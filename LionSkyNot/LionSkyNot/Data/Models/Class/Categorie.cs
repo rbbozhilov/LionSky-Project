@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using static LionSkyNot.Data.DataConstants;
 
 namespace LionSkyNot.Data.Models.Class
 {
     public class Categorie
     {
-
+        
         public Categorie()
         {
             this.Trainers = new HashSet<Trainer>();

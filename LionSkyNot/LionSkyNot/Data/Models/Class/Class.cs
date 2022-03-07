@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using static LionSkyNot.Data.DataConstants;
 
 namespace LionSkyNot.Data.Models.Class
 {

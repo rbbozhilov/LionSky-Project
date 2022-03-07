@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using static LionSkyNot.Data.DataConstants;
 
 namespace LionSkyNot.Data.Models.Product
 {

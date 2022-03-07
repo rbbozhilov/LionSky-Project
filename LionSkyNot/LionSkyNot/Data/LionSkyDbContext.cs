@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LionSkyNot.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class LionSkyDbContext : IdentityDbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public LionSkyDbContext(DbContextOptions<LionSkyDbContext> options)
             : base(options)
         {
         }
@@ -27,7 +27,7 @@ namespace LionSkyNot.Data
 
         public virtual DbSet<Product> Products { get; set; }
 
-        public virtual DbSet<Reception> Receptions { get; set; }
+        public virtual DbSet<Recipe> Recipes { get; set; }
 
     }
 }

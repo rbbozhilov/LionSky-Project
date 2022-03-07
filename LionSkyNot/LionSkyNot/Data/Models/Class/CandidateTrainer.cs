@@ -1,4 +1,6 @@
-﻿namespace LionSkyNot.Data.Models.Class
+﻿using static LionSkyNot.Data.DataConstants;
+
+namespace LionSkyNot.Data.Models.Class
 {
 
     //TODO CANDIDATE SYSTEM FOR TRAINERS//
