@@ -14,7 +14,7 @@ namespace LionSkyNot.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(CalculateFormModel calculateModel , CalculatorViewModel model)
+        public IActionResult Index(CalculateFormModel calculateModel, CalculatorViewModel model)
         {
 
             if (!this.ModelState.IsValid)
@@ -28,9 +28,9 @@ namespace LionSkyNot.Controllers
             model = calculator.Calculation(calculateModel.Goal, calculateModel.Weight);
 
 
-            return View("Result",model);
+            return View("Result", model);
         }
 
-       
+
     }
 }

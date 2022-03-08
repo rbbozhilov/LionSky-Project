@@ -1,0 +1,64 @@
+﻿<div class="jumbotron text-center">
+    <img height = 250 weigth = 250 src="https://st.depositphotos.com/1002881/1285/i/950/depositphotos_12859789-stock-photo-admin-tag.jpg" />
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-1">
+            <h3>Menu</h3>
+        </div>
+    </div>
+</div>
+<ul class="nav flex-column">
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Shop
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="AddProduct">Add Product</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="DeleteProduct">Delete Product</a>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Recipe
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="AddRecipe">Add Recipe</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="DeleteRecipe">Delete Recipe</a>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Classes
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="AddClass">Add Class</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="DeleteClass">Delete Class</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="GetCandidates">Check candidatures</a>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Exercise
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+             <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="AddExercise">Add exercise</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="DeleteExercise">Delete exercise</a>
+        </div>
+    </div>
+
+     <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Fired
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+             <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="FiredTrainer">Fired Trainer</a> 
+             <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="FiredCooker">Fired Cooker</a> 
+        </div>
+    </div>
+
+</ul>

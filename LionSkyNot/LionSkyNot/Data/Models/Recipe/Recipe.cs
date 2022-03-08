@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using static LionSkyNot.Data.DataConstants;
 
-namespace LionSkyNot.Data.Models.Reception
+namespace LionSkyNot.Data.Models.Recipe
 {
     public class Recipe
     {
@@ -17,19 +17,16 @@ namespace LionSkyNot.Data.Models.Reception
         [MaxLength(2000)]
         public string Description { get; set; }
 
-        [Required]
         public float Calories { get; set; }
 
-        [Required]
         public float Protein { get; set; }
 
-        [Required]
-        public float MyProperty { get; set; }
+        public float Fat { get; set; }
 
-        [Required]
         public float Carbohydrates { get; set; }
 
-
+        [Required]
+        public string ImageUrl { get; set; }
 
     }
 }

@@ -1,6 +1,6 @@
 ﻿using LionSkyNot.Data.Models.Class;
 using LionSkyNot.Data.Models.Product;
-using LionSkyNot.Data.Models.Reception;
+using LionSkyNot.Data.Models.Recipe;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 

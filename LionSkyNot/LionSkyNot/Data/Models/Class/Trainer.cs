@@ -25,6 +25,8 @@ namespace LionSkyNot.Data.Models.Class
 
         public float Height { get; set; }
 
+        public bool Candidate { get; set; }
+
         public virtual ICollection<Categorie> Categories { get; set; }
 
 

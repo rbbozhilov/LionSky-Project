@@ -29,6 +29,5 @@ namespace LionSkyNot.Data.Models.Class
 
         public Categorie Categorie { get; set; }
 
-
     }
 }

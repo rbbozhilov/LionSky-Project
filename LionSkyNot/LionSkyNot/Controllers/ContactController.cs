@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using LionSkyNot.Models.Contact;
+using Microsoft.AspNetCore.Mvc;
 
 namespace LionSkyNot.Controllers
 {
@@ -8,6 +9,19 @@ namespace LionSkyNot.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Index(ContactFormModel model)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+
+            return View("SendSuccess");
         }
 
 
