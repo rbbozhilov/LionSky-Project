@@ -1,0 +1,18 @@
+﻿@model CalculatorViewModel
+
+
+<div class="jumbotron text-center">
+    <img src="https://www.muscleandfitness.com/wp-content/uploads/2019/04/12-Weeks-Mass-Phil-Heath-Bench-Dumbbells.jpg?quality=86&strip=all" />
+    <h1>Here you can check your results</h1>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <h3>Protein: @String.Format("{0:0.0}", Model.Protein)</h3>
+            <h3>Carbohydrates: @String.Format("{0:0.0}", Model.Carbohydrates)</h3>
+            <h3>Fat: @String.Format("{0:0.0}", Model.Fat)</h3>
+            <h3>Calories: @String.Format("{0:0.0}", Model.Calories)</h3>
+        </div>
+    </div>
+</div>

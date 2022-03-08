@@ -9,7 +9,6 @@ namespace LionSkyNot.Infrastructure
         //Method create on each start project new migration and put some data in database
         public static IApplicationBuilder PrepareDatabase(this IApplicationBuilder app)
         {
-
             using var scopeServices = app.ApplicationServices.CreateScope();
 
             var data = scopeServices.ServiceProvider.GetService<LionSkyDbContext>();
@@ -32,14 +31,10 @@ namespace LionSkyNot.Infrastructure
                 (
                 new[]
                 {
-
-
                     new Categorie() { Name = "Fitness trainer"},
                     new Categorie() { Name = "Yoga trainer"},
                     new Categorie() { Name = "Box trainer"}
-                }
-
-                );
+                });
 
             data.SaveChanges();
         }
