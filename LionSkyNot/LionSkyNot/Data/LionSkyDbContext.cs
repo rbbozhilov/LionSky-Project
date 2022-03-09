@@ -1,4 +1,5 @@
 ﻿using LionSkyNot.Data.Models.Class;
+using LionSkyNot.Data.Models.Exercise;
 using LionSkyNot.Data.Models.Product;
 using LionSkyNot.Data.Models.Recipe;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -28,6 +29,10 @@ namespace LionSkyNot.Data
         public virtual DbSet<Product> Products { get; set; }
 
         public virtual DbSet<Recipe> Recipes { get; set; }
+
+        public virtual DbSet<Exercise> Exercises { get; set; }
+
+        public virtual DbSet<TypeExercise> TypeExercises { get; set; }
 
     }
 }

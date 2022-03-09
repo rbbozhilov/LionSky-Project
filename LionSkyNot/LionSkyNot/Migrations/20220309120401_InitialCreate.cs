@@ -1,5 +1,7 @@
-﻿
+﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+
+#nullable disable
 
 namespace LionSkyNot.Migrations
 {
@@ -82,8 +84,10 @@ namespace LionSkyNot.Migrations
                     Description = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: false),
                     Calories = table.Column<float>(type: "real", nullable: false),
                     Protein = table.Column<float>(type: "real", nullable: false),
-                    MyProperty = table.Column<float>(type: "real", nullable: false),
-                    Carbohydrates = table.Column<float>(type: "real", nullable: false)
+                    Fat = table.Column<float>(type: "real", nullable: false),
+                    Carbohydrates = table.Column<float>(type: "real", nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -100,11 +104,25 @@ namespace LionSkyNot.Migrations
                     YearOfExperience = table.Column<int>(type: "int", nullable: false),
                     BirthDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Weight = table.Column<float>(type: "real", nullable: false),
-                    Height = table.Column<float>(type: "real", nullable: false)
+                    Height = table.Column<float>(type: "real", nullable: false),
+                    Candidate = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Trainers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TypeExercises",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TypeName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TypeExercises", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -281,6 +299,29 @@ namespace LionSkyNot.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Exercises",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    VideoUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TypeExerciseId = table.Column<int>(type: "int", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Exercises", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Exercises_TypeExercises_TypeExerciseId",
+                        column: x => x.TypeExerciseId,
+                        principalTable: "TypeExercises",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
                 {
@@ -364,6 +405,11 @@ namespace LionSkyNot.Migrations
                 column: "TrainerId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Exercises_TypeExerciseId",
+                table: "Exercises",
+                column: "TypeExerciseId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Products_BrandId",
                 table: "Products",
                 column: "BrandId");
@@ -398,6 +444,9 @@ namespace LionSkyNot.Migrations
                 name: "Classes");
 
             migrationBuilder.DropTable(
+                name: "Exercises");
+
+            migrationBuilder.DropTable(
                 name: "Products");
 
             migrationBuilder.DropTable(
@@ -414,6 +463,9 @@ namespace LionSkyNot.Migrations
 
             migrationBuilder.DropTable(
                 name: "Trainers");
+
+            migrationBuilder.DropTable(
+                name: "TypeExercises");
 
             migrationBuilder.DropTable(
                 name: "Brands");

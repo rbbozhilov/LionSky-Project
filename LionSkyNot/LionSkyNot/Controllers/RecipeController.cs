@@ -1,13 +1,26 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using LionSkyNot.Services.Recipes;
+using LionSkyNot.Views.ViewModels.Recipes;
+using Microsoft.AspNetCore.Mvc;
 
 namespace LionSkyNot.Controllers
 {
     public class RecipeController : BaseController
     {
 
-        public IActionResult Index()
+        private IRecipeService recipeService;
+
+        public RecipeController(IRecipeService recipeService)
         {
-            return View();
+            this.recipeService = recipeService;
+        }
+
+
+        public IActionResult Index(IEnumerable<RecipeViewModel> recipeViewModel)
+        {
+
+            recipeViewModel = this.recipeService.GetAll();
+
+            return View(recipeViewModel);
         }
     }
 }

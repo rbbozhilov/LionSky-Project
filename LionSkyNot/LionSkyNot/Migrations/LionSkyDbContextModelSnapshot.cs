@@ -4,7 +4,6 @@ using LionSkyNot.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -12,10 +11,9 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LionSkyNot.Migrations
 {
     [DbContext(typeof(LionSkyDbContext))]
-    [Migration("20220307155423_InitialCreate")]
-    partial class InitialCreate
+    partial class LionSkyDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -102,6 +100,9 @@ namespace LionSkyNot.Migrations
                     b.Property<DateTime?>("BirthDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("Candidate")
+                        .HasColumnType("bit");
+
                     b.Property<string>("FullName")
                         .IsRequired()
                         .HasMaxLength(255)
@@ -119,6 +120,58 @@ namespace LionSkyNot.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Trainers");
+                });
+
+            modelBuilder.Entity("LionSkyNot.Data.Models.Exercise.Exercise", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("TypeExerciseId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("VideoUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TypeExerciseId");
+
+                    b.ToTable("Exercises");
+                });
+
+            modelBuilder.Entity("LionSkyNot.Data.Models.Exercise.TypeExercise", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("TypeName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TypeExercises");
                 });
 
             modelBuilder.Entity("LionSkyNot.Data.Models.Product.Brand", b =>
@@ -193,7 +246,7 @@ namespace LionSkyNot.Migrations
                     b.ToTable("Types");
                 });
 
-            modelBuilder.Entity("LionSkyNot.Data.Models.Reception.Recipe", b =>
+            modelBuilder.Entity("LionSkyNot.Data.Models.Recipe.Recipe", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -212,8 +265,15 @@ namespace LionSkyNot.Migrations
                         .HasMaxLength(2000)
                         .HasColumnType("nvarchar(2000)");
 
-                    b.Property<float>("MyProperty")
+                    b.Property<float>("Fat")
                         .HasColumnType("real");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -462,6 +522,17 @@ namespace LionSkyNot.Migrations
                     b.Navigation("Categorie");
 
                     b.Navigation("Trainer");
+                });
+
+            modelBuilder.Entity("LionSkyNot.Data.Models.Exercise.Exercise", b =>
+                {
+                    b.HasOne("LionSkyNot.Data.Models.Exercise.TypeExercise", "TypeExercise")
+                        .WithMany()
+                        .HasForeignKey("TypeExerciseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TypeExercise");
                 });
 
             modelBuilder.Entity("LionSkyNot.Data.Models.Product.Product", b =>

@@ -28,5 +28,7 @@ namespace LionSkyNot.Data.Models.Recipe
         [Required]
         public string ImageUrl { get; set; }
 
+        public bool IsDeleted { get; set; } = false;
+
     }
 }

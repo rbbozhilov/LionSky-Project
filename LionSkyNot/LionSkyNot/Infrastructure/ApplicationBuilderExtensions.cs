@@ -1,5 +1,6 @@
 ﻿using LionSkyNot.Data;
 using LionSkyNot.Data.Models.Class;
+using LionSkyNot.Data.Models.Exercise;
 using Microsoft.EntityFrameworkCore;
 
 namespace LionSkyNot.Infrastructure
@@ -16,6 +17,7 @@ namespace LionSkyNot.Infrastructure
             data.Database.Migrate();
 
             SeedCategories(data);
+            SeedTypeExercise(data);
 
             return app;
         }
@@ -38,5 +40,26 @@ namespace LionSkyNot.Infrastructure
 
             data.SaveChanges();
         }
+
+        public static void SeedTypeExercise(LionSkyDbContext data)
+        {
+            if (data.TypeExercises.Any())
+            {
+                return;
+            }
+
+            data.TypeExercises.AddRange
+                (
+                new[]
+                {
+                    new TypeExercise() { TypeName = "Biceps"},
+                    new TypeExercise() { TypeName = "Back"},
+                    new TypeExercise() { TypeName = "Chest"},
+                    new TypeExercise() { TypeName = "Legs"},
+                });
+
+            data.SaveChanges();
+        }
+
     }
 }

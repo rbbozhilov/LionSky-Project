@@ -1,0 +1,45 @@
+﻿@model AddExerciseFormModel
+
+<link rel="stylesheet" href="~/css/form.css" asp-append-version="true" />
+
+<div>
+    <img class="center" src="https://www.verywellfit.com/thmb/UJ6TimjhJq3eQZ3VEXO2DP86Cvw=/500x350/filters:no_upscale():max_bytes(150000):strip_icc()/the-best-exercises-for-when-you-re-feeling-angry-5120367_Final_Text-acd42d7ae2ea47c6908e1f65747f8d70.png">
+</div>
+<br />
+<br />
+
+<div class="row">
+    <div class="offset-md-3 col-md-6 col-sm-12 ">
+
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="Name">Name of the exercise</label>
+                <input asp-for="Name" type="text" class="form-control">
+                <span asp-validation-for="Name" class="small text-danger"> </span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="VideoUrl">Video Url</label>
+                <video asp-for="VideoUrl" width="320" height="240" controls src="@Model.VideoUrl"></video>>
+                <span asp-validation-for="VideoUrl" class="small text-danger"> </span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ImageUrl">Image Url</label>
+                <input asp-for="ImageUrl" type="text" class="form-control" id="input3">
+                <span asp-validation-for="ImageUrl" class="small text-danger"> </span>
+            </div>
+
+            <label asp-for="TypeId">Choose for which type is the exercise</label>
+            <select asp-for="TypeId" class="form-control form-control-sm">
+                @foreach (var current in Model.Type)
+                {
+                    <option value="@current.Id">@current.Name</option>
+                }
+            </select>
+
+            <br />
+            <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+    </div>
+</div>
