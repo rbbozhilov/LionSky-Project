@@ -20,7 +20,7 @@
 
             <div class="form-group">
                 <label asp-for="VideoUrl">Video Url</label>
-                <video asp-for="VideoUrl" width="320" height="240" controls src="@Model.VideoUrl"></video>>
+                <input asp-for="VideoUrl" type="text" class="form-control">
                 <span asp-validation-for="VideoUrl" class="small text-danger"> </span>
             </div>
 
@@ -30,13 +30,16 @@
                 <span asp-validation-for="ImageUrl" class="small text-danger"> </span>
             </div>
 
-            <label asp-for="TypeId">Choose for which type is the exercise</label>
-            <select asp-for="TypeId" class="form-control form-control-sm">
-                @foreach (var current in Model.Type)
-                {
-                    <option value="@current.Id">@current.Name</option>
-                }
-            </select>
+            <div class="form-group">
+                <label asp-for="TypeId">Choose for which type is the exercise</label>
+                <select asp-for="TypeId" class="form-control form-control-sm">
+
+                    @foreach (var current in Model.Type)
+                    {
+                        <option value="@current.Id">@current.Name</option>
+                    }
+                </select>
+            </div>
 
             <br />
             <button type="submit" class="btn btn-primary">Add</button>

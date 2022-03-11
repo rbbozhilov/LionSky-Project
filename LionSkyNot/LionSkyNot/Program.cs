@@ -1,6 +1,7 @@
 using LionSkyNot.Data;
 using LionSkyNot.Infrastructure;
 using LionSkyNot.Services.Exercises;
+using LionSkyNot.Services.Products;
 using LionSkyNot.Services.Recipes;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +20,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddTransient<IRecipeService, RecipeService>();
 builder.Services.AddTransient<IExerciseService, ExerciseService>();
+builder.Services.AddTransient<IProductService, ProductService>();
 
 var app = builder.Build();
 

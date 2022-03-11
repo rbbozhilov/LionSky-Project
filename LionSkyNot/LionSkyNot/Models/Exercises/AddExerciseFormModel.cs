@@ -5,11 +5,9 @@ namespace LionSkyNot.Models.Exercises
 {
     public class AddExerciseFormModel
     {
-
         [MaxLength(200)]
         [Required]
         public string Name { get; set; }
-
 
         [Url]
         [Required]
@@ -19,11 +17,10 @@ namespace LionSkyNot.Models.Exercises
         [Required]
         public string ImageUrl { get; set; }
 
-        
         [Display(Name = "Type")]
         public int TypeId { get; set; }
 
-        public IEnumerable<TypeExerciseViewModel> Type { get; set; }
+        public IEnumerable<TypeExerciseViewModel>? Type { get; set; }
 
 
     }

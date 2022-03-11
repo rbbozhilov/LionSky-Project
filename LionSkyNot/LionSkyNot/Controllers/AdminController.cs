@@ -1,7 +1,9 @@
 ﻿using LionSkyNot.Data;
 using LionSkyNot.Models.Exercises;
+using LionSkyNot.Models.Products;
 using LionSkyNot.Models.Recipe;
 using LionSkyNot.Services.Exercises;
+using LionSkyNot.Services.Products;
 using LionSkyNot.Services.Recipes;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,15 +14,18 @@ namespace LionSkyNot.Controllers
 
         private IRecipeService recipeService;
         private IExerciseService exerciseService;
+        private IProductService productService;
 
 
 
         public AdminController(
                                IRecipeService recipeService,
-                               IExerciseService exerciseService)
+                               IExerciseService exerciseService,
+                               IProductService productService)
         {
             this.recipeService = recipeService;
             this.exerciseService = exerciseService;
+            this.productService = productService;
         }
 
         public IActionResult Index()
@@ -30,7 +35,34 @@ namespace LionSkyNot.Controllers
 
         public IActionResult AddProduct()
         {
-            return View();
+            return View(new AddProductFormModel()
+            {
+                Type = this.productService.GetAllTypesProduct(),
+                Brand = this.productService.GetAllBrandProduct()
+            });
+
+        }
+
+        [HttpPost]
+        public IActionResult AddProduct(AddProductFormModel productModel)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                productModel.Type = this.productService.GetAllTypesProduct();
+                productModel.Brand = this.productService.GetAllBrandProduct();
+
+                return View(productModel);
+            }
+
+            this.productService.CreateProduct(productModel.Name,
+                productModel.Price,
+                productModel.Description,
+                productModel.ImageUrl,
+                productModel.TypeId,
+                productModel.BrandId);
+
+            return RedirectToAction("Index");
         }
 
 
@@ -96,16 +128,16 @@ namespace LionSkyNot.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddExercise(AddExerciseFormModel exerciseFormModel)
+        public IActionResult AddExercise(AddExerciseFormModel exerciseModel)
         {
+            
             if (!ModelState.IsValid)
             {
-                exerciseFormModel.Type = this.exerciseService.GetAllTypeExercises();
-
-                return View(exerciseFormModel);
+                exerciseModel.Type = this.exerciseService.GetAllTypeExercises();
+                return View(exerciseModel);
             }
 
-            this.exerciseService.Create(exerciseFormModel.Name, exerciseFormModel.ImageUrl, exerciseFormModel.VideoUrl, exerciseFormModel.TypeId);
+            this.exerciseService.Create(exerciseModel.Name, exerciseModel.ImageUrl, exerciseModel.VideoUrl, exerciseModel.TypeId);
 
 
             return RedirectToAction("Index");

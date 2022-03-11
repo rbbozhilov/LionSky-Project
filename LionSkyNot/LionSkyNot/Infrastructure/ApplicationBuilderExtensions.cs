@@ -1,7 +1,11 @@
 ﻿using LionSkyNot.Data;
+
 using LionSkyNot.Data.Models.Class;
 using LionSkyNot.Data.Models.Exercise;
+using LionSkyNot.Data.Models.Product;
+
 using Microsoft.EntityFrameworkCore;
+using Type = LionSkyNot.Data.Models.Product.Type;
 
 namespace LionSkyNot.Infrastructure
 {
@@ -18,6 +22,8 @@ namespace LionSkyNot.Infrastructure
 
             SeedCategories(data);
             SeedTypeExercise(data);
+            SeedProductBrand(data);
+            SeedProductType(data);
 
             return app;
         }
@@ -56,6 +62,46 @@ namespace LionSkyNot.Infrastructure
                     new TypeExercise() { TypeName = "Back"},
                     new TypeExercise() { TypeName = "Chest"},
                     new TypeExercise() { TypeName = "Legs"},
+                });
+
+            data.SaveChanges();
+        }
+
+        public static void SeedProductType(LionSkyDbContext data)
+        {
+            if (data.Types.Any())
+            {
+                return;
+            }
+
+            data.Types.AddRange
+                (
+                new[]
+                {
+                    new Type() { TypeName = "Protein"},
+                    new Type() { TypeName = "BCAA"},
+                    new Type() { TypeName = "l-Carnitine"},
+                    new Type() { TypeName = "Creatine"},
+                });
+
+            data.SaveChanges();
+        }
+
+        public static void SeedProductBrand(LionSkyDbContext data)
+        {
+            if (data.Types.Any())
+            {
+                return;
+            }
+
+            data.Brands.AddRange
+                (
+                new[]
+                {
+                    new Brand() { BrandName = "Universal"},
+                    new Brand() { BrandName = "MyProtein"},
+                    new Brand() { BrandName = "Optimum Nutrition"},
+                    new Brand() { BrandName = "AMIX"},
                 });
 
             data.SaveChanges();

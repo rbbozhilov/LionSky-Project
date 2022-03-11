@@ -27,22 +27,28 @@ namespace LionSkyNot.Controllers
             return View(exerciseViewModel);
         }
 
-        public IActionResult LegExercises()
+        public IActionResult LegExercises(IEnumerable<ExerciseViewModel> exerciseViewModel)
         {
 
-            return View();
+            exerciseViewModel = this.exerciesService.GetAllExercisesByType("Legs");
+
+            return View(exerciseViewModel);
         }
 
-        public IActionResult BicepsExercises()
+        public IActionResult BicepsExercises(IEnumerable<ExerciseViewModel> exerciseViewModel)
         {
 
-            return View();
+            exerciseViewModel = this.exerciesService.GetAllExercisesByType("Biceps");
+
+            return View(exerciseViewModel);
         }
 
-        public IActionResult ChestExercises()
+        public IActionResult ChestExercises(IEnumerable<ExerciseViewModel> exerciseViewModel)
         {
 
-            return View();
+            exerciseViewModel = this.exerciesService.GetAllExercisesByType("Chest");
+
+            return View(exerciseViewModel);
         }
 
     }

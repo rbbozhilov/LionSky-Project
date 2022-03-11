@@ -1,0 +1,27 @@
+﻿/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+.row.content {
+    height: 450px
+}
+
+/* Set gray background color and 100% height */
+.sidenav {
+    padding-top: 20px;
+    background-color: #2b384a;
+    height: 100%;
+}
+
+.sidenav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+  
+    /* Add a color to the active/current link */
+    .sidenav a.active {
+        
+        color: white;
+    }

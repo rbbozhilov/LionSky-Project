@@ -21,6 +21,9 @@ namespace LionSkyNot.Data.Models.Product
         [Column(TypeName = "decimal(18,2)")]
         public decimal Price { get; set; }
 
+        [Required]
+        public string ImageUrl { get; set; }
+
         [ForeignKey(nameof(Type))]
         public int TypeId { get; set; }
 
@@ -30,6 +33,8 @@ namespace LionSkyNot.Data.Models.Product
         public int BrandId { get; set; }
 
         public Brand Brand { get; set; }
+
+        public bool IsDeleted { get; set; } = false;
 
 
     }

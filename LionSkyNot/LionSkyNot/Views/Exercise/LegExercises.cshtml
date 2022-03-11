@@ -1,21 +1,25 @@
-﻿@model IEnumerable<RecipeViewModel>
+﻿@model IEnumerable<ExerciseViewModel>
 
 <div class="row">
 
     @if (Model.Any())
     {
 
-        @foreach (var recipe in Model)
+        @foreach (var exercise in Model)
         {
             <div class="col-sm-3">
                 <div class="well">
-                    <p>@recipe.Name</p>
-                    <img src="@recipe.ImageUrl" class="img-circle" height="100" width="100" alt="Avatar">
+                    <p>@exercise.Name</p>
+                    <img src="@exercise.ImageUrl" class="img-circle" height="100" width="100" alt="Avatar">
                 </div>
             </div>
             <div class="col-sm-9">
                 <div class="well">
-                    <p>@recipe.Description</p>
+                    <iframe width="560"
+                    height="315"
+                    src="@exercise.VideoUrl"
+                    frameborder="0"
+                    allowfullscreen></iframe>
                 </div>
             </div>
         }
@@ -23,5 +27,5 @@
     }
     else
     {
-        <h1> Don't have recipes yet , try soon !</h1>
+        <h1> Don't have exercises for legs yet , try soon !</h1>
     }
