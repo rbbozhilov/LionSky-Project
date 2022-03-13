@@ -1,10 +1,12 @@
 ﻿using LionSkyNot.Data;
+using LionSkyNot.Models;
 using LionSkyNot.Models.Exercises;
 using LionSkyNot.Models.Products;
 using LionSkyNot.Models.Recipe;
 using LionSkyNot.Services.Exercises;
 using LionSkyNot.Services.Products;
 using LionSkyNot.Services.Recipes;
+using LionSkyNot.Services.Trainers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LionSkyNot.Controllers
@@ -15,17 +17,21 @@ namespace LionSkyNot.Controllers
         private IRecipeService recipeService;
         private IExerciseService exerciseService;
         private IProductService productService;
+        private ITrainerService trainerService;
 
 
 
         public AdminController(
                                IRecipeService recipeService,
                                IExerciseService exerciseService,
-                               IProductService productService)
+                               IProductService productService,
+                               ITrainerService trainerService)
         {
             this.recipeService = recipeService;
             this.exerciseService = exerciseService;
             this.productService = productService;
+            this.trainerService = trainerService;
+
         }
 
         public IActionResult Index()
@@ -69,6 +75,39 @@ namespace LionSkyNot.Controllers
         public IActionResult DeleteProduct()
         {
             return View();
+        }
+
+
+        public IActionResult AddTrainer()
+        {
+            return View(new AddTrainerFormModel
+            {
+                Categorie = this.trainerService.GetAllCategories()
+            });
+        }
+
+        [HttpPost]
+        public IActionResult AddTrainer(AddTrainerFormModel trainerModel)
+        {
+
+            trainerModel.Categorie = this.trainerService.GetAllCategories();
+
+            if (!ModelState.IsValid)
+            {
+                return View(trainerModel);
+            }
+
+            this.trainerService.Create(trainerModel.FullName,
+                                       trainerModel.YearOfExperience,
+                                       trainerModel.ImageUrl,
+                                       trainerModel.Height,
+                                       trainerModel.Weight,
+                                       trainerModel.BirthDate,
+                                       trainerModel.CategorieId,
+                                       trainerModel.Description);
+
+            return RedirectToAction("Index");
+
         }
 
         public IActionResult AddRecipe()
@@ -130,7 +169,7 @@ namespace LionSkyNot.Controllers
         [HttpPost]
         public IActionResult AddExercise(AddExerciseFormModel exerciseModel)
         {
-            
+
             if (!ModelState.IsValid)
             {
                 exerciseModel.Type = this.exerciseService.GetAllTypeExercises();

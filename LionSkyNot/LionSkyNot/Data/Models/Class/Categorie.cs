@@ -17,7 +17,7 @@ namespace LionSkyNot.Data.Models.Class
         [Required]
         public string Name { get; set; }
 
-        public ICollection<Trainer> Trainers { get; set; }
+        public virtual ICollection<Trainer> Trainers { get; set; }
 
     }
 }

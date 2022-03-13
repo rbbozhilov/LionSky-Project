@@ -8,11 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Views\Shop\Creatine.cshtml" />
+    <Content Remove="Views\Admin\TopProductsBuyed.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="Views\Shop\Creatine.cshtml" />
+    <Compile Include="Views\Shop\TopProductsBuyed.cshtml" />
   </ItemGroup>
 
   <ItemGroup>

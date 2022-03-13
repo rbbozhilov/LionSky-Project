@@ -10,5 +10,38 @@ namespace LionSkyNot.Controllers
             return View();
         }
 
+
+        public IActionResult Bcaa()
+        {
+            
+            return View();
+        }
+
+        public IActionResult Protein()
+        {
+
+            return View();
+        }
+
+        public IActionResult LCarnitine()
+        {
+
+            return View();
+        }
+
+        public IActionResult Creatine()
+        {
+
+            return View();
+        }
+
+
+
+        public IActionResult TopProductsBuyed()
+        {
+
+            return View();
+        }
+
     }
 }

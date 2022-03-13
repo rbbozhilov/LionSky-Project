@@ -12,6 +12,8 @@ namespace LionSkyNot.Data.Models.Class
 
         public int PractitionerCount { get; set; }
 
+        public int MaxPractitionerCount { get; set; }
+
         [Column(TypeName = "decimal(18,2)")]
         public decimal Price { get; set; }
 
@@ -24,10 +26,7 @@ namespace LionSkyNot.Data.Models.Class
 
         public Trainer Trainer { get; set; }
 
-        [ForeignKey(nameof(Categorie))]
-        public int CategorieId { get; set; }
-
-        public Categorie Categorie { get; set; }
+       
 
     }
 }

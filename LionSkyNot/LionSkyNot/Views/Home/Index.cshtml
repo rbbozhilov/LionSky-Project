@@ -1,75 +1,111 @@
-﻿<div id="myCarousel" class="carousel slide" data-ride="carousel">
+﻿@model IEnumerable<TrainerViewModel>
+
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
-      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-      <li data-target="#myCarousel" data-slide-to="1"></li>
-      <li data-target="#myCarousel" data-slide-to="2"></li>
-      <li data-target="#myCarousel" data-slide-to="3"></li>
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+        <li data-target="#myCarousel" data-slide-to="3"></li>
     </ol>
 
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
-      <div class="item active">
-        <img src="https://wpstatic.gymbeam.com/blog/wp-content/uploads/mageblog/phil_heath.png" alt="Image">
-        <div class="carousel-caption">
-          <h3>Join our Classes <button type="button" class="btn btn-danger" onclick="location.href='@Url.Action("Index", "Class")'">NOW</button> </h3>
-        </div>      
-      </div>
+        <div class="item active">
+            <img src="https://wpstatic.gymbeam.com/blog/wp-content/uploads/mageblog/phil_heath.png" alt="Image">
+            <div class="carousel-caption">
+                <h3>Join our Classes <button type="button" class="btn btn-danger" onclick="location.href='@Url.Action("Index", "Class")'">NOW</button> </h3>
+            </div>
+        </div>
 
-      <div class="item">
-        <img src="https://static.parade.com/wp-content/uploads/2020/06/iStock-1203599963.jpg" alt="Image">
-        <div class="carousel-caption">
-          <h1>Eat Healthy !</h1>
-          <p>Here you can find our healthy recipes for you and enjoy it!</p>
-          <button type="button" class="btn btn-success" onclick="location.href='@Url.Action("Index", "Recipe")'">Recipes</button>
-        </div>      
-      </div>
+        <div class="item">
+            <img src="https://static.parade.com/wp-content/uploads/2020/06/iStock-1203599963.jpg" alt="Image">
+            <div class="carousel-caption">
+                <h1>Eat Healthy !</h1>
+                <p>Here you can find our healthy recipes for you and enjoy it!</p>
+                <button type="button" class="btn btn-success" onclick="location.href='@Url.Action("Index", "Recipe")'">Recipes</button>
+            </div>
+        </div>
 
-      <div class="item">
-        <img src="https://supplementdevil.com/wp-content/uploads/2019/08/phil-heath-launches-his-own-supplement-brand-phil-heath-labs.jpg" alt="Image">
-        <div class="carousel-caption">
-          <h1>We have a shop for nutritional supplements that you can buy and use it for more POWER and RESULTS !</h1>
-          <button type="button" class="btn btn-danger" onclick="location.href='@Url.Action("Index", "Shop")'">Shop NOW</button>
-        </div>      
-      </div>
+        <div class="item">
+            <img src="https://supplementdevil.com/wp-content/uploads/2019/08/phil-heath-launches-his-own-supplement-brand-phil-heath-labs.jpg" alt="Image">
+            <div class="carousel-caption">
+                <h1>We have a shop for nutritional supplements that you can buy and use it for more POWER and RESULTS !</h1>
+                <button type="button" class="btn btn-danger" onclick="location.href='@Url.Action("Index", "Shop")'">Shop NOW</button>
+            </div>
+        </div>
 
-       <div class="item">
-        <img src="https://images-prod.healthline.com/hlcmsresource/images/AN_images/woman-measuring-stomach-1296x728.jpg" alt="Image">
-        <div class="carousel-caption">
-          <h1>You don't know how much calories need to eat per day ? Calculate it buy clicking <button type="button" class="btn btn-warning" onclick="location.href='@Url.Action("Index","Calculator")'">HERE</button></h1>
-          
-        </div>      
-      </div>
+        <div class="item">
+            <img src="https://images-prod.healthline.com/hlcmsresource/images/AN_images/woman-measuring-stomach-1296x728.jpg" alt="Image">
+            <div class="carousel-caption">
+                <h1>You don't know how much calories need to eat per day ? Calculate it buy clicking <button type="button" class="btn btn-warning" onclick="location.href='@Url.Action("Index","Calculator")'">HERE</button></h1>
+
+            </div>
+        </div>
 
     </div>
 
     <!-- Left and right controls -->
     <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
     </a>
     <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
     </a>
 </div>
-  
-<div class="container text-center">    
-  <h3>What We Do</h3><br>
-  <div class="row">
-    <div class="col-sm-4">
-      <img src="https://i.insider.com/6172edae4f281c001296a1e7?width=700" class="img-responsive" style="width:100%" alt="Image">
+
+<div class="container text-center">
+    <h3>What We Do</h3><br>
+    <div class="row">
+        <div class="col-sm-4">
+            <img src="https://i.insider.com/6172edae4f281c001296a1e7?width=700" class="img-responsive" style="width:100%" alt="Image">
+        </div>
+        <div class="col-sm-4">
+            <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/a6/4f/49/coffit-club-gym-is-the.jpg?w=500&h=400&s=1" class="img-responsive" style="width:100%" alt="Image">
+        </div>
+        <div class="col-sm-4">
+            <div class="well">
+                <p>We offer both group activities and recipes for healthy eating and also the best nutritional supplements</p>
+            </div>
+            <div class="well">
+                <p>Doing this since a lot time , so we know that you will join it ! Just join us don't think it a lot.</p>
+            </div>
+        </div>
     </div>
-    <div class="col-sm-4"> 
-      <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/a6/4f/49/coffit-club-gym-is-the.jpg?w=500&h=400&s=1" class="img-responsive" style="width:100%" alt="Image">  
+</div>
+<br>
+
+<br />
+<br />
+
+<h2>Our top trainers for each class are here published!</h2>
+
+<br />
+
+<div class="container">
+    <div class="row">
+
+        @foreach (var trainer in Model)
+        {
+
+
+
+            <div class="col-sm-4">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">@trainer.FullName</div>
+                    <div class="panel-body"><img src="@trainer.ImageUrl" class="img-responsive" style="width:100%" alt="Image"></div>
+                    <div class="panel-footer">@trainer.Description</div>
+                </div>
+            </div>
+
+        }
+
     </div>
-    <div class="col-sm-4">
-      <div class="well">
-       <p>We offer both group activities and recipes for healthy eating and also the best nutritional supplements</p>
-      </div>
-      <div class="well">
-       <p>Doing this since a lot time , so we know that you will join it ! Just join us don't think it a lot.</p>
-      </div>
-    </div>
-  </div>
-</div><br>
+</div>
+
+
+
+

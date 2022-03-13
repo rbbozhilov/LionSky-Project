@@ -18,6 +18,10 @@ namespace LionSkyNot.Data.Models.Product
         [MaxLength(2000)]
         public string Description { get; set; }
 
+        public int CountInStock { get; set; }
+
+        public int CountOfBuys { get; set; }
+
         [Column(TypeName = "decimal(18,2)")]
         public decimal Price { get; set; }
 

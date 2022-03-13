@@ -1,16 +1,33 @@
-﻿using LionSkyNot.Models;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
+
+using LionSkyNot.Models;
+using LionSkyNot.Services.Trainers;
+using LionSkyNot.Views.ViewModels.Trainers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
+
 
 namespace LionSkyNot.Controllers
 {
     public class HomeController : BaseController
     {
-      
-        public IActionResult Index()
+
+        private ITrainerService trainerService;
+
+        public HomeController(ITrainerService trainerService)
         {
-            return View();
+            this.trainerService = trainerService;
+        }
+
+
+
+        public IActionResult Index(IEnumerable<TrainerViewModel> trainerModel)
+        {
+
+            trainerModel = this.trainerService.TopTrainers();
+
+            return View(trainerModel);
         }
 
       

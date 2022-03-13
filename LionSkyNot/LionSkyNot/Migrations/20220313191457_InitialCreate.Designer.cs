@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LionSkyNot.Migrations
 {
     [DbContext(typeof(LionSkyDbContext))]
-    [Migration("20220311225108_InitialCreate")]
+    [Migration("20220313191457_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,21 +23,6 @@ namespace LionSkyNot.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("CategorieTrainer", b =>
-                {
-                    b.Property<int>("CategoriesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TrainersId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CategoriesId", "TrainersId");
-
-                    b.HasIndex("TrainersId");
-
-                    b.ToTable("CategorieTrainer");
-                });
 
             modelBuilder.Entity("LionSkyNot.Data.Models.Class.Categorie", b =>
                 {
@@ -64,11 +49,11 @@ namespace LionSkyNot.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("CategorieId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("EndDateTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("MaxPractitionerCount")
+                        .HasColumnType("int");
 
                     b.Property<int>("PractitionerCount")
                         .HasColumnType("int");
@@ -84,8 +69,6 @@ namespace LionSkyNot.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategorieId");
-
                     b.HasIndex("TrainerId");
 
                     b.ToTable("Classes");
@@ -99,19 +82,34 @@ namespace LionSkyNot.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<DateTime?>("BirthDate")
+                    b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("Candidate")
                         .HasColumnType("bit");
 
-                    b.Property<string>("FullName")
+                    b.Property<int>("CategorieId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
                     b.Property<float>("Height")
                         .HasColumnType("real");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<float>("Weight")
                         .HasColumnType("real");
@@ -120,6 +118,8 @@ namespace LionSkyNot.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CategorieId");
 
                     b.ToTable("Trainers");
                 });
@@ -203,6 +203,12 @@ namespace LionSkyNot.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("BrandId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CountInStock")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CountOfBuys")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -499,38 +505,26 @@ namespace LionSkyNot.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("CategorieTrainer", b =>
-                {
-                    b.HasOne("LionSkyNot.Data.Models.Class.Categorie", null)
-                        .WithMany()
-                        .HasForeignKey("CategoriesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("LionSkyNot.Data.Models.Class.Trainer", null)
-                        .WithMany()
-                        .HasForeignKey("TrainersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("LionSkyNot.Data.Models.Class.Class", b =>
                 {
-                    b.HasOne("LionSkyNot.Data.Models.Class.Categorie", "Categorie")
-                        .WithMany()
-                        .HasForeignKey("CategorieId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("LionSkyNot.Data.Models.Class.Trainer", "Trainer")
                         .WithMany()
                         .HasForeignKey("TrainerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Categorie");
-
                     b.Navigation("Trainer");
+                });
+
+            modelBuilder.Entity("LionSkyNot.Data.Models.Class.Trainer", b =>
+                {
+                    b.HasOne("LionSkyNot.Data.Models.Class.Categorie", "Categorie")
+                        .WithMany("Trainers")
+                        .HasForeignKey("CategorieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Categorie");
                 });
 
             modelBuilder.Entity("LionSkyNot.Data.Models.Exercise.Exercise", b =>
@@ -612,6 +606,11 @@ namespace LionSkyNot.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("LionSkyNot.Data.Models.Class.Categorie", b =>
+                {
+                    b.Navigation("Trainers");
                 });
 #pragma warning restore 612, 618
         }

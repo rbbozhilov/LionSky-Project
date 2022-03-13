@@ -39,9 +39,10 @@ namespace LionSkyNot.Infrastructure
                 (
                 new[]
                 {
-                    new Categorie() { Name = "Fitness trainer"},
-                    new Categorie() { Name = "Yoga trainer"},
-                    new Categorie() { Name = "Box trainer"}
+                    new Categorie() { Name = "Fitness"},
+                    new Categorie() { Name = "Yoga"},
+                    new Categorie() { Name = "Box"},
+                    new Categorie() { Name = "MMA"}
                 });
 
             data.SaveChanges();

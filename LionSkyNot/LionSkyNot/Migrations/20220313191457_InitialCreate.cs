@@ -95,24 +95,6 @@ namespace LionSkyNot.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Trainers",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    FullName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    YearOfExperience = table.Column<int>(type: "int", nullable: false),
-                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Weight = table.Column<float>(type: "real", nullable: false),
-                    Height = table.Column<float>(type: "real", nullable: false),
-                    Candidate = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Trainers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "TypeExercises",
                 columns: table => new
                 {
@@ -245,55 +227,29 @@ namespace LionSkyNot.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CategorieTrainer",
-                columns: table => new
-                {
-                    CategoriesId = table.Column<int>(type: "int", nullable: false),
-                    TrainersId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CategorieTrainer", x => new { x.CategoriesId, x.TrainersId });
-                    table.ForeignKey(
-                        name: "FK_CategorieTrainer_Categories_CategoriesId",
-                        column: x => x.CategoriesId,
-                        principalTable: "Categories",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_CategorieTrainer_Trainers_TrainersId",
-                        column: x => x.TrainersId,
-                        principalTable: "Trainers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Classes",
+                name: "Trainers",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PractitionerCount = table.Column<int>(type: "int", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    StartDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EndDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    TrainerId = table.Column<int>(type: "int", nullable: false),
+                    FullName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    YearOfExperience = table.Column<int>(type: "int", nullable: false),
+                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Weight = table.Column<float>(type: "real", nullable: false),
+                    Height = table.Column<float>(type: "real", nullable: false),
+                    Candidate = table.Column<bool>(type: "bit", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CategorieId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Classes", x => x.Id);
+                    table.PrimaryKey("PK_Trainers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Classes_Categories_CategorieId",
+                        name: "FK_Trainers_Categories_CategorieId",
                         column: x => x.CategorieId,
                         principalTable: "Categories",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Classes_Trainers_TrainerId",
-                        column: x => x.TrainerId,
-                        principalTable: "Trainers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -329,6 +285,8 @@ namespace LionSkyNot.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: false),
+                    CountInStock = table.Column<int>(type: "int", nullable: false),
+                    CountOfBuys = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TypeId = table.Column<int>(type: "int", nullable: false),
@@ -348,6 +306,30 @@ namespace LionSkyNot.Migrations
                         name: "FK_Products_Types_TypeId",
                         column: x => x.TypeId,
                         principalTable: "Types",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Classes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PractitionerCount = table.Column<int>(type: "int", nullable: false),
+                    MaxPractitionerCount = table.Column<int>(type: "int", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    StartDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TrainerId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Classes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Classes_Trainers_TrainerId",
+                        column: x => x.TrainerId,
+                        principalTable: "Trainers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -392,16 +374,6 @@ namespace LionSkyNot.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CategorieTrainer_TrainersId",
-                table: "CategorieTrainer",
-                column: "TrainersId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Classes_CategorieId",
-                table: "Classes",
-                column: "CategorieId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Classes_TrainerId",
                 table: "Classes",
                 column: "TrainerId");
@@ -420,6 +392,11 @@ namespace LionSkyNot.Migrations
                 name: "IX_Products_TypeId",
                 table: "Products",
                 column: "TypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Trainers_CategorieId",
+                table: "Trainers",
+                column: "CategorieId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -440,9 +417,6 @@ namespace LionSkyNot.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "CategorieTrainer");
-
-            migrationBuilder.DropTable(
                 name: "Classes");
 
             migrationBuilder.DropTable(
@@ -461,9 +435,6 @@ namespace LionSkyNot.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Categories");
-
-            migrationBuilder.DropTable(
                 name: "Trainers");
 
             migrationBuilder.DropTable(
@@ -474,6 +445,9 @@ namespace LionSkyNot.Migrations
 
             migrationBuilder.DropTable(
                 name: "Types");
+
+            migrationBuilder.DropTable(
+                name: "Categories");
         }
     }
 }

@@ -1,18 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
-using static LionSkyNot.Data.DataConstants;
+﻿using LionSkyNot.Views.ViewModels.Trainers;
+using System.ComponentModel.DataAnnotations;
 
-namespace LionSkyNot.Data.Models.Class
+namespace LionSkyNot.Models
 {
-    public class Trainer
+    public class AddTrainerFormModel
     {
-
-        [Key]
-        public int Id { get; set; }
 
         [MaxLength(50)]
         [Required]
         public string FullName { get; set; }
 
+        [Url]
         [Required]
         public string ImageUrl { get; set; }
 
@@ -28,14 +26,9 @@ namespace LionSkyNot.Data.Models.Class
 
         public float Height { get; set; }
 
-        public bool Candidate { get; set; } = false;
-
-        public bool IsDeleted { get; set; } = false;
-
         public int CategorieId { get; set; }
 
-        public Categorie Categorie { get; set; }
+        public IEnumerable<CategorieViewModel>? Categorie { get; set; }
 
-      
     }
 }

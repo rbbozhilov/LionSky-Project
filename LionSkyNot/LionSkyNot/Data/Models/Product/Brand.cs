@@ -13,8 +13,5 @@ namespace LionSkyNot.Data.Models.Product
         [MaxLength(255)]
         public string BrandName { get; set; }
 
-
-
-
     }
 }
