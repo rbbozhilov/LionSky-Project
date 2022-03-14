@@ -47,8 +47,25 @@ namespace LionSkyNot.Services.Trainers
 
             List<TrainerViewModel> trainers = new List<TrainerViewModel>();
 
-            var boxer = this.data.Trainers
-                          .Where(t => t.Categorie.Name == "Box")
+            var boxer = this.GetTrainer("Box");
+            var mma = this.GetTrainer("MMA");
+            var yoga = this.GetTrainer("Yoga");
+            var fitness = this.GetTrainer("Fitness");
+
+            trainers.Add(boxer);
+            trainers.Add(mma);
+            trainers.Add(yoga);
+            trainers.Add(fitness);
+
+            return trainers;
+        }
+
+
+        private TrainerViewModel GetTrainer(string category)
+        {
+
+            var trainer = this.data.Trainers
+                          .Where(t => t.Categorie.Name == category)
                           .Select(t => new TrainerViewModel()
                           {
                               FullName = t.FullName,
@@ -63,62 +80,8 @@ namespace LionSkyNot.Services.Trainers
                           .Take(1)
                           .FirstOrDefault();
 
-            var mma = this.data.Trainers
-                         .Where(t => t.Categorie.Name == "MMA")
-                         .Select(t => new TrainerViewModel()
-                         {
-                             FullName = t.FullName,
-                             ImageUrl = t.ImageUrl,
-                             Description = t.Description,
-                             YearOfExperience = t.YearOfExperience,
-                             BirthDate = t.BirthDate,
-                             Weight = t.Weight,
-                             Height = t.Height
-                         })
-                         .OrderByDescending(t => t.YearOfExperience)
-                         .Take(1)
-                         .FirstOrDefault();
-
-            var yoga = this.data.Trainers
-                         .Where(t => t.Categorie.Name == "Yoga")
-                         .Select(t => new TrainerViewModel()
-                         {
-                             FullName = t.FullName,
-                             ImageUrl = t.ImageUrl,
-                             Description = t.Description,
-                             YearOfExperience = t.YearOfExperience,
-                             BirthDate = t.BirthDate,
-                             Weight = t.Weight,
-                             Height = t.Height
-                         })
-                         .OrderByDescending(t => t.YearOfExperience)
-                         .Take(1)
-                         .FirstOrDefault();
-
-            var fitness = this.data.Trainers
-                         .Where(t => t.Categorie.Name == "Fitness")
-                         .Select(t => new TrainerViewModel()
-                         {
-                             FullName = t.FullName,
-                             ImageUrl = t.ImageUrl,
-                             Description = t.Description,
-                             YearOfExperience = t.YearOfExperience,
-                             BirthDate = t.BirthDate,
-                             Weight = t.Weight,
-                             Height = t.Height
-                         })
-                         .OrderByDescending(t => t.YearOfExperience)
-                         .Take(1)
-                         .FirstOrDefault();
-
-            trainers.Add(boxer);
-            trainers.Add(mma);
-            trainers.Add(yoga);
-            trainers.Add(fitness);
-
-            return trainers;
+            return trainer;
         }
-
 
 
     }
