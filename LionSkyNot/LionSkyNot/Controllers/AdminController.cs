@@ -18,6 +18,7 @@ namespace LionSkyNot.Controllers
         private IExerciseService exerciseService;
         private IProductService productService;
         private ITrainerService trainerService;
+        private LionSkyDbContext data;
 
 
 
@@ -25,12 +26,14 @@ namespace LionSkyNot.Controllers
                                IRecipeService recipeService,
                                IExerciseService exerciseService,
                                IProductService productService,
-                               ITrainerService trainerService)
+                               ITrainerService trainerService,
+                               LionSkyDbContext data)
         {
             this.recipeService = recipeService;
             this.exerciseService = exerciseService;
             this.productService = productService;
             this.trainerService = trainerService;
+            this.data = data;
 
         }
 
@@ -52,6 +55,16 @@ namespace LionSkyNot.Controllers
         [HttpPost]
         public IActionResult AddProduct(AddProductFormModel productModel)
         {
+
+            if(!this.data.Types.Any(t=> t.Id == productModel.TypeId))
+            {
+                this.ModelState.AddModelError(nameof(productModel.TypeId), "Don't make some hack tries!");
+            }
+
+            if(!this.data.Brands.Any(b=>b.Id == productModel.BrandId))
+            {
+                this.ModelState.AddModelError(nameof(productModel.BrandId), "Don't make some hack tries!");
+            }
 
             if (!ModelState.IsValid)
             {
@@ -169,6 +182,11 @@ namespace LionSkyNot.Controllers
         [HttpPost]
         public IActionResult AddExercise(AddExerciseFormModel exerciseModel)
         {
+
+            if(!this.data.TypeExercises.Any(e=>e.Id == exerciseModel.TypeId))
+            {
+                this.ModelState.AddModelError(nameof(exerciseModel.TypeId), "Don't make some hack tries!");
+            }
 
             if (!ModelState.IsValid)
             {

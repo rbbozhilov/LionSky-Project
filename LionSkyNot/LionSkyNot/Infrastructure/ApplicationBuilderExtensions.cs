@@ -42,7 +42,9 @@ namespace LionSkyNot.Infrastructure
                     new Categorie() { Name = "Fitness"},
                     new Categorie() { Name = "Yoga"},
                     new Categorie() { Name = "Box"},
-                    new Categorie() { Name = "MMA"}
+                    new Categorie() { Name = "Mma"},
+                    new Categorie() { Name = "Wrestling"},
+                    new Categorie() { Name = "Athletic"},
                 });
 
             data.SaveChanges();

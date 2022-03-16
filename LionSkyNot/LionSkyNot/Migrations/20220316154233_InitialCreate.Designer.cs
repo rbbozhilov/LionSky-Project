@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LionSkyNot.Migrations
 {
     [DbContext(typeof(LionSkyDbContext))]
-    [Migration("20220313191457_InitialCreate")]
+    [Migration("20220316154233_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

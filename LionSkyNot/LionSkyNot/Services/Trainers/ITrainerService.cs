@@ -11,6 +11,9 @@ namespace LionSkyNot.Services.Trainers
 
         IEnumerable<TrainerViewModel> TopTrainers();
 
+        IEnumerable<TrainerListViewModel> GetAllTrainersByCategory(string category);
+
+        IEnumerable<TrainerListViewModel> SearchTrainerByName(string searchedName);
 
     }
 }

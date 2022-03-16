@@ -81,30 +81,26 @@
 <br />
 <br />
 
-<h2>Our top trainers for each class are here published!</h2>
-
 <br />
 
-<div class="container">
-    <div class="row">
+@if (Model.Any(x => x!= null))
+{
+    <div class="container">
+        <div class="row">
 
-        @foreach (var trainer in Model)
-        {
-
-
-
-            <div class="col-sm-4">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">@trainer.FullName</div>
-                    <div class="panel-body"><img src="@trainer.ImageUrl" class="img-responsive" style="width:100%" alt="Image"></div>
-                    <div class="panel-footer">@trainer.Description</div>
+            @foreach (var trainer in Model)
+            {
+                <div class="col-sm-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">@trainer.FullName</div>
+                        <div class="panel-body"><img src="@trainer.ImageUrl" class="img-responsive" style="width:100%" alt="Image"></div>
+                        <div class="panel-footer">@trainer.Description</div>
+                    </div>
                 </div>
-            </div>
-
-        }
-
+            }
+        </div>
     </div>
-</div>
+}
 
 
 
