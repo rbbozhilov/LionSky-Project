@@ -1,0 +1,15 @@
+﻿@model AllTrainersViewModel
+
+
+
+    @foreach (var trainer in Model.Trainers)
+{
+    <div class="card" style="width: 18rem; display:inline-block">
+        <img class="card-img-top" src="@trainer.ImageUrl" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">@trainer.FullName</h5>
+            <p class="card-text">@trainer.Description</p>
+            <a asp-controller="Trainer" asp-action="@trainer.Category" asp-action="Trainers" class="btn btn-primary">Go somewhere</a>
+        </div>
+    </div>
+}

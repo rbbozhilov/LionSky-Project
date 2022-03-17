@@ -15,6 +15,5 @@ namespace LionSkyNot.Views.ViewModels.Trainers
         public IEnumerable<TrainerSort> Sort { get; set; }
 
 
-
     }
 }

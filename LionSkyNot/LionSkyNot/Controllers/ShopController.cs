@@ -1,19 +1,88 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using LionSkyNot.Services.Products;
+using LionSkyNot.Views.ViewModels.Products;
+using Microsoft.AspNetCore.Mvc;
 
 namespace LionSkyNot.Controllers
 {
     public class ShopController : BaseController
     {
 
-        public IActionResult Index()
+        private IProductService productService;
+
+        public ShopController(IProductService productService)
         {
-            return View();
+            this.productService = productService;
+        }
+
+
+
+        public IActionResult Index(string brand, string type, SortedProductViewModel sortedBy)
+        {
+
+            var allProductViewModel = new AllProductsViewModel()
+            {
+                Brands = this.productService.GetAllBrandProduct().Select(x => x.Name),
+                Types = this.productService.GetAllTypesProduct().Select(x => x.Name)
+            };
+
+
+
+            if (!string.IsNullOrWhiteSpace(brand) && !string.IsNullOrEmpty(brand)
+                        && !string.IsNullOrWhiteSpace(type) && !string.IsNullOrEmpty(type)
+                        && !string.IsNullOrWhiteSpace(sortedBy.ToString()) && !string.IsNullOrEmpty(sortedBy.ToString()))
+            {
+
+                var products = this.productService.GetProductsByBrandAndType(type, brand);
+
+                switch (sortedBy.ToString())
+                {
+                    case "SortedByPrice":
+                        {
+                            //products = this.productService.SortedByPrice();
+                            break;
+                        }
+
+                    case "SortedByPriceDescending":
+                        {
+                            this.productService.SortedByPriceDescending();
+                            break;
+                        }
+
+                    case "SortedByName":
+                        {
+                            //products = this.productService.SortedByName();
+                            break;
+                        }
+
+                    case "SortedByMostBuys":
+                        {
+
+                            break;
+                        }
+                }
+
+
+                return View("Result", products.Select(p => new ProductListViewModel()
+                {
+                    Type = p.Type.TypeName,
+                    Brand = p.Brand.BrandName,
+                    Price = p.Price,
+                    Description = p.Description,
+                    ImageUrl = p.ImageUrl
+                }).ToList());
+
+            }
+
+
+            allProductViewModel.Products = this.productService.ShowAllProducts();
+
+            return View(allProductViewModel);
         }
 
 
         public IActionResult Bcaa()
         {
-            
+
             return View();
         }
 
@@ -42,6 +111,7 @@ namespace LionSkyNot.Controllers
 
             return View();
         }
+
 
     }
 }

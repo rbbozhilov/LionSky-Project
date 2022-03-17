@@ -1,89 +1,83 @@
-﻿<link rel="stylesheet" href="~/css/shop.css" asp-append-version="true" />
+﻿@model AllProductsViewModel
 
-<div class="container-fluid text-center">
-    <div class="row content">
-        <div class="col-sm-2 sidenav">
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                            Protein
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item" asp-area="" asp-controller="Shop" asp-action="PMyProtein">MyProtein"</a></li>
-                            <li><a class="dropdown-item" asp-area="" asp-controller="Shop" asp-action="PUniversal">Universal"</a></li>
-                            <li><a class="dropdown-item" asp-area="" asp-controller="Shop" asp-action="POptimumNutrition">Optimum Nutrition"</a></li>
-                            <li><a class="dropdown-item" asp-area="" asp-controller="Shop" asp-action="PAmix">Optimum Nutrition"</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <br />
-                <br />
-                <br />
 
-                <li class="nav-item">
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                            BCAA
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item" asp-area="" asp-controller="Shop" asp-action="BMyProtein">MyProtein" </a></li>
-                            <li><a class="dropdown-item" asp-area="" asp-controller="Shop" asp-action="BUniversal">Universal"</a></li>
-                            <li><a class="dropdown-item" asp-area="" asp-controller="Shop" asp-action="BOptimumNutrition">Optimum Nutrition"</a></li>
-                            <li><a class="dropdown-item" asp-area="" asp-controller="Shop" asp-action="BAmix">Optimum Nutrition"</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <br />
-                <br />
-                <br />
+<form method="get">
+    <div class="row-mb-5">
+        <div class="form-group col-md-4">
+            <div class="form-group">
+                <label asp-for="Brand"></label>
+                <select asp-for="Brand" class="form-control">
 
-                <li class="nav-item">
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                            L-Carnitine
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item" asp-area="" asp-controller="Shop" asp-action="LMyProtein">MyProtein"</a></li>
-                            <li><a class="dropdown-item" asp-area="" asp-controller="Shop" asp-action="LUniversal">Universal"</a></li>
-                            <li><a class="dropdown-item" asp-area="" asp-controller="Shop" asp-action="LOptimumNutrition">Optimum Nutrition"</a></li>
-                            <li><a class="dropdown-item" asp-area="" asp-controller="Shop" asp-action="LAmix">Optimum Nutrition"</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <br />
-                <br />
-                <br />
-
-                <li class="nav-item">
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                            Creatine
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item" asp-area="" asp-controller="Shop" asp-action="CMyProtein">MyProtein"</a></li>
-                            <li><a class="dropdown-item" asp-area="" asp-controller="Shop" asp-action="CUniversal">Universal"</a></li>
-                            <li><a class="dropdown-item" asp-area="" asp-controller="Shop" asp-action="COptimumNutrition">Optimum Nutrition"</a></li>
-                            <li><a class="dropdown-item" asp-area="" asp-controller="Shop" asp-action="CAmix">Optimum Nutrition"</a></li>
-                        </ul>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <div class="col-sm-8 text-left">
-            <h1>Welcome</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            <hr>
-            <h3>Test</h3>
-            <p>Lorem ipsum...</p>
-        </div>
-        <div class="col-sm-2 sidenav">
-            <div class="well">
-                <p>You will find best products for muscle mass here !</p>
-            </div>
-            <div class="well">
-                <p>Buy Now !</p>
+                    @foreach (var brand in Model.Brands)
+                    {
+                        <option value=@brand>@brand</option>
+                    }
+                </select>
             </div>
         </div>
     </div>
-</div>
+
+    <div class="row-mb-5">
+        <div class="form-group col-md-4">
+            <div class="form-group">
+                <label asp-for="Type"></label>
+                <select asp-for="Type" class="form-control">
+
+                    @foreach (var type in Model.Types)
+                    {
+                        <option value=@type>@type</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+
+     <div class="row-mb-5">
+        <div class="form-group col-md-4">
+            <div class="form-group">
+                <label asp-for="SortedBy"></label>
+                <select asp-for="SortedBy" class="form-control">
+                        <option value="0">Sorting By Price</option>
+                        <option value="1">Sorting By Price Descending</option>
+                        <option value="2">Sorting By Name</option>
+                        <option value="3">Sorting By Most Buys</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+
+</form>
+
+
+<br />
+<br />
+    @foreach (var product in Model.Products)
+    {
+
+        <div class="container">
+            <div class="row">
+
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="@product.ImageUrl" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">@product.Name</h5>
+                        <p class="card-text">@product.Description</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">@product.Brand</li>
+                        <li class="list-group-item">@product.Type</li>
+                        <li class="list-group-item">@String.Format(product.Price % 1 == 0 ? "{0:0}" : "{0:0.00}", product.Price) £</li>
+                    </ul>
+                    <div class="card-body">
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+    }

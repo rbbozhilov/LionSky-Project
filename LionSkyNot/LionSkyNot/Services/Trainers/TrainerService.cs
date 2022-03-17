@@ -88,12 +88,14 @@ namespace LionSkyNot.Services.Trainers
 
             var trainerQuery = this.data.Trainers.AsQueryable();
 
-            var trainers = trainerQuery.Select(t => new TrainerListViewModel()
-                                      {
-                                          FullName = t.FullName,
-                                          Description = t.Description,
-                                          ImageUrl = t.ImageUrl,
-                                       }).ToList();
+            var trainers = trainerQuery
+                                        .Where(t => t.FullName.ToLower().Contains(searchedName.ToLower()))
+                                        .Select(t => new TrainerListViewModel()
+                                        {
+                                            FullName = t.FullName,
+                                            Description = t.Description,
+                                            ImageUrl = t.ImageUrl,
+                                        }).ToList();
 
             return trainers;
         }

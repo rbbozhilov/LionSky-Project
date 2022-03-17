@@ -19,13 +19,17 @@ namespace LionSkyNot.Controllers
         public IActionResult Index(string searchTerm)
         {
 
-
-
             if (!string.IsNullOrWhiteSpace(searchTerm) && !string.IsNullOrEmpty(searchTerm))
             {
-              var searchTrainer = trainerService.SearchTrainerByName(searchTerm);
+                var searchTrainers = trainerService.SearchTrainerByName(searchTerm);
 
-                
+                var allTrainersViewModel = new AllTrainersViewModel()
+                {
+                    Trainers = searchTrainers
+                };
+
+                return View("TrainerSearch", allTrainersViewModel);
+
             }
 
 

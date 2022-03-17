@@ -15,7 +15,7 @@ namespace LionSkyNot.Services.Products
         }
 
 
-        public void CreateProduct(string name, decimal price,string description, string imgUrl,  int typeProductId, int brandProductId)
+        public void CreateProduct(string name, decimal price, string description, string imgUrl, int typeProductId, int brandProductId)
         {
             var newProduct = new Product()
             {
@@ -49,6 +49,82 @@ namespace LionSkyNot.Services.Products
         }).ToList();
 
 
+        public IQueryable<Product> GetProductsByBrandAndType(string type, string brand)
+        {
+
+            var products = this.data.Products
+                                    .Where(p => p.Brand.BrandName == brand && p.Type.TypeName == type)
+                                    .Distinct();
+
+            return products;
+        }
+
+
+        public IEnumerable<ProductListViewModel> ShowAllProducts()
+        {
+
+            var products = this.data.Products
+                                    .Select(p => new ProductListViewModel()
+                                    {
+                                        Type = p.Type.TypeName,
+                                        Brand = p.Brand.BrandName,
+                                        Price = p.Price,
+                                        Description = p.Description,
+                                        ImageUrl = p.ImageUrl
+                                    })
+                                    .Distinct()
+                                    .ToList();
+
+            return products;
+        }
+
+
+        public IQueryable<Product> SortedByPriceDescending()
+        {
+
+            var products = this.data.Products    
+                                    .Distinct()
+                                    .OrderByDescending(p => p.Price);
+
+            return products;
+        }
+
+        public IEnumerable<ProductListViewModel> SortedByPrice()
+        {
+
+            var products = this.data.Products
+                                    .Select(p => new ProductListViewModel()
+                                    {
+                                        Type = p.Type.TypeName,
+                                        Brand = p.Brand.BrandName,
+                                        Price = p.Price,
+                                        Description = p.Description,
+                                        ImageUrl = p.ImageUrl
+                                    })
+                                    .Distinct()
+                                    .OrderBy(p => p.Price)
+                                    .ToList();
+
+            return products;
+        }
+
+        public IQueryable<ProductListViewModel> SortedByName()
+        {
+
+            var products = this.data.Products
+                                    .Select(p => new ProductListViewModel()
+                                    {
+                                        Type = p.Type.TypeName,
+                                        Brand = p.Brand.BrandName,
+                                        Price = p.Price,
+                                        Description = p.Description,
+                                        ImageUrl = p.ImageUrl
+                                    })
+                                    .Distinct()
+                                    .OrderBy(p => p.Name);
+
+            return products;
+        }
 
     }
 }

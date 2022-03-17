@@ -1,4 +1,5 @@
-﻿using LionSkyNot.Views.ViewModels.Products;
+﻿using LionSkyNot.Data.Models.Product;
+using LionSkyNot.Views.ViewModels.Products;
 
 namespace LionSkyNot.Services.Products
 {
@@ -9,7 +10,17 @@ namespace LionSkyNot.Services.Products
 
         IEnumerable<ProductBrandViewModel> GetAllBrandProduct();
 
-        void CreateProduct(string name,decimal price, string description, string imgUrl, int typeProductId, int brandProductId);
+        IQueryable<Product> GetProductsByBrandAndType(string type, string brand);
+
+        IEnumerable<ProductListViewModel> ShowAllProducts();
+
+        IEnumerable<ProductListViewModel> SortedByPrice();
+
+        IQueryable<Product> SortedByPriceDescending();
+
+        IQueryable<ProductListViewModel> SortedByName();
+
+        void CreateProduct(string name, decimal price, string description, string imgUrl, int typeProductId, int brandProductId);
 
     }
 }
