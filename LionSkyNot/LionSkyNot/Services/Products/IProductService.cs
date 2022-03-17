@@ -14,11 +14,13 @@ namespace LionSkyNot.Services.Products
 
         IEnumerable<ProductListViewModel> ShowAllProducts();
 
-        IEnumerable<ProductListViewModel> SortedByPrice();
+        IQueryable<Product> SortedByPrice(IQueryable<Product> products);
 
-        IQueryable<Product> SortedByPriceDescending();
+        IQueryable<Product> SortedByPriceDescending(IQueryable<Product> products);
 
-        IQueryable<ProductListViewModel> SortedByName();
+        IQueryable<Product> SortedByName(IQueryable<Product> products);
+
+        IEnumerable<ProductListViewModel> GetFinalProductsSelected(IQueryable<Product> products);
 
         void CreateProduct(string name, decimal price, string description, string imgUrl, int typeProductId, int brandProductId);
 

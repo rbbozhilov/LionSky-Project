@@ -79,52 +79,44 @@ namespace LionSkyNot.Services.Products
         }
 
 
-        public IQueryable<Product> SortedByPriceDescending()
+        public IQueryable<Product> SortedByPriceDescending(IQueryable<Product> products)
         {
 
-            var products = this.data.Products    
-                                    .Distinct()
-                                    .OrderByDescending(p => p.Price);
+            products = products.Distinct()
+                               .OrderByDescending(p => p.Price);
 
             return products;
         }
 
-        public IEnumerable<ProductListViewModel> SortedByPrice()
+        public IQueryable<Product> SortedByPrice(IQueryable<Product> products)
         {
 
-            var products = this.data.Products
-                                    .Select(p => new ProductListViewModel()
-                                    {
-                                        Type = p.Type.TypeName,
-                                        Brand = p.Brand.BrandName,
-                                        Price = p.Price,
-                                        Description = p.Description,
-                                        ImageUrl = p.ImageUrl
-                                    })
-                                    .Distinct()
-                                    .OrderBy(p => p.Price)
-                                    .ToList();
+            products = products.Distinct()
+                               .OrderBy(p => p.Price);
 
             return products;
         }
 
-        public IQueryable<ProductListViewModel> SortedByName()
+        public IQueryable<Product> SortedByName(IQueryable<Product> products)
         {
 
-            var products = this.data.Products
-                                    .Select(p => new ProductListViewModel()
-                                    {
-                                        Type = p.Type.TypeName,
-                                        Brand = p.Brand.BrandName,
-                                        Price = p.Price,
-                                        Description = p.Description,
-                                        ImageUrl = p.ImageUrl
-                                    })
-                                    .Distinct()
-                                    .OrderBy(p => p.Name);
+            products = products.Distinct()
+                               .OrderBy(p => p.Name);
 
             return products;
         }
 
+
+        public IEnumerable<ProductListViewModel> GetFinalProductsSelected(IQueryable<Product> products)
+        {
+            return products.Select(p => new ProductListViewModel()
+            {
+                Type = p.Type.TypeName,
+                Brand = p.Brand.BrandName,
+                Price = p.Price,
+                Description = p.Description,
+                ImageUrl = p.ImageUrl
+            }).ToList();
+        }
     }
 }

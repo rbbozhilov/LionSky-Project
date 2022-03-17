@@ -38,19 +38,19 @@ namespace LionSkyNot.Controllers
                 {
                     case "SortedByPrice":
                         {
-                            //products = this.productService.SortedByPrice();
+                            products = this.productService.SortedByPrice(products);
                             break;
                         }
 
                     case "SortedByPriceDescending":
                         {
-                            this.productService.SortedByPriceDescending();
+                            products = this.productService.SortedByPriceDescending(products);
                             break;
                         }
 
                     case "SortedByName":
                         {
-                            //products = this.productService.SortedByName();
+                            products = this.productService.SortedByName(products);
                             break;
                         }
 
@@ -61,15 +61,10 @@ namespace LionSkyNot.Controllers
                         }
                 }
 
+                var finalProducts = this.productService.GetFinalProductsSelected(products);
 
-                return View("Result", products.Select(p => new ProductListViewModel()
-                {
-                    Type = p.Type.TypeName,
-                    Brand = p.Brand.BrandName,
-                    Price = p.Price,
-                    Description = p.Description,
-                    ImageUrl = p.ImageUrl
-                }).ToList());
+
+                return View("Result", finalProducts);
 
             }
 
