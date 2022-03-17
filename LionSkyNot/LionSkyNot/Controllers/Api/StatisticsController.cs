@@ -1,5 +1,5 @@
-﻿using LionSkyNot.Data;
-using LionSkyNot.Models.Api.Statistics;
+﻿using LionSkyNot.Models.Api.Statistics;
+using LionSkyNot.Services.Statistics;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LionSkyNot.Controllers.Api
@@ -9,31 +9,18 @@ namespace LionSkyNot.Controllers.Api
     public class StatisticsController : ControllerBase
     {
 
-        private LionSkyDbContext data;
+        private IStatisticsService statisticsService;
 
-        public StatisticsController(LionSkyDbContext data)
+        public StatisticsController(IStatisticsService statisticsService)
         {
-            this.data = data;
+            this.statisticsService = statisticsService;
         }
 
 
         [HttpGet]
         [Route("api/statistics")]
         public ActionResult<StatisticsResponseModel> GetStatistics()
-        {
-
-            var statistics = new StatisticsResponseModel()
-            {
-                RecipeCount = this.data.Recipes.Count(),
-                ProductCount = this.data.Products.Count(),
-                ExerciseCount = this.data.Exercises.Count(),
-                ClassesCount = this.data.Classes.Count(),
-                TrainerCount = this.data.Trainers.Count(),
-            };
-
-
-            return statistics;
-        }
+        => this.statisticsService.GetStatistics();
 
     }
 }

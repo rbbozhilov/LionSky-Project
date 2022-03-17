@@ -118,5 +118,22 @@ namespace LionSkyNot.Services.Products
                 ImageUrl = p.ImageUrl
             }).ToList();
         }
+
+
+        public IEnumerable<ProductListViewModel> ShowMostBuyedProducts(int countOfProducts)
+         => this.data
+                .Products
+                .OrderByDescending(p => p.CountOfBuys)
+                .Select(p => new ProductListViewModel()
+                {
+                    Name = p.Name,
+                    Brand = p.Brand.BrandName,
+                    Description = p.Description,
+                    ImageUrl = p.ImageUrl,
+                    Price = p.Price,
+                    Type = p.Type.TypeName
+                })
+                .Take(countOfProducts)
+                .ToList();
     }
 }
