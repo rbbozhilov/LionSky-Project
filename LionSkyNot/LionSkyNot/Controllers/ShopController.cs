@@ -34,32 +34,42 @@ namespace LionSkyNot.Controllers
 
                 var products = this.productService.GetProductsByBrandAndType(type, brand);
 
-                switch (sortedBy.ToString())
+                products = sortedBy switch
                 {
-                    case "SortedByPrice":
-                        {
-                            products = this.productService.SortedByPrice(products);
-                            break;
-                        }
+                    SortedProductViewModel.SortedByPrice => products = this.productService.SortedByPrice(products),
+                    SortedProductViewModel.SortedByPriceDescending => products = this.productService.SortedByPriceDescending(products),
+                    SortedProductViewModel.SortedByName => products = this.productService.SortedByName(products),
+                   
+                 
+                    //TODO SORTED BY MOST BUYS
+                };
 
-                    case "SortedByPriceDescending":
-                        {
-                            products = this.productService.SortedByPriceDescending(products);
-                            break;
-                        }
+                //switch (sortedBy.ToString())
+                //{
+                //    case "SortedByPrice":
+                //        {
+                //            products = this.productService.SortedByPrice(products);
+                //            break;
+                //        }
 
-                    case "SortedByName":
-                        {
-                            products = this.productService.SortedByName(products);
-                            break;
-                        }
+                //    case "SortedByPriceDescending":
+                //        {
+                //            products = this.productService.SortedByPriceDescending(products);
+                //            break;
+                //        }
 
-                    case "SortedByMostBuys":
-                        {
+                //    case "SortedByName":
+                //        {
+                //            products = this.productService.SortedByName(products);
+                //            break;
+                //        }
 
-                            break;
-                        }
-                }
+                //    case "SortedByMostBuys":
+                //        {
+
+                //            break;
+                //        }
+                //}
 
                 var finalProducts = this.productService.GetFinalProductsSelected(products);
 
