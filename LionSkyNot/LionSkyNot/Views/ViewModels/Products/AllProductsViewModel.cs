@@ -3,7 +3,11 @@
     public class AllProductsViewModel
     {
 
+        public const int ProductsPerPage = 3; 
+
         public string Brand { get; set; }
+
+        public int CurrentPage { get; set; } = 1;
 
         public IEnumerable<string> Brands { get; set; }
 

@@ -1,22 +1,36 @@
 ﻿
 <div>
-    <img height = 500 weight = 500 class ="center" src="https://static.onecms.io/wp-content/uploads/sites/35/2019/02/03195512/gym-workouts-exericse-order.jpg">
+    <img height=500 weight=500 class="center" src="https://static.onecms.io/wp-content/uploads/sites/35/2019/02/03195512/gym-workouts-exericse-order.jpg">
 </div>
 <br />
 <h1>Here you can find exercises for each group that you want to train</h1>
 <br />
 
 <ul class="nav flex-column">
-  <li class="nav-item">
-    <a class="nav-link active" asp-area="" asp-controller="Exercise" asp-action="BicepsExercises">Biceps</a>
-  </li>
-  <li class="nav-item">
+    <li class="nav-item">
+        <a class="nav-link active" id="check">Biceps</a>
+    </li>
+    <li class="nav-item">
         <a class="nav-link active" asp-area="" asp-controller="Exercise" asp-action="ChestExercises">Chest</a>
-  </li>
-  <li class="nav-item">
+    </li>
+    <li class="nav-item">
         <a class="nav-link active" asp-area="" asp-controller="Exercise" asp-action="BackExercises">Back</a>
-  </li>
-  <li class="nav-item">
+    </li>
+    <li class="nav-item">
         <a class="nav-link active" asp-area="" asp-controller="Exercise" asp-action="LegExercises">Leg</a>
-  </li>
+    </li>
 </ul>
+
+
+@section Scripts {
+
+<script>
+    $('#check').on('click', ev => {
+         $.get('/api/statistics', (data) => {
+        console.log(data);
+     })
+    });
+
+</script>
+
+}

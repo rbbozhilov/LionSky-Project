@@ -16,7 +16,7 @@ namespace LionSkyNot.Controllers
 
 
 
-        public IActionResult Index(string brand, string type, SortedProductViewModel sortedBy)
+        public IActionResult Index([FromQuery] AllProductsViewModel query)
         {
 
             var allProductViewModel = new AllProductsViewModel()
@@ -27,49 +27,27 @@ namespace LionSkyNot.Controllers
 
 
 
-            if (!string.IsNullOrWhiteSpace(brand) && !string.IsNullOrEmpty(brand)
-                        && !string.IsNullOrWhiteSpace(type) && !string.IsNullOrEmpty(type)
-                        && !string.IsNullOrWhiteSpace(sortedBy.ToString()) && !string.IsNullOrEmpty(sortedBy.ToString()))
+            if (!string.IsNullOrWhiteSpace(query.Brand) &&
+                !string.IsNullOrEmpty(query.Brand) &&
+                !string.IsNullOrWhiteSpace(query.Type) &&
+                !string.IsNullOrEmpty(query.Type) &&
+                !string.IsNullOrWhiteSpace(query.SortedBy.ToString()) &&
+                !string.IsNullOrEmpty(query.SortedBy.ToString()))
             {
 
-                var products = this.productService.GetProductsByBrandAndType(type, brand);
+                var products = this.productService.GetProductsByBrandAndType(query.Type, query.Brand);
 
-                products = sortedBy switch
+                products = query.SortedBy switch
                 {
                     SortedProductViewModel.SortedByPrice => products = this.productService.SortedByPrice(products),
                     SortedProductViewModel.SortedByPriceDescending => products = this.productService.SortedByPriceDescending(products),
                     SortedProductViewModel.SortedByName => products = this.productService.SortedByName(products),
-                   
-                 
+
                     //TODO SORTED BY MOST BUYS
+
+                    _ => products = this.productService.SortedByName(products)
                 };
 
-                //switch (sortedBy.ToString())
-                //{
-                //    case "SortedByPrice":
-                //        {
-                //            products = this.productService.SortedByPrice(products);
-                //            break;
-                //        }
-
-                //    case "SortedByPriceDescending":
-                //        {
-                //            products = this.productService.SortedByPriceDescending(products);
-                //            break;
-                //        }
-
-                //    case "SortedByName":
-                //        {
-                //            products = this.productService.SortedByName(products);
-                //            break;
-                //        }
-
-                //    case "SortedByMostBuys":
-                //        {
-
-                //            break;
-                //        }
-                //}
 
                 var finalProducts = this.productService.GetFinalProductsSelected(products);
 
@@ -80,6 +58,7 @@ namespace LionSkyNot.Controllers
 
 
             allProductViewModel.Products = this.productService.ShowAllProducts();
+
 
             return View(allProductViewModel);
         }

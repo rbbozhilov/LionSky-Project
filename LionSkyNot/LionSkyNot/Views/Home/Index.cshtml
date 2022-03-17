@@ -83,7 +83,7 @@
 
 <br />
 
-@if (Model.Any(x => x!= null))
+@if (Model.Any(x => x != null))
 {
     <div class="container">
         <div class="row">
@@ -100,6 +100,49 @@
             }
         </div>
     </div>
+}
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default text-left">
+            <div class="panel-body">
+                <p id="statistics-p">Click here to show statistics of this site</p>
+
+                <div class="d-none" id="statistics">
+                    <p id="classesCount"></p>
+                    <p id="recipeCount"></p>
+                    <p id="productCount"></p>
+                    <p id="trainerCount"></p>
+                    <p id="exerciseCount"></p>
+                </div>
+
+                <button type="button" class="btn btn-primary" id="statistics-button">
+                    Check
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+
+<script>
+    $('#statistics-button').on('click', ev => {
+         $.get('/api/statistics', (data) => {
+         $('#classesCount').text("Classes: " + data.classesCount);
+         $('#recipeCount').text("Recipes: " + data.recipeCount);
+         $('#trainerCount').text("Trainers: " + data.trainerCount );
+         $('#exerciseCount').text("Exercises: " + data.exerciseCount );
+         $('#productCount').text("Products: " + data.productCount );
+
+         $('#statistics').removeClass('d-none');
+         $('#statistics-p').addClass('d-none');
+         $('#statistics-button').addClass('d-none');
+     })
+    });
+</script>
 }
 
 

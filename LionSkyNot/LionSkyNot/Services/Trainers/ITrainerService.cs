@@ -5,7 +5,10 @@ namespace LionSkyNot.Services.Trainers
     public interface ITrainerService
     {
 
-        void Create(string fullName, int yearsOfExperience, string imageUrl, float height, float weight, DateTime birthDate , int categorieId , string description);
+        void Create(string fullName, int yearsOfExperience, string imageUrl, float height, float weight, DateTime birthDate, int categorieId, string description);
+
+
+        TrainerViewModel GetTrainerById(int id);
 
         IEnumerable<CategorieViewModel> GetAllCategories();
 

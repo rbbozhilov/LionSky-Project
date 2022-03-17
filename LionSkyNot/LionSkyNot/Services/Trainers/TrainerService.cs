@@ -100,6 +100,23 @@ namespace LionSkyNot.Services.Trainers
             return trainers;
         }
 
+        public TrainerViewModel GetTrainerById(int id)
+        {
+
+            return this.data.Trainers.Where(t => t.Id == id).Select(t => new TrainerViewModel()
+            {
+                FullName = t.FullName,
+                ImageUrl = t.ImageUrl,
+                Description = t.Description,
+                YearOfExperience = t.YearOfExperience,
+                BirthDate = t.BirthDate,
+                Weight = t.Weight,
+                Height = t.Height
+            }).FirstOrDefault();
+
+        }
+
+
 
         private TrainerViewModel GetTopTrainerByCategorie(string category)
         {
@@ -122,6 +139,9 @@ namespace LionSkyNot.Services.Trainers
 
             return trainer;
         }
+
+
+
 
     }
 }
