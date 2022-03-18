@@ -10,6 +10,13 @@ namespace LionSkyNot.Data.Models.Class
         [Key]
         public int Id { get; set; }
 
+        [MaxLength(255)]
+        [Required]
+        public string ClassName { get; set; }
+
+        [Required]
+        public string ImageUrl { get; set; }
+
         public int PractitionerCount { get; set; }
 
         public int MaxPractitionerCount { get; set; }
@@ -26,7 +33,7 @@ namespace LionSkyNot.Data.Models.Class
 
         public Trainer Trainer { get; set; }
 
-       
-
+     
+        public bool IsDeleted { get; set; } = false;
     }
 }

@@ -1,8 +1,10 @@
 ﻿using LionSkyNot.Data;
 using LionSkyNot.Models;
+using LionSkyNot.Models.Class;
 using LionSkyNot.Models.Exercises;
 using LionSkyNot.Models.Products;
 using LionSkyNot.Models.Recipe;
+using LionSkyNot.Services.Classes;
 using LionSkyNot.Services.Exercises;
 using LionSkyNot.Services.Products;
 using LionSkyNot.Services.Recipes;
@@ -18,6 +20,7 @@ namespace LionSkyNot.Controllers
         private IExerciseService exerciseService;
         private IProductService productService;
         private ITrainerService trainerService;
+        private IClassService classService;
         private LionSkyDbContext data;
 
 
@@ -27,12 +30,14 @@ namespace LionSkyNot.Controllers
                                IExerciseService exerciseService,
                                IProductService productService,
                                ITrainerService trainerService,
+                               IClassService classService,
                                LionSkyDbContext data)
         {
             this.recipeService = recipeService;
             this.exerciseService = exerciseService;
             this.productService = productService;
             this.trainerService = trainerService;
+            this.classService = classService;
             this.data = data;
 
         }
@@ -158,7 +163,42 @@ namespace LionSkyNot.Controllers
 
         public IActionResult AddClass()
         {
-            return View();
+            return View(new AddClassFormModel()
+            {
+                Trainers = this.classService.GetAllTrainers()
+            });
+
+        }
+
+        [HttpPost]
+        public IActionResult AddClass(AddClassFormModel classModel)
+        {
+            //TOOD START AND END DATE VALIDATION
+
+            if (!this.data.Trainers.Any(t => t.Id == classModel.TrainerId))
+            {
+                this.ModelState.AddModelError(nameof(classModel.TrainerId), "Don't make some hack tries!");
+            }
+
+
+            if (!ModelState.IsValid)
+            {
+                classModel.Trainers = this.classService.GetAllTrainers();
+                
+
+                return View(classModel);
+            }
+
+            this.classService.Create(
+                                     classModel.ClassName,
+                                     classModel.ImageUrl,
+                                     classModel.Price,
+                                     classModel.MaxPractitionerCount,
+                                     classModel.TrainerId,
+                                     classModel.StartDateTime,
+                                     classModel.EndDateTime);
+
+            return RedirectToAction("Index");
         }
 
         public IActionResult DeleteClass()

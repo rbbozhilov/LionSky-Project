@@ -1,62 +1,67 @@
-﻿@*@model AddClassFormModel
+﻿@model AddClassFormModel
 
 <link rel="stylesheet" href="~/css/form.css" asp-append-version="true" />
 
 <div>
-    <img class ="center" src="https://www.maggi.co.uk/sites/default/files/styles/maggi_desktop_image_style/public/NUK1265%20maggi%20Recipes%20banner%201500x700px%20opt2A.jpg?h=4f5b30f1&itok=DcsF1RwA">
+    <img class="center" src="https://www.ncl.ac.uk/mediav8/sport-/exercise-class-header.jpg">
 </div>
 <br />
 <br />
 
 <div class="row">
-<div class="offset-md-3 col-md-6 col-sm-12 ">
+    <div class="offset-md-3 col-md-6 col-sm-12 ">
 
-<form method="post">
-    <div class="form-group">
-        <label asp-for="Name">Name of the recipe</label>
-        <input asp-for="Name" type="text" class="form-control">
-        <span asp-validation-for="Name" class="small text-danger"> </span>
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="ClassName">Name of class</label>
+                <input asp-for="ClassName" type="text" class="form-control">
+                <span asp-validation-for="ClassName" class="small text-danger"> </span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ImageUrl">Image Url</label>
+                <input asp-for="ImageUrl" type="text" class="form-control">
+                <span asp-validation-for="ImageUrl" class="small text-danger"> </span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="StartDateTime">Start date of the class</label>
+                <input asp-for="StartDateTime" type="date" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label asp-for="EndDateTime">End date of the class</label>
+                <input asp-for="EndDateTime" type="date" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Price">Price</label>
+                <input asp-for="Price" type="text" class="form-control" value="">
+                <span asp-validation-for="Price" class="small text-danger"> </span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="MaxPractitionerCount">Max practitioners</label>
+                <input asp-for="MaxPractitionerCount" type="text" class="form-control" value="">
+                <span asp-validation-for="MaxPractitionerCount" class="small text-danger"> </span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="TrainerId">Choose trainer</label>
+                <select asp-for="TrainerId" class="form-control form-control-sm">
+
+                    @foreach (var trainer in Model.Trainers)
+                    {
+                        <option value="@trainer.Id">@trainer.FullName</option>
+                    }
+                </select>
+                <span asp-validation-for="TrainerId" class="small text-danger"> </span>
+
+            </div>
+
+            <br />
+            <button type="submit" class="btn btn-primary">Add</button>
+        </form>
     </div>
-
-    <div class="form-group">
-        <label asp-for="Description">Description for the recipe</label>
-        <textarea asp-for="Description"  type="text" class="form-control"> </textarea>
-        <span asp-validation-for="Description" class="small text-danger"> </span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="Calories">Calories</label>
-        <input asp-for="Calories" type="text" class="form-control" id="input3">
-        <span asp-validation-for="Calories" class="small text-danger"> </span>
-    </div>
-
-      <div class="form-group">
-        <label asp-for="Fat">Fats</label>
-        <input asp-for="Fat" type="text" class="form-control" id="input3">
-        <span asp-validation-for="Fat" class="small text-danger"> </span>
-    </div>
-
-      <div class="form-group">
-        <label asp-for="Carbohydrates">Carbohydrates</label>
-        <input asp-for="Carbohydrates" type="text" class="form-control" id="input3">
-        <span asp-validation-for="Carbohydrates" class="small text-danger"> </span>
-    </div>
-
-      <div class="form-group">
-        <label asp-for="Protein">Protein</label>
-        <input asp-for="Protein" type="text" class="form-control" id="input3">
-        <span asp-validation-for="Protein" class="small text-danger"> </span>
-    </div>
-
-      <div class="form-group">
-        <label asp-for="ImageUrl">Image Url</label>
-        <input asp-for="ImageUrl" type="text" class="form-control" id="input3">
-        <span asp-validation-for="ImageUrl" class="small text-danger"> </span>
-    </div>
-
-    <br />
-    <button type="submit" class="btn btn-primary">Add</button>
-</form>
 </div>
-</div>
-*@
