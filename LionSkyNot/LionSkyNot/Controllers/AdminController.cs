@@ -58,7 +58,6 @@ namespace LionSkyNot.Controllers
         }
 
         [HttpPost]
-        [AutoValidateAntiforgeryToken]
         public IActionResult AddProduct(AddProductFormModel productModel)
         {
 
@@ -106,7 +105,6 @@ namespace LionSkyNot.Controllers
         }
 
         [HttpPost]
-        [AutoValidateAntiforgeryToken]
         public IActionResult AddTrainer(AddTrainerFormModel trainerModel)
         {
 
@@ -136,7 +134,6 @@ namespace LionSkyNot.Controllers
         }
 
         [HttpPost]
-        [AutoValidateAntiforgeryToken]
         public IActionResult AddRecipe(AddRecipeFormModel recipeModel)
         {
 
@@ -174,7 +171,6 @@ namespace LionSkyNot.Controllers
         }
 
         [HttpPost]
-        [AutoValidateAntiforgeryToken]
         public IActionResult AddClass(AddClassFormModel classModel)
         {
             //TOOD START AND END DATE VALIDATION
@@ -224,7 +220,6 @@ namespace LionSkyNot.Controllers
         }
 
         [HttpPost]
-        [AutoValidateAntiforgeryToken]
         public IActionResult AddExercise(AddExerciseFormModel exerciseModel)
         {
 

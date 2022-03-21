@@ -17,8 +17,8 @@ namespace LionSkyNot.Controllers.Api
         }
 
 
-        [HttpGet]
         [Route("api/statistics")]
+        [HttpGet]
         public ActionResult<StatisticsResponseModel> GetStatistics()
         => this.statisticsService.GetStatistics();
 

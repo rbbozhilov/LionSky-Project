@@ -14,7 +14,6 @@ namespace LionSkyNot.Controllers
         }
 
         [HttpPost]
-        [AutoValidateAntiforgeryToken]
         public IActionResult Index(CalculateFormModel calculateModel, CalculatorViewModel model)
         {
 
