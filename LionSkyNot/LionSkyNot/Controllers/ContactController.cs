@@ -12,6 +12,7 @@ namespace LionSkyNot.Controllers
         }
 
         [HttpPost]
+        [AutoValidateAntiforgeryToken]
         public IActionResult Index(ContactFormModel model)
         {
 
