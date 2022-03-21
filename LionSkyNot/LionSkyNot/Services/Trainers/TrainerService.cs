@@ -46,6 +46,7 @@ namespace LionSkyNot.Services.Trainers
         {
 
             List<TrainerViewModel> trainers = new List<TrainerViewModel>();
+            List<TrainerViewModel> allValidTrainers = new List<TrainerViewModel>();
 
             var boxer = this.GetTopTrainerByCategorie("Box");
             var mma = this.GetTopTrainerByCategorie("MMA");
@@ -55,37 +56,26 @@ namespace LionSkyNot.Services.Trainers
             var athletic = this.GetTopTrainerByCategorie("Athletic");
 
 
-            if (boxer != null)
+            trainers.AddRange(new List<TrainerViewModel>()
             {
-                trainers.Add(boxer);
+                boxer,
+                mma,
+                yoga,
+                fitness,
+                wrestling,
+                athletic
+            });
+
+   
+            foreach (var trainer in trainers)
+            {
+                if(trainer != null)
+                {
+                    allValidTrainers.Add(trainer);
+                }
             }
 
-            if (mma != null)
-            {
-                trainers.Add(mma);
-            }
-
-            if (yoga != null)
-            {
-                trainers.Add(yoga);
-            }
-
-            if (fitness != null)
-            {
-                trainers.Add(fitness);
-            }
-
-            if (wrestling != null)
-            {
-                trainers.Add(wrestling);
-            }
-
-            if (athletic != null)
-            {
-                trainers.Add(athletic);
-            }
-
-            return trainers;
+            return allValidTrainers;
         }
 
 
