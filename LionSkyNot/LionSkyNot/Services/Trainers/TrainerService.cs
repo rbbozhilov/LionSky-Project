@@ -54,12 +54,36 @@ namespace LionSkyNot.Services.Trainers
             var wrestling = this.GetTopTrainerByCategorie("Wrestling");
             var athletic = this.GetTopTrainerByCategorie("Athletic");
 
-            trainers.Add(boxer);
-            trainers.Add(mma);
-            trainers.Add(yoga);
-            trainers.Add(fitness);
-            trainers.Add(wrestling);
-            trainers.Add(athletic);
+
+            if (boxer != null)
+            {
+                trainers.Add(boxer);
+            }
+
+            if (mma != null)
+            {
+                trainers.Add(mma);
+            }
+
+            if (yoga != null)
+            {
+                trainers.Add(yoga);
+            }
+
+            if (fitness != null)
+            {
+                trainers.Add(fitness);
+            }
+
+            if (wrestling != null)
+            {
+                trainers.Add(wrestling);
+            }
+
+            if (athletic != null)
+            {
+                trainers.Add(athletic);
+            }
 
             return trainers;
         }
