@@ -1,5 +1,5 @@
 ﻿using LionSkyNot.Data;
-using LionSkyNot.Data.Models.Product;
+using LionSkyNot.Data.Models.Shop;
 using LionSkyNot.Views.ViewModels.Products;
 
 namespace LionSkyNot.Services.Products

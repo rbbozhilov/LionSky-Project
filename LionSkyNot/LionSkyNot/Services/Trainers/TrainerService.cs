@@ -1,6 +1,6 @@
 ﻿using LionSkyNot.Data;
 using LionSkyNot.Views.ViewModels.Trainers;
-using LionSkyNot.Data.Models.Class;
+using LionSkyNot.Data.Models.Classes;
 
 namespace LionSkyNot.Services.Trainers
 {

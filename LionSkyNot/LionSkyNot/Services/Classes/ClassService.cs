@@ -1,5 +1,5 @@
 ﻿using LionSkyNot.Data;
-using LionSkyNot.Data.Models.Class;
+using LionSkyNot.Data.Models.Classes;
 using LionSkyNot.Views.ViewModels.Classes;
 
 namespace LionSkyNot.Services.Classes

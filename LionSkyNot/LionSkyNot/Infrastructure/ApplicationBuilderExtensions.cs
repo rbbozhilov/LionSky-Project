@@ -1,11 +1,11 @@
 ﻿using LionSkyNot.Data;
 
-using LionSkyNot.Data.Models.Class;
+using LionSkyNot.Data.Models.Classes;
 using LionSkyNot.Data.Models.Exercise;
-using LionSkyNot.Data.Models.Product;
+using LionSkyNot.Data.Models.Shop;
 
 using Microsoft.EntityFrameworkCore;
-using Type = LionSkyNot.Data.Models.Product.Type;
+using Type = LionSkyNot.Data.Models.Shop.Type;
 
 namespace LionSkyNot.Infrastructure
 {

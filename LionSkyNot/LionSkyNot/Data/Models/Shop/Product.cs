@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using static LionSkyNot.Data.DataConstants;
 
-namespace LionSkyNot.Data.Models.Product
+namespace LionSkyNot.Data.Models.Shop
 {
     public class Product
     {

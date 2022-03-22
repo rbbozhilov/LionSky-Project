@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using static LionSkyNot.Data.DataConstants;
 
-namespace LionSkyNot.Data.Models.Product
+namespace LionSkyNot.Data.Models.Shop
 {
-    public class Type
+    public class Brand
     {
 
         [Key]
@@ -11,8 +11,7 @@ namespace LionSkyNot.Data.Models.Product
 
         [Required]
         [MaxLength(255)]
-        public string TypeName { get; set; }
-
+        public string BrandName { get; set; }
 
     }
 }

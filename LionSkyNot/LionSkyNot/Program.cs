@@ -1,5 +1,5 @@
 using LionSkyNot.Data;
-
+using LionSkyNot.Data.Models.User;
 using LionSkyNot.Infrastructure;
 using LionSkyNot.Services.Classes;
 using LionSkyNot.Services.Exercises;
@@ -20,7 +20,7 @@ builder.Services.AddDbContext<LionSkyDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+builder.Services.AddDefaultIdentity<User>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
     options.Password.RequireDigit = true;

@@ -1,7 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using static LionSkyNot.Data.DataConstants;
 
-namespace LionSkyNot.Data.Models.Class
+namespace LionSkyNot.Data.Models.Classes
 {
     public class Trainer
     {
@@ -28,14 +29,13 @@ namespace LionSkyNot.Data.Models.Class
 
         public float Height { get; set; }
 
-        public bool Candidate { get; set; } = false;
-
         public bool IsDeleted { get; set; } = false;
 
+        [ForeignKey(nameof(Categorie))]
         public int CategorieId { get; set; }
 
         public Categorie Categorie { get; set; }
 
-      
+
     }
 }

@@ -227,6 +227,26 @@ namespace LionSkyNot.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "WishLists",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TotalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WishLists", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_WishLists_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Trainers",
                 columns: table => new
                 {
@@ -239,7 +259,6 @@ namespace LionSkyNot.Migrations
                     BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Weight = table.Column<float>(type: "real", nullable: false),
                     Height = table.Column<float>(type: "real", nullable: false),
-                    Candidate = table.Column<bool>(type: "bit", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CategorieId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -291,7 +310,8 @@ namespace LionSkyNot.Migrations
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TypeId = table.Column<int>(type: "int", nullable: false),
                     BrandId = table.Column<int>(type: "int", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    WishListId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -308,6 +328,11 @@ namespace LionSkyNot.Migrations
                         principalTable: "Types",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Products_WishLists_WishListId",
+                        column: x => x.WishListId,
+                        principalTable: "WishLists",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -324,7 +349,8 @@ namespace LionSkyNot.Migrations
                     StartDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     TrainerId = table.Column<int>(type: "int", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    WishListId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -335,6 +361,11 @@ namespace LionSkyNot.Migrations
                         principalTable: "Trainers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Classes_WishLists_WishListId",
+                        column: x => x.WishListId,
+                        principalTable: "WishLists",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -382,6 +413,11 @@ namespace LionSkyNot.Migrations
                 column: "TrainerId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Classes_WishListId",
+                table: "Classes",
+                column: "WishListId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Exercises_TypeExerciseId",
                 table: "Exercises",
                 column: "TypeExerciseId");
@@ -397,9 +433,20 @@ namespace LionSkyNot.Migrations
                 column: "TypeId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Products_WishListId",
+                table: "Products",
+                column: "WishListId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Trainers_CategorieId",
                 table: "Trainers",
                 column: "CategorieId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WishLists_UserId",
+                table: "WishLists",
+                column: "UserId",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -435,9 +482,6 @@ namespace LionSkyNot.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
                 name: "Trainers");
 
             migrationBuilder.DropTable(
@@ -450,7 +494,13 @@ namespace LionSkyNot.Migrations
                 name: "Types");
 
             migrationBuilder.DropTable(
+                name: "WishLists");
+
+            migrationBuilder.DropTable(
                 name: "Categories");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
         }
     }
 }
