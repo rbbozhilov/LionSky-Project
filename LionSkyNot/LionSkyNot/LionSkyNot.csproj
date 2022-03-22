@@ -9,6 +9,11 @@
 
   <ItemGroup>
     <Content Remove="Views\Admin\TopProductsBuyed.cshtml" />
+    <Content Remove="Views\WishList\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Views\WishList\Index.cshtml" />
   </ItemGroup>
 
   <ItemGroup>

@@ -15,7 +15,7 @@ namespace LionSkyNot.Services.Products
         }
 
 
-        public void CreateProduct(string name, decimal price, string description, string imgUrl, int typeProductId, int brandProductId)
+        public void CreateProduct(string name, decimal price, int inStock, string description, string imgUrl, int typeProductId, int brandProductId)
         {
             var newProduct = new Product()
             {
@@ -24,7 +24,8 @@ namespace LionSkyNot.Services.Products
                 ImageUrl = imgUrl,
                 Price = price,
                 TypeId = typeProductId,
-                BrandId = brandProductId
+                BrandId = brandProductId,
+                CountInStock = inStock
             };
 
             data.Products.Add(newProduct);
@@ -70,7 +71,8 @@ namespace LionSkyNot.Services.Products
                                         Brand = p.Brand.BrandName,
                                         Price = p.Price,
                                         Description = p.Description,
-                                        ImageUrl = p.ImageUrl
+                                        ImageUrl = p.ImageUrl,
+                                        InStock = p.CountInStock
                                     })
                                     .Distinct()
                                     .ToList();
@@ -135,5 +137,33 @@ namespace LionSkyNot.Services.Products
                 })
                 .Take(countOfProducts)
                 .ToList();
+
+
+        public IEnumerable<Product> GetAllProductsWithZeroInStock(int countOfProducts)
+        => this.data
+               .Products
+               .Where(p => p.CountInStock == 0)
+               .ToList();
+
+
+        public bool UpdateInStockCountOfProducts()
+        {
+            var products = this.data.Products.Where(p => p.CountInStock == 0).ToList();
+
+            if (products.Count() == 0)
+            {
+                return false;
+            }
+
+            for (int i = 0; i < products.Count(); i++)
+            {
+                products[i].CountInStock = 10;
+            }
+
+            this.data.SaveChanges();
+
+            return true;
+        }
+
     }
 }

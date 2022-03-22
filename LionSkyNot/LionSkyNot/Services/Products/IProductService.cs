@@ -22,7 +22,8 @@ namespace LionSkyNot.Services.Products
 
         IEnumerable<ProductListViewModel> GetFinalProductsSelected(IQueryable<Product> products);
 
-        void CreateProduct(string name, decimal price, string description, string imgUrl, int typeProductId, int brandProductId);
-
+        void CreateProduct(string name, decimal price,int inStock, string description, string imgUrl, int typeProductId, int brandProductId);
+        
+        bool UpdateInStockCountOfProducts();
     }
 }

@@ -6,13 +6,49 @@
     <h1>Here you can check your results</h1>
 </div>
 
-<div class="container">
-    <div class="row">
-        <div class="col-sm-4">
-            <h3>Protein: @String.Format("{0:0.0}", Model.Protein)</h3>
-            <h3>Carbohydrates: @String.Format("{0:0.0}", Model.Carbohydrates)</h3>
-            <h3>Fat: @String.Format("{0:0.0}", Model.Fat)</h3>
-            <h3>Calories: @String.Format("{0:0.0}", Model.Calories)</h3>
-        </div>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="success">
+                    <td>Protein</td>
+                    <td>@String.Format("{0:0.0}", Model.Protein) g</td>
+                </tr>
+                <tr class="danger">
+                    <td>Calories</td>
+                    <td>@String.Format("{0:0.0}", Model.Calories) g</td>
+                </tr>
+                <tr class="info">
+                    <td>Fat</td>
+                    <td>@String.Format("{0:0.0}", Model.Fat) g</td>
+                </tr>
+                <tr class="warning">
+                    <td>Carbohydrates</td>
+                    <td>@String.Format("{0:0.0}", Model.Carbohydrates) g</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-</div>
+
+</body>
+</html>
+

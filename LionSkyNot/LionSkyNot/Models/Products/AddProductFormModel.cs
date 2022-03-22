@@ -24,6 +24,8 @@ namespace LionSkyNot.Models.Products
         [Required]
         public string ImageUrl { get; set; }
 
+        [Range(1,100)]
+        public int InStock { get; set; }
 
         public int TypeId { get; set; }
 
@@ -33,6 +35,5 @@ namespace LionSkyNot.Models.Products
 
         public IEnumerable<ProductBrandViewModel>? Brand { get; set; }
       
-
     }
 }

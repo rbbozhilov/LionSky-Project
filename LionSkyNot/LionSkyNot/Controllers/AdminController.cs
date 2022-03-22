@@ -81,12 +81,32 @@ namespace LionSkyNot.Controllers
 
             this.productService.CreateProduct(productModel.Name,
                 productModel.Price,
+                productModel.InStock,
                 productModel.Description,
                 productModel.ImageUrl,
                 productModel.TypeId,
                 productModel.BrandId);
 
             return RedirectToAction("Index");
+        }
+
+        public IActionResult AddProductsInStock()
+        {
+            bool isDone = this.productService.UpdateInStockCountOfProducts();
+
+            if (!isDone)
+            {
+                return RedirectToAction("NotSuccess");
+            }
+
+
+            return View();
+        }
+
+        public IActionResult NotSuccess()
+        {
+
+            return View();
         }
 
 
