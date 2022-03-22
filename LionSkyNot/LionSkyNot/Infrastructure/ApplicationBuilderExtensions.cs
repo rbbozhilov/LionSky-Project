@@ -1,4 +1,5 @@
-﻿using LionSkyNot.Data;
+﻿
+using LionSkyNot.Data;
 
 using LionSkyNot.Data.Models.Classes;
 using LionSkyNot.Data.Models.Exercise;

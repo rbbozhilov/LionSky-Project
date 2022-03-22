@@ -4,8 +4,7 @@ namespace LionSkyNot.Infrastructure
 {
     public static class ClaimsPrincipalExtensions
     {
-
-        public static string GetUserId(ClaimsPrincipal user)
+        public static string GetId(this ClaimsPrincipal user)
             => user.FindFirst(ClaimTypes.NameIdentifier).Value;
     }
 }

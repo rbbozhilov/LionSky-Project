@@ -35,6 +35,7 @@ namespace LionSkyNot.Data.Models.Classes
 
         public bool IsDeleted { get; set; } = false;
 
-     
+
+
     }
 }

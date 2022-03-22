@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using LionSkyNot.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+
 
 namespace LionSkyNot.Controllers
 {
@@ -7,8 +9,18 @@ namespace LionSkyNot.Controllers
     public class WishListController : BaseController
     {
 
+        private LionSkyDbContext data;
+
+        public WishListController(LionSkyDbContext data)
+        {
+            this.data = data;
+        }
+
+
         public IActionResult Index()
         {
+            var user = Infrastructure.ClaimsPrincipalExtensions.GetId(this.User);
+
 
             return View();
         }
