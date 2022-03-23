@@ -28,10 +28,10 @@ namespace LionSkyNot.Services.Classes
                 EndDateTime = endDateTime
             };
 
-            data.Classes.Add(@class);
 
+            this.data.Classes.Add(@class);
 
-            data.SaveChanges();
+            this.data.SaveChanges();
         }
 
         public IEnumerable<TrainerViewModel> GetAllTrainers()

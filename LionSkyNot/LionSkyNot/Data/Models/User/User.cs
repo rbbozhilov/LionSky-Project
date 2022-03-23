@@ -1,8 +1,9 @@
-﻿using LionSkyNot.Data.Models.Classes;
+﻿using System.ComponentModel.DataAnnotations;
+
+using LionSkyNot.Data.Models.Classes;
 using LionSkyNot.Data.Models.Shop;
 
 using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LionSkyNot.Data.Models.User
 {
@@ -13,6 +14,7 @@ namespace LionSkyNot.Data.Models.User
         {
             this.Classes = new HashSet<ClassUser>();
         }
+
 
 
         public ICollection<ClassUser> Classes { get; set; }

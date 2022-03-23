@@ -16,7 +16,7 @@ namespace LionSkyNot.Controllers
         private LionSkyDbContext data;
 
 
-        public TrainerController(ITrainerService trainerService , LionSkyDbContext data)
+        public TrainerController(ITrainerService trainerService, LionSkyDbContext data)
         {
             this.trainerService = trainerService;
             this.data = data;
@@ -57,29 +57,24 @@ namespace LionSkyNot.Controllers
         public IActionResult BecomeTrainer(AddTrainerFormModel trainerModel)
         {
             trainerModel.Categorie = this.trainerService.GetAllCategories();
+            var userId = ClaimsPrincipalExtensions.GetId(this.User);
 
             if (!ModelState.IsValid)
             {
                 return View(trainerModel);
             }
 
-            var trainer = new Trainer()
-            {
-                FullName = trainerModel.FullName,
-                ImageUrl = trainerModel.ImageUrl,
-                YearOfExperience = trainerModel.YearOfExperience,
-                Height = trainerModel.Height,
-                Weight = trainerModel.Weight,
-                BirthDate = trainerModel.BirthDate,
-                CategorieId = trainerModel.CategorieId,
-                Description = trainerModel.Description,
-                UserId = ClaimsPrincipalExtensions.GetId(this.User)
-            };
+            this.trainerService.Create(trainerModel.FullName,
+                                       trainerModel.YearOfExperience,
+                                       trainerModel.ImageUrl,
+                                       trainerModel.Height,
+                                       trainerModel.Weight,
+                                       trainerModel.BirthDate,
+                                       trainerModel.CategorieId,
+                                       trainerModel.Description,
+                                       userId);
 
-            this.data.Trainers.Add(trainer);
-
-            this.data.SaveChanges();
-
+         
             return RedirectToAction("Index");
         }
 

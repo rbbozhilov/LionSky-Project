@@ -15,7 +15,7 @@ namespace LionSkyNot.Services.Trainers
             this.data = data;
         }
 
-        public void Create(string fullName, int yearsOfExperience, string imageUrl, float height, float weight, DateTime birthDate, int categorieId, string description)
+        public void Create(string fullName, int yearsOfExperience, string imageUrl, float height, float weight, DateTime birthDate, int categorieId, string description,string userId)
         {
             var trainer = new Trainer()
             {
@@ -26,8 +26,8 @@ namespace LionSkyNot.Services.Trainers
                 Weight = weight,
                 BirthDate = birthDate,
                 CategorieId = categorieId,
-                Description = description
-                
+                Description = description,
+                UserId = userId
             };
 
             this.data.Trainers.Add(trainer);

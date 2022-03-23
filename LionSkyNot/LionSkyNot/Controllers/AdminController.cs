@@ -124,29 +124,29 @@ namespace LionSkyNot.Controllers
             });
         }
 
-        [HttpPost]
-        public IActionResult AddTrainer(AddTrainerFormModel trainerModel)
-        {
+        //[HttpPost]
+        //public IActionResult AddTrainer(AddTrainerFormModel trainerModel)
+        //{
 
-            trainerModel.Categorie = this.trainerService.GetAllCategories();
+        //    trainerModel.Categorie = this.trainerService.GetAllCategories();
 
-            if (!ModelState.IsValid)
-            {
-                return View(trainerModel);
-            }
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return View(trainerModel);
+        //    }
 
-            this.trainerService.Create(trainerModel.FullName,
-                                       trainerModel.YearOfExperience,
-                                       trainerModel.ImageUrl,
-                                       trainerModel.Height,
-                                       trainerModel.Weight,
-                                       trainerModel.BirthDate,
-                                       trainerModel.CategorieId,
-                                       trainerModel.Description);
+        //    this.trainerService.Create(trainerModel.FullName,
+        //                               trainerModel.YearOfExperience,
+        //                               trainerModel.ImageUrl,
+        //                               trainerModel.Height,
+        //                               trainerModel.Weight,
+        //                               trainerModel.BirthDate,
+        //                               trainerModel.CategorieId,
+        //                               trainerModel.Description);
 
-            return RedirectToAction("Index");
+        //    return RedirectToAction("Index");
 
-        }
+        //}
 
         public IActionResult AddRecipe()
         {
