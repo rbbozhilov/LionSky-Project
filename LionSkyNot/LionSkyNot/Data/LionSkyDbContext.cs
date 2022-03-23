@@ -66,13 +66,12 @@ namespace LionSkyNot.Data
                 .HasForeignKey(c => c.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            //builder.Entity<Class>()
-            //    .HasMany<User>()
-            //    .WithOne()
 
-
-
-
+            builder.Entity<Trainer>()
+                .HasOne<User>()
+                .WithOne()
+                .HasForeignKey<Trainer>(t => t.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             base.OnModelCreating(builder);
         }

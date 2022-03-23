@@ -260,11 +260,18 @@ namespace LionSkyNot.Migrations
                     Weight = table.Column<float>(type: "real", nullable: false),
                     Height = table.Column<float>(type: "real", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    CategorieId = table.Column<int>(type: "int", nullable: false)
+                    CategorieId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Trainers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Trainers_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Trainers_Categories_CategorieId",
                         column: x => x.CategorieId,
@@ -453,6 +460,12 @@ namespace LionSkyNot.Migrations
                 name: "IX_Trainers_CategorieId",
                 table: "Trainers",
                 column: "CategorieId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Trainers_UserId",
+                table: "Trainers",
+                column: "UserId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_WishLists_UserId",

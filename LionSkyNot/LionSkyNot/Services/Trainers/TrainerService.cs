@@ -1,6 +1,7 @@
 ﻿using LionSkyNot.Data;
-using LionSkyNot.Views.ViewModels.Trainers;
 using LionSkyNot.Data.Models.Classes;
+
+using LionSkyNot.Views.ViewModels.Trainers;
 
 namespace LionSkyNot.Services.Trainers
 {
@@ -26,6 +27,7 @@ namespace LionSkyNot.Services.Trainers
                 BirthDate = birthDate,
                 CategorieId = categorieId,
                 Description = description
+                
             };
 
             this.data.Trainers.Add(trainer);

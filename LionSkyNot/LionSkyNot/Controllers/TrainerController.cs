@@ -1,5 +1,10 @@
-﻿using LionSkyNot.Services.Trainers;
+﻿using LionSkyNot.Data;
+using LionSkyNot.Data.Models.Classes;
+using LionSkyNot.Infrastructure;
+using LionSkyNot.Models;
+using LionSkyNot.Services.Trainers;
 using LionSkyNot.Views.ViewModels.Trainers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LionSkyNot.Controllers
@@ -8,11 +13,13 @@ namespace LionSkyNot.Controllers
     {
 
         private ITrainerService trainerService;
+        private LionSkyDbContext data;
 
 
-        public TrainerController(ITrainerService trainerService)
+        public TrainerController(ITrainerService trainerService , LionSkyDbContext data)
         {
             this.trainerService = trainerService;
+            this.data = data;
         }
 
 
@@ -34,6 +41,46 @@ namespace LionSkyNot.Controllers
 
 
             return View();
+        }
+
+        [Authorize]
+        public IActionResult BecomeTrainer()
+        {
+            return View(new AddTrainerFormModel
+            {
+                Categorie = this.trainerService.GetAllCategories()
+            });
+        }
+
+        [HttpPost]
+        [Authorize]
+        public IActionResult BecomeTrainer(AddTrainerFormModel trainerModel)
+        {
+            trainerModel.Categorie = this.trainerService.GetAllCategories();
+
+            if (!ModelState.IsValid)
+            {
+                return View(trainerModel);
+            }
+
+            var trainer = new Trainer()
+            {
+                FullName = trainerModel.FullName,
+                ImageUrl = trainerModel.ImageUrl,
+                YearOfExperience = trainerModel.YearOfExperience,
+                Height = trainerModel.Height,
+                Weight = trainerModel.Weight,
+                BirthDate = trainerModel.BirthDate,
+                CategorieId = trainerModel.CategorieId,
+                Description = trainerModel.Description,
+                UserId = ClaimsPrincipalExtensions.GetId(this.User)
+            };
+
+            this.data.Trainers.Add(trainer);
+
+            this.data.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
 

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LionSkyNot.Migrations
 {
     [DbContext(typeof(LionSkyDbContext))]
-    [Migration("20220323160115_InitialCreate")]
+    [Migration("20220323193836_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -130,6 +130,10 @@ namespace LionSkyNot.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<float>("Weight")
                         .HasColumnType("real");
 
@@ -139,6 +143,9 @@ namespace LionSkyNot.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CategorieId");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("Trainers");
                 });
@@ -588,6 +595,12 @@ namespace LionSkyNot.Migrations
                         .WithMany("Trainers")
                         .HasForeignKey("CategorieId")
                         .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LionSkyNot.Data.Models.User.User", null)
+                        .WithOne()
+                        .HasForeignKey("LionSkyNot.Data.Models.Classes.Trainer", "UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Categorie");

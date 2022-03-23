@@ -36,6 +36,7 @@ namespace LionSkyNot.Data.Models.Classes
 
         public Categorie Categorie { get; set; }
 
+        public string UserId { get; set; }
 
     }
 }

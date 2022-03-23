@@ -1,0 +1,74 @@
+﻿@model AddTrainerFormModel
+
+<link rel="stylesheet" href="~/css/form.css" asp-append-version="true" />
+
+<div>
+    <img class="center" src="https://media.istockphoto.com/photos/male-personal-trainer-helping-sportswoman-to-do-exercises-with-at-picture-id972833328?k=20&m=972833328&s=612x612&w=0&h=LtGaklhIxyJbMkxEKDNWzGXgX-zmONE2-llVRDrv17c=">
+</div>
+<br />
+<br />
+
+<div class="row">
+    <div class="offset-md-3 col-md-6 col-sm-12 ">
+
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="FullName">Full name</label>
+                <input asp-for="FullName" type="text" class="form-control">
+                <span asp-validation-for="FullName" class="small text-danger"> </span>
+            </div>
+
+             <div class="form-group">
+                <label asp-for="Description">Description</label>
+                <input asp-for="Description" type="text" class="form-control">
+                <span asp-validation-for="Description" class="small text-danger"> </span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="YearOfExperience">Year of experience</label>
+                <input asp-for="YearOfExperience" type="text" value = "" class="form-control"> </input>
+                <span asp-validation-for="YearOfExperience" class="small text-danger"> </span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="BirthDate">BirthDate</label>
+                <input asp-for="BirthDate" type="date" value="" class="form-control" id="input3">
+                <span asp-validation-for="BirthDate" class="small text-danger"> </span>
+            </div>
+
+
+             <div class="form-group">
+                <label asp-for="Weight">Weight</label>
+                <input asp-for="Weight" type="text" value="" class="form-control" id="input3">
+                <span asp-validation-for="Weight" class="small text-danger"> </span>
+            </div>
+
+             <div class="form-group">
+                <label asp-for="Height">Height</label>
+                <input asp-for="Height" type="text" value="" class="form-control" id="input3">
+                <span asp-validation-for="Height" class="small text-danger"> </span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ImageUrl">Image Url</label>
+                <input asp-for="ImageUrl" type="text" class="form-control" id="input3">
+                <span asp-validation-for="ImageUrl" class="small text-danger"> </span>
+            </div>
+            <br />
+            <br />
+            <div class="form-group">
+                <label asp-for="CategorieId">Choose categorie</label>
+                <select asp-for="CategorieId" class="form-control form-control-sm">
+
+                    @foreach (var current in Model.Categorie)
+                    {
+                        <option value="@current.Id">@current.Name</option>
+                    }
+                </select>
+            </div>
+
+            <br />
+            <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+    </div>
+</div>
