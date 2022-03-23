@@ -11,10 +11,11 @@ namespace LionSkyNot.Data.Models.User
 
         public User()
         {
-            
+            this.Classes = new HashSet<ClassUser>();
         }
 
 
-   
+        public ICollection<ClassUser> Classes { get; set; }
+
     }
 }

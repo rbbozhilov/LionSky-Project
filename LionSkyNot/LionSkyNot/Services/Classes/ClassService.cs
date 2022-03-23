@@ -30,6 +30,7 @@ namespace LionSkyNot.Services.Classes
 
             data.Classes.Add(@class);
 
+
             data.SaveChanges();
         }
 

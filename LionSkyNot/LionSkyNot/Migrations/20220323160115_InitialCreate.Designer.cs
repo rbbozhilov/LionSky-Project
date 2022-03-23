@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LionSkyNot.Migrations
 {
     [DbContext(typeof(LionSkyDbContext))]
-    [Migration("20220322145455_InitialCreate")]
+    [Migration("20220323160115_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,11 +43,8 @@ namespace LionSkyNot.Migrations
 
             modelBuilder.Entity("LionSkyNot.Data.Models.Classes.Class", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ClassName")
                         .IsRequired()
@@ -79,16 +76,24 @@ namespace LionSkyNot.Migrations
                     b.Property<int>("TrainerId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("WishListId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("TrainerId");
 
-                    b.HasIndex("WishListId");
-
                     b.ToTable("Classes");
+                });
+
+            modelBuilder.Entity("LionSkyNot.Data.Models.Classes.ClassUser", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ClassId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("UserId", "ClassId");
+
+                    b.ToTable("ClassUsers");
                 });
 
             modelBuilder.Entity("LionSkyNot.Data.Models.Classes.Trainer", b =>
@@ -555,11 +560,26 @@ namespace LionSkyNot.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("LionSkyNot.Data.Models.Shop.WishList", null)
-                        .WithMany("Classes")
-                        .HasForeignKey("WishListId");
-
                     b.Navigation("Trainer");
+                });
+
+            modelBuilder.Entity("LionSkyNot.Data.Models.Classes.ClassUser", b =>
+                {
+                    b.HasOne("LionSkyNot.Data.Models.Classes.Class", "Class")
+                        .WithMany("Users")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("LionSkyNot.Data.Models.User.User", "User")
+                        .WithMany("Classes")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Class");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("LionSkyNot.Data.Models.Classes.Trainer", b =>
@@ -672,11 +692,19 @@ namespace LionSkyNot.Migrations
                     b.Navigation("Trainers");
                 });
 
+            modelBuilder.Entity("LionSkyNot.Data.Models.Classes.Class", b =>
+                {
+                    b.Navigation("Users");
+                });
+
             modelBuilder.Entity("LionSkyNot.Data.Models.Shop.WishList", b =>
                 {
-                    b.Navigation("Classes");
-
                     b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("LionSkyNot.Data.Models.User.User", b =>
+                {
+                    b.Navigation("Classes");
                 });
 #pragma warning restore 612, 618
         }

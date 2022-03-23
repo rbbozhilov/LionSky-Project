@@ -26,6 +26,5 @@ namespace LionSkyNot.Data.Models.Shop
         public string UserId { get; set; }
 
     
-
     }
 }

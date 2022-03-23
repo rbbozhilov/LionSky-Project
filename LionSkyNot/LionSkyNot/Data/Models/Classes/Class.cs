@@ -7,8 +7,14 @@ namespace LionSkyNot.Data.Models.Classes
     public class Class
     {
 
+        public Class()
+        {
+            this.Users = new HashSet<ClassUser>();
+            this.Id = Guid.NewGuid().ToString();
+        }
+
         [Key]
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         [MaxLength(255)]
         [Required]
@@ -35,6 +41,7 @@ namespace LionSkyNot.Data.Models.Classes
 
         public bool IsDeleted { get; set; } = false;
 
+        public ICollection<ClassUser> Users { get; set; }
 
 
     }

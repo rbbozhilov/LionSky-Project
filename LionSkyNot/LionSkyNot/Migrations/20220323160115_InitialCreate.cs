@@ -339,8 +339,7 @@ namespace LionSkyNot.Migrations
                 name: "Classes",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ClassName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PractitionerCount = table.Column<int>(type: "int", nullable: false),
@@ -349,8 +348,7 @@ namespace LionSkyNot.Migrations
                     StartDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     TrainerId = table.Column<int>(type: "int", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    WishListId = table.Column<int>(type: "int", nullable: true)
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -361,11 +359,30 @@ namespace LionSkyNot.Migrations
                         principalTable: "Trainers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ClassUsers",
+                columns: table => new
+                {
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ClassId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ClassUsers", x => new { x.UserId, x.ClassId });
                     table.ForeignKey(
-                        name: "FK_Classes_WishLists_WishListId",
-                        column: x => x.WishListId,
-                        principalTable: "WishLists",
-                        principalColumn: "Id");
+                        name: "FK_ClassUsers_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ClassUsers_Classes_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Classes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -411,11 +428,6 @@ namespace LionSkyNot.Migrations
                 name: "IX_Classes_TrainerId",
                 table: "Classes",
                 column: "TrainerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Classes_WishListId",
-                table: "Classes",
-                column: "WishListId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Exercises_TypeExerciseId",
@@ -467,7 +479,7 @@ namespace LionSkyNot.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Classes");
+                name: "ClassUsers");
 
             migrationBuilder.DropTable(
                 name: "Exercises");
@@ -482,7 +494,7 @@ namespace LionSkyNot.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Trainers");
+                name: "Classes");
 
             migrationBuilder.DropTable(
                 name: "TypeExercises");
@@ -497,10 +509,13 @@ namespace LionSkyNot.Migrations
                 name: "WishLists");
 
             migrationBuilder.DropTable(
-                name: "Categories");
+                name: "Trainers");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Categories");
         }
     }
 }

@@ -39,6 +39,8 @@ namespace LionSkyNot.Data
 
         public virtual DbSet<WishList> WishLists { get; set; }
 
+        public virtual DbSet<ClassUser> ClassUsers { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -48,6 +50,29 @@ namespace LionSkyNot.Data
                 .WithOne()
                 .HasForeignKey<WishList>(w => w.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<ClassUser>()
+                .HasKey(cu => new { cu.UserId, cu.ClassId });
+
+            builder.Entity<ClassUser>()
+                .HasOne(u => u.User)
+                .WithMany(c => c.Classes)
+                .HasForeignKey(u=> u.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<ClassUser>()
+                .HasOne(c => c.Class)
+                .WithMany(u => u.Users)
+                .HasForeignKey(c => c.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            //builder.Entity<Class>()
+            //    .HasMany<User>()
+            //    .WithOne()
+
+
+
+
 
             base.OnModelCreating(builder);
         }
