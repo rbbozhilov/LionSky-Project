@@ -1,4 +1,4 @@
-﻿@model AddTrainerFormModel
+﻿@model AddTrainerFromAdminFormModel
 
 <link rel="stylesheet" href="~/css/form.css" asp-append-version="true" />
 
@@ -11,50 +11,56 @@
 <div class="row">
     <div class="offset-md-3 col-md-6 col-sm-12 ">
 
-        
+
         <form method="post">
-            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="text-danger">@Html.ValidationMessage("notFindUser")</div>
+
+            <div class="form-group">
+                <label asp-for="Username">Username</label>
+                <input asp-for="Username" type="text" value="" class="form-control"> </input>
+                <span asp-validation-for="Username" class="small text-danger"> </span>
+            </div>
             <div class="form-group">
                 <label asp-for="FullName">Full name</label>
                 <input asp-for="FullName" type="text" class="form-control">
-                @*<span asp-validation-for="FullName" class="small text-danger"> </span>*@
+                <span asp-validation-for="FullName" class="small text-danger"> </span>
             </div>
 
             <div class="form-group">
                 <label asp-for="Description">Description</label>
                 <input asp-for="Description" type="text" class="form-control">
-               @* <span asp-validation-for="Description" class="small text-danger"> </span>*@
+                <span asp-validation-for="Description" class="small text-danger"> </span>
             </div>
 
             <div class="form-group">
                 <label asp-for="YearOfExperience">Year of experience</label>
                 <input asp-for="YearOfExperience" type="text" value="" class="form-control"> </input>
-               @* <span asp-validation-for="YearOfExperience" class="small text-danger"> </span>*@
+                <span asp-validation-for="YearOfExperience" class="small text-danger"> </span>
             </div>
 
             <div class="form-group">
                 <label asp-for="BirthDate">BirthDate</label>
                 <input asp-for="BirthDate" type="date" value="" class="form-control" id="input3">
-               @* <span asp-validation-for="BirthDate" class="small text-danger"> </span>*@
+                <span asp-validation-for="BirthDate" class="small text-danger"> </span>
             </div>
 
 
             <div class="form-group">
                 <label asp-for="Weight">Weight</label>
                 <input asp-for="Weight" type="text" value="" class="form-control" id="input3">
-               @* <span asp-validation-for="Weight" class="small text-danger"> </span>*@
+                <span asp-validation-for="Weight" class="small text-danger"> </span>
             </div>
 
             <div class="form-group">
                 <label asp-for="Height">Height</label>
                 <input asp-for="Height" type="text" value="" class="form-control" id="input3">
-               @* <span asp-validation-for="Height" class="small text-danger"> </span>*@
+                <span asp-validation-for="Height" class="small text-danger"> </span>
             </div>
 
             <div class="form-group">
                 <label asp-for="ImageUrl">Image Url</label>
                 <input asp-for="ImageUrl" type="text" class="form-control" id="input3">
-             @*   <span asp-validation-for="ImageUrl" class="small text-danger"> </span>*@
+                <span asp-validation-for="ImageUrl" class="small text-danger"> </span>
             </div>
             <br />
             <br />

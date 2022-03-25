@@ -4,6 +4,7 @@ using LionSkyNot.Models.Class;
 using LionSkyNot.Models.Exercises;
 using LionSkyNot.Models.Products;
 using LionSkyNot.Models.Recipe;
+using LionSkyNot.Models.Trainers;
 using LionSkyNot.Services.Classes;
 using LionSkyNot.Services.Exercises;
 using LionSkyNot.Services.Products;
@@ -61,12 +62,12 @@ namespace LionSkyNot.Controllers
         public IActionResult AddProduct(AddProductFormModel productModel)
         {
 
-            if(!this.data.Types.Any(t=> t.Id == productModel.TypeId))
+            if (!this.data.Types.Any(t => t.Id == productModel.TypeId))
             {
                 this.ModelState.AddModelError(nameof(productModel.TypeId), "Don't make some hack tries!");
             }
 
-            if(!this.data.Brands.Any(b=>b.Id == productModel.BrandId))
+            if (!this.data.Brands.Any(b => b.Id == productModel.BrandId))
             {
                 this.ModelState.AddModelError(nameof(productModel.BrandId), "Don't make some hack tries!");
             }
@@ -118,35 +119,45 @@ namespace LionSkyNot.Controllers
 
         public IActionResult AddTrainer()
         {
-            return View(new AddTrainerFormModel
+            return View(new AddTrainerFromAdminFormModel
             {
                 Categorie = this.trainerService.GetAllCategories()
             });
         }
 
-        //[HttpPost]
-        //public IActionResult AddTrainer(AddTrainerFormModel trainerModel)
-        //{
+        [HttpPost]
+        public IActionResult AddTrainer(AddTrainerFromAdminFormModel trainerModel)
+        {
+            var currentUser = this.data.Users.FirstOrDefault(u => u.UserName == trainerModel.Username);
+            trainerModel.Categorie = this.trainerService.GetAllCategories();
 
-        //    trainerModel.Categorie = this.trainerService.GetAllCategories();
+            if (currentUser == null)
+            {
+                ModelState.AddModelError("notFindUser", "the user is not exsist");
+            }
 
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return View(trainerModel);
-        //    }
 
-        //    this.trainerService.Create(trainerModel.FullName,
-        //                               trainerModel.YearOfExperience,
-        //                               trainerModel.ImageUrl,
-        //                               trainerModel.Height,
-        //                               trainerModel.Weight,
-        //                               trainerModel.BirthDate,
-        //                               trainerModel.CategorieId,
-        //                               trainerModel.Description);
+            if (!ModelState.IsValid)
+            {
+                return View(trainerModel);
+            }
 
-        //    return RedirectToAction("Index");
+            var exsistUserId = currentUser.Id;
 
-        //}
+
+            this.trainerService.Create(trainerModel.FullName,
+                                       trainerModel.YearOfExperience,
+                                       trainerModel.ImageUrl,
+                                       trainerModel.Height,
+                                       trainerModel.Weight,
+                                       trainerModel.BirthDate,
+                                       trainerModel.CategorieId,
+                                       trainerModel.Description,
+                                       exsistUserId);
+
+            return RedirectToAction("Index");
+
+        }
 
         public IActionResult AddRecipe()
         {
@@ -204,7 +215,7 @@ namespace LionSkyNot.Controllers
             if (!ModelState.IsValid)
             {
                 classModel.Trainers = this.classService.GetAllTrainers();
-                
+
 
                 return View(classModel);
             }
@@ -243,7 +254,7 @@ namespace LionSkyNot.Controllers
         public IActionResult AddExercise(AddExerciseFormModel exerciseModel)
         {
 
-            if(!this.data.TypeExercises.Any(e=>e.Id == exerciseModel.TypeId))
+            if (!this.data.TypeExercises.Any(e => e.Id == exerciseModel.TypeId))
             {
                 this.ModelState.AddModelError(nameof(exerciseModel.TypeId), "Don't make some hack tries!");
             }
