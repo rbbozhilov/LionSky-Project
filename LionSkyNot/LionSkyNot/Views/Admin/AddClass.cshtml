@@ -12,6 +12,8 @@
     <div class="offset-md-3 col-md-6 col-sm-12 ">
 
         <form method="post">
+
+            <div class="text-danger">@Html.ValidationMessage("errorDate")</div>
             <div class="form-group">
                 <label asp-for="ClassName">Name of class</label>
                 <input asp-for="ClassName" type="text" class="form-control">

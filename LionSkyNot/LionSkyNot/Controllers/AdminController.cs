@@ -133,16 +133,16 @@ namespace LionSkyNot.Controllers
 
             if (currentUser == null)
             {
-                ModelState.AddModelError("notFindUser", "the user is not exsist");
+                ModelState.AddModelError("notFindUser", "the user is not exists");
             }
 
-
+            
             if (!ModelState.IsValid)
             {
                 return View(trainerModel);
             }
 
-            var exsistUserId = currentUser.Id;
+            var existsUserId = currentUser.Id;
 
 
             this.trainerService.Create(trainerModel.FullName,
@@ -153,7 +153,7 @@ namespace LionSkyNot.Controllers
                                        trainerModel.BirthDate,
                                        trainerModel.CategorieId,
                                        trainerModel.Description,
-                                       exsistUserId);
+                                       existsUserId);
 
             return RedirectToAction("Index");
 
@@ -204,7 +204,12 @@ namespace LionSkyNot.Controllers
         [HttpPost]
         public IActionResult AddClass(AddClassFormModel classModel)
         {
-            //TOOD START AND END DATE VALIDATION
+
+            if(classModel.StartDateTime > classModel.EndDateTime)
+            {
+                this.ModelState.AddModelError("errorDate", "Cannot start date be after end date");
+            }
+
 
             if (!this.data.Trainers.Any(t => t.Id == classModel.TrainerId))
             {
