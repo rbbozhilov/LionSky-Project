@@ -98,6 +98,19 @@ namespace LionSkyNot.Services.Trainers
             return trainers;
         }
 
+        public IEnumerable<TrainerUserIdViewModel> GetAllTrainersUserId()
+        {
+
+            var trainers = this.data.Trainers
+                                    .Select(t => new TrainerUserIdViewModel()
+                                    {
+                                       UserId = t.UserId
+                                    })
+                                    .ToList();
+
+            return trainers;
+        }
+
 
         public IEnumerable<TrainerListViewModel> SearchTrainerByName(string searchedName)
         {

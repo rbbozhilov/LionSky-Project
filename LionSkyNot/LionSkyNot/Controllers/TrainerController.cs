@@ -57,7 +57,14 @@ namespace LionSkyNot.Controllers
         public IActionResult BecomeTrainer(AddTrainerFormModel trainerModel)
         {
             trainerModel.Categorie = this.trainerService.GetAllCategories();
-            var userId = ClaimsPrincipalExtensions.GetId(this.User);
+            var currentUserId = ClaimsPrincipalExtensions.GetId(this.User);
+            var allTrainersUserId = this.trainerService.GetAllTrainersUserId();
+
+
+            if (allTrainersUserId.Any(a => a.UserId == currentUserId))
+            {
+                ModelState.AddModelError("error", "The current user is already a trainer!");
+            }
 
             if (!ModelState.IsValid)
             {
@@ -72,9 +79,9 @@ namespace LionSkyNot.Controllers
                                        trainerModel.BirthDate,
                                        trainerModel.CategorieId,
                                        trainerModel.Description,
-                                       userId);
+                                       currentUserId);
 
-         
+
             return RedirectToAction("Index");
         }
 

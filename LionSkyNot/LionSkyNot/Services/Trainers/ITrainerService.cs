@@ -5,7 +5,7 @@ namespace LionSkyNot.Services.Trainers
     public interface ITrainerService
     {
 
-        void Create(string fullName, int yearsOfExperience, string imageUrl, float height, float weight, DateTime birthDate, int categorieId, string description,string userId);
+        void Create(string fullName, int yearsOfExperience, string imageUrl, float height, float weight, DateTime birthDate, int categorieId, string description, string userId);
 
 
         TrainerViewModel GetTrainerById(int id);
@@ -16,7 +16,10 @@ namespace LionSkyNot.Services.Trainers
 
         IEnumerable<TrainerListViewModel> GetAllTrainersByCategory(string category);
 
+        IEnumerable<TrainerUserIdViewModel> GetAllTrainersUserId();
+
         IEnumerable<TrainerListViewModel> SearchTrainerByName(string searchedName);
+
 
     }
 }
