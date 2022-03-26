@@ -1,5 +1,6 @@
 ﻿using LionSkyNot.Data;
 using LionSkyNot.Data.Models.Classes;
+
 using LionSkyNot.Views.ViewModels.Classes;
 
 namespace LionSkyNot.Services.Classes
@@ -46,10 +47,10 @@ namespace LionSkyNot.Services.Classes
         }
 
 
-        public IEnumerable<ClassViewModel> GetAllTrainerClasses(int trainerId)
+        public IEnumerable<ClassTrainerViewModel> GetAllTrainerClasses(int trainerId)
          => this.data.Classes
                      .Where(c => c.TrainerId == trainerId)
-                     .Select(t => new ClassViewModel()
+                     .Select(t => new ClassTrainerViewModel()
                      {
                          PractitionerCount = t.PractitionerCount,
                          Price = t.Price,
@@ -59,6 +60,22 @@ namespace LionSkyNot.Services.Classes
                          Categorie = t.Trainer.Categorie.Name,
                          ClassName = t.ClassName,
                          ImageUrl = t.ImageUrl
+                     })
+                     .ToList();
+
+
+        public IEnumerable<ClassViewModel> GetAllClasses()
+         => this.data.Classes
+                     .Select(c => new ClassViewModel()
+                     {
+                         ClassName = c.ClassName,
+                         Price = c.Price,
+                         StartDateTime = c.StartDateTime.ToString(),
+                         EndDateTime = c.EndDateTime.ToString(),
+                         Categorie = c.Trainer.Categorie.Name,
+                         ImageUrl = c.ImageUrl,
+                         Trainer = c.Trainer.FullName,
+                         Id = c.Id
                      })
                      .ToList();
 

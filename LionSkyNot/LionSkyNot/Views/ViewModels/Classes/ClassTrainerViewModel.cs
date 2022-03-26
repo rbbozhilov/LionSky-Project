@@ -1,9 +1,9 @@
 ﻿namespace LionSkyNot.Views.ViewModels.Classes
 {
-    public class ClassViewModel
+    public class ClassTrainerViewModel
     {
-
-        public string Id { get; set; }
+        
+        public int PractitionerCount { get; set; }
 
         public decimal Price { get; set; }
 

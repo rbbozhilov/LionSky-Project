@@ -89,7 +89,7 @@ namespace LionSkyNot.Controllers
 
 
         [Authorize]
-        public IActionResult TrainerClasses(IEnumerable<ClassViewModel> classModel)
+        public IActionResult TrainerClasses(IEnumerable<ClassTrainerViewModel> classModel)
         {
             var currentUserId = ClaimsPrincipalExtensions.GetId(this.User);
             int currentTrainerId = this.trainerService.GetTrainerId(currentUserId);

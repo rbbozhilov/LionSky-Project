@@ -5,11 +5,19 @@ namespace LionSkyNot.Services.Classes
     public interface IClassService
     {
 
+        IEnumerable<ClassViewModel> GetAllClasses();
+
         IEnumerable<TrainerClassViewModel> GetAllTrainers();
 
-        IEnumerable<ClassViewModel> GetAllTrainerClasses(int trainerId);
+        IEnumerable<ClassTrainerViewModel> GetAllTrainerClasses(int trainerId);
 
-        void Create(string fullname,string imageUrl,decimal price,int MaxPractitionerCount,int trainerId,DateTime startDateTime,DateTime endDateTime);
+        void Create(string fullname,
+            string imageUrl,
+            decimal price,
+            int MaxPractitionerCount,
+            int trainerId,
+            DateTime startDateTime,
+            DateTime endDateTime);
 
     }
 }

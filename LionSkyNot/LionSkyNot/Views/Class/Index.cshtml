@@ -1,1 +1,32 @@
-﻿
+﻿@model IEnumerable<ClassViewModel>
+
+
+    @if (Model.Any())
+{
+    <div class="container">
+        <div class="row">
+
+            @foreach (var currentClass in Model)
+            {
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="@currentClass.ImageUrl" alt="Card image cap">
+                    <div class="card-body">
+                        <h3 class="card-title">@currentClass.ClassName</h3>
+                        <p class="card-text">This class is started on @currentClass.StartDateTime date and ends on @currentClass.EndDateTime</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Trainer: @currentClass.Trainer</li>
+                        <li class="list-group-item">Category of the class: @currentClass.Categorie</li>
+                        <li class="list-group-item">Price: @String.Format(currentClass.Price % 1 == 0 ? "{0:0}" : "{0:0.00}", currentClass.Price) £</li>
+                    </ul>
+                    <div class="card-body">
+                        <a asp-controller="Class" asp-action="ShowDetails" asp-route-id="@currentClass.Id" class="btn btn-warning">Show Details</a>
+                        <a asp-controller="Class" asp-action="Buy" asp-route-id="@currentClass.Id" class="btn btn-warning">Add to Wihslist</a>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+}
+
