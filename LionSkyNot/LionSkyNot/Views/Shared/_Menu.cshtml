@@ -30,14 +30,6 @@
                     <a class="nav-link text-white" asp-area="" asp-controller="Trainer" asp-action="Index">Trainers</a>
                 </li>
 
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <li class="nav-item">
-                        <a class="nav-link text-white" asp-area="" asp-controller="Trainer" asp-action="BecomeTrainer">Become Trainer</a>
-                    </li>
-                }
-
-
                 <li class="nav-item">
                     <a class="nav-link text-white" asp-area="" asp-controller="Admin" asp-action="Index">Admin Panel</a>
                 </li>

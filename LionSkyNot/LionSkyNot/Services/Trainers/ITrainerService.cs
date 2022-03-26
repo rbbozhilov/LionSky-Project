@@ -7,6 +7,7 @@ namespace LionSkyNot.Services.Trainers
 
         void Create(string fullName, int yearsOfExperience, string imageUrl, float height, float weight, DateTime birthDate, int categorieId, string description, string userId);
 
+        bool IsTrainer(string userId);
 
         TrainerViewModel GetTrainerById(int id);
 

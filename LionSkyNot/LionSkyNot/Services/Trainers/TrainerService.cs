@@ -15,7 +15,7 @@ namespace LionSkyNot.Services.Trainers
             this.data = data;
         }
 
-        public void Create(string fullName, int yearsOfExperience, string imageUrl, float height, float weight, DateTime birthDate, int categorieId, string description,string userId)
+        public void Create(string fullName, int yearsOfExperience, string imageUrl, float height, float weight, DateTime birthDate, int categorieId, string description, string userId)
         {
             var trainer = new Trainer()
             {
@@ -68,10 +68,10 @@ namespace LionSkyNot.Services.Trainers
                 athletic
             });
 
-   
+
             foreach (var trainer in trainers)
             {
-                if(trainer != null)
+                if (trainer != null)
                 {
                     allValidTrainers.Add(trainer);
                 }
@@ -104,7 +104,7 @@ namespace LionSkyNot.Services.Trainers
             var trainers = this.data.Trainers
                                     .Select(t => new TrainerUserIdViewModel()
                                     {
-                                       UserId = t.UserId
+                                        UserId = t.UserId
                                     })
                                     .ToList();
 
@@ -144,6 +144,9 @@ namespace LionSkyNot.Services.Trainers
             }).FirstOrDefault();
 
         }
+
+        public bool IsTrainer(string userId)
+         => this.data.Trainers.Any(t => t.UserId == userId);
 
 
 
