@@ -4,6 +4,7 @@ using LionSkyNot.Models.Class;
 using LionSkyNot.Models.Exercises;
 using LionSkyNot.Models.Products;
 using LionSkyNot.Models.Recipe;
+using LionSkyNot.Models.Recipes;
 using LionSkyNot.Models.Trainers;
 using LionSkyNot.Services.Classes;
 using LionSkyNot.Services.Exercises;
@@ -202,13 +203,22 @@ namespace LionSkyNot.Controllers
 
         }
 
+        public IActionResult ShowRecipes(IEnumerable<RecipeFormModelForAdmin> recipeModel)
+        {
+
+            recipeModel = this.recipeService.GetAllRecipesForAdmin();
+
+            return View(recipeModel);
+
+        }
+
         public IActionResult AddRecipe()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult AddRecipe(AddRecipeFormModel recipeModel)
+        public IActionResult AddRecipe(RecipeFormModel recipeModel)
         {
 
             if (!ModelState.IsValid)
@@ -230,9 +240,54 @@ namespace LionSkyNot.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult DeleteRecipe()
+
+        public IActionResult EditRecipe(int id)
         {
-            return View();
+            var currentRecipe = this.recipeService.GetRecipeById(id);
+
+            return View(new RecipeFormModel()
+            {
+                Name = currentRecipe.Name,
+                Description = currentRecipe.Description,
+                Protein = currentRecipe.Protein,
+                Calories = currentRecipe.Calories,
+                Fat = currentRecipe.Fat,
+                ImageUrl = currentRecipe.ImageUrl,
+                Carbohydrates = currentRecipe.Carbohydrates,
+            });
+        }
+
+        [HttpPost]
+        public IActionResult EditRecipe(RecipeFormModel recipeModel,int id)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View(recipeModel);
+            }
+
+
+            this.recipeService.EditRecipe(
+                id,
+                recipeModel.Name,
+                recipeModel.ImageUrl,
+                recipeModel.Description,
+                recipeModel.Calories,
+                recipeModel.Carbohydrates,
+                recipeModel.Fat,
+                recipeModel.Protein);
+
+            return RedirectToAction("Index");
+
+        }
+
+
+        public IActionResult DeleteRecipe(int id)
+        {
+
+            this.recipeService.Delete(id);
+
+            return View("Successfull");
         }
 
         public IActionResult AddClass()

@@ -2,7 +2,7 @@
 
 namespace LionSkyNot.Models.Recipe
 {
-    public class AddRecipeFormModel
+    public class RecipeFormModel
     {
 
         [Required]

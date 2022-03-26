@@ -18,11 +18,21 @@ namespace LionSkyNot.Services.Statistics
         public StatisticsResponseModel GetStatistics()
         => new StatisticsResponseModel()
         {
-            ProductCount = this.data.Products.Count(),
-            ClassesCount = this.data.Classes.Count(),
-            ExerciseCount = this.data.Exercises.Count(),
-            TrainerCount = this.data.Trainers.Count(),
-            RecipeCount = this.data.Recipes.Count()
+            ProductCount = this.data.Products
+                                    .Where(p => p.IsDeleted == false)
+                                    .Count(),
+            ClassesCount = this.data.Classes
+                                    .Where(c => c.IsDeleted == false)
+                                    .Count(),
+            ExerciseCount = this.data.Exercises
+                                     .Where(e => e.IsDeleted == false)
+                                     .Count(),
+            TrainerCount = this.data.Trainers
+                                    .Where(t => t.IsDeleted == false)
+                                    .Count(),
+            RecipeCount = this.data.Recipes
+                                   .Where(r => r.IsDeleted == false)
+                                   .Count()
         };
     }
 }
