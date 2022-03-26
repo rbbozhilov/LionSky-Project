@@ -3,41 +3,45 @@
 <link rel="stylesheet" href="~/css/form.css" asp-append-version="true" />
 
 <div>
-    <img class ="center" src="http://3.bp.blogspot.com/-IKSOF370H_I/VH2fTh4S5XI/AAAAAAAAb-Y/e4BmmOA28oQ/s1600/FiGirlTiFbCoverPic.png">
+    <img class="center" src="http://3.bp.blogspot.com/-IKSOF370H_I/VH2fTh4S5XI/AAAAAAAAb-Y/e4BmmOA28oQ/s1600/FiGirlTiFbCoverPic.png">
 </div>
 <br />
 <br />
 
 <div class="row">
-<div class="offset-md-3 col-md-6 col-sm-12 ">
+    <div class="offset-md-3 col-md-6 col-sm-12 ">
 
-<form method="post">
-    <div class="form-group">
-        <label asp-for="Age">Input your Age</label>
-        <input asp-for="Age" type="text" class="form-control" placeholder="Example : 26">
-        <span asp-validation-for="Age" class="small text-danger"> </span>
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="Age">Input your Age</label>
+                <input asp-for="Age" type="text" class="form-control" placeholder="Example : 26">
+                <span asp-validation-for="Age" class="small text-danger"> </span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Weight">Input your Weight in KG</label>
+                <input asp-for="Weight" type="text" class="form-control" id="input2" placeholder="Example : 55.6">
+                <span asp-validation-for="Weight" class="small text-danger"> </span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Height">Input your Height in CM !</label>
+                <input asp-for="Height" type="text" class="form-control" id="input3" placeholder="Example : 181.2">
+                <span asp-validation-for="Height" class="small text-danger"> </span>
+            </div>
+
+            <label>Choose what is your goal</label>
+            <select asp-for="Goal" class="form-control form-control-sm">
+                <option>Weight Loss</option>
+                <option>Increase Muscle Mass</option>
+                <option>Weight Maintenance</option>
+            </select>
+            <br />
+            <button type="submit" class="btn btn-warning">Calculate</button>
+        </form>
     </div>
-
-    <div class="form-group">
-        <label asp-for="Weight">Input your Weight in KG</label>
-        <input asp-for="Weight" type="text" class="form-control" id="input2" placeholder="Example : 55.6">
-        <span asp-validation-for="Weight" class="small text-danger"> </span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="Height">Input your Height in CM !</label>
-        <input asp-for="Height" type="text" class="form-control" id="input3" placeholder="Example : 181.2">
-        <span asp-validation-for="Height" class="small text-danger"> </span>
-    </div>
-
-    <label>Choose what is your goal</label>
-    <select asp-for="Goal" class="form-control form-control-sm">
-        <option>Weight Loss</option>
-        <option>Increase Muscle Mass</option>
-        <option>Weight Maintenance</option>
-    </select>
-    <br />
-    <button type="submit" class="btn btn-warning">Calculate</button>
-</form>
 </div>
-</div>
+
+@section Scripts {
+<partial name="_ValidationScriptsPartial" />
+}

@@ -8,6 +8,7 @@ using LionSkyNot.Services.Recipes;
 using LionSkyNot.Services.Statistics;
 using LionSkyNot.Services.Trainers;
 using LionSkyNot.Services.Users;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -27,6 +28,7 @@ builder.Services.AddDefaultIdentity<User>(options =>
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequireUppercase = false;
 })
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<LionSkyDbContext>();
 
 builder.Services.AddControllersWithViews(options =>
