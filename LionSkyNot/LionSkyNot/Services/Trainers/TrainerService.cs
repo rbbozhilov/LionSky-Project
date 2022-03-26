@@ -81,6 +81,11 @@ namespace LionSkyNot.Services.Trainers
         }
 
 
+        public int GetTrainerId(string userId)
+        => this.data.Trainers.Where(t => t.UserId == userId).Select(t => t.Id).FirstOrDefault();
+
+
+
         public IEnumerable<TrainerListViewModel> GetAllTrainersByCategory(string category)
         {
 

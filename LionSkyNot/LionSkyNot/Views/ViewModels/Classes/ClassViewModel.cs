@@ -15,5 +15,10 @@
 
         public string Categorie { get; set; }
 
+        public string ClassName { get; set; }
+
+        public string ImageUrl { get; set; }
+
+
     }
 }

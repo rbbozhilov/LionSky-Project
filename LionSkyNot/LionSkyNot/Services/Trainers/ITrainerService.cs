@@ -9,6 +9,8 @@ namespace LionSkyNot.Services.Trainers
 
         bool IsTrainer(string userId);
 
+        int GetTrainerId(string userId);
+
         TrainerViewModel GetTrainerById(int id);
 
         IEnumerable<CategorieViewModel> GetAllCategories();

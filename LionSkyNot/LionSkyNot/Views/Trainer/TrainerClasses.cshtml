@@ -1,0 +1,22 @@
+﻿@model IEnumerable<ClassViewModel>
+
+
+@if (Model.Any())
+{
+       @foreach (var classes in Model)
+{
+    <div class="card"  style="width: 18rem; display:inline-block">
+        <img class="card-img-top" src="@classes.ImageUrl" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">@classes.ClassName</h5>
+            <p class="card-text">@classes.StartDateTime Start Date </p>
+            <p class="card-text">@classes.EndDateTime End Date </p>
+            <p class="card-text">@classes.PractitionerCount people will join </p>
+        </div>
+    </div>
+}
+}
+else
+{
+
+}

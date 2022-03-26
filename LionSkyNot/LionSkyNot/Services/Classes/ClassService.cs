@@ -34,9 +34,9 @@ namespace LionSkyNot.Services.Classes
             this.data.SaveChanges();
         }
 
-        public IEnumerable<TrainerViewModel> GetAllTrainers()
+        public IEnumerable<TrainerClassViewModel> GetAllTrainers()
         {
-            var allTrainers = this.data.Trainers.Select(t => new TrainerViewModel()
+            var allTrainers = this.data.Trainers.Select(t => new TrainerClassViewModel()
             {
                 Id = t.Id,
                 FullName = t.FullName,
@@ -44,5 +44,24 @@ namespace LionSkyNot.Services.Classes
 
             return allTrainers;
         }
+
+
+        public IEnumerable<ClassViewModel> GetAllTrainerClasses(int trainerId)
+         => this.data.Classes
+                     .Where(c => c.TrainerId == trainerId)
+                     .Select(t => new ClassViewModel()
+                     {
+                         PractitionerCount = t.PractitionerCount,
+                         Price = t.Price,
+                         StartDateTime = t.StartDateTime.ToString(),
+                         EndDateTime = t.EndDateTime.ToString(),
+                         Trainer = t.Trainer.FullName,
+                         Categorie = t.Trainer.Categorie.Name,
+                         ClassName = t.ClassName,
+                         ImageUrl = t.ImageUrl
+                     })
+                     .ToList();
+
+
     }
 }

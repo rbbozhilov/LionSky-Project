@@ -24,7 +24,7 @@ namespace LionSkyNot.Models.Class
 
         public int TrainerId { get; set; }
 
-        public IEnumerable<TrainerViewModel>? Trainers { get; set; }
+        public IEnumerable<TrainerClassViewModel>? Trainers { get; set; }
 
     }
 }

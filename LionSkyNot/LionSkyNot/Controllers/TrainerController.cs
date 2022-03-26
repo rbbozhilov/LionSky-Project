@@ -2,7 +2,9 @@
 using LionSkyNot.Data.Models.Classes;
 using LionSkyNot.Infrastructure;
 using LionSkyNot.Models;
+using LionSkyNot.Services.Classes;
 using LionSkyNot.Services.Trainers;
+using LionSkyNot.Views.ViewModels.Classes;
 using LionSkyNot.Views.ViewModels.Trainers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,13 +15,13 @@ namespace LionSkyNot.Controllers
     {
 
         private ITrainerService trainerService;
-        private LionSkyDbContext data;
+        private IClassService classService;
 
 
-        public TrainerController(ITrainerService trainerService, LionSkyDbContext data)
+        public TrainerController(ITrainerService trainerService, IClassService classService)
         {
             this.trainerService = trainerService;
-            this.data = data;
+            this.classService = classService;
         }
 
 
@@ -83,6 +85,19 @@ namespace LionSkyNot.Controllers
 
 
             return RedirectToAction("Index");
+        }
+
+
+        [Authorize]
+        public IActionResult TrainerClasses(IEnumerable<ClassViewModel> classModel)
+        {
+            var currentUserId = ClaimsPrincipalExtensions.GetId(this.User);
+            int currentTrainerId = this.trainerService.GetTrainerId(currentUserId);
+
+            classModel = this.classService.GetAllTrainerClasses(currentTrainerId);
+
+
+            return View(classModel);
         }
 
 

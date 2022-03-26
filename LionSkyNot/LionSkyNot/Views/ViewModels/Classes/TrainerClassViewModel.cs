@@ -1,6 +1,6 @@
 ﻿namespace LionSkyNot.Views.ViewModels.Classes
 {
-    public class TrainerViewModel
+    public class TrainerClassViewModel
     {
 
         public int Id { get; set; }
