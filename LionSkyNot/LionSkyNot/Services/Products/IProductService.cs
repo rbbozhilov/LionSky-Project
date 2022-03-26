@@ -13,6 +13,8 @@ namespace LionSkyNot.Services.Products
 
         void EditProduct(int id, string imageUrl, string name, decimal price);
 
+        void DeleteProduct(int id);
+
         EditProductFormModel GetProductById(int id);
 
         IEnumerable<ProductTypeViewModel> GetAllTypesProduct();

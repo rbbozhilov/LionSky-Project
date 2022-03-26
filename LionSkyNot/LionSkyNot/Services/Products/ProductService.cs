@@ -60,6 +60,16 @@ namespace LionSkyNot.Services.Products
             this.data.SaveChanges();
         }
 
+        public void DeleteProduct(int id)
+        {
+            var currentProduct = this.data.Products
+                                          .Where(p => p.Id == id && p.IsDeleted == false)
+                                          .FirstOrDefault();
+
+            currentProduct.IsDeleted = true;
+
+            this.data.SaveChanges();
+        }
 
         public IEnumerable<ProductBrandViewModel> GetAllBrandProduct()
         => this.data.Brands.Select(b => new ProductBrandViewModel

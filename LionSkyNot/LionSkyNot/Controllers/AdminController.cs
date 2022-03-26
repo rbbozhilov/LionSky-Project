@@ -153,7 +153,10 @@ namespace LionSkyNot.Controllers
 
         public IActionResult DeleteProduct(int id)
         {
-            return View();
+
+            this.productService.DeleteProduct(id);
+
+            return View("Successfull");
         }
 
 
