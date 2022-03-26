@@ -1,5 +1,6 @@
 ﻿using LionSkyNot.Data;
 using LionSkyNot.Data.Models.Shop;
+using LionSkyNot.Models.Products;
 using LionSkyNot.Views.ViewModels.Products;
 
 namespace LionSkyNot.Services.Products
@@ -34,6 +35,32 @@ namespace LionSkyNot.Services.Products
         }
 
 
+        public EditProductFormModel GetProductById(int id)
+        => this.data.Products
+                    .Where(p => p.Id == id && p.IsDeleted == false)
+                    .Select(p => new EditProductFormModel()
+                    {
+                        ImageUrl = p.ImageUrl,
+                        Name = p.Name,
+                        Price = p.Price
+                    })
+                    .FirstOrDefault();
+
+
+        public void EditProduct(int id, string imageUrl, string name, decimal price)
+        {
+            var currentProduct = this.data.Products
+                                          .Where(p => p.Id == id && p.IsDeleted == false)
+                                          .FirstOrDefault();
+
+            currentProduct.ImageUrl = imageUrl;
+            currentProduct.Name = name;
+            currentProduct.Price = price;
+
+            this.data.SaveChanges();
+        }
+
+
         public IEnumerable<ProductBrandViewModel> GetAllBrandProduct()
         => this.data.Brands.Select(b => new ProductBrandViewModel
         {
@@ -54,7 +81,7 @@ namespace LionSkyNot.Services.Products
         {
 
             var products = this.data.Products
-                                    .Where(p => p.Brand.BrandName == brand && p.Type.TypeName == type)
+                                    .Where(p => p.Brand.BrandName == brand && p.Type.TypeName == type && p.IsDeleted == false)
                                     .Distinct();
 
             return products;
@@ -65,6 +92,7 @@ namespace LionSkyNot.Services.Products
         {
 
             var products = this.data.Products
+                                    .Where(p => p.IsDeleted == false)
                                     .Select(p => new ProductListViewModel()
                                     {
                                         Type = p.Type.TypeName,
@@ -79,6 +107,18 @@ namespace LionSkyNot.Services.Products
 
             return products;
         }
+
+        public IEnumerable<ProductServiceModel> GetAllProductsForAdmin()
+        => this.data.Products
+                       .Where(p => p.IsDeleted == false)
+                       .Select(p => new ProductServiceModel()
+                       {
+                           Id = p.Id,
+                           ImageUrl = p.ImageUrl,
+                           Name = p.Name,
+                           Price = p.Price
+                       })
+                       .ToList();
 
 
         public IQueryable<Product> SortedByPriceDescending(IQueryable<Product> products)
@@ -125,6 +165,7 @@ namespace LionSkyNot.Services.Products
         public IEnumerable<ProductListViewModel> ShowMostBuyedProducts(int countOfProducts)
          => this.data
                 .Products
+                .Where(p => p.IsDeleted == false)
                 .OrderByDescending(p => p.CountOfBuys)
                 .Select(p => new ProductListViewModel()
                 {
@@ -142,13 +183,13 @@ namespace LionSkyNot.Services.Products
         public IEnumerable<Product> GetAllProductsWithZeroInStock(int countOfProducts)
         => this.data
                .Products
-               .Where(p => p.CountInStock == 0)
+               .Where(p => p.CountInStock == 0 && p.IsDeleted == false)
                .ToList();
 
 
         public bool UpdateInStockCountOfProducts()
         {
-            var products = this.data.Products.Where(p => p.CountInStock == 0).ToList();
+            var products = this.data.Products.Where(p => p.CountInStock == 0 && p.IsDeleted == false).ToList();
 
             if (products.Count() == 0)
             {

@@ -111,7 +111,47 @@ namespace LionSkyNot.Controllers
         }
 
 
-        public IActionResult DeleteProduct()
+        public IActionResult ShowProducts(IEnumerable<ProductServiceModel> serviceModel)
+        {
+
+            serviceModel = this.productService.GetAllProductsForAdmin();
+
+            return View(serviceModel);
+        }
+
+        public IActionResult EditProduct(int id)
+        {
+
+            var currentProduct = this.productService.GetProductById(id);
+
+            return View(new EditProductFormModel()
+            {
+                ImageUrl = currentProduct.ImageUrl,
+                Price = currentProduct.Price,
+                Name = currentProduct.Name,
+            });
+        }
+
+        [HttpPost]
+        public IActionResult EditProduct(EditProductFormModel productModel,int id)
+        {
+
+           
+            if (!ModelState.IsValid)
+            {
+                return View(productModel);
+            }
+
+            this.productService.EditProduct(id,
+                productModel.ImageUrl,
+                productModel.Name,
+                productModel.Price);
+
+            return RedirectToAction("Index");
+
+        }
+
+        public IActionResult DeleteProduct(int id)
         {
             return View();
         }

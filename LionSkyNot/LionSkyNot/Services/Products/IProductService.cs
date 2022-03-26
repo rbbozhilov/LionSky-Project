@@ -1,10 +1,19 @@
 ﻿using LionSkyNot.Data.Models.Shop;
+using LionSkyNot.Models.Products;
 using LionSkyNot.Views.ViewModels.Products;
 
 namespace LionSkyNot.Services.Products
 {
     public interface IProductService
     {
+
+        void CreateProduct(string name, decimal price, int inStock, string description, string imgUrl, int typeProductId, int brandProductId);
+
+        bool UpdateInStockCountOfProducts();
+
+        void EditProduct(int id, string imageUrl, string name, decimal price);
+
+        EditProductFormModel GetProductById(int id);
 
         IEnumerable<ProductTypeViewModel> GetAllTypesProduct();
 
@@ -14,6 +23,8 @@ namespace LionSkyNot.Services.Products
 
         IEnumerable<ProductListViewModel> ShowAllProducts();
 
+        IEnumerable<ProductServiceModel> GetAllProductsForAdmin();
+
         IQueryable<Product> SortedByPrice(IQueryable<Product> products);
 
         IQueryable<Product> SortedByPriceDescending(IQueryable<Product> products);
@@ -22,8 +33,5 @@ namespace LionSkyNot.Services.Products
 
         IEnumerable<ProductListViewModel> GetFinalProductsSelected(IQueryable<Product> products);
 
-        void CreateProduct(string name, decimal price,int inStock, string description, string imgUrl, int typeProductId, int brandProductId);
-        
-        bool UpdateInStockCountOfProducts();
     }
 }

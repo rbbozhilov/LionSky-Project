@@ -5,6 +5,7 @@ namespace LionSkyNot.Models.Trainers
 {
     public class AddTrainerFromAdminFormModel
     {
+        
 
 
         [Required]

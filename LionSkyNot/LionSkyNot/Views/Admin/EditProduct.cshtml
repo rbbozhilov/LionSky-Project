@@ -1,0 +1,34 @@
+﻿@model EditProductFormModel
+
+<link rel="stylesheet" href="~/css/form.css" asp-append-version="true" />
+
+<div>
+    <img class="center" src="https://m.az-jenata.bg/media/az-jenata/files/articles/448x336/be58cd43a10a348913055f3ac367ea91.jpg">
+</div>
+<br />
+<br />
+
+<div class="row">
+    <div class="offset-md-3 col-md-6 col-sm-12 ">
+
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="Name">Name of the product</label>
+                <input asp-for="Name" type="text" class="form-control">
+                <span asp-validation-for="Name" class="small text-danger"> </span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price">Price</label>
+                <input asp-for="Price" type="text" value="" class="form-control" id="input3">
+                <span asp-validation-for="Price" class="small text-danger"> </span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageUrl">Image Url</label>
+                <input asp-for="ImageUrl" type="text" class="form-control" id="input3">
+                <span asp-validation-for="ImageUrl" class="small text-danger"> </span>
+            </div>
+            <br />
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+</div>

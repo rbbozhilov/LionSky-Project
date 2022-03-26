@@ -6,7 +6,7 @@ namespace LionSkyNot.Models.Products
     public class AddProductFormModel
     {
 
-        
+  
         [MaxLength(255)]
         [MinLength(2)]
         [Required]
