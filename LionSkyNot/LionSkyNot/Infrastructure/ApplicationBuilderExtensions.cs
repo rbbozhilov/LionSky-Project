@@ -4,7 +4,8 @@ using LionSkyNot.Data;
 using LionSkyNot.Data.Models.Classes;
 using LionSkyNot.Data.Models.Exercise;
 using LionSkyNot.Data.Models.Shop;
-
+using LionSkyNot.Data.Models.User;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Type = LionSkyNot.Data.Models.Shop.Type;
 
@@ -17,7 +18,8 @@ namespace LionSkyNot.Infrastructure
         {
             using var scopeServices = app.ApplicationServices.CreateScope();
 
-            var data = scopeServices.ServiceProvider.GetService<LionSkyDbContext>();
+            var serviceProvider = scopeServices.ServiceProvider;
+            var data = serviceProvider.GetService<LionSkyDbContext>();
 
             data.Database.Migrate();
 
@@ -25,11 +27,12 @@ namespace LionSkyNot.Infrastructure
             SeedTypeExercise(data);
             SeedProductBrand(data);
             SeedProductType(data);
+            SeedAdminRole(serviceProvider);
 
             return app;
         }
 
-        public static void SeedCategories(LionSkyDbContext data)
+        private static void SeedCategories(LionSkyDbContext data)
         {
             if (data.Categories.Any())
             {
@@ -51,7 +54,7 @@ namespace LionSkyNot.Infrastructure
             data.SaveChanges();
         }
 
-        public static void SeedTypeExercise(LionSkyDbContext data)
+        private static void SeedTypeExercise(LionSkyDbContext data)
         {
             if (data.TypeExercises.Any())
             {
@@ -71,7 +74,7 @@ namespace LionSkyNot.Infrastructure
             data.SaveChanges();
         }
 
-        public static void SeedProductType(LionSkyDbContext data)
+        private static void SeedProductType(LionSkyDbContext data)
         {
             if (data.Types.Any())
             {
@@ -91,7 +94,7 @@ namespace LionSkyNot.Infrastructure
             data.SaveChanges();
         }
 
-        public static void SeedProductBrand(LionSkyDbContext data)
+        private static void SeedProductBrand(LionSkyDbContext data)
         {
             if (data.Types.Any())
             {
@@ -109,6 +112,41 @@ namespace LionSkyNot.Infrastructure
                 });
 
             data.SaveChanges();
+        }
+
+        private static void SeedAdminRole(IServiceProvider services)
+        {
+            var userManager = services.GetRequiredService<UserManager<User>>();
+            var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+
+            Task
+                .Run(async () =>
+                {
+                    if (await roleManager.RoleExistsAsync("Administrator"))
+                    {
+                        return;
+                    }
+
+                    var role = new IdentityRole { Name = "Administrator" };
+
+                    await roleManager.CreateAsync(role);
+
+                    const string adminEmail = "admin@abv.bg";
+                    const string adminPassword = "admin12";
+
+                    var user = new User
+                    {
+                        Email = adminEmail
+                    };
+
+                    await userManager.CreateAsync(user, adminPassword);
+
+                    await userManager.AddToRoleAsync(user, role.Name);
+                })
+                .GetAwaiter()
+                .GetResult();
+
+
         }
 
     }

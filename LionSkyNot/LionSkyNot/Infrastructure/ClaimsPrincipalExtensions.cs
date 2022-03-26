@@ -9,5 +9,9 @@ namespace LionSkyNot.Infrastructure
 
         public static string GetUsername(this ClaimsPrincipal user)
             => user.FindFirst(ClaimTypes.Name).Value;
+
+        public static bool IsAdmin(this ClaimsPrincipal user)
+           => user.IsInRole("Administrator");
+
     }
 }

@@ -11,10 +11,13 @@ using LionSkyNot.Services.Exercises;
 using LionSkyNot.Services.Products;
 using LionSkyNot.Services.Recipes;
 using LionSkyNot.Services.Trainers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LionSkyNot.Controllers
 {
+
+    [Authorize(Roles = "Administrator")]
     public class AdminController : BaseController
     {
 
