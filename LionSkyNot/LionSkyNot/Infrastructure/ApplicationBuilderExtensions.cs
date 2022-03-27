@@ -1,6 +1,5 @@
 ﻿
 using LionSkyNot.Data;
-
 using LionSkyNot.Data.Models.Classes;
 using LionSkyNot.Data.Models.Exercise;
 using LionSkyNot.Data.Models.Shop;
@@ -28,6 +27,7 @@ namespace LionSkyNot.Infrastructure
             SeedProductBrand(data);
             SeedProductType(data);
             SeedAdminRole(serviceProvider);
+            SeedModeratorRole(serviceProvider);
 
             return app;
         }
@@ -119,6 +119,7 @@ namespace LionSkyNot.Infrastructure
             var userManager = services.GetRequiredService<UserManager<User>>();
             var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
 
+     
             Task
                 .Run(async () =>
                 {
@@ -131,12 +132,13 @@ namespace LionSkyNot.Infrastructure
 
                     await roleManager.CreateAsync(role);
 
-                    const string adminEmail = "admin@abv.bg";
+                    const string adminEmail = "admin@lionsky.net";
                     const string adminPassword = "admin12";
 
                     var user = new User
                     {
-                        Email = adminEmail
+                        Email = adminEmail,
+                        UserName = adminEmail
                     };
 
                     await userManager.CreateAsync(user, adminPassword);
@@ -148,6 +150,44 @@ namespace LionSkyNot.Infrastructure
 
 
         }
+
+
+        private static void SeedModeratorRole(IServiceProvider services)
+        {
+            var userManager = services.GetRequiredService<UserManager<User>>();
+            var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+
+
+            Task
+                .Run(async () =>
+                {
+                    if (await roleManager.RoleExistsAsync("Moderator"))
+                    {
+                        return;
+                    }
+
+                    var role = new IdentityRole { Name = "Moderator" };
+
+                    await roleManager.CreateAsync(role);
+
+                    const string moderatorEmail = "moderator@lionsky.net";
+                    const string moderatorPassword = "moderator12";
+
+                    var user = new User
+                    {
+                        Email = moderatorEmail,
+                        UserName = moderatorEmail
+                    };
+
+                    await userManager.CreateAsync(user, moderatorPassword);
+
+                    await userManager.AddToRoleAsync(user, role.Name);
+                })
+                .GetAwaiter()
+                .GetResult();
+
+        }
+
 
     }
 }

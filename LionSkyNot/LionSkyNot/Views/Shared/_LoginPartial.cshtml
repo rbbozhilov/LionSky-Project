@@ -12,19 +12,21 @@
         var userId = ClaimsPrincipalExtensions.GetId(this.User);
         var userIsTrainer = TrainerService.IsTrainer(userId);
 
-        @if (!userIsTrainer)
+        @if (!User.IsInRole("Administrator") && !User.IsInRole("Moderator"))
         {
-            <li class="nav-item">
-                <a class="nav-link text-white" asp-area="" asp-controller="Trainer" asp-action="BecomeTrainer">Become Trainer</a>
-            </li>
+            @if (!userIsTrainer)
+            {
+                <li class="nav-item">
+                    <a class="nav-link text-white" asp-area="" asp-controller="Trainer" asp-action="BecomeTrainer">Become Trainer</a>
+                </li>
+            }
+            else
+            {
+                <li class="nav-item">
+                    <a class="nav-link text-white" asp-area="" asp-controller="Trainer" asp-action="TrainerClasses">Training classes</a>
+                </li>
+            }
         }
-        else
-        {
-            <li class="nav-item">
-                <a class="nav-link text-white" asp-area="" asp-controller="Trainer" asp-action="TrainerClasses">Training classes</a>
-            </li>
-        }
-
 
         <li class="nav-item">
             <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>

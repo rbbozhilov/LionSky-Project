@@ -17,7 +17,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace LionSkyNot.Controllers
 {
 
-    [Authorize(Roles = "Administrator")]
+    [Authorize(Roles = "Administrator,Moderator")]
     public class AdminController : BaseController
     {
 
@@ -27,7 +27,6 @@ namespace LionSkyNot.Controllers
         private ITrainerService trainerService;
         private IClassService classService;
         private LionSkyDbContext data;
-
 
 
         public AdminController(
@@ -52,6 +51,9 @@ namespace LionSkyNot.Controllers
             return View();
         }
 
+
+        [Authorize(Roles = "Moderator,Administrator")]
+        
         public IActionResult AddProduct()
         {
             return View(new AddProductFormModel()
@@ -62,6 +64,7 @@ namespace LionSkyNot.Controllers
 
         }
 
+        [Authorize(Roles = "Moderator,Administrator")]
         [HttpPost]
         public IActionResult AddProduct(AddProductFormModel productModel)
         {
@@ -95,6 +98,7 @@ namespace LionSkyNot.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "Moderator,Administrator")]
         public IActionResult AddProductsInStock()
         {
             bool isDone = this.productService.UpdateInStockCountOfProducts();
@@ -114,7 +118,7 @@ namespace LionSkyNot.Controllers
             return View();
         }
 
-
+        [Authorize(Roles = "Administrator")]
         public IActionResult ShowProducts(IEnumerable<ProductServiceModel> serviceModel)
         {
 
@@ -123,6 +127,7 @@ namespace LionSkyNot.Controllers
             return View(serviceModel);
         }
 
+        [Authorize(Roles = "Administrator")]
         public IActionResult EditProduct(int id)
         {
 
@@ -136,6 +141,7 @@ namespace LionSkyNot.Controllers
             });
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         public IActionResult EditProduct(EditProductFormModel productModel,int id)
         {
@@ -155,6 +161,7 @@ namespace LionSkyNot.Controllers
 
         }
 
+        [Authorize(Roles = "Administrator")]
         public IActionResult DeleteProduct(int id)
         {
 
@@ -163,7 +170,7 @@ namespace LionSkyNot.Controllers
             return View("Successfull");
         }
 
-
+        [Authorize(Roles = "Administrator")]
         public IActionResult AddTrainer()
         {
             return View(new AddTrainerFromAdminFormModel
@@ -172,6 +179,7 @@ namespace LionSkyNot.Controllers
             });
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         public IActionResult AddTrainer(AddTrainerFromAdminFormModel trainerModel)
         {
@@ -206,6 +214,7 @@ namespace LionSkyNot.Controllers
 
         }
 
+        [Authorize(Roles = "Administrator")]
         public IActionResult ShowRecipes(IEnumerable<RecipeFormModelForAdmin> recipeModel)
         {
 
@@ -215,11 +224,13 @@ namespace LionSkyNot.Controllers
 
         }
 
+        [Authorize(Roles = "Moderator,Administrator")]
         public IActionResult AddRecipe()
         {
             return View();
         }
 
+        [Authorize(Roles = "Moderator,Administrator")]
         [HttpPost]
         public IActionResult AddRecipe(RecipeFormModel recipeModel)
         {
@@ -244,6 +255,7 @@ namespace LionSkyNot.Controllers
         }
 
 
+        [Authorize(Roles = "Administrator")]
         public IActionResult EditRecipe(int id)
         {
             var currentRecipe = this.recipeService.GetRecipeById(id);
@@ -260,6 +272,7 @@ namespace LionSkyNot.Controllers
             });
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         public IActionResult EditRecipe(RecipeFormModel recipeModel,int id)
         {
@@ -284,7 +297,7 @@ namespace LionSkyNot.Controllers
 
         }
 
-
+        [Authorize(Roles = "Administrator")]
         public IActionResult DeleteRecipe(int id)
         {
 
@@ -293,6 +306,7 @@ namespace LionSkyNot.Controllers
             return View("Successfull");
         }
 
+        [Authorize(Roles = "Moderator,Administrator")]
         public IActionResult AddClass()
         {
             return View(new AddClassFormModel()
@@ -302,6 +316,7 @@ namespace LionSkyNot.Controllers
 
         }
 
+        [Authorize(Roles = "Moderator,Administrator")]
         [HttpPost]
         public IActionResult AddClass(AddClassFormModel classModel)
         {
@@ -348,6 +363,7 @@ namespace LionSkyNot.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Moderator,Administrator")]
         public IActionResult AddExercise()
         {
             return View(new AddExerciseFormModel()
@@ -356,6 +372,7 @@ namespace LionSkyNot.Controllers
             });
         }
 
+        [Authorize(Roles = "Moderator,Administrator")]
         [HttpPost]
         public IActionResult AddExercise(AddExerciseFormModel exerciseModel)
         {
