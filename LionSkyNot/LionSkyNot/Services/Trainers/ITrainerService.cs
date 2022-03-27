@@ -1,4 +1,5 @@
-﻿using LionSkyNot.Views.ViewModels.Trainers;
+﻿using LionSkyNot.Models.Trainers;
+using LionSkyNot.Views.ViewModels.Trainers;
 
 namespace LionSkyNot.Services.Trainers
 {
@@ -10,6 +11,10 @@ namespace LionSkyNot.Services.Trainers
         bool IsTrainer(string userId);
 
         int GetTrainerId(string userId);
+
+        bool Delete(int id);
+
+        IEnumerable<TrainerFormModelForAdmin> GetAllTrainersForAdmin();
 
         TrainerViewModel GetTrainerById(int id);
 

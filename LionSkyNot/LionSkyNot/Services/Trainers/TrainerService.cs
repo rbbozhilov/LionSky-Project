@@ -1,6 +1,6 @@
 ﻿using LionSkyNot.Data;
 using LionSkyNot.Data.Models.Classes;
-
+using LionSkyNot.Models.Trainers;
 using LionSkyNot.Views.ViewModels.Trainers;
 
 namespace LionSkyNot.Services.Trainers
@@ -33,6 +33,24 @@ namespace LionSkyNot.Services.Trainers
             this.data.Trainers.Add(trainer);
 
             this.data.SaveChanges();
+
+        }
+
+        public bool Delete(int id)
+        {
+            var currentTrainer = this.data.Trainers.Where(t => t.Id == id && t.IsDeleted == false)
+                                                   .FirstOrDefault();
+       
+            if(currentTrainer == null)
+            {
+                return false;
+            }
+
+            this.data.Trainers.Remove(currentTrainer);
+
+            this.data.SaveChanges();
+
+            return true;
 
         }
 
@@ -178,6 +196,14 @@ namespace LionSkyNot.Services.Trainers
         }
 
 
+        public IEnumerable<TrainerFormModelForAdmin> GetAllTrainersForAdmin()
+        => this.data.Trainers.Where(t => t.IsDeleted == false)
+                             .Select(t => new TrainerFormModelForAdmin()
+                             {
+                                 Id = t.Id,
+                                 FullName = t.FullName
+                             })
+                             .ToList();
 
 
     }

@@ -1,5 +1,4 @@
 ﻿using LionSkyNot.Data;
-using LionSkyNot.Models;
 using LionSkyNot.Models.Class;
 using LionSkyNot.Models.Exercises;
 using LionSkyNot.Models.Products;
@@ -43,6 +42,7 @@ namespace LionSkyNot.Controllers
             this.trainerService = trainerService;
             this.classService = classService;
             this.data = data;
+
 
         }
 
@@ -186,6 +186,16 @@ namespace LionSkyNot.Controllers
             return View("Successfull");
         }
 
+
+        public IActionResult ShowTrainers(IEnumerable<TrainerFormModelForAdmin> trainerModel)
+        {
+
+            trainerModel = this.trainerService.GetAllTrainersForAdmin();
+
+            return View(trainerModel);
+
+        }
+
         [Authorize(Roles = "Administrator")]
         public IActionResult AddTrainer()
         {
@@ -227,6 +237,22 @@ namespace LionSkyNot.Controllers
                                        existsUserId);
 
             return RedirectToAction("Index");
+
+        }
+
+        public IActionResult DeleteTrainer(int id)
+        {
+
+            bool isDeleted = this.trainerService.Delete(id);
+
+            if (!isDeleted)
+            {
+                return BadRequest();
+            }
+
+
+
+            return View("Successfull");
 
         }
 
@@ -455,7 +481,7 @@ namespace LionSkyNot.Controllers
         }
 
 
-
+        [Authorize(Roles = "Administrator")]
         public IActionResult DeleteClass(string id)
         {
 
