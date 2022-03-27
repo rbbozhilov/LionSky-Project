@@ -16,7 +16,6 @@
 
                 @foreach (var currentClass in Model)
                 {
-
                     <tr>
                         <td>@currentClass.ClassName</td>
                         <td><a asp-controller="Admin" asp-action="EditClass" asp-route-id="@currentClass.Id" class="btn btn-warning">Edit Class</a></td>
@@ -28,5 +27,5 @@
     }
     else
     {
-        <h1> Don't have recipes yet , try soon !</h1>
+        <h1> Don't have classes yet , try soon !</h1>
     }

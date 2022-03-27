@@ -35,13 +35,72 @@ namespace LionSkyNot.Services.Classes
             this.data.SaveChanges();
         }
 
+
+        public bool Edit(
+                         string id,
+                         string className,
+                         string imageUrl,
+                         int maxPractitionerCount,
+                         decimal price,
+                         DateTime startDate,
+                         DateTime endDate,
+                         int trainerId
+                         )
+        {
+
+
+            var currentClass = this.data.Classes.Where(c => c.Id == id && c.IsDeleted == false)
+                                                .FirstOrDefault();
+
+            if (currentClass == null)
+            {
+                return false;
+            }
+
+
+            currentClass.ClassName = className;
+            currentClass.ImageUrl = imageUrl;
+            currentClass.Price = price;
+            currentClass.StartDateTime = startDate;
+            currentClass.EndDateTime = endDate;
+            currentClass.MaxPractitionerCount = maxPractitionerCount;
+            currentClass.TrainerId = trainerId;
+
+
+            this.data.SaveChanges();
+
+            return true;
+
+        }
+
+
+        public bool Delete(string id)
+        {
+            var currentClass = this.data.Classes.Where(c => c.Id == id && c.IsDeleted == false)
+                                                .FirstOrDefault();
+
+            if (currentClass == null)
+            {
+                return false;
+            }
+
+            currentClass.IsDeleted = true;
+
+            this.data.SaveChanges();
+
+            return true;
+        }
+
+
         public IEnumerable<TrainerClassViewModel> GetAllTrainers()
         {
-            var allTrainers = this.data.Trainers.Select(t => new TrainerClassViewModel()
-            {
-                Id = t.Id,
-                FullName = t.FullName,
-            }).ToList();
+            var allTrainers = this.data.Trainers
+                                       .Where(t => t.IsDeleted == false)
+                                       .Select(t => new TrainerClassViewModel()
+                                       {
+                                           Id = t.Id,
+                                           FullName = t.FullName,
+                                       }).ToList();
 
             return allTrainers;
         }
@@ -66,6 +125,7 @@ namespace LionSkyNot.Services.Classes
 
         public IEnumerable<ClassViewModel> GetAllClasses()
          => this.data.Classes
+                     .Where(c => c.IsDeleted == false)
                      .Select(c => new ClassViewModel()
                      {
                          ClassName = c.ClassName,
@@ -79,6 +139,7 @@ namespace LionSkyNot.Services.Classes
                      })
                      .ToList();
 
+
         public IEnumerable<ClassFormModelForAdmin> GetAllClassesForAdmin()
          => this.data.Classes.Where(c => c.IsDeleted == false)
                              .Select(c => new ClassFormModelForAdmin()
@@ -87,6 +148,27 @@ namespace LionSkyNot.Services.Classes
                                  Id = c.Id,
                              })
                              .ToList();
+
+
+        public ClassFormModel GetClassById(string id)
+         => this.data.Classes.Where(c => c.Id == id && c.IsDeleted == false)
+                             .Select(c => new ClassFormModel()
+                             {
+                                 ClassName = c.ClassName,
+                                 StartDateTime = c.StartDateTime,
+                                 EndDateTime = c.EndDateTime,
+                                 ImageUrl = c.ImageUrl,
+                                 MaxPractitionerCount = c.MaxPractitionerCount,
+                                 Price = c.Price,
+                                 TrainerId = c.Trainer.Id,
+                             })
+                             .FirstOrDefault();
+
+        public ClassFormModel GetClassById(string id, string className, string imageUrl, int maxPractitionerCount, decimal price, DateTime startDate, DateTime endDate, int trainerId)
+        {
+            throw new NotImplementedException();
+        }
+
 
     }
 }

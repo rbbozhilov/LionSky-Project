@@ -343,7 +343,6 @@ namespace LionSkyNot.Controllers
             classModel = this.classService.GetAllClassesForAdmin();
 
             return View(classModel);
-
         }
 
         [Authorize(Roles = "Moderator,Administrator")]
@@ -395,22 +394,80 @@ namespace LionSkyNot.Controllers
 
 
 
-        //[Authorize(Roles = "Administrator")]
-        //public IActionResult EditClass()
-        //{
-        //    return View(new AddClassFormModel()
-        //    {
-        //        Trainers = this.classService.GetAllTrainers()
-        //    });
+        [Authorize(Roles = "Administrator")]
+        public IActionResult EditClass(string id)
+        {
 
-        //}
+            var currentClass = this.classService.GetClassById(id);
+
+            if(currentClass == null)
+            {
+                return BadRequest();
+            }
+
+            currentClass.Trainers = this.classService.GetAllTrainers();
+
+            return View(new ClassFormModel()
+            {
+                ClassName = currentClass.ClassName,
+                TrainerId = currentClass.TrainerId,
+                Trainers = currentClass.Trainers,
+                ImageUrl = currentClass.ImageUrl,
+                MaxPractitionerCount = currentClass.MaxPractitionerCount,
+                Price = currentClass.Price,
+                StartDateTime = currentClass.StartDateTime,
+                EndDateTime = currentClass.EndDateTime,
+               
+            });
+
+        }
+
+
+        [Authorize(Roles = "Administrator")]
+        [HttpPost]
+        public IActionResult EditClass(ClassFormModel classModel,string id)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View(classModel);
+            }
+
+            bool isEditted = this.classService.Edit(
+                                                    id,
+                                                    classModel.ClassName,
+                                                    classModel.ImageUrl,
+                                                    classModel.MaxPractitionerCount,
+                                                    classModel.Price,
+                                                    classModel.StartDateTime,
+                                                    classModel.EndDateTime,
+                                                    classModel.TrainerId);
+                                                            
+
+            if (!isEditted)
+            {
+                return BadRequest();
+            }
+
+
+            return RedirectToAction("Index");
+
+        }
 
 
 
-        //public IActionResult DeleteClass()
-        //{
-        //    return View();
-        //}
+        public IActionResult DeleteClass(string id)
+        {
+
+            bool isDeleted = this.classService.Delete(id);
+
+            if (!isDeleted)
+            {
+                return BadRequest();
+            }
+
+            return View("Successfull");
+        }
 
 
 

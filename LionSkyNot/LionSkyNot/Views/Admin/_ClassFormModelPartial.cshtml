@@ -1,0 +1,73 @@
+﻿@model ClassFormModel
+
+<link rel="stylesheet" href="~/css/form.css" asp-append-version="true" />
+
+<div>
+    <img class="center" src="https://www.ncl.ac.uk/mediav8/sport-/exercise-class-header.jpg">
+</div>
+<br />
+<br />
+
+<div class="row">
+    <div class="offset-md-3 col-md-6 col-sm-12 ">
+
+        <form method="post">
+
+            <div class="text-danger">@Html.ValidationMessage("errorDate")</div>
+            <div class="form-group">
+                <label asp-for="ClassName">Name of class</label>
+                <input asp-for="ClassName" type="text" class="form-control">
+                <span asp-validation-for="ClassName" class="small text-danger"> </span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ImageUrl">Image Url</label>
+                <input asp-for="ImageUrl" type="text" class="form-control">
+                <span asp-validation-for="ImageUrl" class="small text-danger"> </span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="StartDateTime">Start date of the class</label>
+                <input asp-for="StartDateTime" type="date" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label asp-for="EndDateTime">End date of the class</label>
+                <input asp-for="EndDateTime" type="date" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Price">Price</label>
+                <input asp-for="Price" type="text" class="form-control" value="">
+                <span asp-validation-for="Price" class="small text-danger"> </span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="MaxPractitionerCount">Max practitioners</label>
+                <input asp-for="MaxPractitionerCount" type="text" class="form-control" value="">
+                <span asp-validation-for="MaxPractitionerCount" class="small text-danger"> </span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="TrainerId">Choose trainer</label>
+                <select asp-for="TrainerId" class="form-control form-control-sm">
+
+                    @foreach (var trainer in Model.Trainers)
+                    {
+                        <option value="@trainer.Id">@trainer.FullName</option>
+                    }
+                </select>
+                <span asp-validation-for="TrainerId" class="small text-danger"> </span>
+
+            </div>
+
+            <br />
+            <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+<partial name="_ValidationScriptsPartial" />
+}
