@@ -1,6 +1,6 @@
 ﻿using LionSkyNot.Data;
 using LionSkyNot.Data.Models.Classes;
-
+using LionSkyNot.Models.Class;
 using LionSkyNot.Views.ViewModels.Classes;
 
 namespace LionSkyNot.Services.Classes
@@ -79,6 +79,14 @@ namespace LionSkyNot.Services.Classes
                      })
                      .ToList();
 
+        public IEnumerable<ClassFormModelForAdmin> GetAllClassesForAdmin()
+         => this.data.Classes.Where(c => c.IsDeleted == false)
+                             .Select(c => new ClassFormModelForAdmin()
+                             {
+                                 ClassName = c.ClassName,
+                                 Id = c.Id,
+                             })
+                             .ToList();
 
     }
 }

@@ -52,8 +52,9 @@ namespace LionSkyNot.Controllers
         }
 
 
+
+
         [Authorize(Roles = "Moderator,Administrator")]
-        
         public IActionResult AddProduct()
         {
             return View(new AddProductFormModel()
@@ -133,6 +134,11 @@ namespace LionSkyNot.Controllers
 
             var currentProduct = this.productService.GetProductById(id);
 
+            if (currentProduct == null)
+            {
+                return BadRequest();
+            }
+
             return View(new EditProductFormModel()
             {
                 ImageUrl = currentProduct.ImageUrl,
@@ -143,19 +149,26 @@ namespace LionSkyNot.Controllers
 
         [Authorize(Roles = "Administrator")]
         [HttpPost]
-        public IActionResult EditProduct(EditProductFormModel productModel,int id)
+        public IActionResult EditProduct(EditProductFormModel productModel, int id)
         {
 
-           
+
             if (!ModelState.IsValid)
             {
                 return View(productModel);
             }
 
-            this.productService.EditProduct(id,
-                productModel.ImageUrl,
-                productModel.Name,
-                productModel.Price);
+            
+          bool isEditted =  this.productService.EditProduct(id,
+                                                            productModel.ImageUrl,
+                                                            productModel.Name,
+                                                            productModel.Price);
+
+            if (!isEditted)
+            {
+                return BadRequest();
+            }
+
 
             return RedirectToAction("Index");
 
@@ -165,7 +178,10 @@ namespace LionSkyNot.Controllers
         public IActionResult DeleteProduct(int id)
         {
 
-            this.productService.DeleteProduct(id);
+            if (!this.productService.DeleteProduct(id))
+            {
+                return BadRequest();
+            }
 
             return View("Successfull");
         }
@@ -191,7 +207,7 @@ namespace LionSkyNot.Controllers
                 ModelState.AddModelError("notFindUser", "the user is not exists");
             }
 
-            
+
             if (!ModelState.IsValid)
             {
                 return View(trainerModel);
@@ -260,6 +276,12 @@ namespace LionSkyNot.Controllers
         {
             var currentRecipe = this.recipeService.GetRecipeById(id);
 
+            if (currentRecipe == null)
+            {
+                return BadRequest();
+            }
+
+
             return View(new RecipeFormModel()
             {
                 Name = currentRecipe.Name,
@@ -274,7 +296,7 @@ namespace LionSkyNot.Controllers
 
         [Authorize(Roles = "Administrator")]
         [HttpPost]
-        public IActionResult EditRecipe(RecipeFormModel recipeModel,int id)
+        public IActionResult EditRecipe(RecipeFormModel recipeModel, int id)
         {
 
             if (!ModelState.IsValid)
@@ -282,16 +304,21 @@ namespace LionSkyNot.Controllers
                 return View(recipeModel);
             }
 
+          bool isEditted =  this.recipeService.EditRecipe(
+                                                          id,
+                                                          recipeModel.Name,
+                                                          recipeModel.ImageUrl,
+                                                          recipeModel.Description,
+                                                          recipeModel.Calories,
+                                                          recipeModel.Carbohydrates,
+                                                          recipeModel.Fat,
+                                                          recipeModel.Protein);
 
-            this.recipeService.EditRecipe(
-                id,
-                recipeModel.Name,
-                recipeModel.ImageUrl,
-                recipeModel.Description,
-                recipeModel.Calories,
-                recipeModel.Carbohydrates,
-                recipeModel.Fat,
-                recipeModel.Protein);
+            if (!isEditted)
+            {
+                return BadRequest();
+            }
+
 
             return RedirectToAction("Index");
 
@@ -301,15 +328,28 @@ namespace LionSkyNot.Controllers
         public IActionResult DeleteRecipe(int id)
         {
 
-            this.recipeService.Delete(id);
+            if (!this.recipeService.Delete(id))
+            {
+                return BadRequest();
+            }
 
             return View("Successfull");
+        }
+
+
+        [Authorize(Roles = "Administrator")]
+        public IActionResult ShowClasses(IEnumerable<ClassFormModelForAdmin> classModel)
+        {
+            classModel = this.classService.GetAllClassesForAdmin();
+
+            return View(classModel);
+
         }
 
         [Authorize(Roles = "Moderator,Administrator")]
         public IActionResult AddClass()
         {
-            return View(new AddClassFormModel()
+            return View(new ClassFormModel()
             {
                 Trainers = this.classService.GetAllTrainers()
             });
@@ -318,10 +358,10 @@ namespace LionSkyNot.Controllers
 
         [Authorize(Roles = "Moderator,Administrator")]
         [HttpPost]
-        public IActionResult AddClass(AddClassFormModel classModel)
+        public IActionResult AddClass(ClassFormModel classModel)
         {
 
-            if(classModel.StartDateTime > classModel.EndDateTime)
+            if (classModel.StartDateTime > classModel.EndDateTime)
             {
                 this.ModelState.AddModelError("errorDate", "Cannot start date be after end date");
             }
@@ -353,15 +393,26 @@ namespace LionSkyNot.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult DeleteClass()
-        {
-            return View();
-        }
 
-        public IActionResult GetCandidates()
-        {
-            return View();
-        }
+
+        //[Authorize(Roles = "Administrator")]
+        //public IActionResult EditClass()
+        //{
+        //    return View(new AddClassFormModel()
+        //    {
+        //        Trainers = this.classService.GetAllTrainers()
+        //    });
+
+        //}
+
+
+
+        //public IActionResult DeleteClass()
+        //{
+        //    return View();
+        //}
+
+
 
         [Authorize(Roles = "Moderator,Administrator")]
         public IActionResult AddExercise()
@@ -394,19 +445,73 @@ namespace LionSkyNot.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult DeleteExercise()
+
+        [Authorize(Roles = "Administrator")]
+        public IActionResult ShowExercise(IEnumerable<ExerciseFormModelForAdmin> exerciseModel)
         {
-            return View();
+
+            exerciseModel = this.exerciseService.GetAllExercises();
+
+            return View(exerciseModel);
         }
 
-        public IActionResult FiredTrainer()
+        [Authorize(Roles = "Administrator")]
+        public IActionResult EditExercise(int id)
         {
-            return View();
+
+            var exercise = this.exerciseService.GetExerciseById(id);
+
+            if(exercise == null)
+            {
+                return BadRequest();
+            }
+
+            return View(new EditExerciseFormModel()
+            {
+                VideoUrl = exercise.VideoUrl,
+                ImageUrl = exercise.ImageUrl,
+                Name = exercise.Name
+            });
         }
 
-        public IActionResult FiredCooker()
+
+        [Authorize(Roles = "Administrator")]
+        [HttpPost]
+        public IActionResult EditExercise(EditExerciseFormModel exerciseModel, int id)
         {
-            return View();
+
+            if (!ModelState.IsValid)
+            {
+                return View(exerciseModel);
+            }
+
+
+            bool isEditted = this.exerciseService.Edit(
+                                                       id,
+                                                       exerciseModel.Name,
+                                                       exerciseModel.ImageUrl,
+                                                       exerciseModel.VideoUrl);
+
+            if (!isEditted)
+            {
+                return BadRequest();
+            }
+
+
+            return RedirectToAction("Index");
+        }
+
+
+        [Authorize(Roles = "Administrator")]
+        public IActionResult DeleteExercise(int id)
+        {
+
+            if (!this.exerciseService.Delete(id))
+            {
+                return BadRequest();
+            };
+
+            return View("Successfull");
         }
 
     }

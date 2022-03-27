@@ -7,7 +7,7 @@ namespace LionSkyNot.Services.Recipes
     public interface IRecipeService
     {
 
-        void Delete(int id);
+        bool Delete(int id);
 
         void Create(
                     string name,
@@ -18,7 +18,7 @@ namespace LionSkyNot.Services.Recipes
                     string imgUrl,
                     float carbohydrates);
 
-        void EditRecipe(
+        bool EditRecipe(
           int id,
           string name,
           string imageUrl,

@@ -76,7 +76,7 @@ namespace LionSkyNot.Services.Recipes
 
 
 
-        public void EditRecipe(
+        public bool EditRecipe(
             int id,
             string name,
             string imageUrl,
@@ -90,6 +90,11 @@ namespace LionSkyNot.Services.Recipes
                                          .Where(r => r.Id == id && r.IsDeleted == false)
                                          .FirstOrDefault();
 
+            if(currentRecipe == null)
+            {
+                return false;
+            }
+
             currentRecipe.Name = name;
             currentRecipe.Description = description;
             currentRecipe.Calories = calories;
@@ -100,6 +105,7 @@ namespace LionSkyNot.Services.Recipes
 
             this.data.SaveChanges();
 
+            return true;
         }
 
 
@@ -120,15 +126,22 @@ namespace LionSkyNot.Services.Recipes
 
 
         //TODOO
-        public void Delete(int id)
+        public bool Delete(int id)
         {
             var currentRecipe = this.data.Recipes
                                          .Where(r => r.Id == id && r.IsDeleted == false)
                                          .FirstOrDefault();
 
+            if(currentRecipe == null)
+            {
+                return false;
+            }
+
             currentRecipe.IsDeleted = true;
 
             this.data.SaveChanges();
+
+            return true;
         }
 
     }

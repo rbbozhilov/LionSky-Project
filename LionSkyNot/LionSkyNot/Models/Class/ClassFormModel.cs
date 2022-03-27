@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace LionSkyNot.Models.Class
 {
-    public class AddClassFormModel
+    public class ClassFormModel
     {
 
         [MaxLength(255)]

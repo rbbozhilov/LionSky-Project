@@ -1,9 +1,12 @@
-﻿using LionSkyNot.Views.ViewModels.Classes;
+﻿using LionSkyNot.Models.Class;
+using LionSkyNot.Views.ViewModels.Classes;
 
 namespace LionSkyNot.Services.Classes
 {
     public interface IClassService
     {
+
+        IEnumerable<ClassFormModelForAdmin> GetAllClassesForAdmin();
 
         IEnumerable<ClassViewModel> GetAllClasses();
 

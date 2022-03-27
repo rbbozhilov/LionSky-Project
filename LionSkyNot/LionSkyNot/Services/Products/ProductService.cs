@@ -47,28 +47,42 @@ namespace LionSkyNot.Services.Products
                     .FirstOrDefault();
 
 
-        public void EditProduct(int id, string imageUrl, string name, decimal price)
+        public bool EditProduct(int id, string imageUrl, string name, decimal price)
         {
             var currentProduct = this.data.Products
                                           .Where(p => p.Id == id && p.IsDeleted == false)
                                           .FirstOrDefault();
+
+            if (currentProduct == null)
+            {
+                return false;
+            }
 
             currentProduct.ImageUrl = imageUrl;
             currentProduct.Name = name;
             currentProduct.Price = price;
 
             this.data.SaveChanges();
+
+            return true;
         }
 
-        public void DeleteProduct(int id)
+        public bool DeleteProduct(int id)
         {
             var currentProduct = this.data.Products
                                           .Where(p => p.Id == id && p.IsDeleted == false)
                                           .FirstOrDefault();
 
+            if(currentProduct == null)
+            {
+                return false;
+            }
+
             currentProduct.IsDeleted = true;
 
             this.data.SaveChanges();
+
+            return true;
         }
 
         public IEnumerable<ProductBrandViewModel> GetAllBrandProduct()

@@ -1,5 +1,5 @@
 ﻿<div class="jumbotron text-center">
-    <img height = 250 weigth = 250 src="https://st.depositphotos.com/1002881/1285/i/950/depositphotos_12859789-stock-photo-admin-tag.jpg" />
+    <img height=250 weigth=250 src="https://st.depositphotos.com/1002881/1285/i/950/depositphotos_12859789-stock-photo-admin-tag.jpg" />
 </div>
 
 <div class="container">
@@ -37,8 +37,7 @@
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item" asp-area="" asp-controller="Admin" asp-action="AddClass">Add Class</a>
-            <a class="dropdown-item" asp-area="" asp-controller="Admin" asp-action="DeleteClass">Delete Class</a>
-            <a class="dropdown-item" asp-area="" asp-controller="Admin" asp-action="GetCandidates">Check candidatures</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Admin" asp-action="ShowClasses">Show classes</a>
         </div>
     </div>
 
@@ -47,31 +46,20 @@
             Exercise
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-             <a class="dropdown-item" asp-area="" asp-controller="Admin" asp-action="AddExercise">Add exercise</a>
-            <a class="dropdown-item" asp-area="" asp-controller="Admin" asp-action="DeleteExercise">Delete exercise</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Admin" asp-action="AddExercise">Add exercise</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Admin" asp-action="ShowExercise">Show exercises</a>
         </div>
     </div>
 
-      <div class="dropdown">
+    <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Trainer
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-             <a class="dropdown-item" asp-area="" asp-controller="Admin" asp-action="AddTrainer">Add Trainer</a> 
-             <a class="dropdown-item" asp-area="" asp-controller="Admin" asp-action="DeleteTrainer">Delete Trainer</a> 
+            <a class="dropdown-item" asp-area="" asp-controller="Admin" asp-action="AddTrainer">Add Trainer</a>
+            <a class="dropdown-item" asp-area="" asp-controller="Admin" asp-action="DeleteTrainer">Delete Trainer</a>
         </div>
     </div>
 
 
-     <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Fired
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-             <a class="dropdown-item" asp-area="" asp-controller="Admin" asp-action="FiredTrainer">Fired Trainer</a> 
-             <a class="dropdown-item" asp-area="" asp-controller="Admin" asp-action="FiredCooker">Fired Cooker</a> 
-        </div>
-    </div>
-
-     
 </ul>

@@ -11,9 +11,9 @@ namespace LionSkyNot.Services.Products
 
         bool UpdateInStockCountOfProducts();
 
-        void EditProduct(int id, string imageUrl, string name, decimal price);
+        bool EditProduct(int id, string imageUrl, string name, decimal price);
 
-        void DeleteProduct(int id);
+        bool DeleteProduct(int id);
 
         EditProductFormModel GetProductById(int id);
 

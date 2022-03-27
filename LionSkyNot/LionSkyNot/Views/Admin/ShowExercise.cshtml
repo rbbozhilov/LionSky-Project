@@ -1,0 +1,36 @@
+﻿@model IEnumerable<ExerciseFormModelForAdmin>
+
+<div class="row">
+
+    @if (Model.Any())
+    {
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">Exercise Name</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var exercise in Model)
+                {
+
+                    <tr>
+                        <td>@exercise.Name</td>
+                        <td><a asp-controller="Admin" asp-action="EditExercise" asp-route-id="@exercise.Id" class="btn btn-warning">Edit Exercise</a></td>
+                        <td><a asp-controller="Admin" asp-action="DeleteExercise" asp-route-id="@exercise.Id" class="btn btn-danger">Delete Exercise</a></td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
+    }
+    else
+    {
+        <h1> Don't have recipes yet , try soon !</h1>
+    }
+
+
