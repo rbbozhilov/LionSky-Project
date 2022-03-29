@@ -1,5 +1,6 @@
 ﻿using LionSkyNot.Data;
 using LionSkyNot.Data.Models.Shop;
+using LionSkyNot.Models.Products;
 using LionSkyNot.Services.Products;
 using LionSkyNot.Services.WishLists;
 using LionSkyNot.Views.ViewModels.Products;
@@ -62,6 +63,26 @@ namespace LionSkyNot.Controllers
             return View("Index");
         }
 
+
+        public IActionResult Payment()
+        {
+
+            return View(new PaymentFormModel());
+        }
+
+        [HttpPost]
+        public IActionResult Payment(PaymentFormModel paymentModel)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View(paymentModel);
+            }
+
+
+            return RedirectToAction("BuyProducts");
+        }
+
         public IActionResult BuyProducts()
         {
 
@@ -75,10 +96,10 @@ namespace LionSkyNot.Controllers
                 return View("BuyedProducts",touple.Item2);
             }
 
-           
-            return View("SuccessBuyedAll",touple.Item2);
-        }
 
+            return View("SuccessBuyedAll", touple.Item2);
+
+        }
 
     }
 }
