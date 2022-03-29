@@ -95,7 +95,6 @@ namespace LionSkyNot.Services.Classes
         public IEnumerable<TrainerClassViewModel> GetAllTrainers()
         {
             var allTrainers = this.data.Trainers
-                                       .Where(t => t.IsDeleted == false)
                                        .Select(t => new TrainerClassViewModel()
                                        {
                                            Id = t.Id,

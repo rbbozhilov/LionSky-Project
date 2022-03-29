@@ -28,7 +28,6 @@ namespace LionSkyNot.Services.Statistics
                                      .Where(e => e.IsDeleted == false)
                                      .Count(),
             TrainerCount = this.data.Trainers
-                                    .Where(t => t.IsDeleted == false)
                                     .Count(),
             RecipeCount = this.data.Recipes
                                    .Where(r => r.IsDeleted == false)

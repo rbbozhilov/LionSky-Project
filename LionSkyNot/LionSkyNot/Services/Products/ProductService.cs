@@ -73,7 +73,7 @@ namespace LionSkyNot.Services.Products
                                           .Where(p => p.Id == id && p.IsDeleted == false)
                                           .FirstOrDefault();
 
-            if(currentProduct == null)
+            if (currentProduct == null)
             {
                 return false;
             }
@@ -119,6 +119,7 @@ namespace LionSkyNot.Services.Products
                                     .Where(p => p.IsDeleted == false)
                                     .Select(p => new ProductListViewModel()
                                     {
+                                        Id = p.Id,
                                         Type = p.Type.TypeName,
                                         Brand = p.Brand.BrandName,
                                         Price = p.Price,
@@ -177,6 +178,7 @@ namespace LionSkyNot.Services.Products
         {
             return products.Select(p => new ProductListViewModel()
             {
+                Id = p.Id,
                 Type = p.Type.TypeName,
                 Brand = p.Brand.BrandName,
                 Price = p.Price,
@@ -230,5 +232,14 @@ namespace LionSkyNot.Services.Products
             return true;
         }
 
+        public Product TakeProduct(int id)
+        {
+            var product = this.data.Products
+                                   .Where(p => p.Id == id && p.IsDeleted == false)
+                                   .FirstOrDefault();
+
+
+            return product;
+        }
     }
 }

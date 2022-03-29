@@ -41,14 +41,16 @@ namespace LionSkyNot.Data
 
         public virtual DbSet<ClassUser> ClassUsers { get; set; }
 
+        public virtual DbSet<WishListsProducts> WishListsProducts { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
 
-            builder.Entity<WishList>()
+            builder.Entity<WishListsProducts>()
                 .HasOne<User>()
                 .WithOne()
-                .HasForeignKey<WishList>(w => w.UserId)
+                .HasForeignKey<WishListsProducts>(w => w.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<ClassUser>()
@@ -57,13 +59,26 @@ namespace LionSkyNot.Data
             builder.Entity<ClassUser>()
                 .HasOne(u => u.User)
                 .WithMany(c => c.Classes)
-                .HasForeignKey(u=> u.UserId)
+                .HasForeignKey(u => u.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<ClassUser>()
                 .HasOne(c => c.Class)
                 .WithMany(u => u.Users)
                 .HasForeignKey(c => c.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+
+            builder.Entity<WishListsProducts>()
+                .HasOne(w => w.WishList)
+                .WithMany(p => p.Products)
+                .HasForeignKey(w => w.WishListId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<WishListsProducts>()
+                .HasOne(p => p.Product)
+                .WithMany(w => w.WishLists)
+                .HasForeignKey(p => p.ProductId)
                 .OnDelete(DeleteBehavior.Restrict);
 
 

@@ -7,6 +7,11 @@ namespace LionSkyNot.Data.Models.Shop
     public class Product
     {
 
+        public Product()
+        {
+            this.WishLists = new HashSet<WishListsProducts>();
+        }
+
         [Key]
         public int Id { get; set; }
 
@@ -39,6 +44,9 @@ namespace LionSkyNot.Data.Models.Shop
         public Brand Brand { get; set; }
 
         public bool IsDeleted { get; set; } = false;
+
+
+        public virtual ICollection<WishListsProducts> WishLists { get; set; }
 
 
     }

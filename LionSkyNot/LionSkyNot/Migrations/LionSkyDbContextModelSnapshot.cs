@@ -125,9 +125,6 @@ namespace LionSkyNot.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -300,16 +297,11 @@ namespace LionSkyNot.Migrations
                     b.Property<int>("TypeId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("WishListId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("BrandId");
 
                     b.HasIndex("TypeId");
-
-                    b.HasIndex("WishListId");
 
                     b.ToTable("Products");
                 });
@@ -340,19 +332,39 @@ namespace LionSkyNot.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<decimal>("TotalPrice")
-                        .HasColumnType("decimal(18,2)");
+                    b.HasKey("Id");
+
+                    b.ToTable("WishLists");
+                });
+
+            modelBuilder.Entity("LionSkyNot.Data.Models.Shop.WishListsProducts", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
 
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<int>("WishListId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
 
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("WishLists");
+                    b.HasIndex("WishListId");
+
+                    b.ToTable("WishListsProducts");
                 });
 
             modelBuilder.Entity("LionSkyNot.Data.Models.User.User", b =>
@@ -629,22 +641,34 @@ namespace LionSkyNot.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("LionSkyNot.Data.Models.Shop.WishList", null)
-                        .WithMany("Products")
-                        .HasForeignKey("WishListId");
-
                     b.Navigation("Brand");
 
                     b.Navigation("Type");
                 });
 
-            modelBuilder.Entity("LionSkyNot.Data.Models.Shop.WishList", b =>
+            modelBuilder.Entity("LionSkyNot.Data.Models.Shop.WishListsProducts", b =>
                 {
-                    b.HasOne("LionSkyNot.Data.Models.User.User", null)
-                        .WithOne()
-                        .HasForeignKey("LionSkyNot.Data.Models.Shop.WishList", "UserId")
+                    b.HasOne("LionSkyNot.Data.Models.Shop.Product", "Product")
+                        .WithMany("WishLists")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("LionSkyNot.Data.Models.User.User", null)
+                        .WithOne()
+                        .HasForeignKey("LionSkyNot.Data.Models.Shop.WishListsProducts", "UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("LionSkyNot.Data.Models.Shop.WishList", "WishList")
+                        .WithMany("Products")
+                        .HasForeignKey("WishListId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("WishList");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -706,6 +730,11 @@ namespace LionSkyNot.Migrations
             modelBuilder.Entity("LionSkyNot.Data.Models.Classes.Class", b =>
                 {
                     b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("LionSkyNot.Data.Models.Shop.Product", b =>
+                {
+                    b.Navigation("WishLists");
                 });
 
             modelBuilder.Entity("LionSkyNot.Data.Models.Shop.WishList", b =>

@@ -20,7 +20,7 @@
             <li class="list-group-item">Price: @String.Format(product.Price % 1 == 0 ? "{0:0}" : "{0:0.00}", product.Price) £</li>
         </ul>
         <div class="card-body">
-             <a href="#" class="btn btn-primary">Go somewhere</a>
+              <a asp-controller="WishList" asp-action="AddToWishList" asp-route-id="@product.Id" class="btn btn-danger">Add to wishlist</a>
         </div>
     </div>
 

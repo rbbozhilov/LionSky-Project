@@ -38,7 +38,7 @@ namespace LionSkyNot.Services.Trainers
 
         public bool Delete(int id)
         {
-            var currentTrainer = this.data.Trainers.Where(t => t.Id == id && t.IsDeleted == false)
+            var currentTrainer = this.data.Trainers.Where(t => t.Id == id)
                                                    .FirstOrDefault();
        
             if(currentTrainer == null)
@@ -197,8 +197,7 @@ namespace LionSkyNot.Services.Trainers
 
 
         public IEnumerable<TrainerFormModelForAdmin> GetAllTrainersForAdmin()
-        => this.data.Trainers.Where(t => t.IsDeleted == false)
-                             .Select(t => new TrainerFormModelForAdmin()
+        => this.data.Trainers.Select(t => new TrainerFormModelForAdmin()
                              {
                                  Id = t.Id,
                                  FullName = t.FullName

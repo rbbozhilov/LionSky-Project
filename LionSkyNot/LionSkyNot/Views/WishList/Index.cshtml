@@ -1,6 +1,56 @@
-﻿namespace LionSkyNot.Views.WishList
+﻿@model WishListFormModel
+
+@if (Model != null)
 {
-    public class Index
-    {
-    }
+    <div class="row">
+
+        @if (Model.Products.Any())
+        {
+            <table class="table table-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">Product Name</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Remove</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var product in Model.Products)
+                    {
+
+                        <tr>
+                            <td>@product.Name</td>
+                            <td>@String.Format(product.Price % 1 == 0 ? "{0:0}" : "{0:0.00}", product.Price) £</td>
+                            <td><a asp-controller="WishList" asp-action="RemoveProduct" asp-route-id="@product.Id" class="btn btn-danger">Remove Product</a></td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        }
+
+
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">Total Price</th>
+                    <th scope="col">Buy</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td>Price of all products</td>
+                    <td>@String.Format(@Model.Price % 1 == 0 ? "{0:0}" : "{0:0.00}", @Model.Price) £</td>
+                    <td><a asp-controller="WishList" asp-action="BuyProducts" class="btn btn-danger">Buy</a></td>
+                </tr>
+
+            </tbody>
+        </table>
+        }
+    </div>
 }
+
+
+

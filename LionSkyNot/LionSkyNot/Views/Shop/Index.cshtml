@@ -80,14 +80,14 @@
                 @if (@product.InStock == 0)
                 {
                     <div class="card-body">
-                        <a href="#" class="btn btn-primary" disabled>Go somewhere</a>
+                        <a href="#" class="btn btn-primary" disabled>Add to wishlist</a>
                     </div>
 
                 }
                 else
                 {
                     <div class="card-body">
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <a asp-controller="WishList" asp-action="AddToWishList" asp-route-id="@product.Id" class="btn btn-danger">Add to wishlist</a>
                     </div>
                 }
 

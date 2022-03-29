@@ -30,6 +30,13 @@
                     <a class="nav-link text-white" asp-area="" asp-controller="Trainer" asp-action="Index">Trainers</a>
                 </li>
 
+                @if (this.User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link text-white" asp-area="" asp-controller="WishList" asp-action="Index">Wish List</a>
+                    </li>
+                }
+
                 @if (User.Identity.IsAuthenticated && (User.IsInRole("Administrator") || User.IsInRole("Moderator")))
                 {
                     <li class="nav-item">

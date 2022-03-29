@@ -10,21 +10,17 @@ namespace LionSkyNot.Data.Models.Shop
 
         public WishList()
         {
-            this.Products = new HashSet<Product>();
+            this.Products = new HashSet<WishListsProducts>();
         }
 
 
         [Key]
         public int Id { get; set; }
 
-        [Column(TypeName = "decimal(18,2)")]
-        public decimal TotalPrice { get; set; }
 
-        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<WishListsProducts> Products { get; set; }
 
 
-        public string UserId { get; set; }
 
-    
     }
 }
