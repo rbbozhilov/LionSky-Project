@@ -84,14 +84,14 @@ namespace LionSkyNot.Services.WishLists
         }
 
 
-        public bool RemoveProduct(int productId ,string userId)
+        public bool RemoveProduct(int productId, string userId)
         {
 
             var currentWishListProduct = this.data.WishListsProducts
                                            .Where(w => w.UserId == userId && w.ProductId == productId)
                                            .FirstOrDefault();
 
-            if(currentWishListProduct == null)
+            if (currentWishListProduct == null)
             {
                 return false;
             }
@@ -102,6 +102,27 @@ namespace LionSkyNot.Services.WishLists
             this.data.SaveChanges();
 
             return true;
+        }
+
+        public bool BuyProducts(string userId)
+        {
+
+            var currentWishListProduct = this.data.WishListsProducts
+                                          .Where(w => w.UserId == userId)
+                                          .ToList();
+
+            if (currentWishListProduct == null)
+            {
+                return false;
+            }
+
+
+            this.data.WishListsProducts.RemoveRange(currentWishListProduct);
+
+            this.data.SaveChanges();
+
+            return true;
+
         }
 
     }

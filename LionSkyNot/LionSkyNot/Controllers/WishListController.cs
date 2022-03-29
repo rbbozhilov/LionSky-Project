@@ -65,9 +65,15 @@ namespace LionSkyNot.Controllers
         public IActionResult BuyProducts()
         {
 
+            var user = Infrastructure.ClaimsPrincipalExtensions.GetId(this.User);
+
+            if (!this.wishListService.BuyProducts(user))
+            {
+                return BadRequest();
+            }
 
 
-            return View();
+            return View("Index");
         }
 
 

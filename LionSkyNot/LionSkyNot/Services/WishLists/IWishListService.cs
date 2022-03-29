@@ -10,6 +10,8 @@ namespace LionSkyNot.Services.WishLists
 
         bool RemoveProduct(int productId, string userId);
 
+        bool BuyProducts(string userId);
+
         WishListFormModel GetProductsOfUser(string userId);
 
 
