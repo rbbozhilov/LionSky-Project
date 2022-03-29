@@ -2,6 +2,8 @@
 using LionSkyNot.Data.Models.Shop;
 using LionSkyNot.Models.Products;
 using LionSkyNot.Models.WihLists;
+using LionSkyNot.Services.Products;
+using LionSkyNot.Views.ViewModels.Products;
 using Microsoft.EntityFrameworkCore;
 
 namespace LionSkyNot.Services.WishLists
@@ -10,10 +12,12 @@ namespace LionSkyNot.Services.WishLists
     {
 
         private LionSkyDbContext data;
+        private IProductService productService;
 
-        public WishListService(LionSkyDbContext data)
+        public WishListService(LionSkyDbContext data, IProductService productService)
         {
             this.data = data;
+            this.productService = productService;
         }
 
 
@@ -104,16 +108,37 @@ namespace LionSkyNot.Services.WishLists
             return true;
         }
 
-        public bool BuyProducts(string userId)
+        public Tuple<bool, IEnumerable<BuyProductViewModel>> BuyProducts(string userId)
         {
 
             var currentWishListProduct = this.data.WishListsProducts
                                           .Where(w => w.UserId == userId)
                                           .ToList();
 
-            if (currentWishListProduct == null)
+
+            var buyProducts = new List<BuyProductViewModel>();
+            var errorReturnedTuple = new Tuple<bool, IEnumerable<BuyProductViewModel>>(false, buyProducts);
+            
+            if(currentWishListProduct == null)
             {
-                return false;
+                return errorReturnedTuple;
+            }
+
+
+            foreach (var product in currentWishListProduct)
+            {
+                var currentProduct = this.productService.TakeProduct(product.ProductId);
+
+                if (currentProduct.CountInStock <= 0)
+                {
+                    this.data.WishListsProducts.RemoveRange(currentWishListProduct);
+                    this.data.SaveChanges();
+                    return errorReturnedTuple;
+                }
+
+                currentProduct.CountInStock--;
+                currentProduct.CountOfBuys++;
+                buyProducts.Add(new BuyProductViewModel { Name = currentProduct.Name});
             }
 
 
@@ -121,9 +146,11 @@ namespace LionSkyNot.Services.WishLists
 
             this.data.SaveChanges();
 
-            return true;
+            var successReturnTuple = new Tuple<bool, IEnumerable<BuyProductViewModel>>(true, buyProducts);
+
+
+            return successReturnTuple;
 
         }
-
     }
 }

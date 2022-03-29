@@ -67,13 +67,16 @@ namespace LionSkyNot.Controllers
 
             var user = Infrastructure.ClaimsPrincipalExtensions.GetId(this.User);
 
-            if (!this.wishListService.BuyProducts(user))
+
+            var touple = this.wishListService.BuyProducts(user);
+
+            if(touple.Item1 == false)
             {
-                return BadRequest();
+                return View("BuyedProducts",touple.Item2);
             }
 
-
-            return View("Index");
+           
+            return View("SuccessBuyedAll",touple.Item2);
         }
 
 

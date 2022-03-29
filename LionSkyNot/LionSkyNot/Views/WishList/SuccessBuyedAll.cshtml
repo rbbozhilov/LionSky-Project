@@ -1,0 +1,18 @@
+﻿@model IEnumerable<BuyProductViewModel>
+
+
+<div class="container">
+    <div class="jumbotron">
+        <h1>Successfully buyed products</h1>
+        <p>You just buyed those products</p>
+        @foreach (var product in Model)
+        {
+            <p style="color:green">Product name: @product.Name</p>
+        }
+    </div>
+
+    <br />
+
+    <h3> Thank you for buying from us!</h3>
+
+</div>

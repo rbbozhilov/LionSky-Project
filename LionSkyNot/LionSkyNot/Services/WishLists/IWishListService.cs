@@ -1,5 +1,6 @@
 ﻿using LionSkyNot.Data.Models.Shop;
 using LionSkyNot.Models.WihLists;
+using LionSkyNot.Views.ViewModels.Products;
 
 namespace LionSkyNot.Services.WishLists
 {
@@ -10,10 +11,9 @@ namespace LionSkyNot.Services.WishLists
 
         bool RemoveProduct(int productId, string userId);
 
-        bool BuyProducts(string userId);
-
         WishListFormModel GetProductsOfUser(string userId);
 
+        Tuple<bool, IEnumerable<BuyProductViewModel>> BuyProducts(string userId);
 
 
     }

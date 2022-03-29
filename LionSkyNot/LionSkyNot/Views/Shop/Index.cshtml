@@ -77,7 +77,7 @@
                     }
                     <li class="list-group-item">In Stock: @product.InStock</li>
                 </ul>
-                @if (@product.InStock == 0)
+                @if (@product.InStock <= 0)
                 {
                     <div class="card-body">
                         <a href="#" class="btn btn-primary" disabled>Add to wishlist</a>
