@@ -66,8 +66,7 @@ namespace LionSkyNot.Controllers
 
         public IActionResult Payment()
         {
-
-            return View(new PaymentFormModel());
+            return View();
         }
 
         [HttpPost]
