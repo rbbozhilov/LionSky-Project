@@ -34,8 +34,6 @@ namespace LionSkyNot.Services.WishLists
                 wishListProducts.WishList = wishList;
                 wishListProducts.UserId = userId;
 
-
-
             }
 
             else
@@ -83,7 +81,28 @@ namespace LionSkyNot.Services.WishLists
 
             return returnProducts;
 
-
         }
+
+
+        public bool RemoveProduct(int productId ,string userId)
+        {
+
+            var currentWishListProduct = this.data.WishListsProducts
+                                           .Where(w => w.UserId == userId && w.ProductId == productId)
+                                           .FirstOrDefault();
+
+            if(currentWishListProduct == null)
+            {
+                return false;
+            }
+
+
+            this.data.WishListsProducts.Remove(currentWishListProduct);
+
+            this.data.SaveChanges();
+
+            return true;
+        }
+
     }
 }

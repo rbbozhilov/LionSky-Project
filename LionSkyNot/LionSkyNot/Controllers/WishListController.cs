@@ -13,7 +13,6 @@ namespace LionSkyNot.Controllers
     [Authorize]
     public class WishListController : BaseController
     {
-
         private IProductService productService;
         private IWishListService wishListService;
         private LionSkyDbContext data;
@@ -41,7 +40,6 @@ namespace LionSkyNot.Controllers
 
         public IActionResult AddToWishList(int id)
         {
-
             var user = Infrastructure.ClaimsPrincipalExtensions.GetId(this.User);
 
             var currentProduct = this.productService.TakeProduct(id);
@@ -51,6 +49,27 @@ namespace LionSkyNot.Controllers
             return View("Index");
 
         }
+
+        public IActionResult RemoveProduct(int id)
+        {
+            var user = Infrastructure.ClaimsPrincipalExtensions.GetId(this.User);
+
+            if (!this.wishListService.RemoveProduct(id, user))
+            {
+                return BadRequest();
+            };
+
+            return View("Index");
+        }
+
+        public IActionResult BuyProducts()
+        {
+
+
+
+            return View();
+        }
+
 
     }
 }
