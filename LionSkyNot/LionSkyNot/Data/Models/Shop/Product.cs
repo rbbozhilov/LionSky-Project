@@ -45,6 +45,8 @@ namespace LionSkyNot.Data.Models.Shop
 
         public bool IsDeleted { get; set; } = false;
 
+        public bool IsOnPromotion { get; set; } = false;
+
 
         public virtual ICollection<WishListsProducts> WishLists { get; set; }
 

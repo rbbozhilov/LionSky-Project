@@ -47,7 +47,7 @@ namespace LionSkyNot.Services.Products
                     .FirstOrDefault();
 
 
-        public bool EditProduct(int id, string imageUrl, string name, decimal price)
+        public bool EditProduct(int id, string imageUrl, string name, decimal price, float percentage)
         {
             var currentProduct = this.data.Products
                                           .Where(p => p.Id == id && p.IsDeleted == false)
@@ -58,9 +58,23 @@ namespace LionSkyNot.Services.Products
                 return false;
             }
 
+
+            if(percentage > 0)
+            {
+                currentProduct.IsOnPromotion = true;
+            }
+            else
+            {
+                currentProduct.IsOnPromotion = false;
+            }
+
+            
+
             currentProduct.ImageUrl = imageUrl;
             currentProduct.Name = name;
             currentProduct.Price = price;
+
+            currentProduct.Price -= currentProduct.Price * (decimal)(percentage / 100);
 
             this.data.SaveChanges();
 
@@ -187,8 +201,24 @@ namespace LionSkyNot.Services.Products
             }).ToList();
         }
 
+        public IEnumerable<ProductListViewModel> GetAllProductsOnPromotion()
+        {
+            return this.data.Products
+                            .Where(p => p.IsOnPromotion == true && p.IsDeleted == false)
+                            .Select(p => new ProductListViewModel()
+                            {
+                                Id = p.Id,
+                                Type = p.Type.TypeName,
+                                Brand = p.Brand.BrandName,
+                                Price = p.Price,
+                                Description = p.Description,
+                                ImageUrl = p.ImageUrl
+                            })
+                            .ToList();
 
-        public IEnumerable<ProductListViewModel> ShowMostBuyedProducts(int countOfProducts)
+        }
+
+        public IEnumerable<ProductListViewModel> ShowMostBuyedProducts()
          => this.data
                 .Products
                 .Where(p => p.IsDeleted == false)
@@ -202,7 +232,7 @@ namespace LionSkyNot.Services.Products
                     Price = p.Price,
                     Type = p.Type.TypeName
                 })
-                .Take(countOfProducts)
+                .Take(5)
                 .ToList();
 
 
@@ -241,5 +271,6 @@ namespace LionSkyNot.Services.Products
 
             return product;
         }
+
     }
 }

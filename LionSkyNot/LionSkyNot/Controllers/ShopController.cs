@@ -57,13 +57,35 @@ namespace LionSkyNot.Controllers
             }
 
 
-            allProductViewModel.Products = this.productService.ShowAllProducts();
+            //allProductViewModel.Products = this.productService.ShowAllProducts();
 
 
             return View(allProductViewModel);
         }
 
   
+        public IActionResult AllProducts()
+        {
+            var allProducts = this.productService.ShowAllProducts();
+
+            return View(allProducts);
+        }
+
+        public IActionResult MostBuyedProducts()
+        {
+
+            var mostBuyedProducts = this.productService.ShowMostBuyedProducts();
+
+            return View(mostBuyedProducts);
+        }
+
+        public IActionResult SaleProducts()
+        {
+
+            var productsOnPromotion = this.productService.GetAllProductsOnPromotion();
+
+            return View(productsOnPromotion);
+        }
 
     }
 }

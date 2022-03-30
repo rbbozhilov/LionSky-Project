@@ -162,7 +162,8 @@ namespace LionSkyNot.Controllers
           bool isEditted =  this.productService.EditProduct(id,
                                                             productModel.ImageUrl,
                                                             productModel.Name,
-                                                            productModel.Price);
+                                                            productModel.Price,
+                                                            productModel.PromotionPercentage);
 
             if (!isEditted)
             {

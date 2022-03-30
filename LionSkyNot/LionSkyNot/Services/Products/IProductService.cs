@@ -11,7 +11,7 @@ namespace LionSkyNot.Services.Products
 
         bool UpdateInStockCountOfProducts();
 
-        bool EditProduct(int id, string imageUrl, string name, decimal price);
+        bool EditProduct(int id, string imageUrl, string name, decimal price,float percentage);
 
         bool DeleteProduct(int id);
 
@@ -26,6 +26,10 @@ namespace LionSkyNot.Services.Products
         IQueryable<Product> GetProductsByBrandAndType(string type, string brand);
 
         IEnumerable<ProductListViewModel> ShowAllProducts();
+
+        IEnumerable<ProductListViewModel> ShowMostBuyedProducts();
+
+        IEnumerable<ProductListViewModel> GetAllProductsOnPromotion();
 
         IEnumerable<ProductServiceModel> GetAllProductsForAdmin();
 

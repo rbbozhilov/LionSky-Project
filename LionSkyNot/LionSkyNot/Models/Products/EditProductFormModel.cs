@@ -10,7 +10,10 @@ namespace LionSkyNot.Models.Products
         [Required]
         public string Name { get; set; }
 
+        [Range(0,100)]
+        public float PromotionPercentage { get; set; }
 
+        [Range(0,1000)]
         public decimal Price { get; set; }
 
         [Url]
@@ -18,6 +21,5 @@ namespace LionSkyNot.Models.Products
         public string ImageUrl { get; set; }
 
  
-
     }
 }

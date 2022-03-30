@@ -308,7 +308,8 @@ namespace LionSkyNot.Migrations
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TypeId = table.Column<int>(type: "int", nullable: false),
                     BrandId = table.Column<int>(type: "int", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    IsOnPromotion = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
