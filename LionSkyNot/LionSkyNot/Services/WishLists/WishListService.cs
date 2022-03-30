@@ -1,7 +1,7 @@
 ﻿using LionSkyNot.Data;
 using LionSkyNot.Data.Models.Shop;
 using LionSkyNot.Models.Products;
-using LionSkyNot.Models.WihLists;
+using LionSkyNot.Models.WishLists;
 using LionSkyNot.Services.Products;
 using LionSkyNot.Views.ViewModels.Products;
 using Microsoft.EntityFrameworkCore;
@@ -72,7 +72,9 @@ namespace LionSkyNot.Services.WishLists
                 {
                     Id = wishList.Product.Id,
                     Name = wishList.Product.Name,
-                    Price = wishList.Product.Price
+                    Price = wishList.Product.Price,
+                    PriceOnPromotion = wishList.Product.PriceOnPromotion,
+                    IsOnPromotion = wishList.Product.IsOnPromotion
                 };
 
                 products.Add(currentProduct);

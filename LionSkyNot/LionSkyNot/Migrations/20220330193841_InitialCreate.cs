@@ -305,6 +305,7 @@ namespace LionSkyNot.Migrations
                     CountInStock = table.Column<int>(type: "int", nullable: false),
                     CountOfBuys = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    PriceOnPromotion = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TypeId = table.Column<int>(type: "int", nullable: false),
                     BrandId = table.Column<int>(type: "int", nullable: false),

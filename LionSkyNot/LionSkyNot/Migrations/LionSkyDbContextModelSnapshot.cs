@@ -297,6 +297,9 @@ namespace LionSkyNot.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<decimal>("PriceOnPromotion")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<int>("TypeId")
                         .HasColumnType("int");
 

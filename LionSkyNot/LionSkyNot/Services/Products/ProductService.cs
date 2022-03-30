@@ -74,7 +74,7 @@ namespace LionSkyNot.Services.Products
             currentProduct.Name = name;
             currentProduct.Price = price;
 
-            currentProduct.Price -= currentProduct.Price * (decimal)(percentage / 100);
+            currentProduct.PriceOnPromotion = currentProduct.Price - (currentProduct.Price * (decimal)(percentage / 100));
 
             this.data.SaveChanges();
 
@@ -139,7 +139,9 @@ namespace LionSkyNot.Services.Products
                                         Price = p.Price,
                                         Description = p.Description,
                                         ImageUrl = p.ImageUrl,
-                                        InStock = p.CountInStock
+                                        InStock = p.CountInStock,
+                                        PriceOnPromotion = p.PriceOnPromotion,
+                                        IsOnPromotion = p.IsOnPromotion
                                     })
                                     .Distinct()
                                     .ToList();
@@ -211,6 +213,9 @@ namespace LionSkyNot.Services.Products
                                 Type = p.Type.TypeName,
                                 Brand = p.Brand.BrandName,
                                 Price = p.Price,
+                                PriceOnPromotion = p.PriceOnPromotion,
+                                InStock = p.CountInStock,
+                                IsOnPromotion = p.IsOnPromotion,
                                 Description = p.Description,
                                 ImageUrl = p.ImageUrl
                             })
@@ -225,11 +230,15 @@ namespace LionSkyNot.Services.Products
                 .OrderByDescending(p => p.CountOfBuys)
                 .Select(p => new ProductListViewModel()
                 {
+                    Id = p.Id,
                     Name = p.Name,
                     Brand = p.Brand.BrandName,
                     Description = p.Description,
                     ImageUrl = p.ImageUrl,
                     Price = p.Price,
+                    IsOnPromotion = p.IsOnPromotion,
+                    PriceOnPromotion = p.PriceOnPromotion,
+                    InStock = p.CountInStock,
                     Type = p.Type.TypeName
                 })
                 .Take(5)

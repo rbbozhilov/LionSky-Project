@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LionSkyNot.Migrations
 {
     [DbContext(typeof(LionSkyDbContext))]
-    [Migration("20220330104834_InitialCreate")]
+    [Migration("20220330193841_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -297,6 +297,9 @@ namespace LionSkyNot.Migrations
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("PriceOnPromotion")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("TypeId")

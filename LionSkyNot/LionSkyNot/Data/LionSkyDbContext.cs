@@ -47,6 +47,7 @@ namespace LionSkyNot.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
 
+       
             builder.Entity<WishListsProducts>()
                 .HasOne<User>()
                 .WithOne()

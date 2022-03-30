@@ -30,6 +30,9 @@ namespace LionSkyNot.Data.Models.Shop
         [Column(TypeName = "decimal(18,2)")]
         public decimal Price { get; set; }
 
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal PriceOnPromotion { get; set; }
+
         [Required]
         public string ImageUrl { get; set; }
 

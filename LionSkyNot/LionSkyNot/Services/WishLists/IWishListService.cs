@@ -1,5 +1,5 @@
 ﻿using LionSkyNot.Data.Models.Shop;
-using LionSkyNot.Models.WihLists;
+using LionSkyNot.Models.WishLists;
 using LionSkyNot.Views.ViewModels.Products;
 
 namespace LionSkyNot.Services.WishLists
