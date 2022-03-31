@@ -28,8 +28,8 @@
                             </td>
                             <td>@currentCLass.ClassName</td>
                             <td>@currentCLass.Trainer</td>
-                            <td>@currentCLass.StartDateTime</td>
-                            <td>@currentCLass.EndDateTime</td>
+                            <td>@currentCLass.StartDateTime.ToString("dd-MM-yyyy")</td>
+                            <td>@currentCLass.EndDateTime.ToString("dd-MM-yyyy")</td>
                             <td><a asp-controller="Class" asp-action="ViewDetails" asp-route-id="@currentCLass.Id" class="btn btn-success">View details</a></td>
                             <td><a asp-controller="Class" asp-action="Join" asp-route-id="@currentCLass.Id" class="btn btn-danger">Join</a></td>
                         </tr>

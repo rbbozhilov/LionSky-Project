@@ -129,8 +129,8 @@ namespace LionSkyNot.Services.Classes
                      {
                          ClassName = c.ClassName,
 
-                         StartDateTime = c.StartDateTime.ToString(),
-                         EndDateTime = c.EndDateTime.ToString(),
+                         StartDateTime = c.StartDateTime,
+                         EndDateTime = c.EndDateTime,
                          ImageUrl = c.ImageUrl,
                          Trainer = c.Trainer.FullName,
                          Id = c.Id
@@ -189,8 +189,8 @@ namespace LionSkyNot.Services.Classes
                         ClassName = c.ClassName,
                         ImageUrl = c.ImageUrl,
                         Trainer = c.Trainer.FullName,
-                        StartDateTime = c.StartDateTime.ToString(),
-                        EndDateTime = c.EndDateTime.ToString()
+                        StartDateTime = c.StartDateTime,
+                        EndDateTime = c.EndDateTime
                     })
                     .ToList();
 
@@ -203,8 +203,8 @@ namespace LionSkyNot.Services.Classes
                         ClassName = c.ClassName,
                         ImageUrl = c.ImageUrl,
                         Trainer = c.Trainer.FullName,
-                        StartDateTime = c.StartDateTime.ToString(),
-                        EndDateTime = c.EndDateTime.ToString()
+                        StartDateTime = c.StartDateTime,
+                        EndDateTime = c.EndDateTime
                     })
                     .ToList();
 
@@ -217,8 +217,8 @@ namespace LionSkyNot.Services.Classes
                         ClassName = c.ClassName,
                         ImageUrl = c.ImageUrl,
                         Trainer = c.Trainer.FullName,
-                        StartDateTime = c.StartDateTime.ToString(),
-                        EndDateTime = c.EndDateTime.ToString()
+                        StartDateTime = c.StartDateTime,
+                        EndDateTime = c.EndDateTime
                     })
                     .ToList();
 
@@ -231,8 +231,8 @@ namespace LionSkyNot.Services.Classes
                         ClassName = c.ClassName,
                         ImageUrl = c.ImageUrl,
                         Trainer = c.Trainer.FullName,
-                        StartDateTime = c.StartDateTime.ToString(),
-                        EndDateTime = c.EndDateTime.ToString()
+                        StartDateTime = c.StartDateTime,
+                        EndDateTime = c.EndDateTime
                     })
                     .ToList();
 
@@ -245,8 +245,8 @@ namespace LionSkyNot.Services.Classes
                         ClassName = c.ClassName,
                         ImageUrl = c.ImageUrl,
                         Trainer = c.Trainer.FullName,
-                        StartDateTime = c.StartDateTime.ToString(),
-                        EndDateTime = c.EndDateTime.ToString()
+                        StartDateTime = c.StartDateTime,
+                        EndDateTime = c.EndDateTime
                     })
                     .ToList();
 
@@ -259,8 +259,8 @@ namespace LionSkyNot.Services.Classes
                         ClassName = c.ClassName,
                         ImageUrl = c.ImageUrl,
                         Trainer = c.Trainer.FullName,
-                        StartDateTime = c.StartDateTime.ToString(),
-                        EndDateTime = c.EndDateTime.ToString()
+                        StartDateTime = c.StartDateTime,
+                        EndDateTime = c.EndDateTime
                     })
                     .ToList();
 
