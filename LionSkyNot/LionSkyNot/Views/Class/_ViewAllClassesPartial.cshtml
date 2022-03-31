@@ -1,0 +1,41 @@
+﻿ @model IEnumerable<ClassViewModel>
+
+<link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-image">
+                <thead>
+                    <tr>
+                        <th scope="col">Image</th>
+                        <th scope="col">Class Name</th>
+                        <th scope="col">Trainer</th>
+                        <th scope="col">Start Date</th>
+                        <th scope="col">End Date</th>
+                        <th scope="col">View details</th>
+                        <th scope="col">Join</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var currentCLass in Model)
+                    {
+                        <tr>
+                            <td class="w-25">
+                                <img src="@currentCLass.ImageUrl" class="img-fluid img-thumbnail" alt="Sheep">
+                            </td>
+                            <td>@currentCLass.ClassName</td>
+                            <td>@currentCLass.Trainer</td>
+                            <td>@currentCLass.StartDateTime</td>
+                            <td>@currentCLass.EndDateTime</td>
+                            <td><a asp-controller="Class" asp-action="ViewDetails" asp-route-id="@currentCLass.Id" class="btn btn-success">View details</a></td>
+                            <td><a asp-controller="Class" asp-action="Join" asp-route-id="@currentCLass.Id" class="btn btn-danger">Join</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

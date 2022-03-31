@@ -1,15 +1,8 @@
 ﻿@model AllTrainersViewModel
 
-<form method="get">
-    <div class="form-group">
-        <label asp-for="SearchTerm">Search by name</label>
-        <input asp-for="SearchTerm"  class="form-control">
-        <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-</form>
+<link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
 
-<br />
-<br />
+
     @foreach (var trainer in Model.Trainers)
 {
     <div class="card" style="width: 18rem; display:inline-block">

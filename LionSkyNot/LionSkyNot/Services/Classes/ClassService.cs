@@ -128,10 +128,9 @@ namespace LionSkyNot.Services.Classes
                      .Select(c => new ClassViewModel()
                      {
                          ClassName = c.ClassName,
-                         Price = c.Price,
+
                          StartDateTime = c.StartDateTime.ToString(),
                          EndDateTime = c.EndDateTime.ToString(),
-                         Categorie = c.Trainer.Categorie.Name,
                          ImageUrl = c.ImageUrl,
                          Trainer = c.Trainer.FullName,
                          Id = c.Id
@@ -168,6 +167,126 @@ namespace LionSkyNot.Services.Classes
             throw new NotImplementedException();
         }
 
+        public IEnumerable<ClassViewModel> GetAllFitnessClass()
+        => this.data.Classes
+                    .Where(c => c.Trainer.Categorie.Name == "Fitness")
+                    .Select(c => new ClassViewModel()
+                    {
+                        Id = c.Id,
+                        ClassName = c.ClassName,
+                        ImageUrl = c.ImageUrl,
+                        Trainer = c.Trainer.FullName,
+                        StartDateTime = c.StartDateTime.ToString(),
+                        EndDateTime = c.EndDateTime.ToString()
+                    })
+                    .ToList();
+
+        public IEnumerable<ClassViewModel> GetAllYogaClass()
+        => this.data.Classes
+                    .Where(c => c.Trainer.Categorie.Name == "Yoga")
+                    .Select(c => new ClassViewModel()
+                    {
+                        Id = c.Id,
+                        ClassName = c.ClassName,
+                        ImageUrl = c.ImageUrl,
+                        Trainer = c.Trainer.FullName,
+                        StartDateTime = c.StartDateTime.ToString(),
+                        EndDateTime = c.EndDateTime.ToString()
+                    })
+                    .ToList();
+
+        public IEnumerable<ClassViewModel> GetAllMmaClass()
+        => this.data.Classes
+                    .Where(c => c.Trainer.Categorie.Name == "Mma")
+                    .Select(c => new ClassViewModel()
+                    {
+                        Id = c.Id,
+                        ClassName = c.ClassName,
+                        ImageUrl = c.ImageUrl,
+                        Trainer = c.Trainer.FullName,
+                        StartDateTime = c.StartDateTime.ToString(),
+                        EndDateTime = c.EndDateTime.ToString()
+                    })
+                    .ToList();
+
+        public IEnumerable<ClassViewModel> GetAllBoxClass()
+        => this.data.Classes
+                    .Where(c => c.Trainer.Categorie.Name == "Box")
+                    .Select(c => new ClassViewModel()
+                    {
+                        Id = c.Id,
+                        ClassName = c.ClassName,
+                        ImageUrl = c.ImageUrl,
+                        Trainer = c.Trainer.FullName,
+                        StartDateTime = c.StartDateTime.ToString(),
+                        EndDateTime = c.EndDateTime.ToString()
+                    })
+                    .ToList();
+
+        public IEnumerable<ClassViewModel> GetAllWrestlingClass()
+        => this.data.Classes
+                    .Where(c => c.Trainer.Categorie.Name == "Wrestling")
+                    .Select(c => new ClassViewModel()
+                    {
+                        Id = c.Id,
+                        ClassName = c.ClassName,
+                        ImageUrl = c.ImageUrl,
+                        Trainer = c.Trainer.FullName,
+                        StartDateTime = c.StartDateTime.ToString(),
+                        EndDateTime = c.EndDateTime.ToString()
+                    })
+                    .ToList();
+
+        public IEnumerable<ClassViewModel> GetAllAthleticClass()
+        => this.data.Classes
+                    .Where(c => c.Trainer.Categorie.Name == "Athletic")
+                    .Select(c => new ClassViewModel()
+                    {
+                        Id = c.Id,
+                        ClassName = c.ClassName,
+                        ImageUrl = c.ImageUrl,
+                        Trainer = c.Trainer.FullName,
+                        StartDateTime = c.StartDateTime.ToString(),
+                        EndDateTime = c.EndDateTime.ToString()
+                    })
+                    .ToList();
+
+
+        public AllClassViewModel GetCountOfAllClasses()
+        => new AllClassViewModel()
+        {
+            CountOfAthleticClass = this.GetCountOfAthleticClass(),
+            CountOfMmaClass = this.GetCountOfMmaClass(),
+            CountOfBoxClass = this.GetCountOfBoxClass(),
+            CountOfFitnessClass = this.GetCountOfFitnessClass(),
+            CountOfWrestlingClass = this.GetCountOfWrestlingClass(),
+            CountOfYogaClass = this.GetCountOfYogaClass()
+        };
+
+
+
+        private int GetCountOfYogaClass()
+        => this.data.Classes.Where(c => c.Trainer.Categorie.Name == "Yoga").Count();
+
+
+        private int GetCountOfFitnessClass()
+        => this.data.Classes.Where(c => c.Trainer.Categorie.Name == "Fitness").Count();
+
+
+        private int GetCountOfMmaClass()
+        => this.data.Classes.Where(c => c.Trainer.Categorie.Name == "Mma").Count();
+
+
+        private int GetCountOfBoxClass()
+        => this.data.Classes.Where(c => c.Trainer.Categorie.Name == "Box").Count();
+
+
+        private int GetCountOfWrestlingClass()
+        => this.data.Classes.Where(c => c.Trainer.Categorie.Name == "Wrestling").Count();
+
+
+        private int GetCountOfAthleticClass()
+        => this.data.Classes.Where(c => c.Trainer.Categorie.Name == "Athletic").Count();
 
     }
 }

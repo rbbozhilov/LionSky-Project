@@ -6,13 +6,14 @@ namespace LionSkyNot.Services.Classes
     public interface IClassService
     {
 
-        void Create(string fullname,
-           string imageUrl,
-           decimal price,
-           int MaxPractitionerCount,
-           int trainerId,
-           DateTime startDateTime,
-           DateTime endDateTime);
+        void Create(
+                    string fullname,
+                    string imageUrl,
+                    decimal price,
+                    int MaxPractitionerCount,
+                    int trainerId,
+                    DateTime startDateTime,
+                    DateTime endDateTime);
 
         bool Edit(
                   string id,
@@ -28,11 +29,28 @@ namespace LionSkyNot.Services.Classes
 
         bool Delete(string id);
 
+        
+
+        AllClassViewModel GetCountOfAllClasses();
+
         ClassFormModel GetClassById(string id);
 
         IEnumerable<ClassFormModelForAdmin> GetAllClassesForAdmin();
 
         IEnumerable<ClassViewModel> GetAllClasses();
+
+        IEnumerable<ClassViewModel> GetAllFitnessClass();
+
+        IEnumerable<ClassViewModel> GetAllYogaClass();
+
+        IEnumerable<ClassViewModel> GetAllMmaClass();
+
+        IEnumerable<ClassViewModel> GetAllBoxClass();
+
+        IEnumerable<ClassViewModel> GetAllWrestlingClass();
+
+        IEnumerable<ClassViewModel> GetAllAthleticClass();
+
 
         IEnumerable<TrainerClassViewModel> GetAllTrainers();
 

@@ -1,4 +1,8 @@
-﻿div.inline {
+﻿body {
+    background-color: grey;
+}
+
+div.inline {
     float: left;
 }
 

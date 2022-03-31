@@ -18,20 +18,58 @@ namespace LionSkyNot.Controllers
         }
 
 
-        public IActionResult Index(IEnumerable<ClassViewModel> classModel)
+        public IActionResult Index(AllClassViewModel allClassModel)
         {
 
-            classModel = this.classService.GetAllClasses();
+            allClassModel = this.classService.GetCountOfAllClasses();
 
-            return View(classModel);
+            return View(allClassModel);
         }
 
 
-        public IActionResult Buy(string id)
+        public IActionResult ViewAllFitnessClass()
         {
 
-            return RedirectToAction("Index");
+            var allFitnessClasses = this.classService.GetAllFitnessClass();
+
+            return View(allFitnessClasses);
         }
+
+        public IActionResult ViewAllYogaClass()
+        {
+            var allYogaClasses = this.classService.GetAllYogaClass();
+
+            return View(allYogaClasses);
+        }
+
+        public IActionResult ViewAllMmaClass()
+        {
+            var allMmaClass = this.classService.GetAllMmaClass();
+
+            return View(allMmaClass);
+        }
+
+        public IActionResult ViewAllBoxClass()
+        {
+            var allBoxClass = this.classService.GetAllBoxClass();
+
+            return View(allBoxClass);
+        }
+
+        public IActionResult ViewAllWrestlingClass()
+        {
+            var allWrestlingClass = this.classService.GetAllWrestlingClass();
+
+            return View(allWrestlingClass);
+        }
+
+        public IActionResult ViewAllAthleticClass()
+        {
+            var allAthleticClass = this.classService.GetAllAthleticClass();
+
+            return View(allAthleticClass);
+        }
+
 
         //public IActionResult ShowDetails()
         //{

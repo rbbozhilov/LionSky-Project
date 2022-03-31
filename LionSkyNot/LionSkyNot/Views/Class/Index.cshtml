@@ -1,39 +1,4 @@
-﻿@*@model IEnumerable<ClassViewModel>
-
-
-    @if (Model.Any())
-    {
-    <div class="container">
-    <div class="row">
-
-    @foreach (var currentClass in Model)
-    {
-    <div class="card" style="width: 18rem;">
-    <img class="card-img-top" src="@currentClass.ImageUrl" alt="Card image cap">
-    <div class="card-body">
-    <h3 class="card-title">@currentClass.ClassName</h3>
-    <p class="card-text">This class is started on @currentClass.StartDateTime date and ends on @currentClass.EndDateTime</p>
-    </div>
-    <ul class="list-group list-group-flush">
-    <li class="list-group-item">Trainer: @currentClass.Trainer</li>
-    <li class="list-group-item">Category of the class: @currentClass.Categorie</li>
-    <li class="list-group-item">Price: @String.Format(currentClass.Price % 1 == 0 ? "{0:0}" : "{0:0.00}", currentClass.Price) £</li>
-    </ul>
-    <div class="card-body">
-    <a asp-controller="Class" asp-action="ShowDetails" asp-route-id="@currentClass.Id" class="btn btn-warning">Show Details</a>
-    <a asp-controller="Class" asp-action="Buy" asp-route-id="@currentClass.Id" class="btn btn-warning">Add to Wihslist</a>
-    </div>
-    </div>
-    }
-
-    </div>
-    </div>
-    }
-
-*@
-
-
-
+﻿@model AllClassViewModel
 
 
 <!DOCTYPE html>
@@ -46,7 +11,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <style>
-
+        
         .container {
             padding: 2rem 0rem;
         }
@@ -72,7 +37,7 @@
 
     </style>
 </head>
-<body>
+<body style="background-color:grey;">
 
 
 
@@ -90,7 +55,7 @@
         <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox">
             <div class="item active">
-                <img src="https://jagerhof.bg/wp-content/themes/html5blank-stable/assets/img/fitness_2.jpg" alt="Image">
+                <img src="https://thumbor.thedailymeal.com/opKcYX7uRLdIajlOMGuVG8qqGCU=/870x565/https://www.theactivetimes.com/sites/default/files/2019/02/08/00_istockphoto.com_.jpg" alt="Image">
                 <div class="carousel-caption">
                     <h3>Fitness Classes</h3>
                     <p style="color:white">Check it  <button type="button" class="btn btn-danger" onclick="location.href='@Url.Action("Fitness", "Class")'">NOW</button></p>
@@ -163,34 +128,65 @@
                 <table class="table table-image">
                     <thead>
                         <tr>
-                            <th scope="col">Day</th>
                             <th scope="col">Image</th>
-                            <th scope="col">Article Name</th>
-                            <th scope="col">Author</th>
-                            <th scope="col">Words</th>
-                            <th scope="col">Shares</th>
+                            <th scope="col">Class Type</th>
+                            <th scope="col">Count of classes</th>
+                            <th scope="col">View All</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <th scope="row">1</th>
                             <td class="w-25">
-                                <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/sheep-3.jpg" class="img-fluid img-thumbnail" alt="Sheep">
+                                <img src="https://gxunited.com/wp-content/uploads/2020/01/42.-Class-Intros-copy.jpg" class="img-fluid img-thumbnail" alt="Sheep">
                             </td>
-                            <td>Bootstrap 4 CDN and Starter Template</td>
-                            <td>Cristina</td>
-                            <td>913</td>
-                            <td>2.846</td>
+                            <td>Fitness</td>
+                            <td>@Model.CountOfFitnessClass</td>
+                            <td><a asp-controller="Class" asp-action="ViewAllFitnessClass" class="btn btn-success">View All</a></td>
                         </tr>
+
                         <tr>
-                            <th scope="row">2</th>
                             <td class="w-25">
-                                <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/sheep-5.jpg" class="img-fluid img-thumbnail" alt="Sheep">
+                                <img src="https://media.istockphoto.com/photos/asian-yoga-students-observing-and-practicing-during-class-picture-id1324181858?b=1&k=20&m=1324181858&s=170667a&w=0&h=HDyD7lT-s8rNKE9eUuGHkJYWrVHxraLylgFSqkWBeF0=" class="img-fluid img-thumbnail" alt="Sheep">
                             </td>
-                            <td>Bootstrap Grid 4 Tutorial and Examples</td>
-                            <td>Cristina</td>
-                            <td>1.434</td>
-                            <td>3.417</td>
+                            <td>Yoga</td>
+                            <td>@Model.CountOfYogaClass</td>
+                            <td><a asp-controller="Class" asp-action="ViewAllYogaClass" class="btn btn-success">View All</a></td>
+                        </tr>
+
+                        <tr>
+                            <td class="w-25">
+                                <img src="https://www.extrememma.com.au/wp-content/uploads/2018/10/40402591_1797621563608171_7373067337957638144_o.jpg" class="img-fluid img-thumbnail" alt="Sheep">
+                            </td>
+                            <td>Mma</td>
+                            <td>@Model.CountOfMmaClass</td>
+                            <td><a asp-controller="Class" asp-action="ViewAllMmaClass" class="btn btn-success">View All</a></td>
+                        </tr>
+
+                        <tr>
+                            <td class="w-25">
+                                <img src="https://media.self.com/photos/587fb60739d082f57cdffb8a/1:1/w_832,h_832,c_limit/first-boxing-class-boxer-situps.jpg" class="img-fluid img-thumbnail" alt="Sheep">
+                            </td>
+                            <td>Box</td>
+                            <td>@Model.CountOfBoxClass</td>
+                            <td><a asp-controller="Class" asp-action="ViewAllBoxClass" class="btn btn-success">View All</a></td>
+                        </tr>
+
+                        <tr>
+                            <td class="w-25">
+                                <img src="http://www.bjjglobetrotter.com/wp-content/uploads/2011/04/ED3FAC22-857C-45A6-A89F-26D18B5FBA1D49.jpg" class="img-fluid img-thumbnail" alt="Sheep">
+                            </td>
+                            <td>Wrestling</td>
+                            <td>@Model.CountOfWrestlingClass</td>
+                            <td><a asp-controller="Class" asp-action="ViewAllWrestlingClass" class="btn btn-success">View All</a></td>
+                        </tr>
+
+                        <tr>
+                            <td class="w-25">
+                                <img src="https://www.24hourfitness.com/images/pages/GX24/athletic_interval/hiit.jpg" class="img-fluid img-thumbnail" alt="Sheep">
+                            </td>
+                            <td>Athletic</td>
+                            <td>@Model.CountOfAthleticClass</td>
+                            <td><a asp-controller="Class" asp-action="ViewAllAthleticClass" class="btn btn-success">View All</a></td>
                         </tr>
                     </tbody>
                 </table>
