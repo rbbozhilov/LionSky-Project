@@ -40,8 +40,8 @@ namespace LionSkyNot.Services.Trainers
         {
             var currentTrainer = this.data.Trainers.Where(t => t.Id == id)
                                                    .FirstOrDefault();
-       
-            if(currentTrainer == null)
+
+            if (currentTrainer == null)
             {
                 return false;
             }
@@ -53,6 +53,9 @@ namespace LionSkyNot.Services.Trainers
             return true;
 
         }
+
+        public bool IsTrainer(string userId)
+         => this.data.Trainers.Any(t => t.UserId == userId);
 
         public IEnumerable<CategorieViewModel> GetAllCategories()
         => this.data.Categories.Select(c => new CategorieViewModel
@@ -168,9 +171,6 @@ namespace LionSkyNot.Services.Trainers
 
         }
 
-        public bool IsTrainer(string userId)
-         => this.data.Trainers.Any(t => t.UserId == userId);
-
 
 
         private TrainerViewModel GetTopTrainerByCategorie(string category)
@@ -198,10 +198,10 @@ namespace LionSkyNot.Services.Trainers
 
         public IEnumerable<TrainerFormModelForAdmin> GetAllTrainersForAdmin()
         => this.data.Trainers.Select(t => new TrainerFormModelForAdmin()
-                             {
-                                 Id = t.Id,
-                                 FullName = t.FullName
-                             })
+        {
+            Id = t.Id,
+            FullName = t.FullName
+        })
                              .ToList();
 
 

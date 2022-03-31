@@ -215,9 +215,14 @@ namespace LionSkyNot.Controllers
 
             if (currentUser == null)
             {
-                ModelState.AddModelError("notFindUser", "the user is not exists");
+                ModelState.AddModelError("notFindUser", "The user is not exists");
             }
 
+            if (this.trainerService.IsTrainer(currentUser.Id))
+            {
+                ModelState.AddModelError("userIsTrainer", "The user is already trainer");
+
+            }
 
             if (!ModelState.IsValid)
             {
