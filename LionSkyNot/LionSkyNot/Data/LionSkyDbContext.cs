@@ -48,10 +48,10 @@ namespace LionSkyNot.Data
         {
 
        
-            builder.Entity<WishListsProducts>()
+            builder.Entity<WishList>()
                 .HasOne<User>()
                 .WithOne()
-                .HasForeignKey<WishListsProducts>(w => w.UserId)
+                .HasForeignKey<WishList>(w => w.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<ClassUser>()

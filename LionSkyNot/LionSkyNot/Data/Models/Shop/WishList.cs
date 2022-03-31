@@ -18,8 +18,9 @@ namespace LionSkyNot.Data.Models.Shop
         public int Id { get; set; }
 
 
-        public virtual ICollection<WishListsProducts> Products { get; set; }
+        public string UserId { get; set; }
 
+        public virtual ICollection<WishListsProducts> Products { get; set; }
 
 
     }

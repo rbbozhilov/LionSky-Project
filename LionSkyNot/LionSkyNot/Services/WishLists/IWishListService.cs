@@ -11,7 +11,7 @@ namespace LionSkyNot.Services.WishLists
 
         bool RemoveProduct(int productId, string userId);
 
-        WishListFormModel GetProductsOfUser(string userId);
+        Tuple<bool, WishListFormModel> GetProductsOfUser(string userId);
 
         Tuple<bool, IEnumerable<BuyProductViewModel>> BuyProducts(string userId);
 

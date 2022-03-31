@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LionSkyNot.Migrations
 {
     [DbContext(typeof(LionSkyDbContext))]
-    [Migration("20220330193841_InitialCreate")]
+    [Migration("20220331081556_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -340,7 +340,14 @@ namespace LionSkyNot.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("WishLists");
                 });
@@ -356,19 +363,12 @@ namespace LionSkyNot.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int>("WishListId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ProductId");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
 
                     b.HasIndex("WishListId");
 
@@ -654,17 +654,20 @@ namespace LionSkyNot.Migrations
                     b.Navigation("Type");
                 });
 
+            modelBuilder.Entity("LionSkyNot.Data.Models.Shop.WishList", b =>
+                {
+                    b.HasOne("LionSkyNot.Data.Models.User.User", null)
+                        .WithOne()
+                        .HasForeignKey("LionSkyNot.Data.Models.Shop.WishList", "UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("LionSkyNot.Data.Models.Shop.WishListsProducts", b =>
                 {
                     b.HasOne("LionSkyNot.Data.Models.Shop.Product", "Product")
                         .WithMany("WishLists")
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("LionSkyNot.Data.Models.User.User", null)
-                        .WithOne()
-                        .HasForeignKey("LionSkyNot.Data.Models.Shop.WishListsProducts", "UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 

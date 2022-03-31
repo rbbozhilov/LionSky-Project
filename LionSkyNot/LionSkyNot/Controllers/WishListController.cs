@@ -33,7 +33,10 @@ namespace LionSkyNot.Controllers
         {
             var user = Infrastructure.ClaimsPrincipalExtensions.GetId(this.User);
 
-            var currentProducts = this.wishListService.GetProductsOfUser(user);
+            
+            var tuple = this.wishListService.GetProductsOfUser(user);
+
+            var currentProducts = tuple.Item2;
 
             return View(currentProducts);
         }
@@ -88,15 +91,21 @@ namespace LionSkyNot.Controllers
             var user = Infrastructure.ClaimsPrincipalExtensions.GetId(this.User);
 
 
-            var touple = this.wishListService.BuyProducts(user);
+            var tuple = this.wishListService.BuyProducts(user);
 
-            if(touple.Item1 == false)
+
+            if(tuple.Item1 == false && tuple.Item2 == null)
             {
-                return View("BuyedProducts",touple.Item2);
+                return BadRequest();
+            }
+
+            if (tuple.Item1 == false)
+            {
+                return View("BuyedProducts", tuple.Item2);
             }
 
 
-            return View("SuccessBuyedAll", touple.Item2);
+            return View("SuccessBuyedAll", tuple.Item2);
 
         }
 
