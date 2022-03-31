@@ -1,32 +1,203 @@
-﻿@model IEnumerable<ClassViewModel>
+﻿@*@model IEnumerable<ClassViewModel>
 
 
     @if (Model.Any())
-{
+    {
     <div class="container">
-        <div class="row">
+    <div class="row">
 
-            @foreach (var currentClass in Model)
-            {
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="@currentClass.ImageUrl" alt="Card image cap">
-                    <div class="card-body">
-                        <h3 class="card-title">@currentClass.ClassName</h3>
-                        <p class="card-text">This class is started on @currentClass.StartDateTime date and ends on @currentClass.EndDateTime</p>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Trainer: @currentClass.Trainer</li>
-                        <li class="list-group-item">Category of the class: @currentClass.Categorie</li>
-                        <li class="list-group-item">Price: @String.Format(currentClass.Price % 1 == 0 ? "{0:0}" : "{0:0.00}", currentClass.Price) £</li>
-                    </ul>
-                    <div class="card-body">
-                        <a asp-controller="Class" asp-action="ShowDetails" asp-route-id="@currentClass.Id" class="btn btn-warning">Show Details</a>
-                        <a asp-controller="Class" asp-action="Buy" asp-route-id="@currentClass.Id" class="btn btn-warning">Add to Wihslist</a>
-                    </div>
+    @foreach (var currentClass in Model)
+    {
+    <div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="@currentClass.ImageUrl" alt="Card image cap">
+    <div class="card-body">
+    <h3 class="card-title">@currentClass.ClassName</h3>
+    <p class="card-text">This class is started on @currentClass.StartDateTime date and ends on @currentClass.EndDateTime</p>
+    </div>
+    <ul class="list-group list-group-flush">
+    <li class="list-group-item">Trainer: @currentClass.Trainer</li>
+    <li class="list-group-item">Category of the class: @currentClass.Categorie</li>
+    <li class="list-group-item">Price: @String.Format(currentClass.Price % 1 == 0 ? "{0:0}" : "{0:0.00}", currentClass.Price) £</li>
+    </ul>
+    <div class="card-body">
+    <a asp-controller="Class" asp-action="ShowDetails" asp-route-id="@currentClass.Id" class="btn btn-warning">Show Details</a>
+    <a asp-controller="Class" asp-action="Buy" asp-route-id="@currentClass.Id" class="btn btn-warning">Add to Wihslist</a>
+    </div>
+    </div>
+    }
+
+    </div>
+    </div>
+    }
+
+*@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+
+        .container {
+            padding: 2rem 0rem;
+        }
+
+        h4 {
+            margin: 2rem 0rem 1rem;
+        }
+
+        .table-image {
+            td, th
+
+        {
+            vertical-align: middle;
+        }
+
+        }
+
+        .carousel-inner img {
+            width: 100%; /* Set width to 100% */
+            margin: auto;
+            min-height: 200px;
+        }
+
+    </style>
+</head>
+<body>
+
+
+
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+            <li data-target="#myCarousel" data-slide-to="3"></li>
+            <li data-target="#myCarousel" data-slide-to="4"></li>
+            <li data-target="#myCarousel" data-slide-to="5"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+                <img src="https://jagerhof.bg/wp-content/themes/html5blank-stable/assets/img/fitness_2.jpg" alt="Image">
+                <div class="carousel-caption">
+                    <h3>Fitness Classes</h3>
+                    <p style="color:white">Check it  <button type="button" class="btn btn-danger" onclick="location.href='@Url.Action("Fitness", "Class")'">NOW</button></p>
                 </div>
-            }
+            </div>
+
+            <div class="item">
+                <img src="https://media.istockphoto.com/photos/millennials-practicing-yoga-in-a-modern-studio-picture-id1093945358?k=20&m=1093945358&s=612x612&w=0&h=4ER16yFKqURu3-yDxH1eibUMqbGafyqrqSrXxs24QqU=" alt="Image">
+                <div class="carousel-caption">
+                    <h3>Yoga Classes</h3>
+                    <p style="color:white">Check it  <button type="button" class="btn btn-danger" onclick="location.href='@Url.Action("Yoga", "Class")'">NOW</button></p>
+                </div>
+            </div>
+
+            <div class="item">
+                <img src="https://nextgenerationmma.co.uk/wp-content/uploads/2018/09/Next-Gen-5-2-1170x660.jpg" alt="Image">
+                <div class="carousel-caption">
+                    <h3>Wrestling Classes</h3>
+                    <p style="color:white">Check it  <button type="button" class="btn btn-danger" onclick="location.href='@Url.Action("Wrestling", "Class")'">NOW</button></p>
+                </div>
+            </div>
+
+
+            <div class="item">
+                <img src=" https://mmamicks.com/wp-content/uploads/2016/01/conor-mcgregor-movement-training.jpg" alt="Image">
+                <div class="carousel-caption">
+                    <h3>Mma Classes</h3>
+                    <p style="color:white">Check it  <button type="button" class="btn btn-danger" onclick="location.href='@Url.Action("Mma", "Class")'">NOW</button></p>
+                </div>
+            </div>
+
+            <div class="item">
+                <img src="https://titleboxingclub.com/wp-content/uploads/2018/10/boxing-class.jpg" alt="Image">
+                <div class="carousel-caption">
+                    <h3>Box Classes</h3>
+                    <p style="color:white">Check it  <button type="button" class="btn btn-danger" onclick="location.href='@Url.Action("Box", "Class")'">NOW</button></p>
+                </div>
+            </div>
+
+            <div class="item">
+                <img src="https://www.newsletter.co.uk/webimg/TUFZMTI1MDg3ODAz.jpg?width=2048&enable=upscale" alt="Image">
+                <div class="carousel-caption">
+                    <h3>Athletic Classes</h3>
+                    <p style="color:white">Check it  <button type="button" class="btn btn-danger" onclick="location.href='@Url.Action("Athletic", "Class")'">NOW</button></p>
+                </div>
+            </div>
 
         </div>
-    </div>
-}
 
+        <!-- Left and right controls -->
+        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+    <div class="container text-center">
+        <h3>See our classes</h3><br>
+
+    </div>
+    <br>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-image">
+                    <thead>
+                        <tr>
+                            <th scope="col">Day</th>
+                            <th scope="col">Image</th>
+                            <th scope="col">Article Name</th>
+                            <th scope="col">Author</th>
+                            <th scope="col">Words</th>
+                            <th scope="col">Shares</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td class="w-25">
+                                <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/sheep-3.jpg" class="img-fluid img-thumbnail" alt="Sheep">
+                            </td>
+                            <td>Bootstrap 4 CDN and Starter Template</td>
+                            <td>Cristina</td>
+                            <td>913</td>
+                            <td>2.846</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td class="w-25">
+                                <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/sheep-5.jpg" class="img-fluid img-thumbnail" alt="Sheep">
+                            </td>
+                            <td>Bootstrap Grid 4 Tutorial and Examples</td>
+                            <td>Cristina</td>
+                            <td>1.434</td>
+                            <td>3.417</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>
