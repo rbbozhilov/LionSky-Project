@@ -1,0 +1,32 @@
+﻿@model ClassDetailsViewModel
+
+
+<link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
+
+
+<div class="row">
+
+    <div class="col-sm-3">
+        <div class="well">
+            <p>@Model.ClassName</p>
+            <img src="@Model.ImageUrl" class="img-circle" height="100" width="100" alt="Avatar">
+        </div>
+    </div>
+    <div class="col-sm-9">
+        <div class="well">
+            <p style="color:red">Trainer: @Model.TrainerName</p>
+            <br />
+            <p>Start date: @Model.StartDateTime.ToString("dd-MM-yyyy")</p>
+            <br />
+            <p>End date: @Model.EndDateTime.ToString("dd-MM-yyyy")</p>
+            <br />
+            <p style="color:green">People joined: @Model.PractitionerCount</p>
+            <br />
+            <p style="color:red">Max people can join: @Model.MaxPractitionerCount</p>
+        </div>
+    </div>
+</div>
+
+
+
+

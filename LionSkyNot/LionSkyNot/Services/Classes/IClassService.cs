@@ -35,6 +35,8 @@ namespace LionSkyNot.Services.Classes
 
         ClassFormModel GetClassById(string id);
 
+        ClassDetailsViewModel GetClassForDetails(string id);
+
         IEnumerable<ClassFormModelForAdmin> GetAllClassesForAdmin();
 
         IEnumerable<ClassViewModel> GetAllClasses();
@@ -50,7 +52,6 @@ namespace LionSkyNot.Services.Classes
         IEnumerable<ClassViewModel> GetAllWrestlingClass();
 
         IEnumerable<ClassViewModel> GetAllAthleticClass();
-
 
         IEnumerable<TrainerClassViewModel> GetAllTrainers();
 

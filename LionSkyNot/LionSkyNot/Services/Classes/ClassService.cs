@@ -162,14 +162,27 @@ namespace LionSkyNot.Services.Classes
                              })
                              .FirstOrDefault();
 
-        public ClassFormModel GetClassById(string id, string className, string imageUrl, int maxPractitionerCount, decimal price, DateTime startDate, DateTime endDate, int trainerId)
-        {
-            throw new NotImplementedException();
-        }
+        public ClassDetailsViewModel GetClassForDetails(string id)
+         => this.data.Classes
+                     .Where(c => c.Id == id && c.IsDeleted == false)
+                     .Select(c => new ClassDetailsViewModel()
+                     {
+                         ClassName = c.ClassName,
+                         StartDateTime = c.StartDateTime,
+                         EndDateTime = c.EndDateTime,
+                         ImageUrl = c.ImageUrl,
+                         MaxPractitionerCount = c.MaxPractitionerCount,
+                         PractitionerCount = c.PractitionerCount,
+                         TrainerName = c.Trainer.FullName
+                     })
+                     .FirstOrDefault();
+
+
+
 
         public IEnumerable<ClassViewModel> GetAllFitnessClass()
         => this.data.Classes
-                    .Where(c => c.Trainer.Categorie.Name == "Fitness")
+                    .Where(c => c.Trainer.Categorie.Name == "Fitness" && c.IsDeleted == false)
                     .Select(c => new ClassViewModel()
                     {
                         Id = c.Id,
@@ -183,7 +196,7 @@ namespace LionSkyNot.Services.Classes
 
         public IEnumerable<ClassViewModel> GetAllYogaClass()
         => this.data.Classes
-                    .Where(c => c.Trainer.Categorie.Name == "Yoga")
+                    .Where(c => c.Trainer.Categorie.Name == "Yoga" && c.IsDeleted == false)
                     .Select(c => new ClassViewModel()
                     {
                         Id = c.Id,
@@ -197,7 +210,7 @@ namespace LionSkyNot.Services.Classes
 
         public IEnumerable<ClassViewModel> GetAllMmaClass()
         => this.data.Classes
-                    .Where(c => c.Trainer.Categorie.Name == "Mma")
+                    .Where(c => c.Trainer.Categorie.Name == "Mma" && c.IsDeleted == false)
                     .Select(c => new ClassViewModel()
                     {
                         Id = c.Id,
@@ -211,7 +224,7 @@ namespace LionSkyNot.Services.Classes
 
         public IEnumerable<ClassViewModel> GetAllBoxClass()
         => this.data.Classes
-                    .Where(c => c.Trainer.Categorie.Name == "Box")
+                    .Where(c => c.Trainer.Categorie.Name == "Box" && c.IsDeleted == false)
                     .Select(c => new ClassViewModel()
                     {
                         Id = c.Id,
@@ -225,7 +238,7 @@ namespace LionSkyNot.Services.Classes
 
         public IEnumerable<ClassViewModel> GetAllWrestlingClass()
         => this.data.Classes
-                    .Where(c => c.Trainer.Categorie.Name == "Wrestling")
+                    .Where(c => c.Trainer.Categorie.Name == "Wrestling" && c.IsDeleted == false)
                     .Select(c => new ClassViewModel()
                     {
                         Id = c.Id,
@@ -239,7 +252,7 @@ namespace LionSkyNot.Services.Classes
 
         public IEnumerable<ClassViewModel> GetAllAthleticClass()
         => this.data.Classes
-                    .Where(c => c.Trainer.Categorie.Name == "Athletic")
+                    .Where(c => c.Trainer.Categorie.Name == "Athletic" && c.IsDeleted == false)
                     .Select(c => new ClassViewModel()
                     {
                         Id = c.Id,
@@ -266,27 +279,39 @@ namespace LionSkyNot.Services.Classes
 
 
         private int GetCountOfYogaClass()
-        => this.data.Classes.Where(c => c.Trainer.Categorie.Name == "Yoga").Count();
+        => this.data.Classes
+                    .Where(c => c.Trainer.Categorie.Name == "Yoga" && c.IsDeleted == false)
+                    .Count();
 
 
         private int GetCountOfFitnessClass()
-        => this.data.Classes.Where(c => c.Trainer.Categorie.Name == "Fitness").Count();
+        => this.data.Classes
+                    .Where(c => c.Trainer.Categorie.Name == "Fitness" && c.IsDeleted == false)
+                    .Count();
 
 
         private int GetCountOfMmaClass()
-        => this.data.Classes.Where(c => c.Trainer.Categorie.Name == "Mma").Count();
+        => this.data.Classes
+                    .Where(c => c.Trainer.Categorie.Name == "Mma" && c.IsDeleted == false)
+                    .Count();
 
 
         private int GetCountOfBoxClass()
-        => this.data.Classes.Where(c => c.Trainer.Categorie.Name == "Box").Count();
+        => this.data.Classes
+                    .Where(c => c.Trainer.Categorie.Name == "Box" && c.IsDeleted == false)
+                    .Count();
 
 
         private int GetCountOfWrestlingClass()
-        => this.data.Classes.Where(c => c.Trainer.Categorie.Name == "Wrestling").Count();
+        => this.data.Classes
+                    .Where(c => c.Trainer.Categorie.Name == "Wrestling" && c.IsDeleted == false)
+                    .Count();
 
 
         private int GetCountOfAthleticClass()
-        => this.data.Classes.Where(c => c.Trainer.Categorie.Name == "Athletic").Count();
+        => this.data.Classes
+                    .Where(c => c.Trainer.Categorie.Name == "Athletic" && c.IsDeleted == false)
+                    .Count();
 
     }
 }

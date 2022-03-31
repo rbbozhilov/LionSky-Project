@@ -70,6 +70,13 @@ namespace LionSkyNot.Controllers
             return View(allAthleticClass);
         }
 
+        public IActionResult ViewDetails(string id)
+        {
+            var currentClass = this.classService.GetClassForDetails(id);
+
+            return View(currentClass);
+        }
+
 
         //public IActionResult ShowDetails()
         //{
