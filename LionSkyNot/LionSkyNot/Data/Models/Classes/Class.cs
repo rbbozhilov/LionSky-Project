@@ -27,9 +27,6 @@ namespace LionSkyNot.Data.Models.Classes
 
         public int MaxPractitionerCount { get; set; }
 
-        [Column(TypeName = "decimal(18,2)")]
-        public decimal Price { get; set; }
-
         public DateTime StartDateTime { get; set; }
 
         public DateTime EndDateTime { get; set; }

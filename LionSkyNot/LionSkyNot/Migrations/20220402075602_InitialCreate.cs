@@ -258,6 +258,7 @@ namespace LionSkyNot.Migrations
                     BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Weight = table.Column<float>(type: "real", nullable: false),
                     Height = table.Column<float>(type: "real", nullable: false),
+                    IsCandidate = table.Column<bool>(type: "bit", nullable: false),
                     CategorieId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
@@ -345,7 +346,6 @@ namespace LionSkyNot.Migrations
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PractitionerCount = table.Column<int>(type: "int", nullable: false),
                     MaxPractitionerCount = table.Column<int>(type: "int", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     StartDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     TrainerId = table.Column<int>(type: "int", nullable: false),

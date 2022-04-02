@@ -60,12 +60,18 @@ namespace LionSkyNot.Controllers
         {
             trainerModel.Categorie = this.trainerService.GetAllCategories();
             var currentUserId = ClaimsPrincipalExtensions.GetId(this.User);
-            var allTrainersUserId = this.trainerService.GetAllTrainersUserId();
-
+            var allTrainersUserId = this.trainerService.GetAllTrainersUserId(false);
+            var allCandidateTrainersUserId = this.trainerService.GetAllTrainersUserId(true);
+            
 
             if (allTrainersUserId.Any(a => a.UserId == currentUserId))
             {
                 ModelState.AddModelError("error", "The current user is already a trainer!");
+            }
+
+            if(allCandidateTrainersUserId.Any(a => a.UserId == currentUserId))
+            {
+                ModelState.AddModelError("error", "The current user is candidate already for trainer!");
             }
 
             if (!ModelState.IsValid)
@@ -73,7 +79,8 @@ namespace LionSkyNot.Controllers
                 return View(trainerModel);
             }
 
-            this.trainerService.Create(trainerModel.FullName,
+            this.trainerService.Create(
+                                       trainerModel.FullName,
                                        trainerModel.YearOfExperience,
                                        trainerModel.ImageUrl,
                                        trainerModel.Height,
@@ -81,7 +88,8 @@ namespace LionSkyNot.Controllers
                                        trainerModel.BirthDate,
                                        trainerModel.CategorieId,
                                        trainerModel.Description,
-                                       currentUserId);
+                                       currentUserId,
+                                       true);
 
 
             return RedirectToAction("Index");

@@ -9,7 +9,6 @@ namespace LionSkyNot.Services.Classes
         void Create(
                     string fullname,
                     string imageUrl,
-                    decimal price,
                     int MaxPractitionerCount,
                     int trainerId,
                     DateTime startDateTime,
@@ -20,7 +19,6 @@ namespace LionSkyNot.Services.Classes
                   string className,
                   string imageUrl,
                   int maxPractitionerCount,
-                  decimal price,
                   DateTime startDate,
                   DateTime endDate,
                   int trainerId

@@ -65,9 +65,6 @@ namespace LionSkyNot.Migrations
                     b.Property<int>("PractitionerCount")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<DateTime>("StartDateTime")
                         .HasColumnType("datetime2");
 
@@ -124,6 +121,9 @@ namespace LionSkyNot.Migrations
                     b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsCandidate")
+                        .HasColumnType("bit");
 
                     b.Property<string>("UserId")
                         .IsRequired()

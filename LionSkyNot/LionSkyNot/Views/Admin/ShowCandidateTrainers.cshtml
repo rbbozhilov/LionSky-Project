@@ -1,0 +1,41 @@
+﻿ @model IEnumerable<TrainerCandidateViewModel>
+
+<link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-image">
+                <thead>
+                    <tr>
+                        <th scope="col">Image</th>
+                        <th scope="col">Trainer Name</th>
+                        <th scope="col">BirthDate</th>
+                        <th scope="col">YearOfExperience</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Add</th>
+                        <th scope="col">Remove</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var currentTrainer in Model)
+                    {
+                        <tr>
+                            <td class="w-25">
+                                <img src="@currentTrainer.ImageUrl" class="img-fluid img-thumbnail" alt="Sheep">
+                            </td>
+                            <td>@currentTrainer.FullName</td>
+                            <td>@currentTrainer.BirthDate.ToString("dd-MM-yyyy")</td>
+                            <td>@currentTrainer.YearOfExperience</td>
+                            <td>@currentTrainer.Category</td>
+                            <td><a asp-controller="Admin" asp-action="AddTrainerCandidate" asp-route-id="@currentTrainer.Id" class="btn btn-success">Add Trainer</a></td>
+                            <td><a asp-controller="Admin" asp-action="DeleteTrainer" asp-route-id="@currentTrainer.Id" class="btn btn-danger">Remove</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

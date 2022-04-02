@@ -16,7 +16,6 @@ namespace LionSkyNot.Models.Class
 
         public int MaxPractitionerCount { get; set; }
 
-        public decimal Price { get; set; }
 
         public DateTime StartDateTime { get; set; }
 

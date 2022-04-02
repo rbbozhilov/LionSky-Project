@@ -15,7 +15,17 @@ namespace LionSkyNot.Services.Trainers
             this.data = data;
         }
 
-        public void Create(string fullName, int yearsOfExperience, string imageUrl, float height, float weight, DateTime birthDate, int categorieId, string description, string userId)
+        public void Create(
+                           string fullName,
+                           int yearsOfExperience,
+                           string imageUrl,
+                           float height,
+                           float weight,
+                           DateTime birthDate,
+                           int categorieId,
+                           string description,
+                           string userId,
+                           bool isCandidate)
         {
             var trainer = new Trainer()
             {
@@ -27,13 +37,22 @@ namespace LionSkyNot.Services.Trainers
                 BirthDate = birthDate,
                 CategorieId = categorieId,
                 Description = description,
-                UserId = userId
+                UserId = userId,
+                IsCandidate = isCandidate
             };
 
             this.data.Trainers.Add(trainer);
 
             this.data.SaveChanges();
 
+        }
+
+        public void AddCandidate(Trainer currentCandidate)
+        {
+
+            currentCandidate.IsCandidate = false;
+
+            this.data.SaveChanges();
         }
 
         public bool Delete(int id)
@@ -55,14 +74,24 @@ namespace LionSkyNot.Services.Trainers
         }
 
         public bool IsTrainer(string userId)
-         => this.data.Trainers.Any(t => t.UserId == userId);
+         => this.data.Trainers
+                     .Any(t => t.UserId == userId && t.IsCandidate == false);
+
+
+        public Trainer GetCandidateTrainerById(int id)
+         => this.data.Trainers
+                     .Where(t => t.Id == id && t.IsCandidate == true)
+                     .FirstOrDefault();
+
+
 
         public IEnumerable<CategorieViewModel> GetAllCategories()
-        => this.data.Categories.Select(c => new CategorieViewModel
-        {
-            Id = c.Id,
-            Name = c.Name
-        });
+        => this.data.Categories
+                    .Select(c => new CategorieViewModel
+                    {
+                        Id = c.Id,
+                        Name = c.Name
+                    });
 
 
         public IEnumerable<TrainerViewModel> TopTrainers()
@@ -103,7 +132,10 @@ namespace LionSkyNot.Services.Trainers
 
 
         public int GetTrainerId(string userId)
-        => this.data.Trainers.Where(t => t.UserId == userId).Select(t => t.Id).FirstOrDefault();
+        => this.data.Trainers
+                    .Where(t => t.UserId == userId && t.IsCandidate == false)
+                    .Select(t => t.Id)
+                    .FirstOrDefault();
 
 
 
@@ -111,7 +143,7 @@ namespace LionSkyNot.Services.Trainers
         {
 
             var trainers = this.data.Trainers
-                                    .Where(t => t.Categorie.Name == category)
+                                    .Where(t => t.Categorie.Name == category && t.IsCandidate == false)
                                     .Select(t => new TrainerListViewModel()
                                     {
                                         FullName = t.FullName,
@@ -124,10 +156,17 @@ namespace LionSkyNot.Services.Trainers
             return trainers;
         }
 
-        public IEnumerable<TrainerUserIdViewModel> GetAllTrainersUserId()
+        public IEnumerable<TrainerUserIdViewModel> GetAllCandidateTrainersUserId()
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public IEnumerable<TrainerUserIdViewModel> GetAllTrainersUserId(bool isCandidate)
         {
 
             var trainers = this.data.Trainers
+                                    .Where(t => t.IsCandidate == isCandidate)
                                     .Select(t => new TrainerUserIdViewModel()
                                     {
                                         UserId = t.UserId
@@ -158,16 +197,18 @@ namespace LionSkyNot.Services.Trainers
         public TrainerViewModel GetTrainerById(int id)
         {
 
-            return this.data.Trainers.Where(t => t.Id == id).Select(t => new TrainerViewModel()
-            {
-                FullName = t.FullName,
-                ImageUrl = t.ImageUrl,
-                Description = t.Description,
-                YearOfExperience = t.YearOfExperience,
-                BirthDate = t.BirthDate,
-                Weight = t.Weight,
-                Height = t.Height
-            }).FirstOrDefault();
+            return this.data.Trainers
+                            .Where(t => t.Id == id && t.IsCandidate == false)
+                            .Select(t => new TrainerViewModel()
+                            {
+                                FullName = t.FullName,
+                                ImageUrl = t.ImageUrl,
+                                Description = t.Description,
+                                YearOfExperience = t.YearOfExperience,
+                                BirthDate = t.BirthDate,
+                                Weight = t.Weight,
+                                Height = t.Height
+                            }).FirstOrDefault();
 
         }
 
@@ -177,7 +218,7 @@ namespace LionSkyNot.Services.Trainers
         {
 
             var trainer = this.data.Trainers
-                          .Where(t => t.Categorie.Name == category)
+                          .Where(t => t.Categorie.Name == category && t.IsCandidate == false)
                           .Select(t => new TrainerViewModel()
                           {
                               FullName = t.FullName,
@@ -197,13 +238,29 @@ namespace LionSkyNot.Services.Trainers
 
 
         public IEnumerable<TrainerFormModelForAdmin> GetAllTrainersForAdmin()
-        => this.data.Trainers.Select(t => new TrainerFormModelForAdmin()
-        {
-            Id = t.Id,
-            FullName = t.FullName
-        })
-                             .ToList();
+        => this.data.Trainers
+                    .Where(t => t.IsCandidate == false)
+                    .Select(t => new TrainerFormModelForAdmin()
+                    {
+                        Id = t.Id,
+                        FullName = t.FullName
+                    })
+                    .ToList();
 
+
+        public IEnumerable<TrainerCandidateViewModel> GetAllTrainerCandidates()
+        => this.data.Trainers
+                    .Where(t => t.IsCandidate == true)
+                    .Select(t => new TrainerCandidateViewModel()
+                    {
+                        Id = t.Id,
+                        FullName = t.FullName,
+                        BirthDate = t.BirthDate,
+                        Category = t.Categorie.Name,
+                        ImageUrl = t.ImageUrl,
+                        YearOfExperience = t.YearOfExperience
+                    })
+                    .ToList();
 
     }
 }

@@ -16,13 +16,18 @@ namespace LionSkyNot.Services.Classes
         }
 
 
-        public void Create(string className, string imageUrl, decimal price, int maxPractitionerCount, int trainerId, DateTime startDateTime, DateTime endDateTime)
+        public void Create(
+                          string className,
+                          string imageUrl,
+                          int maxPractitionerCount,
+                          int trainerId,
+                          DateTime startDateTime,
+                          DateTime endDateTime)
         {
             var @class = new Class()
             {
                 ClassName = className,
                 ImageUrl = imageUrl,
-                Price = price,
                 MaxPractitionerCount = maxPractitionerCount,
                 TrainerId = trainerId,
                 StartDateTime = startDateTime,
@@ -41,11 +46,9 @@ namespace LionSkyNot.Services.Classes
                          string className,
                          string imageUrl,
                          int maxPractitionerCount,
-                         decimal price,
                          DateTime startDate,
                          DateTime endDate,
-                         int trainerId
-                         )
+                         int trainerId)
         {
 
 
@@ -60,7 +63,6 @@ namespace LionSkyNot.Services.Classes
 
             currentClass.ClassName = className;
             currentClass.ImageUrl = imageUrl;
-            currentClass.Price = price;
             currentClass.StartDateTime = startDate;
             currentClass.EndDateTime = endDate;
             currentClass.MaxPractitionerCount = maxPractitionerCount;
@@ -95,6 +97,7 @@ namespace LionSkyNot.Services.Classes
         public IEnumerable<TrainerClassViewModel> GetAllTrainers()
         {
             var allTrainers = this.data.Trainers
+                                       .Where(t => t.IsCandidate == false)
                                        .Select(t => new TrainerClassViewModel()
                                        {
                                            Id = t.Id,
@@ -111,7 +114,6 @@ namespace LionSkyNot.Services.Classes
                      .Select(t => new ClassTrainerViewModel()
                      {
                          PractitionerCount = t.PractitionerCount,
-                         Price = t.Price,
                          StartDateTime = t.StartDateTime.ToString(),
                          EndDateTime = t.EndDateTime.ToString(),
                          Trainer = t.Trainer.FullName,
@@ -139,28 +141,29 @@ namespace LionSkyNot.Services.Classes
 
 
         public IEnumerable<ClassFormModelForAdmin> GetAllClassesForAdmin()
-         => this.data.Classes.Where(c => c.IsDeleted == false)
-                             .Select(c => new ClassFormModelForAdmin()
-                             {
-                                 ClassName = c.ClassName,
-                                 Id = c.Id,
-                             })
-                             .ToList();
+         => this.data.Classes
+                     .Where(c => c.IsDeleted == false)
+                     .Select(c => new ClassFormModelForAdmin()
+                     {
+                         ClassName = c.ClassName,
+                         Id = c.Id,
+                     })
+                     .ToList();
 
 
         public ClassFormModel GetClassById(string id)
-         => this.data.Classes.Where(c => c.Id == id && c.IsDeleted == false)
-                             .Select(c => new ClassFormModel()
-                             {
-                                 ClassName = c.ClassName,
-                                 StartDateTime = c.StartDateTime,
-                                 EndDateTime = c.EndDateTime,
-                                 ImageUrl = c.ImageUrl,
-                                 MaxPractitionerCount = c.MaxPractitionerCount,
-                                 Price = c.Price,
-                                 TrainerId = c.Trainer.Id,
-                             })
-                             .FirstOrDefault();
+         => this.data.Classes
+                     .Where(c => c.Id == id && c.IsDeleted == false)
+                     .Select(c => new ClassFormModel()
+                     {
+                         ClassName = c.ClassName,
+                         StartDateTime = c.StartDateTime,
+                         EndDateTime = c.EndDateTime,
+                         ImageUrl = c.ImageUrl,
+                         MaxPractitionerCount = c.MaxPractitionerCount,
+                         TrainerId = c.Trainer.Id,
+                     })
+                     .FirstOrDefault();
 
         public ClassDetailsViewModel GetClassForDetails(string id)
          => this.data.Classes

@@ -29,6 +29,8 @@ namespace LionSkyNot.Data.Models.Classes
 
         public float Height { get; set; }
 
+        public bool IsCandidate { get; set; } = false;
+
 
         [ForeignKey(nameof(Categorie))]
         public int CategorieId { get; set; }

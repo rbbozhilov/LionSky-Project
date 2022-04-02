@@ -1,4 +1,5 @@
-﻿using LionSkyNot.Models.Trainers;
+﻿using LionSkyNot.Data.Models.Classes;
+using LionSkyNot.Models.Trainers;
 using LionSkyNot.Views.ViewModels.Trainers;
 
 namespace LionSkyNot.Services.Trainers
@@ -6,7 +7,21 @@ namespace LionSkyNot.Services.Trainers
     public interface ITrainerService
     {
 
-        void Create(string fullName, int yearsOfExperience, string imageUrl, float height, float weight, DateTime birthDate, int categorieId, string description, string userId);
+        void Create(
+                    string fullName,
+                    int yearsOfExperience,
+                    string imageUrl,
+                    float height,
+                    float weight,
+                    DateTime birthDate,
+                    int categorieId,
+                    string description,
+                    string userId,
+                    bool isCandidate);
+
+        void AddCandidate(Trainer trainer);
+
+       
 
         bool IsTrainer(string userId);
 
@@ -14,9 +29,14 @@ namespace LionSkyNot.Services.Trainers
 
         bool Delete(int id);
 
+        TrainerViewModel GetTrainerById(int id);
+
+        Trainer GetCandidateTrainerById(int id);
+
         IEnumerable<TrainerFormModelForAdmin> GetAllTrainersForAdmin();
 
-        TrainerViewModel GetTrainerById(int id);
+
+        IEnumerable<TrainerCandidateViewModel> GetAllTrainerCandidates();
 
         IEnumerable<CategorieViewModel> GetAllCategories();
 
@@ -24,7 +44,7 @@ namespace LionSkyNot.Services.Trainers
 
         IEnumerable<TrainerListViewModel> GetAllTrainersByCategory(string category);
 
-        IEnumerable<TrainerUserIdViewModel> GetAllTrainersUserId();
+        IEnumerable<TrainerUserIdViewModel> GetAllTrainersUserId(bool isCandidate);
 
         IEnumerable<TrainerListViewModel> SearchTrainerByName(string searchedName);
 

@@ -10,6 +10,7 @@ using LionSkyNot.Services.Exercises;
 using LionSkyNot.Services.Products;
 using LionSkyNot.Services.Recipes;
 using LionSkyNot.Services.Trainers;
+using LionSkyNot.Views.ViewModels.Trainers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -158,12 +159,12 @@ namespace LionSkyNot.Controllers
                 return View(productModel);
             }
 
-            
-          bool isEditted =  this.productService.EditProduct(id,
-                                                            productModel.ImageUrl,
-                                                            productModel.Name,
-                                                            productModel.Price,
-                                                            productModel.PromotionPercentage);
+
+            bool isEditted = this.productService.EditProduct(id,
+                                                              productModel.ImageUrl,
+                                                              productModel.Name,
+                                                              productModel.Price,
+                                                              productModel.PromotionPercentage);
 
             if (!isEditted)
             {
@@ -187,7 +188,15 @@ namespace LionSkyNot.Controllers
             return View("Successfull");
         }
 
+        [Authorize(Roles = "Administrator")]
+        public IActionResult ShowCandidateTrainers(IEnumerable<TrainerCandidateViewModel> trainerCandidateModel)
+        {
+            var candidateTrainers = this.trainerService.GetAllTrainerCandidates();
 
+            return View(candidateTrainers);
+        }
+
+        [Authorize(Roles = "Administrator")]
         public IActionResult ShowTrainers(IEnumerable<TrainerFormModelForAdmin> trainerModel)
         {
 
@@ -196,6 +205,25 @@ namespace LionSkyNot.Controllers
             return View(trainerModel);
 
         }
+
+        [Authorize(Roles = "Administrator")]
+        public IActionResult AddTrainerCandidate(int id)
+        {
+
+            var currentCandidate = this.trainerService.GetCandidateTrainerById(id);
+
+            if(currentCandidate == null)
+            {
+                return BadRequest();
+            }
+
+            this.trainerService.AddCandidate(currentCandidate);
+
+ 
+            return View("Index");
+        }
+
+  
 
         [Authorize(Roles = "Administrator")]
         public IActionResult AddTrainer()
@@ -240,7 +268,8 @@ namespace LionSkyNot.Controllers
                                        trainerModel.BirthDate,
                                        trainerModel.CategorieId,
                                        trainerModel.Description,
-                                       existsUserId);
+                                       existsUserId,
+                                       false);
 
             return RedirectToAction("Index");
 
@@ -336,15 +365,15 @@ namespace LionSkyNot.Controllers
                 return View(recipeModel);
             }
 
-          bool isEditted =  this.recipeService.EditRecipe(
-                                                          id,
-                                                          recipeModel.Name,
-                                                          recipeModel.ImageUrl,
-                                                          recipeModel.Description,
-                                                          recipeModel.Calories,
-                                                          recipeModel.Carbohydrates,
-                                                          recipeModel.Fat,
-                                                          recipeModel.Protein);
+            bool isEditted = this.recipeService.EditRecipe(
+                                                            id,
+                                                            recipeModel.Name,
+                                                            recipeModel.ImageUrl,
+                                                            recipeModel.Description,
+                                                            recipeModel.Calories,
+                                                            recipeModel.Carbohydrates,
+                                                            recipeModel.Fat,
+                                                            recipeModel.Protein);
 
             if (!isEditted)
             {
@@ -415,7 +444,6 @@ namespace LionSkyNot.Controllers
             this.classService.Create(
                                      classModel.ClassName,
                                      classModel.ImageUrl,
-                                     classModel.Price,
                                      classModel.MaxPractitionerCount,
                                      classModel.TrainerId,
                                      classModel.StartDateTime,
@@ -432,7 +460,7 @@ namespace LionSkyNot.Controllers
 
             var currentClass = this.classService.GetClassById(id);
 
-            if(currentClass == null)
+            if (currentClass == null)
             {
                 return BadRequest();
             }
@@ -446,10 +474,9 @@ namespace LionSkyNot.Controllers
                 Trainers = currentClass.Trainers,
                 ImageUrl = currentClass.ImageUrl,
                 MaxPractitionerCount = currentClass.MaxPractitionerCount,
-                Price = currentClass.Price,
                 StartDateTime = currentClass.StartDateTime,
                 EndDateTime = currentClass.EndDateTime,
-               
+
             });
 
         }
@@ -457,7 +484,7 @@ namespace LionSkyNot.Controllers
 
         [Authorize(Roles = "Administrator")]
         [HttpPost]
-        public IActionResult EditClass(ClassFormModel classModel,string id)
+        public IActionResult EditClass(ClassFormModel classModel, string id)
         {
 
             if (!ModelState.IsValid)
@@ -470,11 +497,10 @@ namespace LionSkyNot.Controllers
                                                     classModel.ClassName,
                                                     classModel.ImageUrl,
                                                     classModel.MaxPractitionerCount,
-                                                    classModel.Price,
                                                     classModel.StartDateTime,
                                                     classModel.EndDateTime,
                                                     classModel.TrainerId);
-                                                            
+
 
             if (!isEditted)
             {
@@ -550,7 +576,7 @@ namespace LionSkyNot.Controllers
 
             var exercise = this.exerciseService.GetExerciseById(id);
 
-            if(exercise == null)
+            if (exercise == null)
             {
                 return BadRequest();
             }

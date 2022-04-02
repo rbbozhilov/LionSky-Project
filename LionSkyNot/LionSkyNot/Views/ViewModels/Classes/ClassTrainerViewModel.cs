@@ -5,8 +5,6 @@
         
         public int PractitionerCount { get; set; }
 
-        public decimal Price { get; set; }
-
         public string StartDateTime { get; set; }
 
         public string EndDateTime { get; set; }
