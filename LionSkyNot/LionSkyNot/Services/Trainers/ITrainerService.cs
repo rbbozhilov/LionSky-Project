@@ -25,6 +25,8 @@ namespace LionSkyNot.Services.Trainers
 
         bool IsTrainer(string userId);
 
+        bool IsCandidate(string userId);
+
         int GetTrainerId(string userId);
 
         bool Delete(int id);
@@ -34,7 +36,6 @@ namespace LionSkyNot.Services.Trainers
         Trainer GetCandidateTrainerById(int id);
 
         IEnumerable<TrainerFormModelForAdmin> GetAllTrainersForAdmin();
-
 
         IEnumerable<TrainerCandidateViewModel> GetAllTrainerCandidates();
 
@@ -47,6 +48,13 @@ namespace LionSkyNot.Services.Trainers
         IEnumerable<TrainerUserIdViewModel> GetAllTrainersUserId(bool isCandidate);
 
         IEnumerable<TrainerListViewModel> SearchTrainerByName(string searchedName);
+
+        IEnumerable<TrainerCandidateViewModel> SortedByYearOfExperience();
+
+        IEnumerable<TrainerCandidateViewModel> SortedByAge();
+
+
+        
 
 
     }

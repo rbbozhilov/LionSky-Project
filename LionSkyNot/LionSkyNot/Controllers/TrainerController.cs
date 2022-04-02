@@ -92,9 +92,13 @@ namespace LionSkyNot.Controllers
                                        true);
 
 
-            return RedirectToAction("Index");
+            return RedirectToAction("CandidatureSuccess");
         }
 
+        public IActionResult CandidatureSuccess()
+        {
+            return View();
+        }
 
         [Authorize]
         public IActionResult TrainerClasses(IEnumerable<ClassTrainerViewModel> classModel)

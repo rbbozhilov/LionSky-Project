@@ -78,11 +78,15 @@ namespace LionSkyNot.Services.Trainers
                      .Any(t => t.UserId == userId && t.IsCandidate == false);
 
 
+        public bool IsCandidate(string userId)
+        => this.data.Trainers
+                    .Any(t => t.UserId == userId && t.IsCandidate == true);
+
+
         public Trainer GetCandidateTrainerById(int id)
          => this.data.Trainers
                      .Where(t => t.Id == id && t.IsCandidate == true)
                      .FirstOrDefault();
-
 
 
         public IEnumerable<CategorieViewModel> GetAllCategories()
@@ -193,6 +197,38 @@ namespace LionSkyNot.Services.Trainers
 
             return trainers;
         }
+
+        public IEnumerable<TrainerCandidateViewModel> SortedByYearOfExperience()
+        => this.data.Trainers
+                    .Where(t => t.IsCandidate == true)
+                    .OrderByDescending(t => t.YearOfExperience)
+                    .Select(t => new TrainerCandidateViewModel()
+                    {
+                        Id = t.Id,
+                        FullName = t.FullName,
+                        ImageUrl = t.ImageUrl,
+                        YearOfExperience = t.YearOfExperience,
+                        BirthDate = t.BirthDate,
+                        Category = t.Categorie.Name
+                    })
+                    .ToList();
+
+
+        public IEnumerable<TrainerCandidateViewModel> SortedByAge()
+        => this.data.Trainers
+                    .Where(t => t.IsCandidate == true)
+                    .OrderByDescending(t => t.BirthDate.Year)
+                    .Select(t => new TrainerCandidateViewModel()
+                    {
+                        Id = t.Id,
+                        FullName = t.FullName,
+                        ImageUrl = t.ImageUrl,
+                        YearOfExperience = t.YearOfExperience,
+                        BirthDate = t.BirthDate,
+                        Category = t.Categorie.Name
+                    })
+                    .ToList();
+
 
         public TrainerViewModel GetTrainerById(int id)
         {
