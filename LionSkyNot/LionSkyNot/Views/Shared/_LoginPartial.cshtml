@@ -1,9 +1,12 @@
-﻿@using Microsoft.AspNetCore.Identity
+﻿@using LionSkyNot.Services.Classes
+
+@using Microsoft.AspNetCore.Identity
 @using LionSkyNot.Infrastructure
 
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
 @inject ITrainerService TrainerService
+@inject IClassService ClassService
 
 <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))
@@ -12,6 +15,14 @@
         var userId = ClaimsPrincipalExtensions.GetId(this.User);
         var userIsTrainer = TrainerService.IsTrainer(userId);
         var userIsCandidate = TrainerService.IsCandidate(userId);
+        var userHaveClasses = ClassService.IsUserHaveClasses(userId);
+
+        if (userHaveClasses)
+        {
+            <li class="nav-item">
+                <a class="nav-link text-white" asp-area="" asp-controller="Class" asp-action="ViewUserClasses">My Classes</a>
+            </li>
+        }
 
         @if (!User.IsInRole("Administrator") && !User.IsInRole("Moderator"))
         {
@@ -51,4 +62,6 @@
             <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Login">Login</a>
         </li>
     }
+
+
 </ul>

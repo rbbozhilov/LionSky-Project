@@ -80,13 +80,25 @@ namespace LionSkyNot.Migrations
 
             modelBuilder.Entity("LionSkyNot.Data.Models.Classes.ClassUser", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("ClassId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("UserId", "ClassId");
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClassId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("ClassUsers");
                 });
@@ -590,7 +602,7 @@ namespace LionSkyNot.Migrations
                 {
                     b.HasOne("LionSkyNot.Data.Models.Classes.Class", "Class")
                         .WithMany("Users")
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("ClassId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 

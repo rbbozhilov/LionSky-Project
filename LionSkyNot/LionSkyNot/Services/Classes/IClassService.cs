@@ -27,7 +27,13 @@ namespace LionSkyNot.Services.Classes
 
         bool Delete(string id);
 
-        
+        bool RemovingClassFromUser(string userId, string classId);
+
+        bool AddUserToClass(string userId, string classId);
+
+        bool CheckFreePlace(string classId);
+
+        bool IsUserHaveClasses(string userId);
 
         AllClassViewModel GetCountOfAllClasses();
 
@@ -36,6 +42,8 @@ namespace LionSkyNot.Services.Classes
         ClassDetailsViewModel GetClassForDetails(string id);
 
         IEnumerable<ClassFormModelForAdmin> GetAllClassesForAdmin();
+
+        IEnumerable<ClassViewModel> GetUserClasses(string userId);
 
         IEnumerable<ClassViewModel> GetAllClasses();
 
@@ -54,7 +62,6 @@ namespace LionSkyNot.Services.Classes
         IEnumerable<TrainerClassViewModel> GetAllTrainers();
 
         IEnumerable<ClassTrainerViewModel> GetAllTrainerClasses(int trainerId);
-
 
     }
 }

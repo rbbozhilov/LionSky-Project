@@ -2,6 +2,7 @@
 using LionSkyNot.Data.Models.Classes;
 using LionSkyNot.Models.Class;
 using LionSkyNot.Views.ViewModels.Classes;
+using Microsoft.EntityFrameworkCore;
 
 namespace LionSkyNot.Services.Classes
 {
@@ -14,6 +15,63 @@ namespace LionSkyNot.Services.Classes
         {
             this.data = data;
         }
+
+
+        public bool AddUserToClass(string userId, string classId)
+        {
+
+
+            var currentClassUser = this.data.ClassUsers
+                                            .Where(c => c.UserId == userId && c.ClassId == classId)
+                                            .FirstOrDefault();
+
+            if (currentClassUser != null)
+            {
+                return false;
+            }
+
+
+
+            var newClassUser = new ClassUser()
+            {
+                UserId = userId,
+                ClassId = classId
+            };
+
+            var @class = this.data.Classes
+                                  .Where(c => c.Id == classId)
+                                  .FirstOrDefault();
+
+            @class.PractitionerCount++;
+
+
+            this.data.ClassUsers.Add(newClassUser);
+
+            this.data.SaveChanges();
+
+            return true;
+
+        }
+
+        public bool CheckFreePlace(string classId)
+        {
+            var currentCount = this.data.Classes
+                                        .Where(c => c.Id == classId)
+                                        .Select(c => new
+                                        {
+                                            c.MaxPractitionerCount,
+                                            c.PractitionerCount
+                                        })
+                                        .FirstOrDefault();
+
+            return currentCount.PractitionerCount == currentCount.MaxPractitionerCount;
+
+        }
+
+        public bool IsUserHaveClasses(string userId)
+        => this.data.ClassUsers
+                    .Any(c => c.UserId == userId && c.Class.IsDeleted == false);
+
 
 
         public void Create(
@@ -92,6 +150,41 @@ namespace LionSkyNot.Services.Classes
 
             return true;
         }
+
+        public bool RemovingClassFromUser(string userId, string classId)
+        {
+
+            var currentClass = this.data.ClassUsers
+                                        .Where(c => c.UserId == userId && c.ClassId == classId)
+                                        .FirstOrDefault();
+
+            if(currentClass == null)
+            {
+                return false;
+            }
+
+            this.data.ClassUsers.Remove(currentClass);
+
+            this.data.SaveChanges();
+
+            return true;
+        }
+
+        public IEnumerable<ClassViewModel> GetUserClasses(string userId)
+        => this.data.ClassUsers
+                    .Include(c => c.Class)
+                    .Where(c => c.UserId == userId && c.Class.IsDeleted == false)
+                    .Select(c => new ClassViewModel()
+                    {
+                        Id = c.ClassId,
+                        ClassName = c.Class.ClassName,
+                        ImageUrl = c.Class.ImageUrl,
+                        StartDateTime = c.Class.StartDateTime,
+                        EndDateTime = c.Class.EndDateTime,
+                        Trainer = c.Class.Trainer.FullName
+                    })
+                    .ToList();
+
 
 
         public IEnumerable<TrainerClassViewModel> GetAllTrainers()

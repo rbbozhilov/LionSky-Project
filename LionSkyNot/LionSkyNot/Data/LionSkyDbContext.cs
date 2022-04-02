@@ -17,8 +17,6 @@ namespace LionSkyNot.Data
         {
         }
 
-
-
         public virtual DbSet<Categorie> Categories { get; set; }
 
         public virtual DbSet<Class> Classes { get; set; }
@@ -54,8 +52,6 @@ namespace LionSkyNot.Data
                 .HasForeignKey<WishList>(w => w.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.Entity<ClassUser>()
-                .HasKey(cu => new { cu.UserId, cu.ClassId });
 
             builder.Entity<ClassUser>()
                 .HasOne(u => u.User)
@@ -66,7 +62,7 @@ namespace LionSkyNot.Data
             builder.Entity<ClassUser>()
                 .HasOne(c => c.Class)
                 .WithMany(u => u.Users)
-                .HasForeignKey(c => c.UserId)
+                .HasForeignKey(c => c.ClassId)
                 .OnDelete(DeleteBehavior.Restrict);
 
 

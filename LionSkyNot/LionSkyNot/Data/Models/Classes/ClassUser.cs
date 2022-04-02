@@ -1,7 +1,11 @@
-﻿namespace LionSkyNot.Data.Models.Classes
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace LionSkyNot.Data.Models.Classes
 {
     public class ClassUser
     {
+        [Key]
+        public int Id { get; set; }
 
         public string UserId { get; set; }
 

@@ -392,12 +392,14 @@ namespace LionSkyNot.Migrations
                 name: "ClassUsers",
                 columns: table => new
                 {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ClassId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ClassUsers", x => new { x.UserId, x.ClassId });
+                    table.PrimaryKey("PK_ClassUsers", x => x.Id);
                     table.ForeignKey(
                         name: "FK_ClassUsers_AspNetUsers_UserId",
                         column: x => x.UserId,
@@ -405,8 +407,8 @@ namespace LionSkyNot.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_ClassUsers_Classes_UserId",
-                        column: x => x.UserId,
+                        name: "FK_ClassUsers_Classes_ClassId",
+                        column: x => x.ClassId,
                         principalTable: "Classes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -455,6 +457,16 @@ namespace LionSkyNot.Migrations
                 name: "IX_Classes_TrainerId",
                 table: "Classes",
                 column: "TrainerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ClassUsers_ClassId",
+                table: "ClassUsers",
+                column: "ClassId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ClassUsers_UserId",
+                table: "ClassUsers",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Exercises_TypeExerciseId",

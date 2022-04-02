@@ -40,6 +40,5 @@ namespace LionSkyNot.Data.Models.Classes
 
         public ICollection<ClassUser> Users { get; set; }
 
-
     }
 }
