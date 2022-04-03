@@ -59,7 +59,7 @@ namespace LionSkyNot.Services.Products
             }
 
 
-            if(percentage > 0)
+            if (percentage > 0)
             {
                 currentProduct.IsOnPromotion = true;
             }
@@ -68,7 +68,7 @@ namespace LionSkyNot.Services.Products
                 currentProduct.IsOnPromotion = false;
             }
 
-            
+
 
             currentProduct.ImageUrl = imageUrl;
             currentProduct.Name = name;
@@ -194,8 +194,7 @@ namespace LionSkyNot.Services.Products
         {
 
             products = products.Distinct()
-                               .OrderByDescending(p => p.CountOfBuys)
-                               .Take(2);
+                               .OrderByDescending(p => p.CountOfBuys);
 
             return products;
         }
@@ -222,6 +221,7 @@ namespace LionSkyNot.Services.Products
                             .Select(p => new ProductListViewModel()
                             {
                                 Id = p.Id,
+                                Name = p.Name,
                                 Type = p.Type.TypeName,
                                 Brand = p.Brand.BrandName,
                                 Price = p.Price,
@@ -292,6 +292,20 @@ namespace LionSkyNot.Services.Products
 
             return product;
         }
+
+        public ProductDetailViewModel GetProductForDetails(int id)
+        => this.data.Products
+                    .Where(p => p.Id == id && p.IsDeleted == false)
+                    .Select(p => new ProductDetailViewModel()
+                    {
+                        Brand = p.Brand.BrandName,
+                        Description = p.Description,
+                        ImageUrl = p.ImageUrl,
+                        Name = p.Name,
+                        Price = p.Price,
+                        Type = p.Type.TypeName
+                    })
+                    .FirstOrDefault();
 
     }
 }

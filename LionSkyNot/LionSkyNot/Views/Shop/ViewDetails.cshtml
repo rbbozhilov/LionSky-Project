@@ -1,0 +1,32 @@
+﻿@model ProductDetailViewModel
+
+
+<link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
+
+
+<div class="row">
+
+    <div class="col-sm-3">
+        <div class="well">
+            <img src="@Model.ImageUrl" class="img-circle" height="100" width="100" alt="Avatar">
+        </div>
+    </div>
+    <div class="col-sm-9">
+        <div class="well">
+            <p>Name: @Model.Name</p>
+            <br />
+            <p>Type: @Model.Type</p>
+            <br />
+            <p style="color:green">Brand: @Model.Brand</p>
+            <br />
+            <p style="color:green">Price: @Model.Price</p>
+            <br />
+            <p style="color:red">Description: @Model.Description</p>
+        </div>
+    </div>
+</div>
+
+
+
+
+

@@ -3,56 +3,74 @@
 <link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
 
 
-
-<div class="container">
+<div class="container pb-5 mt-n2 mt-md-n3">
     <div class="row">
-        @foreach (var product in Model)
-        {
-            <div class="col-sm-4">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="@product.ImageUrl" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">@product.Name</h5>
+        <div class="col-xl-9 col-md-8">
+
+            @foreach (var product in Model)
+            {
+
+                <!-- Item-->
+                <div class="d-sm-flex justify-content-between my-4">
+                    <div class="media d-block d-sm-flex text-center text-sm-left">
+                        <img src="@product.ImageUrl" width="240" height="240">
+                        <div class="media-body pt-3">
+                            <h3 class="product-card-title font-weight-semibold border-0 pb-0"> <a asp-controller="Shop" asp-action="ViewDetails" asp-route-id="@product.Id">@product.Name</a></h3>
+                            <div class="font-size-sm">Brand: @product.Brand</div>
+                            <div class="font-size-sm">Type: @product.Type</div>
+
+                            @if (@product.InStock == 0)
+                            {
+                                <div class="font-size-sm">Soon in stock</div>
+                            }
+                            else
+                            {
+                                <div class="font-size-sm">In Stock: @product.InStock</div>
+                            }
+
+                            @if (product.IsOnPromotion)
+                            {
+                                <div class="font-size-lg text-danger pt-2"><strike>Old Price: @String.Format(product.Price % 1 == 0 ? "{0:0}" : "{0:0.00}", product.Price) £ </strike></div>
+                                <div class="font-size-lg text-warning pt-2"> New Price: @String.Format(product.PriceOnPromotion % 1 == 0 ? "{0:0}" : "{0:0.00}", product.PriceOnPromotion) £</div>
+                            }
+                            else
+                            {
+                                <div class="font-size-lg text-danger pt-2">Price: @String.Format(product.Price % 1 == 0 ? "{0:0}" : "{0:0.00}", product.Price) £</div>
+                            }
+
+
+                        </div>
                     </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Brand: @product.Brand</li>
-                        <li class="list-group-item">Type: @product.Type</li>
-                        @if (product.IsOnPromotion)
+                    <div class="pt-2 pt-sm-0 pl-sm-3 mx-auto mx-sm-0 text-center text-sm-left" style="max-width: 10rem;">
+
+                        <br />
+                        <br />
+                        <a asp-controller="Shop" asp-action="ViewDetails" asp-route-id="@product.Id" class="btn btn-warning">View Details</a>
+
+
+                        <br />
+                        <br />
+                        @if (@product.InStock <= 0)
                         {
-                            <li class="list-group-item"><strike>Old Price: @String.Format(product.Price % 1 == 0 ? "{0:0}" : "{0:0.00}", product.Price) £ </strike></li>
-                            <li class="list-group-item"> New Price: @String.Format(product.PriceOnPromotion % 1 == 0 ? "{0:0}" : "{0:0.00}", product.PriceOnPromotion) £</li>
+
+                            <a href="#" class="btn btn-primary" disabled>Buy</a>
+
+
                         }
                         else
                         {
-                            <li class="list-group-item">Price: @String.Format(product.Price % 1 == 0 ? "{0:0}" : "{0:0.00}", product.Price) £</li>
-                        }
-                        @if (@product.InStock == 0)
-                        {
-                            <li class="list-group-item">Soon in stock</li>
-                        }
-                        <li class="list-group-item">In Stock: @product.InStock</li>
-                    </ul>
 
-                    <div class="card-body">
-                        <a asp-controller="Shop" asp-action="ShowDetails" asp-route-id="@product.Id" class="btn btn-warning">View Details</a>
+                            <a asp-controller="WishList" asp-action="AddToWishList" asp-route-id="@product.Id" class="btn btn-danger">Buy</a>
+
+                        }
+
                     </div>
-
-                    @if (@product.InStock <= 0)
-                    {
-                        <div class="card-body">
-                            <a href="#" class="btn btn-primary" disabled>Add to wishlist</a>
-                        </div>
-
-                    }
-                    else
-                    {
-                        <div class="card-body">
-                            <a asp-controller="WishList" asp-action="AddToWishList" asp-route-id="@product.Id" class="btn btn-danger">Add to wishlist</a>
-                        </div>
-                    }
-
                 </div>
-            </div>
-        }
+
+                <br />
+            }
+
+        </div>
     </div>
+</div>
 </div>

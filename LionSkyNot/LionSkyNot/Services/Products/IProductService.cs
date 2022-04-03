@@ -19,6 +19,8 @@ namespace LionSkyNot.Services.Products
 
         Product TakeProduct(int id);
 
+        ProductDetailViewModel GetProductForDetails(int id);
+
         IEnumerable<ProductTypeViewModel> GetAllTypesProduct();
 
         IEnumerable<ProductBrandViewModel> GetAllBrandProduct();

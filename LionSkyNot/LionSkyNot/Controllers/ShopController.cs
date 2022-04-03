@@ -61,6 +61,12 @@ namespace LionSkyNot.Controllers
             return View(allProductViewModel);
         }
 
+        public IActionResult ViewDetails(int id)
+        {
+
+            return View(this.productService.GetProductForDetails(id));
+        }
+
   
         public IActionResult AllProducts()
         {
