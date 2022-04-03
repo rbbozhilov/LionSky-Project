@@ -1,0 +1,35 @@
+﻿ @model AllTrainersViewModel
+
+<link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-image">
+                <thead>
+                    <tr>
+                        <th scope="col">Image</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var currentTrainer in Model.Trainers)
+                    {
+                        <tr>
+                            <td class="w-25">
+                                <img src="@currentTrainer.ImageUrl" class="img-fluid img-thumbnail" alt="Sheep">
+                            </td>
+                            <td>@currentTrainer.FullName</td>
+                            <td>@currentTrainer.Category</td>
+                            <td>@currentTrainer.Description</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
