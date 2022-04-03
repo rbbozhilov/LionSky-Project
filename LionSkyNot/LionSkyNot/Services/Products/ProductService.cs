@@ -210,7 +210,10 @@ namespace LionSkyNot.Services.Products
                 Brand = p.Brand.BrandName,
                 Price = p.Price,
                 Description = p.Description,
-                ImageUrl = p.ImageUrl
+                ImageUrl = p.ImageUrl,
+                InStock = p.CountInStock,
+                PriceOnPromotion = p.PriceOnPromotion,
+                IsOnPromotion = p.IsOnPromotion
             }).ToList();
         }
 
