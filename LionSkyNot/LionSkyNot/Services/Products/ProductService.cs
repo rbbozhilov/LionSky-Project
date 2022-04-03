@@ -134,6 +134,7 @@ namespace LionSkyNot.Services.Products
                                     .Select(p => new ProductListViewModel()
                                     {
                                         Id = p.Id,
+                                        Name = p.Name,
                                         Type = p.Type.TypeName,
                                         Brand = p.Brand.BrandName,
                                         Price = p.Price,
@@ -189,12 +190,23 @@ namespace LionSkyNot.Services.Products
             return products;
         }
 
+        public IQueryable<Product> SortedByMostBuys(IQueryable<Product> products)
+        {
+
+            products = products.Distinct()
+                               .OrderByDescending(p => p.CountOfBuys)
+                               .Take(2);
+
+            return products;
+        }
+
 
         public IEnumerable<ProductListViewModel> GetFinalProductsSelected(IQueryable<Product> products)
         {
             return products.Select(p => new ProductListViewModel()
             {
                 Id = p.Id,
+                Name = p.Name,
                 Type = p.Type.TypeName,
                 Brand = p.Brand.BrandName,
                 Price = p.Price,

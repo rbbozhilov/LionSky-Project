@@ -39,6 +39,8 @@ namespace LionSkyNot.Services.Products
 
         IQueryable<Product> SortedByName(IQueryable<Product> products);
 
+        IQueryable<Product> SortedByMostBuys(IQueryable<Product> products);
+
         IEnumerable<ProductListViewModel> GetFinalProductsSelected(IQueryable<Product> products);
 
     }

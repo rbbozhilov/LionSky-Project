@@ -13,7 +13,6 @@
                     <img class="card-img-top" src="@product.ImageUrl" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title">@product.Name</h5>
-                        <p class="card-text">@product.Description</p>
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">Brand: @product.Brand</li>
@@ -33,6 +32,11 @@
                         }
                         <li class="list-group-item">In Stock: @product.InStock</li>
                     </ul>
+
+                    <div class="card-body">
+                        <a asp-controller="Shop" asp-action="ShowDetails" asp-route-id="@product.Id" class="btn btn-warning">View Details</a>
+                    </div>
+
                     @if (@product.InStock <= 0)
                     {
                         <div class="card-body">

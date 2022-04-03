@@ -42,9 +42,7 @@ namespace LionSkyNot.Controllers
                     SortedProductViewModel.SortedByPrice => products = this.productService.SortedByPrice(products),
                     SortedProductViewModel.SortedByPriceDescending => products = this.productService.SortedByPriceDescending(products),
                     SortedProductViewModel.SortedByName => products = this.productService.SortedByName(products),
-
-                    //TODO SORTED BY MOST BUYS
-
+                    SortedProductViewModel.SortedByMostBuys => products = this.productService.SortedByMostBuys(products),
                     _ => products = this.productService.SortedByName(products)
                 };
 
