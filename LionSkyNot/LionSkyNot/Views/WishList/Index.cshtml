@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
 
 
-@if (Model != null)
+@if (Model.Products.Count() != 0)
 {
     <div class="row">
 
@@ -30,9 +30,9 @@
                             }
                             else
                             {
-                            <td>@String.Format(product.Price % 1 == 0 ? "{0:0}" : "{0:0.00}", product.Price) £</td>
+                                <td>@String.Format(product.Price % 1 == 0 ? "{0:0}" : "{0:0.00}", product.Price) £</td>
                             }
-             
+
                             <td><a asp-controller="WishList" asp-action="RemoveProduct" asp-route-id="@product.Id" class="btn btn-danger">Remove Product</a></td>
                         </tr>
                     }
@@ -60,6 +60,13 @@
 }
 else
 {
-             //TODO DON'T HAVE ANY PRODUCTS YET
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Don't have in the moment any products addded</h1>
+            <p>
+                Visit our shop and buy something.
+            </p>
+        </div>
+    </div>
 }
 
