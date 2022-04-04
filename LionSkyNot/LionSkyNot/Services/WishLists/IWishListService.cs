@@ -7,7 +7,7 @@ namespace LionSkyNot.Services.WishLists
     public interface IWishListService
     {
 
-        void Add(Product product, string userId);
+        bool Add(Product product, string userId);
 
         bool RemoveProduct(int productId, string userId);
 

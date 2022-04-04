@@ -1,10 +1,13 @@
 ﻿using LionSkyNot.Models.Calculator;
 using LionSkyNot.Views.ViewModels.Calculator;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
 namespace LionSkyNot.Controllers
 {
+
+    [Authorize]
     public class CalculatorController : BaseController
     {
 

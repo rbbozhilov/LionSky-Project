@@ -48,10 +48,12 @@ namespace LionSkyNot.Controllers
 
             var currentProduct = this.productService.TakeProduct(id);
 
-            this.wishListService.Add(currentProduct, user);
+            if(!this.wishListService.Add(currentProduct, user))
+            {
+                return BadRequest();
+            }
 
             return View("SuccessAddToWishList");
-
         }
 
         public IActionResult RemoveProduct(int id)

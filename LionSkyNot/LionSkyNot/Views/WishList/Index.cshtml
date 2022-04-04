@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
 
 
-@if (Model.Products.Count() != 0)
+@if (Model != null)
 {
     <div class="row">
 
@@ -58,7 +58,7 @@
         }
     </div>
 }
-else
+@if(Model.Products.Count() == 0)
 {
     <div class="container">
         <div class="jumbotron">

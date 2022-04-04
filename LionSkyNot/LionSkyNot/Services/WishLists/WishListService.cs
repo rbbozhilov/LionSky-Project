@@ -21,7 +21,7 @@ namespace LionSkyNot.Services.WishLists
         }
 
 
-        public void Add(Product product, string userId)
+        public bool Add(Product product, string userId)
         {
 
             var wishListProducts = new WishListsProducts();
@@ -30,6 +30,10 @@ namespace LionSkyNot.Services.WishLists
                                            .Where(w => w.UserId == userId)
                                            .FirstOrDefault();
 
+            if(product == null)
+            {
+                return false;
+            }
 
             if (currentWishList == null)
             {
@@ -60,6 +64,7 @@ namespace LionSkyNot.Services.WishLists
 
             this.data.SaveChanges();
 
+            return true;
         }
 
         public Tuple<bool, WishListFormModel> GetProductsOfUser(string userId)
