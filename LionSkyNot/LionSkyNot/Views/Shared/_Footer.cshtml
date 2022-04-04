@@ -1,26 +1,82 @@
-﻿@*<!-- FOOTER -->
+﻿<footer class="bg-dark text-center text-white mt-auto">
+    <!-- Grid container -->
+    <div class="container p-4">
+        <!-- Section: Social media -->
+        <!-- Section: Text -->
+        <!-- Section: Links -->
+        <section class="">
+            <!--Grid row-->
+            <div class="row">
+                <!--Grid column-->
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-uppercase">Most atractive fitness website</h5>
+                    <p style="color:white">This site is created only for education . All products , recipes , trainers has been taken only for education.</p>
+                </div>
+                <!--Grid column-->
+                <!--Grid column-->
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-uppercase">Fitness things</h5>
 
-<footer class="w-100 py-4 flex-shrink-0">
-    <div class="row gy-4 gx-5">
-        <div class="col-lg-4 col-md-6">
-            <p class="small text-muted">Thank you for joining our website ! For us it was pleasure.</p>
+                    <ul class="list-unstyled mb-0">
+                        <li>
+                            <a asp-area="" asp-controller="Class" asp-action="Index" class="text-white">Classes</a>
+                        </li>
+                        <li>
+                            <a asp-area="" asp-controller="Trainer" asp-action="Index" class="text-white">Trainers</a>
+                        </li>
+                        <li>
+                            <a asp-area="" asp-controller="Exercise" asp-action="Index" class="text-white">Exercises</a>
+                        </li>
+                        <li>
+                            <a asp-area="" asp-controller="Calculator" asp-action="Index" class="text-white">Calculator</a>
+                        </li>
+                    </ul>
+                </div>
+                <!--Grid column-->
+                <!--Grid column-->
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-uppercase">Magazine / Health</h5>
 
-        </div>
-        <div class="col-lg-2 col-md-6">
-            <h5 class="text-white mb-3">Quick links</h5>
-            <ul class="list-unstyled text-muted">
-                <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                <li><a asp-area="" asp-controller="Home" asp-action="Class">Classes</a></li>
-                <li><a asp-area="" asp-controller="Home" asp-action="Exercise">Exercises</a></li>
-                <li><a asp-area="" asp-controller="Home" asp-action="Shop">Shop</a></li>
-            </ul>
-        </div>
-        <div class="col-lg-2 col-md-6">
-            <h5 class="text-white mb-3">Quick links</h5>
-            <ul class="list-unstyled text-muted">
-                <li><a asp-area="" asp-controller="Home" asp-action="Recipe">Recipes</a></li>
-                <li><a asp-area="" asp-controller="Home" asp-action="Calculator">Calculator</a></li>
-                <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact Us</a></li>
-            </ul>
-        </div>
-</footer>*@
+                    <ul class="list-unstyled mb-0">
+                        <li>
+                            <a asp-area="" asp-controller="Shop" asp-action="Index" class="text-white">Shop</a>
+                        </li>
+                        <li>
+                            <a asp-area="" asp-controller="Recipe" asp-action="Index" class="text-white">Recipes</a>
+                        </li>
+                        <li>
+                            <a asp-area="" asp-controller="Contact" asp-action="Index" class="text-white">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+
+
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-uppercase">Free Login / Register</h5>
+
+                    <ul class="list-unstyled mb-0">
+                        <li>
+                            <a asp-area="Identity" asp-page="/Account/Login"  class="btn btn-primary">LogIn</a>
+                        </li>
+                        <li>
+                            <br />
+                        </li>
+                        <li>
+                            <a asp-area="Identity" asp-page="/Account/Register"  class="btn btn-danger">Register</a>
+                        </li>
+
+                    </ul>
+                </div>
+                <!--Grid column-->
+            </div>
+
+            <!--Grid column-->
+            <!--Grid column-->
+            <!--Grid column-->
+    </div>
+    <!--Grid row-->
+    </section>
+    <!-- Section: Links -->
+    </div>
+
+</footer>
