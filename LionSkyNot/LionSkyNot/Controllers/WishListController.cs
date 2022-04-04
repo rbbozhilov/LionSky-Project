@@ -50,7 +50,7 @@ namespace LionSkyNot.Controllers
 
             this.wishListService.Add(currentProduct, user);
 
-            return View("Index");
+            return View("SuccessAddToWishList");
 
         }
 
@@ -63,7 +63,7 @@ namespace LionSkyNot.Controllers
                 return BadRequest();
             };
 
-            return View("Index");
+            return View("SuccessRemoveProduct");
         }
 
 

@@ -7,67 +7,80 @@
     <div class="row">
         <div class="col-xl-9 col-md-8">
 
+            @if (!Model.Any())
+            {
+                <div class="container">
+                    <div class="jumbotron">
+                        <h1>Don't have in the moment products</h1>
+                        <p>
+                            Please try soon , we will add it in stock!
+                        </p>
+                    </div>
+                </div>
+            }
+
+
             @foreach (var product in Model)
             {
 
-                    <!-- Item-->
-                    <div class="d-sm-flex justify-content-between my-4">
-                        <div class="media d-block d-sm-flex text-center text-sm-left">
-                            <img src="@product.ImageUrl" width="240" height="240">
-                            <div class="media-body pt-3">
-                                <h3 class="product-card-title font-weight-semibold border-0 pb-0"> <a asp-controller="Shop" asp-action="ViewDetails" asp-route-id="@product.Id">@product.Name</a></h3>
-                                <div class="font-size-sm">Brand: @product.Brand</div>
-                                <div class="font-size-sm">Type: @product.Type</div>
+                <!-- Item-->
+                <div class="d-sm-flex justify-content-between my-4">
+                    <div class="media d-block d-sm-flex text-center text-sm-left">
+                        <img src="@product.ImageUrl" width="240" height="240">
+                        <div class="media-body pt-3">
+                            <h3 class="product-card-title font-weight-semibold border-0 pb-0"> <a asp-controller="Shop" asp-action="ViewDetails" asp-route-id="@product.Id">@product.Name</a></h3>
+                            <div class="font-size-sm">Brand: @product.Brand</div>
+                            <div class="font-size-sm">Type: @product.Type</div>
 
                             @if (@product.InStock == 0)
                             {
-                                        <div class="font-size-sm">Soon in stock</div>
+                                <div class="font-size-sm">Soon in stock</div>
                             }
                             else
                             {
-                                        <div class="font-size-sm">In Stock: @product.InStock</div>
+                                <div class="font-size-sm">In Stock: @product.InStock</div>
                             }
 
                             @if (product.IsOnPromotion)
                             {
-                                        <div class="font-size-lg text-danger pt-2"><strike>Old Price: @String.Format(product.Price % 1 == 0 ? "{0:0}" : "{0:0.00}", product.Price) £ </strike></div>
-                                        <div class="font-size-lg text-warning pt-2"> New Price: @String.Format(product.PriceOnPromotion % 1 == 0 ? "{0:0}" : "{0:0.00}", product.PriceOnPromotion) £</div>
+                                <div class="font-size-lg text-danger pt-2"><strike>Old Price: @String.Format(product.Price % 1 == 0 ? "{0:0}" : "{0:0.00}", product.Price) £ </strike></div>
+                                <div class="font-size-lg text-warning pt-2"> New Price: @String.Format(product.PriceOnPromotion % 1 == 0 ? "{0:0}" : "{0:0.00}", product.PriceOnPromotion) £</div>
                             }
                             else
                             {
-                                        <div class="font-size-lg text-danger pt-2">Price: @String.Format(product.Price % 1 == 0 ? "{0:0}" : "{0:0.00}", product.Price) £</div>
+                                <div class="font-size-lg text-danger pt-2">Price: @String.Format(product.Price % 1 == 0 ? "{0:0}" : "{0:0.00}", product.Price) £</div>
                             }
 
 
-                            </div>
                         </div>
-                        <div class="pt-2 pt-sm-0 pl-sm-3 mx-auto mx-sm-0 text-center text-sm-left" style="max-width: 10rem;">
+                    </div>
+                    <div class="pt-2 pt-sm-0 pl-sm-3 mx-auto mx-sm-0 text-center text-sm-left" style="max-width: 10rem;">
 
-                            <br />
-                            <br />
-                            <a asp-controller="Shop" asp-action="ViewDetails" asp-route-id="@product.Id" class="btn btn-warning">View Details</a>
+                        <br />
+                        <br />
+                        <a asp-controller="Shop" asp-action="ViewDetails" asp-route-id="@product.Id" class="btn btn-warning">View Details</a>
 
 
-                            <br />
-                            <br />
+                        <br />
+                        <br />
                         @if (@product.InStock <= 0)
                         {
 
-                                    <a href="#" class="btn btn-primary" disabled>Buy</a>
+                            <a href="#" class="btn btn-primary" disabled>Buy</a>
 
 
                         }
                         else
                         {
 
-                                    <a asp-controller="WishList" asp-action="AddToWishList" asp-route-id="@product.Id" class="btn btn-danger">Buy</a>
+                            <a asp-controller="WishList" asp-action="AddToWishList" asp-route-id="@product.Id" class="btn btn-danger">Buy</a>
 
                         }
 
-                        </div>
                     </div>
+                </div>
 
-                    <br />
+                <br />
             }
 
         </div>

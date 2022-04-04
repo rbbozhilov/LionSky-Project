@@ -7,6 +7,18 @@
     <div class="row">
         <div class="col-xl-9 col-md-8">
 
+            @if (!Model.Any())
+            {
+                <div class="container">
+                    <div class="jumbotron">
+                        <h1>Don't have in the moment products</h1>
+                        <p>
+                            Please try soon!
+                        </p>
+                    </div>
+                </div>
+            }
+
             @foreach (var product in Model)
             {
 

@@ -327,7 +327,6 @@ namespace LionSkyNot.Controllers
                                       recipeModel.Carbohydrates);
 
 
-
             return RedirectToAction("Index");
         }
 
