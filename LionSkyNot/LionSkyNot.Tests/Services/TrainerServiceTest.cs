@@ -16,6 +16,7 @@ namespace LionSkyNot.Tests.Services
     public class TrainerServiceTest
     {
 
+
         [Fact]
         public void ShouldNotDeleteTrainerAndReturnFalse()
         {
@@ -339,7 +340,7 @@ namespace LionSkyNot.Tests.Services
 
             //Assert
 
-            Assert.Equal(currentCandidate,actualCandidate);
+            Assert.Equal(currentCandidate, actualCandidate);
 
         }
 
@@ -395,23 +396,416 @@ namespace LionSkyNot.Tests.Services
 
             });
 
-
-
-
-
             //Act
 
             data.SaveChanges();
             var categories = trainerService.GetAllCategories();
 
-
-
             //Assert
+
             Assert.Equal(1, categories.Count());
             Assert.Equal("universal", categories.First().Name);
-           
+
 
         }
 
+
+        [Fact]
+        public void GetTopTrainers_ShouldBeCorrect()
+        {
+
+            //Arrange
+
+            using var data = DatabaseMock.Instance;
+            var trainerService = new TrainerService(data);
+
+            var categorieYoga = new Categorie() { Id = 1, Name = "Yoga" };
+
+
+            var trainer1 = new Trainer()
+            {
+                Id = 1,
+                FullName = "test",
+                UserId = "testuser",
+                Description = "description",
+                ImageUrl = "imageurl",
+                YearOfExperience = 5,
+                IsCandidate = false,
+                Categorie = categorieYoga
+            };
+
+            var trainer2 = new Trainer()
+            {
+                Id = 2,
+                FullName = "test1",
+                UserId = "testuser1",
+                Description = "description1",
+                ImageUrl = "imageurl1",
+                YearOfExperience = 10,
+                IsCandidate = false,
+                Categorie = categorieYoga
+            };
+
+
+
+            data.Categories.Add(categorieYoga);
+
+            data.Trainers.AddRange(trainer1, trainer2);
+
+            //Act
+
+            data.SaveChanges();
+            var bestYogaTrainer = trainerService.TopTrainers();
+
+            //Assert
+
+            Assert.Equal(trainer2.FullName, bestYogaTrainer.First().FullName);
+            Assert.Equal(1, bestYogaTrainer.Count());
+
+        }
+
+
+        [Fact]
+        public void GetTrainerId_ShouldReturnCorrectId()
+        {
+
+            //Arrange
+
+            using var data = DatabaseMock.Instance;
+            var trainerService = new TrainerService(data);
+
+
+
+            var trainer1 = new Trainer()
+            {
+                Id = 1,
+                FullName = "test",
+                UserId = "testuser",
+                Description = "description",
+                ImageUrl = "imageurl",
+                YearOfExperience = 5,
+                IsCandidate = false,
+            };
+
+
+            data.Trainers.Add(trainer1);
+
+            //Act
+
+            data.SaveChanges();
+            int actualId = trainerService.GetTrainerId("testuser");
+
+            //Assert
+
+            Assert.Equal(1, actualId);
+
+        }
+
+
+        [Fact]
+        public void GetTrainerId_ShouldBeNull()
+        {
+
+            //Arrange
+
+            using var data = DatabaseMock.Instance;
+            var trainerService = new TrainerService(data);
+
+            //Assert
+
+            Assert.Equal(0, trainerService.GetTrainerId("userid"));
+
+        }
+
+
+        [Fact]
+        public void GetTrainerByCategory_ShouldReturnCorrectTrainer()
+        {
+
+            //Arrange
+
+            using var data = DatabaseMock.Instance;
+            var trainerService = new TrainerService(data);
+            var categorieYoga = new Categorie() { Id = 1, Name = "Yoga" };
+            var categorieBox = new Categorie() { Id = 2, Name = "Box" };
+
+            var trainer1 = new Trainer()
+            {
+                Id = 1,
+                FullName = "Yoga",
+                UserId = "testuser",
+                Description = "description",
+                ImageUrl = "imageurl",
+                YearOfExperience = 5,
+                IsCandidate = false,
+                Categorie = categorieYoga
+            };
+
+            var trainer2 = new Trainer()
+            {
+                Id = 2,
+                FullName = "Box",
+                UserId = "tes2tuser",
+                Description = "descrip3tion",
+                ImageUrl = "image3url",
+                YearOfExperience = 15,
+                IsCandidate = false,
+                Categorie = categorieBox
+            };
+
+
+            data.Trainers.AddRange(trainer1,trainer2);
+
+            //Act
+
+            data.SaveChanges();
+            var currentYogaTrainers = trainerService.GetAllTrainersByCategory("Yoga");
+            var currentBoxTrainers = trainerService.GetAllTrainersByCategory("Box");
+
+
+            //Assert
+
+            Assert.Equal("Yoga", currentYogaTrainers.First().FullName);
+            Assert.Equal("Box", currentBoxTrainers.First().FullName);
+
+        }
+
+
+        [Fact]
+        public void GetAllTrainersUserId_ShouldBeCorrect()
+        {
+
+            //Arrange
+
+            using var data = DatabaseMock.Instance;
+            var trainerService = new TrainerService(data);
+
+
+            var trainer1 = new Trainer()
+            {
+                Id = 1,
+                FullName = "Yoga",
+                UserId = "testuser",
+                Description = "description",
+                ImageUrl = "imageurl",
+                YearOfExperience = 5,
+                IsCandidate = false,
+            };
+
+            var trainer2 = new Trainer()
+            {
+                Id = 2,
+                FullName = "Box",
+                UserId = "tes2tuser",
+                Description = "descrip3tion",
+                ImageUrl = "image3url",
+                YearOfExperience = 15,
+                IsCandidate = true,
+            };
+
+
+            data.Trainers.AddRange(trainer1, trainer2);
+
+            //Act
+
+            data.SaveChanges();
+            var allTrainersUserId = trainerService.GetAllTrainersUserId(false);
+
+            //Assert
+
+            Assert.Equal("testuser", allTrainersUserId.First().UserId);
+            Assert.Equal(1, allTrainersUserId.Count());
+
+        }
+
+
+        [Fact]
+        public void GetAllCandidateTrainerssUserId_ShouldBeCorrect()
+        {
+
+            //Arrange
+
+            using var data = DatabaseMock.Instance;
+            var trainerService = new TrainerService(data);
+
+
+            var trainer1 = new Trainer()
+            {
+                Id = 1,
+                FullName = "Yoga",
+                UserId = "testuser",
+                Description = "description",
+                ImageUrl = "imageurl",
+                YearOfExperience = 5,
+                IsCandidate = false,
+            };
+
+            var trainer2 = new Trainer()
+            {
+                Id = 2,
+                FullName = "Box",
+                UserId = "tes2tuser",
+                Description = "descrip3tion",
+                ImageUrl = "image3url",
+                YearOfExperience = 15,
+                IsCandidate = true,
+            };
+
+
+            data.Trainers.AddRange(trainer1, trainer2);
+
+            //Act
+
+            data.SaveChanges();
+            var allTrainersUserId = trainerService.GetAllTrainersUserId(true);
+
+            //Assert
+
+            Assert.Equal("tes2tuser", allTrainersUserId.First().UserId);
+            Assert.Equal(1, allTrainersUserId.Count());
+
+        }
+
+
+        [Fact]
+        public void SearchTrainerByName_ShouldReturnCorrectOne()
+        {
+
+            //Arrange
+
+            using var data = DatabaseMock.Instance;
+            var trainerService = new TrainerService(data);
+
+
+            var trainer1 = new Trainer()
+            {
+                Id = 1,
+                FullName = "Yoga",
+                UserId = "testuser",
+                Description = "description",
+                ImageUrl = "imageurl",
+                YearOfExperience = 5,
+                IsCandidate = false,
+            };
+
+            var trainer2 = new Trainer()
+            {
+                Id = 2,
+                FullName = "Box",
+                UserId = "tes2tuser",
+                Description = "descrip3tion",
+                ImageUrl = "image3url",
+                YearOfExperience = 15,
+                IsCandidate = true,
+            };
+
+
+            data.Trainers.AddRange(trainer1, trainer2);
+
+            //Act
+
+            data.SaveChanges();
+            var trainers = trainerService.SearchTrainerByName("Yoga");
+
+            //Assert
+
+            Assert.Equal("Yoga", trainers.First().FullName);
+
+        }
+
+
+        [Fact]
+        public void GetTrainerById_ShouldBeCorrect()
+        {
+
+            //Arrange
+
+            using var data = DatabaseMock.Instance;
+            var trainerService = new TrainerService(data);
+
+
+            var trainer1 = new Trainer()
+            {
+                Id = 1,
+                FullName = "Yoga",
+                UserId = "testuser",
+                Description = "description",
+                ImageUrl = "imageurl",
+                YearOfExperience = 5,
+                IsCandidate = false,
+            };
+
+            var trainer2 = new Trainer()
+            {
+                Id = 2,
+                FullName = "Box",
+                UserId = "tes2tuser",
+                Description = "descrip3tion",
+                ImageUrl = "image3url",
+                YearOfExperience = 15,
+                IsCandidate = true,
+            };
+
+
+            data.Trainers.AddRange(trainer1, trainer2);
+
+            //Act
+
+            data.SaveChanges();
+            var actualTrainer = trainerService.GetTrainerById(1);
+
+            //Assert
+
+            Assert.Equal("Yoga", actualTrainer.FullName);
+
+        }
+
+
+        [Fact]
+        public void GetAllTrainersForAdmin_ShouldBeCorrect()
+        {
+
+            //Arrange
+
+            using var data = DatabaseMock.Instance;
+            var trainerService = new TrainerService(data);
+
+
+            var trainer1 = new Trainer()
+            {
+                Id = 1,
+                FullName = "Yoga",
+                UserId = "testuser",
+                Description = "description",
+                ImageUrl = "imageurl",
+                YearOfExperience = 5,
+                IsCandidate = false,
+            };
+
+            var trainer2 = new Trainer()
+            {
+                Id = 2,
+                FullName = "Box",
+                UserId = "tes2tuser",
+                Description = "descrip3tion",
+                ImageUrl = "image3url",
+                YearOfExperience = 15,
+                IsCandidate = true,
+            };
+
+
+            data.Trainers.AddRange(trainer1, trainer2);
+
+            //Act
+
+            data.SaveChanges();
+            var allTrainers = trainerService.GetAllTrainersForAdmin();
+
+            //Assert
+
+            Assert.Equal("Yoga", allTrainers.First().FullName);
+            Assert.Equal(1, allTrainers.Count());
+
+        }
     }
 }

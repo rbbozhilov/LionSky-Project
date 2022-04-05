@@ -49,13 +49,5 @@ namespace LionSkyNot.Services.Trainers
 
         IEnumerable<TrainerListViewModel> SearchTrainerByName(string searchedName);
 
-        IEnumerable<TrainerCandidateViewModel> SortedByYearOfExperience();
-
-        IEnumerable<TrainerCandidateViewModel> SortedByAge();
-
-
-        
-
-
     }
 }
