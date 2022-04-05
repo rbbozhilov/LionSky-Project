@@ -99,21 +99,6 @@ namespace LionSkyNot.Tests.Services
             using var data = DatabaseMock.Instance;
             var trainerService = new TrainerService(data);
 
-            var expectedTrainer = new Trainer()
-            {
-                UserId = "test",
-                ImageUrl = "image",
-                Description = "description",
-                BirthDate = birthDate,
-                FullName = "Grisho",
-                CategorieId = 1,
-                Height = 150,
-                Weight = 80,
-                YearOfExperience = 20,
-                IsCandidate = false
-
-            };
-
             //Act
 
             trainerService.Create(
@@ -127,8 +112,6 @@ namespace LionSkyNot.Tests.Services
                                   description,
                                   userId,
                                   isCandidate);
-
-
 
             var actualTrainer = data.Trainers.Where(t => t.UserId == userId);
 

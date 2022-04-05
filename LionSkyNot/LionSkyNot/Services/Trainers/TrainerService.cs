@@ -203,31 +203,6 @@ namespace LionSkyNot.Services.Trainers
                     .FirstOrDefault();
 
 
-
-
-        private TrainerViewModel GetTopTrainerByCategorie(string category)
-        {
-
-            var trainer = this.data.Trainers
-                          .Where(t => t.Categorie.Name == category && t.IsCandidate == false)
-                          .Select(t => new TrainerViewModel()
-                          {
-                              FullName = t.FullName,
-                              ImageUrl = t.ImageUrl,
-                              Description = t.Description,
-                              YearOfExperience = t.YearOfExperience,
-                              BirthDate = t.BirthDate,
-                              Weight = t.Weight,
-                              Height = t.Height
-                          })
-                          .OrderByDescending(t => t.YearOfExperience)
-                          .Take(1)
-                          .FirstOrDefault();
-
-            return trainer;
-        }
-
-
         public IEnumerable<TrainerFormModelForAdmin> GetAllTrainersForAdmin()
         => this.data.Trainers
                     .Where(t => t.IsCandidate == false)
@@ -252,6 +227,26 @@ namespace LionSkyNot.Services.Trainers
                         YearOfExperience = t.YearOfExperience
                     })
                     .ToList();
+
+
+        private TrainerViewModel GetTopTrainerByCategorie(string category)
+        => this.data.Trainers
+                    .Where(t => t.Categorie.Name == category && t.IsCandidate == false)
+                    .Select(t => new TrainerViewModel()
+                    {
+                        FullName = t.FullName,
+                        ImageUrl = t.ImageUrl,
+                        Description = t.Description,
+                        YearOfExperience = t.YearOfExperience,
+                        BirthDate = t.BirthDate,
+                        Weight = t.Weight,
+                        Height = t.Height
+                    })
+                    .OrderByDescending(t => t.YearOfExperience)
+                    .Take(1)
+                    .FirstOrDefault();
+
+
 
     }
 }

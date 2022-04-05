@@ -1,7 +1,11 @@
 ﻿using LionSkyNot.Data;
+
 using LionSkyNot.Data.Models.Exercise;
+
 using LionSkyNot.Models.Exercises;
+
 using LionSkyNot.Views.ViewModels.Exercises;
+
 
 namespace LionSkyNot.Services.Exercises
 {
@@ -10,32 +14,19 @@ namespace LionSkyNot.Services.Exercises
 
         private LionSkyDbContext data;
 
+
         public ExerciseService(LionSkyDbContext data)
         {
             this.data = data;
         }
 
-        public IEnumerable<ExerciseViewModel> GetAllExercisesByType(string type)
-        {
-            return this.data.Exercises
-                            .Where(x => x.IsDeleted == false && x.TypeExercise.TypeName == type)
-                            .Select(x => new ExerciseViewModel
-                            {
-                                Name = x.Name,
-                                ImageUrl = x.ImageUrl,
-                                VideoUrl = x.VideoUrl
-                            })
-                            .ToList();
-        }
 
-        public IEnumerable<TypeExerciseViewModel> GetAllTypeExercises()
-        => this.data.TypeExercises.Select(x => new TypeExerciseViewModel
-        {
-            Id = x.Id,
-            Name = x.TypeName
-        });
 
-        public void Create(string name, string imgUrl, string videoUrl, int typeExercisesId)
+        public void Create(
+                           string name,
+                           string imgUrl,
+                           string videoUrl,
+                           int typeExercisesId)
         {
             var exercise = new Exercise()
             {
@@ -52,13 +43,18 @@ namespace LionSkyNot.Services.Exercises
 
         }
 
-        public bool Edit(int id,string name, string imgUrl, string videoUrl)
+
+        public bool Edit(
+                         int id,
+                         string name,
+                         string imgUrl,
+                         string videoUrl)
         {
             var exercise = this.data.Exercises
                                     .Where(e => e.Id == id && e.IsDeleted == false)
                                     .FirstOrDefault();
 
-            if(exercise == null)
+            if (exercise == null)
             {
                 return false;
             }
@@ -71,15 +67,16 @@ namespace LionSkyNot.Services.Exercises
             this.data.SaveChanges();
 
             return true;
-                
+
         }
+
 
         public bool Delete(int id)
         {
             var currentExercise = this.data.Exercises
                                            .Where(e => e.Id == id && e.IsDeleted == false)
                                            .FirstOrDefault();
-            if(currentExercise == null)
+            if (currentExercise == null)
             {
                 return false;
             }
@@ -91,18 +88,17 @@ namespace LionSkyNot.Services.Exercises
             return true;
         }
 
+
         public EditExerciseFormModel GetExerciseById(int id)
-        {
-            return this.data.Exercises
-                            .Where(e => e.Id == id && e.IsDeleted == false)
-                            .Select(e => new EditExerciseFormModel()
-                            {
-                                ImageUrl = e.ImageUrl,
-                                Name = e.Name,
-                                VideoUrl = e.VideoUrl
-                            })
-                            .FirstOrDefault();
-        }
+        => this.data.Exercises
+                    .Where(e => e.Id == id && e.IsDeleted == false)
+                    .Select(e => new EditExerciseFormModel()
+                    {
+                        ImageUrl = e.ImageUrl,
+                        Name = e.Name,
+                        VideoUrl = e.VideoUrl
+                    })
+                    .FirstOrDefault();
 
 
         public IEnumerable<ExerciseFormModelForAdmin> GetAllExercises()
@@ -115,6 +111,26 @@ namespace LionSkyNot.Services.Exercises
                      })
                      .ToList();
 
-      
+
+        public IEnumerable<ExerciseViewModel> GetAllExercisesByType(string type)
+        => this.data.Exercises
+                    .Where(x => x.IsDeleted == false && x.TypeExercise.TypeName == type)
+                    .Select(x => new ExerciseViewModel
+                    {
+                        Name = x.Name,
+                        ImageUrl = x.ImageUrl,
+                        VideoUrl = x.VideoUrl
+                    })
+                    .ToList();
+
+
+        public IEnumerable<TypeExerciseViewModel> GetAllTypeExercises()
+        => this.data.TypeExercises
+                    .Select(x => new TypeExerciseViewModel
+                    {
+                        Id = x.Id,
+                        Name = x.TypeName
+                    });
+
     }
 }

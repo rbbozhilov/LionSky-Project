@@ -1,6 +1,9 @@
 ﻿using LionSkyNot.Data.Models.Exercise;
+
 using LionSkyNot.Models.Exercises;
+
 using LionSkyNot.Views.ViewModels.Exercises;
+
 
 namespace LionSkyNot.Services.Exercises
 {
@@ -11,7 +14,7 @@ namespace LionSkyNot.Services.Exercises
 
         bool Delete(int id);
 
-        bool Edit(int id,string name, string imgUrl, string videoUrl);
+        bool Edit(int id, string name, string imgUrl, string videoUrl);
 
         EditExerciseFormModel GetExerciseById(int id);
 
