@@ -320,11 +320,7 @@ namespace LionSkyNot.Controllers
             this.recipeService.Create(
                                       recipeModel.Name,
                                       recipeModel.Description,
-                                      recipeModel.Protein,
-                                      recipeModel.Calories,
-                                      recipeModel.Fat,
-                                      recipeModel.ImageUrl,
-                                      recipeModel.Carbohydrates);
+                                      recipeModel.ImageUrl);
 
 
             return RedirectToAction("Index");
@@ -346,11 +342,7 @@ namespace LionSkyNot.Controllers
             {
                 Name = currentRecipe.Name,
                 Description = currentRecipe.Description,
-                Protein = currentRecipe.Protein,
-                Calories = currentRecipe.Calories,
-                Fat = currentRecipe.Fat,
-                ImageUrl = currentRecipe.ImageUrl,
-                Carbohydrates = currentRecipe.Carbohydrates,
+                ImageUrl = currentRecipe.ImageUrl
             });
         }
 
@@ -368,11 +360,7 @@ namespace LionSkyNot.Controllers
                                                             id,
                                                             recipeModel.Name,
                                                             recipeModel.ImageUrl,
-                                                            recipeModel.Description,
-                                                            recipeModel.Calories,
-                                                            recipeModel.Carbohydrates,
-                                                            recipeModel.Fat,
-                                                            recipeModel.Protein);
+                                                            recipeModel.Description);
 
             if (!isEditted)
             {

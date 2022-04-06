@@ -13,18 +13,9 @@ namespace LionSkyNot.Models.Recipe
         [MaxLength(2000)]
         public string Description { get; set; }
 
-        public float Calories { get; set; }
-
-        public float Protein { get; set; }
-
-        public float Fat { get; set; }
-
-        public float Carbohydrates { get; set; }
-
         [Required]
         [Url]
         public string ImageUrl { get; set; }
-
 
     }
 }
