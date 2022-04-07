@@ -1,7 +1,11 @@
 ﻿using LionSkyNot.Data;
+
 using LionSkyNot.Data.Models.Shop;
+
 using LionSkyNot.Models.Products;
+
 using LionSkyNot.Views.ViewModels.Products;
+
 
 namespace LionSkyNot.Services.Products
 {
@@ -81,6 +85,7 @@ namespace LionSkyNot.Services.Products
             return true;
         }
 
+
         public bool DeleteProduct(int id)
         {
             var currentProduct = this.data.Products
@@ -99,20 +104,23 @@ namespace LionSkyNot.Services.Products
             return true;
         }
 
+
         public IEnumerable<ProductBrandViewModel> GetAllBrandProduct()
-        => this.data.Brands.Select(b => new ProductBrandViewModel
-        {
-            Id = b.Id,
-            Name = b.BrandName
-        }).ToList();
+        => this.data.Brands
+                    .Select(b => new ProductBrandViewModel
+                    {
+                        Id = b.Id,
+                        Name = b.BrandName
+                    }).ToList();
 
 
         public IEnumerable<ProductTypeViewModel> GetAllTypesProduct()
-        => this.data.Types.Select(t => new ProductTypeViewModel
-        {
-            Id = t.Id,
-            Name = t.TypeName
-        }).ToList();
+        => this.data.Types
+                    .Select(t => new ProductTypeViewModel
+                    {
+                        Id = t.Id,
+                        Name = t.TypeName
+                    }).ToList();
 
 
         public IQueryable<Product> GetProductsByBrandAndType(string type, string brand)

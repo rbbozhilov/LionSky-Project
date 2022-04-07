@@ -17,6 +17,32 @@ namespace LionSkyNot.Services.Classes
         }
 
 
+
+        public void Create(
+                          string className,
+                          string imageUrl,
+                          int maxPractitionerCount,
+                          int trainerId,
+                          DateTime startDateTime,
+                          DateTime endDateTime)
+        {
+            var @class = new Class()
+            {
+                ClassName = className,
+                ImageUrl = imageUrl,
+                MaxPractitionerCount = maxPractitionerCount,
+                TrainerId = trainerId,
+                StartDateTime = startDateTime,
+                EndDateTime = endDateTime
+            };
+
+
+            this.data.Classes.Add(@class);
+
+            this.data.SaveChanges();
+        }
+
+
         public bool AddUserToClass(string userId, string classId)
         {
 
@@ -71,32 +97,6 @@ namespace LionSkyNot.Services.Classes
         public bool IsUserHaveClasses(string userId)
         => this.data.ClassUsers
                     .Any(c => c.UserId == userId && c.Class.IsDeleted == false);
-
-
-
-        public void Create(
-                          string className,
-                          string imageUrl,
-                          int maxPractitionerCount,
-                          int trainerId,
-                          DateTime startDateTime,
-                          DateTime endDateTime)
-        {
-            var @class = new Class()
-            {
-                ClassName = className,
-                ImageUrl = imageUrl,
-                MaxPractitionerCount = maxPractitionerCount,
-                TrainerId = trainerId,
-                StartDateTime = startDateTime,
-                EndDateTime = endDateTime
-            };
-
-
-            this.data.Classes.Add(@class);
-
-            this.data.SaveChanges();
-        }
 
 
         public bool Edit(
@@ -158,7 +158,7 @@ namespace LionSkyNot.Services.Classes
                                         .Where(c => c.UserId == userId && c.ClassId == classId)
                                         .FirstOrDefault();
 
-            if(currentClass == null)
+            if (currentClass == null)
             {
                 return false;
             }
@@ -188,17 +188,13 @@ namespace LionSkyNot.Services.Classes
 
 
         public IEnumerable<TrainerClassViewModel> GetAllTrainers()
-        {
-            var allTrainers = this.data.Trainers
-                                       .Where(t => t.IsCandidate == false)
-                                       .Select(t => new TrainerClassViewModel()
-                                       {
-                                           Id = t.Id,
-                                           FullName = t.FullName,
-                                       }).ToList();
-
-            return allTrainers;
-        }
+        => this.data.Trainers
+                    .Where(t => t.IsCandidate == false)
+                    .Select(t => new TrainerClassViewModel()
+                    {
+                        Id = t.Id,
+                        FullName = t.FullName,
+                    }).ToList();
 
 
         public IEnumerable<ClassTrainerViewModel> GetAllTrainerClasses(int trainerId)
@@ -258,6 +254,7 @@ namespace LionSkyNot.Services.Classes
                      })
                      .FirstOrDefault();
 
+
         public ClassDetailsViewModel GetClassForDetails(string id)
          => this.data.Classes
                      .Where(c => c.Id == id && c.IsDeleted == false)
@@ -274,81 +271,9 @@ namespace LionSkyNot.Services.Classes
                      .FirstOrDefault();
 
 
-
-
-        public IEnumerable<ClassViewModel> GetAllFitnessClass()
+        public IEnumerable<ClassViewModel> GetAllClassesByCategorieName(string categorieName)
         => this.data.Classes
-                    .Where(c => c.Trainer.Categorie.Name == "Fitness" && c.IsDeleted == false)
-                    .Select(c => new ClassViewModel()
-                    {
-                        Id = c.Id,
-                        ClassName = c.ClassName,
-                        ImageUrl = c.ImageUrl,
-                        Trainer = c.Trainer.FullName,
-                        StartDateTime = c.StartDateTime,
-                        EndDateTime = c.EndDateTime
-                    })
-                    .ToList();
-
-        public IEnumerable<ClassViewModel> GetAllYogaClass()
-        => this.data.Classes
-                    .Where(c => c.Trainer.Categorie.Name == "Yoga" && c.IsDeleted == false)
-                    .Select(c => new ClassViewModel()
-                    {
-                        Id = c.Id,
-                        ClassName = c.ClassName,
-                        ImageUrl = c.ImageUrl,
-                        Trainer = c.Trainer.FullName,
-                        StartDateTime = c.StartDateTime,
-                        EndDateTime = c.EndDateTime
-                    })
-                    .ToList();
-
-        public IEnumerable<ClassViewModel> GetAllMmaClass()
-        => this.data.Classes
-                    .Where(c => c.Trainer.Categorie.Name == "Mma" && c.IsDeleted == false)
-                    .Select(c => new ClassViewModel()
-                    {
-                        Id = c.Id,
-                        ClassName = c.ClassName,
-                        ImageUrl = c.ImageUrl,
-                        Trainer = c.Trainer.FullName,
-                        StartDateTime = c.StartDateTime,
-                        EndDateTime = c.EndDateTime
-                    })
-                    .ToList();
-
-        public IEnumerable<ClassViewModel> GetAllBoxClass()
-        => this.data.Classes
-                    .Where(c => c.Trainer.Categorie.Name == "Box" && c.IsDeleted == false)
-                    .Select(c => new ClassViewModel()
-                    {
-                        Id = c.Id,
-                        ClassName = c.ClassName,
-                        ImageUrl = c.ImageUrl,
-                        Trainer = c.Trainer.FullName,
-                        StartDateTime = c.StartDateTime,
-                        EndDateTime = c.EndDateTime
-                    })
-                    .ToList();
-
-        public IEnumerable<ClassViewModel> GetAllWrestlingClass()
-        => this.data.Classes
-                    .Where(c => c.Trainer.Categorie.Name == "Wrestling" && c.IsDeleted == false)
-                    .Select(c => new ClassViewModel()
-                    {
-                        Id = c.Id,
-                        ClassName = c.ClassName,
-                        ImageUrl = c.ImageUrl,
-                        Trainer = c.Trainer.FullName,
-                        StartDateTime = c.StartDateTime,
-                        EndDateTime = c.EndDateTime
-                    })
-                    .ToList();
-
-        public IEnumerable<ClassViewModel> GetAllAthleticClass()
-        => this.data.Classes
-                    .Where(c => c.Trainer.Categorie.Name == "Athletic" && c.IsDeleted == false)
+                    .Where(c => c.Trainer.Categorie.Name == categorieName && c.IsDeleted == false)
                     .Select(c => new ClassViewModel()
                     {
                         Id = c.Id,
@@ -371,7 +296,6 @@ namespace LionSkyNot.Services.Classes
             CountOfWrestlingClass = this.GetCountOfWrestlingClass(),
             CountOfYogaClass = this.GetCountOfYogaClass()
         };
-
 
 
         private int GetCountOfYogaClass()
@@ -408,6 +332,5 @@ namespace LionSkyNot.Services.Classes
         => this.data.Classes
                     .Where(c => c.Trainer.Categorie.Name == "Athletic" && c.IsDeleted == false)
                     .Count();
-
     }
 }

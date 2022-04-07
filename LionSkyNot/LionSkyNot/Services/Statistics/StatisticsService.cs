@@ -1,5 +1,7 @@
 ﻿using LionSkyNot.Data;
+
 using LionSkyNot.Models.Api.Statistics;
+
 
 namespace LionSkyNot.Services.Statistics
 {

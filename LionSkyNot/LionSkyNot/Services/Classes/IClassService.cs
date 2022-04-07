@@ -1,5 +1,7 @@
 ﻿using LionSkyNot.Models.Class;
+
 using LionSkyNot.Views.ViewModels.Classes;
+
 
 namespace LionSkyNot.Services.Classes
 {
@@ -47,17 +49,7 @@ namespace LionSkyNot.Services.Classes
 
         IEnumerable<ClassViewModel> GetAllClasses();
 
-        IEnumerable<ClassViewModel> GetAllFitnessClass();
-
-        IEnumerable<ClassViewModel> GetAllYogaClass();
-
-        IEnumerable<ClassViewModel> GetAllMmaClass();
-
-        IEnumerable<ClassViewModel> GetAllBoxClass();
-
-        IEnumerable<ClassViewModel> GetAllWrestlingClass();
-
-        IEnumerable<ClassViewModel> GetAllAthleticClass();
+        IEnumerable<ClassViewModel> GetAllClassesByCategorieName(string categorieName);
 
         IEnumerable<TrainerClassViewModel> GetAllTrainers();
 

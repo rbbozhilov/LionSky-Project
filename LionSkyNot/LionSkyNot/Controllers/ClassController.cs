@@ -31,7 +31,7 @@ namespace LionSkyNot.Controllers
         public IActionResult ViewAllFitnessClass()
         {
 
-            var allFitnessClasses = this.classService.GetAllFitnessClass();
+            var allFitnessClasses = this.classService.GetAllClassesByCategorieName("Fitness");
 
             return View(allFitnessClasses);
         }
@@ -39,7 +39,7 @@ namespace LionSkyNot.Controllers
         [Authorize]
         public IActionResult ViewAllYogaClass()
         {
-            var allYogaClasses = this.classService.GetAllYogaClass();
+            var allYogaClasses = this.classService.GetAllClassesByCategorieName("Yoga");
 
             return View(allYogaClasses);
         }
@@ -47,7 +47,7 @@ namespace LionSkyNot.Controllers
         [Authorize]
         public IActionResult ViewAllMmaClass()
         {
-            var allMmaClass = this.classService.GetAllMmaClass();
+            var allMmaClass = this.classService.GetAllClassesByCategorieName("Mma");
 
             return View(allMmaClass);
         }
@@ -55,7 +55,7 @@ namespace LionSkyNot.Controllers
         [Authorize]
         public IActionResult ViewAllBoxClass()
         {
-            var allBoxClass = this.classService.GetAllBoxClass();
+            var allBoxClass = this.classService.GetAllClassesByCategorieName("Box");
 
             return View(allBoxClass);
         }
@@ -63,7 +63,7 @@ namespace LionSkyNot.Controllers
         [Authorize]
         public IActionResult ViewAllWrestlingClass()
         {
-            var allWrestlingClass = this.classService.GetAllWrestlingClass();
+            var allWrestlingClass = this.classService.GetAllClassesByCategorieName("Wrestling");
 
             return View(allWrestlingClass);
         }
@@ -71,7 +71,7 @@ namespace LionSkyNot.Controllers
         [Authorize]
         public IActionResult ViewAllAthleticClass()
         {
-            var allAthleticClass = this.classService.GetAllAthleticClass();
+            var allAthleticClass = this.classService.GetAllClassesByCategorieName("Athletic");
 
             return View(allAthleticClass);
         }
