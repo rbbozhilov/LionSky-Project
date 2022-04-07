@@ -15,5 +15,9 @@
 
         public decimal Price { get; set; }
 
+        public decimal PriceOnPromotion { get; set; }
+
+        public bool IsOnPromotion { get; set; }
+
     }
 }

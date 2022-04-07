@@ -302,7 +302,9 @@ namespace LionSkyNot.Services.Products
                         ImageUrl = p.ImageUrl,
                         Name = p.Name,
                         Price = p.Price,
-                        Type = p.Type.TypeName
+                        Type = p.Type.TypeName,
+                        IsOnPromotion = p.IsOnPromotion,
+                        PriceOnPromotion = p.PriceOnPromotion
                     })
                     .FirstOrDefault();
 
