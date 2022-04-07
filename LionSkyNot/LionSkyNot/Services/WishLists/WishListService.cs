@@ -1,10 +1,17 @@
 ﻿using LionSkyNot.Data;
+
 using LionSkyNot.Data.Models.Shop;
+
 using LionSkyNot.Models.Products;
+
 using LionSkyNot.Models.WishLists;
+
 using LionSkyNot.Services.Products;
+
 using LionSkyNot.Views.ViewModels.Products;
+
 using Microsoft.EntityFrameworkCore;
+
 
 namespace LionSkyNot.Services.WishLists
 {
@@ -14,11 +21,13 @@ namespace LionSkyNot.Services.WishLists
         private LionSkyDbContext data;
         private IProductService productService;
 
+
         public WishListService(LionSkyDbContext data, IProductService productService)
         {
             this.data = data;
             this.productService = productService;
         }
+
 
 
         public bool Add(Product product, string userId)
@@ -67,6 +76,38 @@ namespace LionSkyNot.Services.WishLists
             return true;
         }
 
+
+        public bool RemoveProduct(int productId, string userId)
+        {
+
+            var currentWishList = this.data.WishLists
+                                           .Where(w => w.UserId == userId)
+                                           .FirstOrDefault();
+
+            if (currentWishList == null)
+            {
+                return false;
+            }
+
+            var currentProduct = this.data.WishListsProducts
+                                          .Where(p => p.ProductId == productId && p.WishListId == currentWishList.Id)
+                                          .FirstOrDefault();
+
+
+            if (currentProduct == null)
+            {
+                return false;
+            }
+
+
+            this.data.WishListsProducts.Remove(currentProduct);
+
+            this.data.SaveChanges();
+
+            return true;
+        }
+
+
         public Tuple<bool, WishListFormModel> GetProductsOfUser(string userId)
         {
             var currentWishList = this.data.WishLists
@@ -109,36 +150,6 @@ namespace LionSkyNot.Services.WishLists
             
         }
 
-
-        public bool RemoveProduct(int productId, string userId)
-        {
-
-            var currentWishList = this.data.WishLists
-                                           .Where(w => w.UserId == userId)
-                                           .FirstOrDefault();
-
-            if(currentWishList == null)
-            {
-                return false;
-            }
-
-            var currentProduct = this.data.WishListsProducts
-                                          .Where(p => p.ProductId == productId && p.WishListId == currentWishList.Id)
-                                          .FirstOrDefault();
-
-
-            if (currentProduct == null)
-            {
-                return false;
-            }
-
-
-            this.data.WishListsProducts.Remove(currentProduct);
-
-            this.data.SaveChanges();
-
-            return true;
-        }
 
         public Tuple<bool, IEnumerable<BuyProductViewModel>> BuyProducts(string userId)
         {
@@ -186,7 +197,6 @@ namespace LionSkyNot.Services.WishLists
 
 
             return successReturnTuple;
-
         }
     }
 }
