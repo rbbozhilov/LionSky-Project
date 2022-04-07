@@ -8,8 +8,6 @@ using LionSkyNot.Services.WishLists;
 
 using LionSkyNot.Tests.Mock;
 
-using System.Linq;
-
 using Xunit;
 
 

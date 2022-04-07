@@ -21,21 +21,19 @@ namespace LionSkyNot.Models.Calculator
         public CalculatorViewModel Calculation(string choice, float weight)
         {
 
-            var model = new CalculatorViewModel();
-
             if (choice == "Weight Loss")
             {
-                CalculationLogic(prLoseWeight, klLoseWeight,weight);
+                CalculationLogic(prLoseWeight, klLoseWeight, weight);
             }
 
             else if (choice == "Weight Maintenance")
             {
-                CalculationLogic(prWeightMaintenance, klWeightMaintenance,weight);
+                CalculationLogic(prWeightMaintenance, klWeightMaintenance, weight);
             }
 
             else
             {
-                CalculationLogic(prIncreaseMuscle, klIncreaseMuscle,weight);
+                CalculationLogic(prIncreaseMuscle, klIncreaseMuscle, weight);
             }
 
             return new CalculatorViewModel()
@@ -48,7 +46,10 @@ namespace LionSkyNot.Models.Calculator
 
         }
 
-        private void CalculationLogic(float prConst, float klConst , float weight)
+        private void CalculationLogic(
+                                      float prConst,
+                                      float klConst,
+                                      float weight)
         {
             this.proteinResult = weight * prConst;
             this.caloriesResult = klConst * weight;
