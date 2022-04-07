@@ -55,9 +55,6 @@ namespace LionSkyNot.Controllers
             }
 
 
-            //allProductViewModel.Products = this.productService.ShowAllProducts();
-
-
             return View(allProductViewModel);
         }
 
