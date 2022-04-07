@@ -20,7 +20,15 @@ namespace LionSkyNot.Services.Products
         }
 
 
-        public void CreateProduct(string name, decimal price, int inStock, string description, string imgUrl, int typeProductId, int brandProductId)
+
+        public void CreateProduct(
+                                  string name,
+                                  decimal price,
+                                  int inStock,
+                                  string description,
+                                  string imgUrl,
+                                  int typeProductId,
+                                  int brandProductId)
         {
             var newProduct = new Product()
             {
@@ -51,7 +59,12 @@ namespace LionSkyNot.Services.Products
                     .FirstOrDefault();
 
 
-        public bool EditProduct(int id, string imageUrl, string name, decimal price, float percentage)
+        public bool EditProduct(
+                                int id,
+                                string imageUrl,
+                                string name,
+                                decimal price,
+                                float percentage)
         {
             var currentProduct = this.data.Products
                                           .Where(p => p.Id == id && p.IsDeleted == false)
@@ -124,39 +137,30 @@ namespace LionSkyNot.Services.Products
 
 
         public IQueryable<Product> GetProductsByBrandAndType(string type, string brand)
-        {
-
-            var products = this.data.Products
-                                    .Where(p => p.Brand.BrandName == brand && p.Type.TypeName == type && p.IsDeleted == false)
-                                    .Distinct();
-
-            return products;
-        }
+        => this.data.Products
+                    .Where(p => p.Brand.BrandName == brand && p.Type.TypeName == type && p.IsDeleted == false)
+                    .Distinct();
 
 
         public IEnumerable<ProductListViewModel> ShowAllProducts()
-        {
+        => this.data.Products
+                    .Where(p => p.IsDeleted == false)
+                    .Select(p => new ProductListViewModel()
+                    {
+                        Id = p.Id,
+                        Name = p.Name,
+                        Type = p.Type.TypeName,
+                        Brand = p.Brand.BrandName,
+                        Price = p.Price,
+                        Description = p.Description,
+                        ImageUrl = p.ImageUrl,
+                        InStock = p.CountInStock,
+                        PriceOnPromotion = p.PriceOnPromotion,
+                        IsOnPromotion = p.IsOnPromotion
+                    })
+                    .Distinct()
+                    .ToList();
 
-            var products = this.data.Products
-                                    .Where(p => p.IsDeleted == false)
-                                    .Select(p => new ProductListViewModel()
-                                    {
-                                        Id = p.Id,
-                                        Name = p.Name,
-                                        Type = p.Type.TypeName,
-                                        Brand = p.Brand.BrandName,
-                                        Price = p.Price,
-                                        Description = p.Description,
-                                        ImageUrl = p.ImageUrl,
-                                        InStock = p.CountInStock,
-                                        PriceOnPromotion = p.PriceOnPromotion,
-                                        IsOnPromotion = p.IsOnPromotion
-                                    })
-                                    .Distinct()
-                                    .ToList();
-
-            return products;
-        }
 
         public IEnumerable<ProductServiceModel> GetAllProductsForAdmin()
         => this.data.Products
@@ -172,79 +176,66 @@ namespace LionSkyNot.Services.Products
 
 
         public IQueryable<Product> SortedByPriceDescending(IQueryable<Product> products)
-        {
+        => products.Distinct()
+                   .OrderByDescending(p => p.Price);
 
-            products = products.Distinct()
-                               .OrderByDescending(p => p.Price);
 
-            return products;
-        }
 
         public IQueryable<Product> SortedByPrice(IQueryable<Product> products)
-        {
+        => products.Distinct()
+                   .OrderBy(p => p.Price);
 
-            products = products.Distinct()
-                               .OrderBy(p => p.Price);
 
-            return products;
-        }
 
         public IQueryable<Product> SortedByName(IQueryable<Product> products)
-        {
+        => products.Distinct()
+                   .OrderBy(p => p.Name);
 
-            products = products.Distinct()
-                               .OrderBy(p => p.Name);
 
-            return products;
-        }
 
         public IQueryable<Product> SortedByMostBuys(IQueryable<Product> products)
-        {
+        => products.Distinct()
+                   .OrderByDescending(p => p.CountOfBuys);
 
-            products = products.Distinct()
-                               .OrderByDescending(p => p.CountOfBuys);
 
-            return products;
-        }
 
 
         public IEnumerable<ProductListViewModel> GetFinalProductsSelected(IQueryable<Product> products)
-        {
-            return products.Select(p => new ProductListViewModel()
-            {
-                Id = p.Id,
-                Name = p.Name,
-                Type = p.Type.TypeName,
-                Brand = p.Brand.BrandName,
-                Price = p.Price,
-                Description = p.Description,
-                ImageUrl = p.ImageUrl,
-                InStock = p.CountInStock,
-                PriceOnPromotion = p.PriceOnPromotion,
-                IsOnPromotion = p.IsOnPromotion
-            }).ToList();
-        }
+        => products
+                   .Select(p => new ProductListViewModel()
+                   {
+                       Id = p.Id,
+                       Name = p.Name,
+                       Type = p.Type.TypeName,
+                       Brand = p.Brand.BrandName,
+                       Price = p.Price,
+                       Description = p.Description,
+                       ImageUrl = p.ImageUrl,
+                       InStock = p.CountInStock,
+                       PriceOnPromotion = p.PriceOnPromotion,
+                       IsOnPromotion = p.IsOnPromotion
+                   })
+                   .ToList();
+
 
         public IEnumerable<ProductListViewModel> GetAllProductsOnPromotion()
-        {
-            return this.data.Products
-                            .Where(p => p.IsOnPromotion == true && p.IsDeleted == false)
-                            .Select(p => new ProductListViewModel()
-                            {
-                                Id = p.Id,
-                                Name = p.Name,
-                                Type = p.Type.TypeName,
-                                Brand = p.Brand.BrandName,
-                                Price = p.Price,
-                                PriceOnPromotion = p.PriceOnPromotion,
-                                InStock = p.CountInStock,
-                                IsOnPromotion = p.IsOnPromotion,
-                                Description = p.Description,
-                                ImageUrl = p.ImageUrl
-                            })
-                            .ToList();
+        => this.data.Products
+                    .Where(p => p.IsOnPromotion == true && p.IsDeleted == false)
+                    .Select(p => new ProductListViewModel()
+                    {
+                        Id = p.Id,
+                        Name = p.Name,
+                        Type = p.Type.TypeName,
+                        Brand = p.Brand.BrandName,
+                        Price = p.Price,
+                        PriceOnPromotion = p.PriceOnPromotion,
+                        InStock = p.CountInStock,
+                        IsOnPromotion = p.IsOnPromotion,
+                        Description = p.Description,
+                        ImageUrl = p.ImageUrl
+                    })
+                    .ToList();
 
-        }
 
         public IEnumerable<ProductListViewModel> ShowMostBuyedProducts()
          => this.data
@@ -268,16 +259,11 @@ namespace LionSkyNot.Services.Products
                 .ToList();
 
 
-        public IEnumerable<Product> GetAllProductsWithZeroInStock(int countOfProducts)
-        => this.data
-               .Products
-               .Where(p => p.CountInStock == 0 && p.IsDeleted == false)
-               .ToList();
-
-
         public bool UpdateInStockCountOfProducts()
         {
-            var products = this.data.Products.Where(p => p.CountInStock == 0 && p.IsDeleted == false).ToList();
+            var products = this.data.Products
+                                    .Where(p => p.CountInStock == 0 && p.IsDeleted == false)
+                                    .ToList();
 
             if (products.Count() == 0)
             {
@@ -294,6 +280,7 @@ namespace LionSkyNot.Services.Products
             return true;
         }
 
+
         public Product TakeProduct(int id)
         {
             var product = this.data.Products
@@ -303,6 +290,7 @@ namespace LionSkyNot.Services.Products
 
             return product;
         }
+
 
         public ProductDetailViewModel GetProductForDetails(int id)
         => this.data.Products
