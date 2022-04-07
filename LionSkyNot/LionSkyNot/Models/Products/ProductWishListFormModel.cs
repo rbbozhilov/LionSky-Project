@@ -13,6 +13,5 @@
 
         public decimal PriceOnPromotion { get; set; }
 
-
     }
 }

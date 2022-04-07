@@ -8,7 +8,6 @@ namespace LionSkyNot.Models.WishLists
 
         public IEnumerable<ProductWishListFormModel> Products { get; set; }
 
-
         public decimal Price => this.TotalPrice();
 
 
