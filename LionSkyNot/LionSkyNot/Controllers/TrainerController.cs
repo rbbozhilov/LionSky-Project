@@ -1,13 +1,19 @@
-﻿using LionSkyNot.Data;
-using LionSkyNot.Data.Models.Classes;
-using LionSkyNot.Infrastructure;
+﻿using LionSkyNot.Infrastructure;
+
 using LionSkyNot.Models;
+
 using LionSkyNot.Services.Classes;
+
 using LionSkyNot.Services.Trainers;
+
 using LionSkyNot.Views.ViewModels.Classes;
+
 using LionSkyNot.Views.ViewModels.Trainers;
+
 using Microsoft.AspNetCore.Authorization;
+
 using Microsoft.AspNetCore.Mvc;
+
 
 namespace LionSkyNot.Controllers
 {
@@ -41,18 +47,17 @@ namespace LionSkyNot.Controllers
 
             }
 
-
             return View();
         }
 
+
         [Authorize]
         public IActionResult BecomeTrainer()
+        => View(new AddTrainerFormModel
         {
-            return View(new AddTrainerFormModel
-            {
-                Categorie = this.trainerService.GetAllCategories()
-            });
-        }
+            Categorie = this.trainerService.GetAllCategories()
+        });
+
 
         [HttpPost]
         [Authorize]
@@ -62,14 +67,14 @@ namespace LionSkyNot.Controllers
             var currentUserId = ClaimsPrincipalExtensions.GetId(this.User);
             var allTrainersUserId = this.trainerService.GetAllTrainersUserId(false);
             var allCandidateTrainersUserId = this.trainerService.GetAllTrainersUserId(true);
-            
+
 
             if (allTrainersUserId.Any(a => a.UserId == currentUserId))
             {
                 ModelState.AddModelError("error", "The current user is already a trainer!");
             }
 
-            if(allCandidateTrainersUserId.Any(a => a.UserId == currentUserId))
+            if (allCandidateTrainersUserId.Any(a => a.UserId == currentUserId))
             {
                 ModelState.AddModelError("error", "The current user is candidate already for trainer!");
             }
@@ -95,10 +100,10 @@ namespace LionSkyNot.Controllers
             return RedirectToAction("CandidatureSuccess");
         }
 
+
         public IActionResult CandidatureSuccess()
-        {
-            return View();
-        }
+        => View();
+
 
         [Authorize]
         public IActionResult TrainerClasses(IEnumerable<ClassTrainerViewModel> classModel)
@@ -107,7 +112,6 @@ namespace LionSkyNot.Controllers
             int currentTrainerId = this.trainerService.GetTrainerId(currentUserId);
 
             classModel = this.classService.GetAllTrainerClasses(currentTrainerId);
-
 
             return View(classModel);
         }
@@ -121,24 +125,23 @@ namespace LionSkyNot.Controllers
             return View(trainersModel);
         }
 
+
         public IActionResult BoxTrainers(AllTrainersViewModel trainersModel)
         {
 
             trainersModel.Trainers = this.trainerService.GetAllTrainersByCategory("Box");
 
-
             return View(trainersModel);
         }
+
 
         public IActionResult MmaTrainers(AllTrainersViewModel trainersModel)
         {
 
             trainersModel.Trainers = this.trainerService.GetAllTrainersByCategory("MMA");
 
-
             return View(trainersModel);
         }
-
 
 
         public IActionResult FitnessTrainers(AllTrainersViewModel trainersModel)
@@ -149,6 +152,7 @@ namespace LionSkyNot.Controllers
             return View(trainersModel);
         }
 
+
         public IActionResult WrestlerTrainers(AllTrainersViewModel trainersModel)
         {
             trainersModel.Trainers = this.trainerService.GetAllTrainersByCategory("Wrestling");
@@ -156,12 +160,12 @@ namespace LionSkyNot.Controllers
             return View(trainersModel);
         }
 
+
         public IActionResult AthleticTrainers(AllTrainersViewModel trainersModel)
         {
             trainersModel.Trainers = this.trainerService.GetAllTrainersByCategory("Athletic");
 
             return View(trainersModel);
         }
-
     }
 }

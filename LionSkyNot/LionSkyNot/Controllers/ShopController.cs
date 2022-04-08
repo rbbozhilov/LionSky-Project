@@ -1,6 +1,9 @@
 ﻿using LionSkyNot.Services.Products;
+
 using LionSkyNot.Views.ViewModels.Products;
+
 using Microsoft.AspNetCore.Mvc;
+
 
 namespace LionSkyNot.Controllers
 {
@@ -24,8 +27,6 @@ namespace LionSkyNot.Controllers
                 Brands = this.productService.GetAllBrandProduct().Select(x => x.Name),
                 Types = this.productService.GetAllTypesProduct().Select(x => x.Name)
             };
-
-
 
             if (!string.IsNullOrWhiteSpace(query.Brand) &&
                 !string.IsNullOrEmpty(query.Brand) &&
@@ -51,42 +52,26 @@ namespace LionSkyNot.Controllers
 
 
                 return View("Result", finalProducts);
-
             }
-
 
             return View(allProductViewModel);
         }
 
+
         public IActionResult ViewDetails(int id)
-        {
+        => View(this.productService.GetProductForDetails(id));
 
-            return View(this.productService.GetProductForDetails(id));
-        }
 
-  
         public IActionResult AllProducts()
-        {
-            var allProducts = this.productService.ShowAllProducts();
+         => View(this.productService.ShowAllProducts());
 
-            return View(allProducts);
-        }
 
         public IActionResult MostBuyedProducts()
-        {
+         => View(this.productService.ShowMostBuyedProducts());
 
-            var mostBuyedProducts = this.productService.ShowMostBuyedProducts();
-
-            return View(mostBuyedProducts);
-        }
 
         public IActionResult SaleProducts()
-        {
-
-            var productsOnPromotion = this.productService.GetAllProductsOnPromotion();
-
-            return View(productsOnPromotion);
-        }
+        => View(this.productService.GetAllProductsOnPromotion());
 
     }
 }

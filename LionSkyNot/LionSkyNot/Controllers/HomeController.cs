@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
 using LionSkyNot.Models;
+
 using LionSkyNot.Services.Trainers;
+
 using LionSkyNot.Views.ViewModels.Trainers;
-using Microsoft.AspNetCore.Authorization;
+
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -23,14 +24,9 @@ namespace LionSkyNot.Controllers
 
 
         public IActionResult Index(IEnumerable<TrainerViewModel> trainerModel)
-        {
+        => View(this.trainerService.TopTrainers());
 
-            trainerModel = this.trainerService.TopTrainers();
 
-            return View(trainerModel);
-        }
-
-      
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

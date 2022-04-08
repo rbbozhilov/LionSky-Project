@@ -1,6 +1,9 @@
 ﻿using LionSkyNot.Services.Recipes;
+
 using LionSkyNot.Views.ViewModels.Recipes;
+
 using Microsoft.AspNetCore.Mvc;
+
 
 namespace LionSkyNot.Controllers
 {
@@ -15,12 +18,9 @@ namespace LionSkyNot.Controllers
         }
 
 
+
         public IActionResult Index(IEnumerable<RecipeViewModel> recipeViewModel)
-        {
+        => View(this.recipeService.GetAll());
 
-            recipeViewModel = this.recipeService.GetAll();
-
-            return View(recipeViewModel);
-        }
     }
 }

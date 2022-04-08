@@ -1,6 +1,9 @@
 ﻿using LionSkyNot.Models.Calculator;
+
 using LionSkyNot.Views.ViewModels.Calculator;
+
 using Microsoft.AspNetCore.Authorization;
+
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -12,9 +15,8 @@ namespace LionSkyNot.Controllers
     {
 
         public IActionResult Index()
-        {
-            return View();
-        }
+        => View();
+
 
         [HttpPost]
         public IActionResult Index(CalculateFormModel calculateModel, CalculatorViewModel model)
@@ -33,7 +35,6 @@ namespace LionSkyNot.Controllers
 
             return View("Result", model);
         }
-
 
     }
 }

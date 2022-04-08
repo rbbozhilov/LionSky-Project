@@ -1,10 +1,15 @@
 ﻿using LionSkyNot.Data;
-using LionSkyNot.Data.Models.Shop;
+
+
 using LionSkyNot.Models.Products;
+
 using LionSkyNot.Services.Products;
+
 using LionSkyNot.Services.WishLists;
-using LionSkyNot.Views.ViewModels.Products;
+
+
 using Microsoft.AspNetCore.Authorization;
+
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -16,14 +21,11 @@ namespace LionSkyNot.Controllers
     {
         private IProductService productService;
         private IWishListService wishListService;
-        private LionSkyDbContext data;
 
         public WishListController(
-                                  LionSkyDbContext data,
                                   IProductService productService,
                                   IWishListService wishListService)
         {
-            this.data = data;
             this.productService = productService;
             this.wishListService = wishListService;
         }
@@ -33,7 +35,7 @@ namespace LionSkyNot.Controllers
         {
             var user = Infrastructure.ClaimsPrincipalExtensions.GetId(this.User);
 
-            
+
             var tuple = this.wishListService.GetProductsOfUser(user);
 
             var currentProducts = tuple.Item2;
@@ -48,13 +50,14 @@ namespace LionSkyNot.Controllers
 
             var currentProduct = this.productService.TakeProduct(id);
 
-            if(!this.wishListService.Add(currentProduct, user))
+            if (!this.wishListService.Add(currentProduct, user))
             {
                 return BadRequest();
             }
 
             return View("SuccessAddToWishList");
         }
+
 
         public IActionResult RemoveProduct(int id)
         {
@@ -70,9 +73,8 @@ namespace LionSkyNot.Controllers
 
 
         public IActionResult Payment()
-        {
-            return View();
-        }
+        => View();
+
 
         [HttpPost]
         public IActionResult Payment(PaymentFormModel paymentModel)
@@ -92,11 +94,9 @@ namespace LionSkyNot.Controllers
 
             var user = Infrastructure.ClaimsPrincipalExtensions.GetId(this.User);
 
-
             var tuple = this.wishListService.BuyProducts(user);
 
-
-            if(tuple.Item1 == false && tuple.Item2 == null)
+            if (tuple.Item1 == false && tuple.Item2 == null)
             {
                 return BadRequest();
             }
@@ -110,6 +110,5 @@ namespace LionSkyNot.Controllers
             return View("SuccessBuyedAll", tuple.Item2);
 
         }
-
     }
 }
