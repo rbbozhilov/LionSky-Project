@@ -48,38 +48,7 @@ namespace LionSkyNot.Tests.Services
 
         }
 
-        [Fact]
-        public void ShouldDeleteTrainerCorrectAndReturnTrue()
-        {
-
-            //Arrange
-
-            using var data = DatabaseMock.Instance;
-            var trainerService = new TrainerService(data);
-
-            //Act
-
-            data.Trainers.Add(new Trainer()
-            {
-                Id = 1,
-                UserId = "userid",
-                Description = "testtest",
-                ImageUrl = "eqweq",
-                FullName = "eqweq"
-            });
-            data.SaveChanges();
-
-            bool result = trainerService.Delete(1);
-
-            //Assert
-
-            Assert.True(result);
-            Assert.False(data.Trainers.Any());
-
-
-        }
-
-
+     
         [Fact]
         public void ShouldCreateTrainerCorrect()
         {
