@@ -46,7 +46,7 @@
                 @if (User.Identity.IsAuthenticated && (User.IsInRole("Administrator") || User.IsInRole("Moderator")))
                 {
                     <li class="nav-item">
-                        <a class="nav-link text-white" asp-area="" asp-controller="Admin" asp-action="Index">Admin Panel</a>
+                        <a class="nav-link text-white" asp-area="Admin" asp-controller="Admin" asp-action="Index">Admin Panel</a>
                     </li>
                 }
             </ul>

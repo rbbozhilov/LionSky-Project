@@ -31,6 +31,7 @@ namespace LionSkyNot.Data.Models.Classes
 
         public bool IsCandidate { get; set; } = false;
 
+        public bool IsDeleted { get; set; } = false;
 
         [ForeignKey(nameof(Categorie))]
         public int CategorieId { get; set; }

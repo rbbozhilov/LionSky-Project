@@ -4,6 +4,8 @@ using LionSkyNot.Data.Models.Classes;
 
 using LionSkyNot.Models.Trainers;
 
+using LionSkyNot.Services.Classes;
+
 using LionSkyNot.Views.ViewModels.Trainers;
 
 
@@ -64,6 +66,11 @@ namespace LionSkyNot.Services.Trainers
         }
 
 
+        public bool isDeletedTrainer(string userId)
+        => data.Trainers
+               .Any(t => t.UserId == userId && t.IsDeleted == true);
+
+
         public bool Delete(int id)
         {
             var currentTrainer = this.data.Trainers.Where(t => t.Id == id)
@@ -74,7 +81,7 @@ namespace LionSkyNot.Services.Trainers
                 return false;
             }
 
-            this.data.Trainers.Remove(currentTrainer);
+            currentTrainer.IsDeleted = true;
 
             this.data.SaveChanges();
 
@@ -85,7 +92,7 @@ namespace LionSkyNot.Services.Trainers
 
         public bool IsTrainer(string userId)
          => this.data.Trainers
-                     .Any(t => t.UserId == userId && t.IsCandidate == false);
+                     .Any(t => t.UserId == userId && t.IsCandidate == false && t.IsDeleted == false);
 
 
         public bool IsCandidate(string userId)
@@ -147,14 +154,14 @@ namespace LionSkyNot.Services.Trainers
 
         public int GetTrainerId(string userId)
         => this.data.Trainers
-                    .Where(t => t.UserId == userId && t.IsCandidate == false)
+                    .Where(t => t.UserId == userId && t.IsCandidate == false && t.IsDeleted == false)
                     .Select(t => t.Id)
                     .FirstOrDefault();
 
 
         public IEnumerable<TrainerListViewModel> GetAllTrainersByCategory(string category)
         => this.data.Trainers
-                    .Where(t => t.Categorie.Name == category && t.IsCandidate == false)
+                    .Where(t => t.Categorie.Name == category && t.IsCandidate == false && t.IsDeleted == false)
                     .Select(t => new TrainerListViewModel()
                     {
                         FullName = t.FullName,
@@ -177,7 +184,7 @@ namespace LionSkyNot.Services.Trainers
 
         public IEnumerable<TrainerListViewModel> SearchTrainerByName(string searchedName)
         => this.data.Trainers
-                    .Where(t => t.FullName.ToLower().Contains(searchedName.ToLower()) && t.IsCandidate == false)
+                    .Where(t => t.FullName.ToLower().Contains(searchedName.ToLower()) && t.IsCandidate == false && t.IsDeleted == false)
                     .Select(t => new TrainerListViewModel()
                     {
                         FullName = t.FullName,
@@ -189,7 +196,7 @@ namespace LionSkyNot.Services.Trainers
 
         public TrainerViewModel GetTrainerById(int id)
         => this.data.Trainers
-                    .Where(t => t.Id == id && t.IsCandidate == false)
+                    .Where(t => t.Id == id && t.IsCandidate == false && t.IsDeleted == false)
                     .Select(t => new TrainerViewModel()
                     {
                         FullName = t.FullName,
@@ -205,7 +212,7 @@ namespace LionSkyNot.Services.Trainers
 
         public IEnumerable<TrainerFormModelForAdmin> GetAllTrainersForAdmin()
         => this.data.Trainers
-                    .Where(t => t.IsCandidate == false)
+                    .Where(t => t.IsCandidate == false && t.IsDeleted == false)
                     .Select(t => new TrainerFormModelForAdmin()
                     {
                         Id = t.Id,
@@ -231,7 +238,7 @@ namespace LionSkyNot.Services.Trainers
 
         private TrainerViewModel GetTopTrainerByCategorie(string category)
         => this.data.Trainers
-                    .Where(t => t.Categorie.Name == category && t.IsCandidate == false)
+                    .Where(t => t.Categorie.Name == category && t.IsCandidate == false && t.IsDeleted == false)
                     .Select(t => new TrainerViewModel()
                     {
                         FullName = t.FullName,
@@ -245,8 +252,6 @@ namespace LionSkyNot.Services.Trainers
                     .OrderByDescending(t => t.YearOfExperience)
                     .Take(1)
                     .FirstOrDefault();
-
-
 
     }
 }

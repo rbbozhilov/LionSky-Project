@@ -99,6 +99,14 @@ namespace LionSkyNot.Services.Products
         }
 
 
+        public bool IsHaveBrand(int brandId)
+        => this.data.Brands.Any(t => t.Id == brandId);
+
+
+        public bool IsHaveType(int typeId)
+        => this.data.Types.Any(t => t.Id == typeId);
+
+
         public bool DeleteProduct(int id)
         {
             var currentProduct = this.data.Products

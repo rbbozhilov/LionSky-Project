@@ -19,13 +19,17 @@
                         <li class="list-group-item">Price: @String.Format(currentProduct.Price % 1 == 0 ? "{0:0}" : "{0:0.00}", currentProduct.Price) £</li>
                     </ul>
                     <div class="card-body">
-                        <a asp-controller="Admin" asp-action="DeleteProduct" asp-route-id="@currentProduct.Id" class="btn btn-danger">Delete Product</a>
-                        <a asp-controller="Admin" asp-action="EditProduct" asp-route-id="@currentProduct.Id" class="btn btn-warning">Edit Product</a>
+                        <a asp-controller="Shop" asp-action="DeleteProduct" asp-route-id="@currentProduct.Id" class="btn btn-danger">Delete Product</a>
+                        <a asp-controller="Shop" asp-action="EditProduct" asp-route-id="@currentProduct.Id" class="btn btn-warning">Edit Product</a>
                     </div>
                 </div>
             }
 
         </div>
     </div>
+}
+else
+{
+    <h1> Don't have products yet , try soon !</h1>
 }
 

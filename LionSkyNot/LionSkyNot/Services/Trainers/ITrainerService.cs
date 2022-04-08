@@ -28,6 +28,8 @@ namespace LionSkyNot.Services.Trainers
 
         bool IsTrainer(string userId);
 
+        bool isDeletedTrainer(string userId);
+
         bool IsCandidate(string userId);
 
         bool Delete(int id);

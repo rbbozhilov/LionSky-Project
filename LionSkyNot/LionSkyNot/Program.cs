@@ -7,6 +7,7 @@ using LionSkyNot.Services.Products;
 using LionSkyNot.Services.Recipes;
 using LionSkyNot.Services.Statistics;
 using LionSkyNot.Services.Trainers;
+using LionSkyNot.Services.Users;
 using LionSkyNot.Services.WishLists;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -43,6 +44,7 @@ builder.Services.AddTransient<ITrainerService, TrainerService>();
 builder.Services.AddTransient<IStatisticsService, StatisticsService>();
 builder.Services.AddTransient<IClassService, ClassService>();
 builder.Services.AddTransient<IWishListService, WishListService>();
+builder.Services.AddTransient<IUserService, UserService>();
 
 var app = builder.Build();
 

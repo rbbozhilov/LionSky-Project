@@ -31,7 +31,6 @@ namespace LionSkyNot.Tests.Controllers
             var wishListService = new WishListService(data, productService);
 
             var wishListController = new WishListController(
-                                                            data,
                                                             productService,
                                                             wishListService);
 
@@ -58,7 +57,6 @@ namespace LionSkyNot.Tests.Controllers
             var wishListService = new WishListService(data, productService);
 
             var wishListController = new WishListController(
-                                                            data,
                                                             productService,
                                                             wishListService);
 
@@ -91,7 +89,6 @@ namespace LionSkyNot.Tests.Controllers
             var wishListService = new WishListService(data, productService);
 
             var wishListController = new WishListController(
-                                                            data,
                                                             productService,
                                                             wishListService);
 

@@ -11,6 +11,8 @@
 
         public string Trainer { get; set; }
 
+        public bool isDeletedTrainer { get; set; }
+
         public string ClassName { get; set; }
 
         public string ImageUrl { get; set; }

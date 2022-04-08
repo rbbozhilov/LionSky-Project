@@ -16,6 +16,7 @@
         var userIsTrainer = TrainerService.IsTrainer(userId);
         var userIsCandidate = TrainerService.IsCandidate(userId);
         var userHaveClasses = ClassService.IsUserHaveClasses(userId);
+        var useerIsDeletedTrainer = TrainerService.isDeletedTrainer(userId);
 
         if (userHaveClasses)
         {
@@ -26,7 +27,7 @@
 
         @if (!User.IsInRole("Administrator") && !User.IsInRole("Moderator"))
         {
-            @if (!userIsTrainer)
+            @if (!userIsTrainer && !useerIsDeletedTrainer)
             {
                 @if (!userIsCandidate)
                 {
@@ -35,7 +36,7 @@
                     </li>
                 }
             }
-            else
+            else if(!useerIsDeletedTrainer)
             {
                 <li class="nav-item">
                     <a class="nav-link text-white" asp-area="" asp-controller="Trainer" asp-action="TrainerClasses">Training classes</a>

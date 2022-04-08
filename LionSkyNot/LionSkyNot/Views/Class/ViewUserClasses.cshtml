@@ -26,7 +26,14 @@
                                 <img src="@currentCLass.ImageUrl" class="img-fluid img-thumbnail" alt="Sheep">
                             </td>
                             <td>@currentCLass.ClassName</td>
-                            <td>@currentCLass.Trainer</td>
+                            @if (@currentCLass.isDeletedTrainer)
+                            {
+                                <td>Not have in the moment trainer</td>
+                            }
+                            else
+                            {
+                                <td>@currentCLass.Trainer</td>
+                            }
                             <td>@currentCLass.StartDateTime.ToString("dd-MM-yyyy")</td>
                             <td>@currentCLass.EndDateTime.ToString("dd-MM-yyyy")</td>
                             <td><a asp-controller="Class" asp-action="RemoveFromClassUser" asp-route-id="@currentCLass.Id" class="btn btn-danger">Unsubscribe</a></td>

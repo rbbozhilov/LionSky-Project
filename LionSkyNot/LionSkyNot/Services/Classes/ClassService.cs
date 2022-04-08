@@ -79,6 +79,11 @@ namespace LionSkyNot.Services.Classes
 
         }
 
+
+        public bool IsHaveTrainerById(int id)
+        => this.data.Trainers.Any(t => t.Id == id);
+
+
         public bool CheckFreePlace(string classId)
         {
             var currentCount = this.data.Classes
@@ -110,8 +115,9 @@ namespace LionSkyNot.Services.Classes
         {
 
 
-            var currentClass = this.data.Classes.Where(c => c.Id == id && c.IsDeleted == false)
-                                                .FirstOrDefault();
+            var currentClass = this.data.Classes
+                                        .Where(c => c.Id == id && c.IsDeleted == false)
+                                        .FirstOrDefault();
 
             if (currentClass == null)
             {
@@ -136,8 +142,9 @@ namespace LionSkyNot.Services.Classes
 
         public bool Delete(string id)
         {
-            var currentClass = this.data.Classes.Where(c => c.Id == id && c.IsDeleted == false)
-                                                .FirstOrDefault();
+            var currentClass = this.data.Classes
+                                        .Where(c => c.Id == id && c.IsDeleted == false)
+                                        .FirstOrDefault();
 
             if (currentClass == null)
             {
@@ -181,7 +188,8 @@ namespace LionSkyNot.Services.Classes
                         ImageUrl = c.Class.ImageUrl,
                         StartDateTime = c.Class.StartDateTime,
                         EndDateTime = c.Class.EndDateTime,
-                        Trainer = c.Class.Trainer.FullName
+                        Trainer = c.Class.Trainer.FullName,
+                        isDeletedTrainer = c.Class.Trainer.IsDeleted
                     })
                     .ToList();
 
@@ -189,7 +197,7 @@ namespace LionSkyNot.Services.Classes
 
         public IEnumerable<TrainerClassViewModel> GetAllTrainers()
         => this.data.Trainers
-                    .Where(t => t.IsCandidate == false)
+                    .Where(t => t.IsCandidate == false && t.IsDeleted == false)
                     .Select(t => new TrainerClassViewModel()
                     {
                         Id = t.Id,
@@ -219,12 +227,12 @@ namespace LionSkyNot.Services.Classes
                      .Select(c => new ClassViewModel()
                      {
                          ClassName = c.ClassName,
-
                          StartDateTime = c.StartDateTime,
                          EndDateTime = c.EndDateTime,
                          ImageUrl = c.ImageUrl,
                          Trainer = c.Trainer.FullName,
-                         Id = c.Id
+                         Id = c.Id,
+                         isDeletedTrainer = c.Trainer.IsDeleted
                      })
                      .ToList();
 
@@ -266,7 +274,8 @@ namespace LionSkyNot.Services.Classes
                          ImageUrl = c.ImageUrl,
                          MaxPractitionerCount = c.MaxPractitionerCount,
                          PractitionerCount = c.PractitionerCount,
-                         TrainerName = c.Trainer.FullName
+                         TrainerName = c.Trainer.FullName,
+                         IsDeletedTrainer = c.Trainer.IsDeleted
                      })
                      .FirstOrDefault();
 
@@ -281,7 +290,8 @@ namespace LionSkyNot.Services.Classes
                         ImageUrl = c.ImageUrl,
                         Trainer = c.Trainer.FullName,
                         StartDateTime = c.StartDateTime,
-                        EndDateTime = c.EndDateTime
+                        EndDateTime = c.EndDateTime,
+                        isDeletedTrainer = c.Trainer.IsDeleted
                     })
                     .ToList();
 

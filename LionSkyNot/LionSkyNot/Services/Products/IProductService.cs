@@ -30,6 +30,10 @@ namespace LionSkyNot.Services.Products
 
         bool DeleteProduct(int id);
 
+        bool IsHaveBrand(int brandId);
+
+        bool IsHaveType(int typeId);
+
         EditProductFormModel GetProductById(int id);
 
         Product TakeProduct(int id);

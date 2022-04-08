@@ -16,6 +16,8 @@ namespace LionSkyNot.Services.Exercises
 
         bool Edit(int id, string name, string imgUrl, string videoUrl);
 
+        bool AnyExercieByType(int id);
+
         EditExerciseFormModel GetExerciseById(int id);
 
         IEnumerable<TypeExerciseViewModel> GetAllTypeExercises();

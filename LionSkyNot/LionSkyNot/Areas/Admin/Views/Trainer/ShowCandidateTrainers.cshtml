@@ -29,8 +29,8 @@
                                 <td>@currentTrainer.BirthDate.ToString("dd-MM-yyyy")</td>
                                 <td>@currentTrainer.YearOfExperience</td>
                                 <td>@currentTrainer.Category</td>
-                                <td><a asp-controller="Admin" asp-action="AddTrainerCandidate" asp-route-id="@currentTrainer.Id" class="btn btn-success">Add Trainer</a></td>
-                                <td><a asp-controller="Admin" asp-action="DeleteTrainer" asp-route-id="@currentTrainer.Id" class="btn btn-danger">Remove</a></td>
+                                <td><a asp-controller="Trainer" asp-action="AddTrainerCandidate" asp-route-id="@currentTrainer.Id" class="btn btn-success">Add Trainer</a></td>
+                                <td><a asp-controller="Trainer" asp-action="DeleteTrainer" asp-route-id="@currentTrainer.Id" class="btn btn-danger">Remove</a></td>
                             </tr>
                     }
                 </tbody>

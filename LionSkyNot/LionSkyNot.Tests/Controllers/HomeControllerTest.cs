@@ -5,7 +5,6 @@ using LionSkyNot.Controllers;
 
 using LionSkyNot.Data.Models.Classes;
 
-using LionSkyNot.Models;
 
 using LionSkyNot.Services.Trainers;
 

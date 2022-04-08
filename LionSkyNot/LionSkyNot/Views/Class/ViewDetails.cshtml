@@ -14,7 +14,14 @@
     </div>
     <div class="col-sm-9">
         <div class="well">
-            <p style="color:red">Trainer: @Model.TrainerName</p>
+            @if (@Model.IsDeletedTrainer)
+            {
+               <p style="color:red">Trainer: Not have in the moment trainer</p>
+            }
+            else
+            {
+                <td>@Model.TrainerName</td>
+            }
             <br />
             <p>Start date: @Model.StartDateTime.ToString("dd-MM-yyyy")</p>
             <br />

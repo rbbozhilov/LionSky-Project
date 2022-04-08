@@ -1,4 +1,5 @@
-﻿using LionSkyNot.Models.Class;
+﻿using LionSkyNot.Data.Models.Classes;
+using LionSkyNot.Models.Class;
 
 using LionSkyNot.Views.ViewModels.Classes;
 
@@ -16,6 +17,7 @@ namespace LionSkyNot.Services.Classes
                     DateTime startDateTime,
                     DateTime endDateTime);
 
+
         bool Edit(
                   string id,
                   string className,
@@ -28,6 +30,8 @@ namespace LionSkyNot.Services.Classes
 
 
         bool Delete(string id);
+
+        bool IsHaveTrainerById(int id);
 
         bool RemovingClassFromUser(string userId, string classId);
 

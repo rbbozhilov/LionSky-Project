@@ -9,6 +9,8 @@
 
         public string TrainerName { get; set; }
 
+        public bool IsDeletedTrainer { get; set; }
+
         public int PractitionerCount { get; set; }
 
         public int MaxPractitionerCount { get; set; }

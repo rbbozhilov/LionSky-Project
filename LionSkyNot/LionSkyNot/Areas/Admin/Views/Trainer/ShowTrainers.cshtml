@@ -21,7 +21,7 @@
 
                     <tr>
                         <td>@trainer.FullName</td>
-                        <td><a asp-controller="Admin" asp-action="DeleteTrainer" asp-route-id="@trainer.Id" class="btn btn-danger">Delete Trainer</a></td>
+                        <td><a asp-controller="Trainer" asp-action="DeleteTrainer" asp-route-id="@trainer.Id" class="btn btn-danger">Delete Trainer</a></td>
                     </tr>
                 }
 
@@ -31,7 +31,7 @@
     }
     else
     {
-        <h1> Don't have recipes yet , try soon !</h1>
+        <h1> Don't have trainers yet , try soon !</h1>
     }
 
 

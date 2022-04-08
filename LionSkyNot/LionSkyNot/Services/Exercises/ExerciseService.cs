@@ -89,6 +89,10 @@ namespace LionSkyNot.Services.Exercises
         }
 
 
+        public bool AnyExercieByType(int id)
+        => this.data.TypeExercises.Any(e => e.Id == id);
+
+
         public EditExerciseFormModel GetExerciseById(int id)
         => this.data.Exercises
                     .Where(e => e.Id == id && e.IsDeleted == false)
@@ -131,6 +135,5 @@ namespace LionSkyNot.Services.Exercises
                         Id = x.Id,
                         Name = x.TypeName
                     });
-
     }
 }
