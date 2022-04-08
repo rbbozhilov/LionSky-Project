@@ -1,12 +1,21 @@
-﻿using LionSkyNot.Controllers;
-using LionSkyNot.Data.Models.Shop;
-using LionSkyNot.Services.Products;
-using LionSkyNot.Tests.Mock;
-using LionSkyNot.Views.ViewModels.Products;
-using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+
 using System.Linq;
+
+using LionSkyNot.Controllers;
+
+using LionSkyNot.Data.Models.Shop;
+
+using LionSkyNot.Services.Products;
+
+using LionSkyNot.Tests.Mock;
+
+using LionSkyNot.Views.ViewModels.Products;
+
+using Microsoft.AspNetCore.Mvc;
+
 using Xunit;
+
 
 namespace LionSkyNot.Tests.Controllers
 {
@@ -17,6 +26,7 @@ namespace LionSkyNot.Tests.Controllers
         private Type type;
         private Product product;
         private Product product2;
+
 
         public ShopControllerTest()
         {
@@ -243,8 +253,6 @@ namespace LionSkyNot.Tests.Controllers
             data.Types.Add(this.type);
             data.Products.AddRange(this.product, this.product2);
             data.SaveChanges();
-
-
 
             //Act
 
