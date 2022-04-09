@@ -1,5 +1,9 @@
 ﻿using LionSkyNot.Views.ViewModels.Products;
+
 using System.ComponentModel.DataAnnotations;
+
+using static LionSkyNot.Data.DataConstants.Product;
+
 
 namespace LionSkyNot.Models.Products
 {
@@ -7,24 +11,24 @@ namespace LionSkyNot.Models.Products
     {
 
   
-        [MaxLength(255)]
-        [MinLength(2)]
+        [MaxLength(NameMaxLength)]
+        [MinLength(NameMinLength)]
         [Required]
         public string Name { get; set; }
 
         [Required]
-        [MaxLength(2000)]
-        [MinLength(10)]
+        [MaxLength(DescriptionMaxLength)]
+        [MinLength(DescriptionMinLength)]
         public string Description { get; set; }
 
-        
+        [Range(MinPrice, MaxPrice)]
         public decimal Price { get; set; }
 
         [Url]
         [Required]
         public string ImageUrl { get; set; }
 
-        [Range(1,100)]
+        [Range(MinInStock,MaxInStock)]
         public int InStock { get; set; }
 
         public int TypeId { get; set; }

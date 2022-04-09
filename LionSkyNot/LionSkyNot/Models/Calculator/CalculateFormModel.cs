@@ -1,20 +1,22 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
+using static LionSkyNot.Data.DataConstants.Calculator;
+
 namespace LionSkyNot.Models.Calculator
 {
     public class CalculateFormModel
     {
 
         [Required]
-        [Range(1,120 , ErrorMessage = "Enter again , age is not correct")]
+        [Range(MinAge,MaxAge , ErrorMessage = AgeErrorMessage)]
         public int Age { get; set; }
 
         [Required]
-        [Range(1,150,ErrorMessage = "Enter again, weight should be between {1} and {2}")]
+        [Range(MinWeight,MaxWeight,ErrorMessage = WeightErrorMessage)]
         public float Weight { get; set; }
         
         [Required]
-        [Range(1, 220, ErrorMessage = "Enter again, height should be between {1} and {2}")]
+        [Range(MinHeight, MaxHeight, ErrorMessage = HeightErrorMessage)]
         public float Height { get; set; }
 
         public string Goal { get; set; }

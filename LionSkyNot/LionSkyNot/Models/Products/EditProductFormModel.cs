@@ -1,19 +1,22 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
+using static LionSkyNot.Data.DataConstants.Product;
+
+
 namespace LionSkyNot.Models.Products
 {
     public class EditProductFormModel
     {
 
-        [MaxLength(255)]
-        [MinLength(2)]
+        [MaxLength(NameMaxLength)]
+        [MinLength(NameMinLength)]
         [Required]
         public string Name { get; set; }
 
-        [Range(0,100)]
+        [Range(MinPromotionPercentage,MaxPromotionPercentage)]
         public float PromotionPercentage { get; set; }
 
-        [Range(0,1000)]
+        [Range(MinPrice,MaxPrice)]
         public decimal Price { get; set; }
 
         [Url]

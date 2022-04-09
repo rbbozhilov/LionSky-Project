@@ -1,11 +1,16 @@
 ﻿using LionSkyNot.Views.ViewModels.Exercises;
+
 using System.ComponentModel.DataAnnotations;
+
+using static LionSkyNot.Data.DataConstants.Exercise;
+
 
 namespace LionSkyNot.Models.Exercises
 {
     public class AddExerciseFormModel
     {
-        [MaxLength(200)]
+        [MaxLength(NameMaxLength)]
+        [MinLength(NameMinLength)]
         [Required]
         public string Name { get; set; }
 
@@ -17,7 +22,7 @@ namespace LionSkyNot.Models.Exercises
         [Required]
         public string ImageUrl { get; set; }
 
-        [Display(Name = "Type")]
+        [Display(Name = DisplayTypeName)]
         public int TypeId { get; set; }
 
         public IEnumerable<TypeExerciseViewModel>? Type { get; set; }

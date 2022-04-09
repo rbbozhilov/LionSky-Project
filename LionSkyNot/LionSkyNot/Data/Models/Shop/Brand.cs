@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using static LionSkyNot.Data.DataConstants;
+
+using static LionSkyNot.Data.DataConstants.Brand;
+
 
 namespace LionSkyNot.Data.Models.Shop
 {
@@ -10,7 +12,7 @@ namespace LionSkyNot.Data.Models.Shop
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(255)]
+        [MaxLength(NameMaxLength)]
         public string BrandName { get; set; }
 
     }

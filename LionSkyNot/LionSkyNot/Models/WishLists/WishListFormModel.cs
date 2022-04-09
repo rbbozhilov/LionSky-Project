@@ -13,7 +13,6 @@ namespace LionSkyNot.Models.WishLists
 
         private decimal TotalPrice()
         {
-
             decimal price = 0;
 
             foreach(var product in this.Products)

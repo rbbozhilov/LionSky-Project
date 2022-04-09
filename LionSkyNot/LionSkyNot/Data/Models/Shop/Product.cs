@@ -1,6 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+
 using System.ComponentModel.DataAnnotations.Schema;
-using static LionSkyNot.Data.DataConstants;
+
+using static LionSkyNot.Data.DataConstants.Product;
+
 
 namespace LionSkyNot.Data.Models.Shop
 {
@@ -16,21 +19,21 @@ namespace LionSkyNot.Data.Models.Shop
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(255)]
+        [MaxLength(NameMaxLength)]
         public string Name { get; set; }
 
         [Required]
-        [MaxLength(2000)]
+        [MaxLength(DescriptionMaxLength)]
         public string Description { get; set; }
 
         public int CountInStock { get; set; }
 
         public int CountOfBuys { get; set; }
 
-        [Column(TypeName = "decimal(18,2)")]
+        [Column(TypeName = TypeDecimal)]
         public decimal Price { get; set; }
 
-        [Column(TypeName = "decimal(18,2)")]
+        [Column(TypeName = TypeDecimal)]
         public decimal PriceOnPromotion { get; set; }
 
         [Required]

@@ -1,28 +1,31 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
+using static LionSkyNot.Data.DataConstants.Contact;
+
+
 namespace LionSkyNot.Models.Contact
 {
     public class ContactFormModel
     {
 
         [Required]
-        [Display(Name = "Name")]
-        [MinLength(2, ErrorMessage = "The name must be at least 2 letters")]
-        [MaxLength(20, ErrorMessage = "Too long name")]
+        [Display(Name = DisplayName)]
+        [MinLength(ContactNameMinLength, ErrorMessage = NameMinLengthErrorMessage)]
+        [MaxLength(ContactNameMaxLength, ErrorMessage = NameMaxLengthErrorMessage)]
         public string Name { get; set; }
 
         [Required]
-        [Display(Name = "Email")]
+        [Display(Name = DisplayEmail)]
         [EmailAddress]
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "Too long subject")]
+        [StringLength(StringLengthSubject, ErrorMessage = SubjectStringLengthErrorMessage)]
         public string Subject { get; set; }
 
         [Required]
-        [Display(Name = "Message")]
-        [StringLength(5000, ErrorMessage = "Too long message")]
+        [Display(Name = DisplayMessage)]
+        [StringLength(StringLengthMessage, ErrorMessage = SubjectStringLengthErrorMessage)]
         public string Message { get; set; }
 
 

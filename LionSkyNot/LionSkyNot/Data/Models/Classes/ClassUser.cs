@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
+
 namespace LionSkyNot.Data.Models.Classes
 {
     public class ClassUser

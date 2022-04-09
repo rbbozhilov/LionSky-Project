@@ -1,12 +1,17 @@
 ﻿using LionSkyNot.Views.ViewModels.Classes;
+
 using System.ComponentModel.DataAnnotations;
+
+using static LionSkyNot.Data.DataConstants.Class;
+
 
 namespace LionSkyNot.Models.Class
 {
     public class ClassFormModel
     {
 
-        [MaxLength(255)]
+        [MaxLength(NameMaxLength)]
+        [MinLength(NameMinLength)]
         [Required]
         public string ClassName { get; set; }
 
@@ -14,8 +19,8 @@ namespace LionSkyNot.Models.Class
         [Required]
         public string ImageUrl { get; set; }
 
+        [Range(MinPractitionerCount, MaxPractitionerCounts)]
         public int MaxPractitionerCount { get; set; }
-
 
         public DateTime StartDateTime { get; set; }
 

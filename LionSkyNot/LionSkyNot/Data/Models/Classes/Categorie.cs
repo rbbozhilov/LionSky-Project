@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using static LionSkyNot.Data.DataConstants;
+
+using static LionSkyNot.Data.DataConstants.Categorie;
+
 
 namespace LionSkyNot.Data.Models.Classes
 {
@@ -14,6 +16,7 @@ namespace LionSkyNot.Data.Models.Classes
         [Key]
         public int Id { get; set; }
 
+        [MaxLength(CategorieNameMaxLength)]
         [Required]
         public string Name { get; set; }
 

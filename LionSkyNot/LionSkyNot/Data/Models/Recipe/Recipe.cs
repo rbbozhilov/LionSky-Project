@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using static LionSkyNot.Data.DataConstants;
+
+using static LionSkyNot.Data.DataConstants.Recipe;
+
 
 namespace LionSkyNot.Data.Models.Recipe
 {
@@ -10,11 +12,11 @@ namespace LionSkyNot.Data.Models.Recipe
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(255)]
+        [MaxLength(NameMaxLength)]
         public string Name { get; set; }
 
         [Required]
-        [MaxLength(2000)]
+        [MaxLength(DescriptionMaxLength)]
         public string Description { get; set; }
 
         [Required]

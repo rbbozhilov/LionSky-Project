@@ -1,16 +1,21 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
+using static LionSkyNot.Data.DataConstants.Recipe;
+
+
 namespace LionSkyNot.Models.Recipe
 {
     public class RecipeFormModel
     {
 
         [Required]
-        [MaxLength(255)]
+        [MaxLength(NameMaxLength)]
+        [MinLength(NameMinLength)]
         public string Name { get; set; }
 
         [Required]
-        [MaxLength(2000)]
+        [MaxLength(DescriptionMaxLength)]
+        [MinLength(DescriptionMinLength)]
         public string Description { get; set; }
 
         [Required]

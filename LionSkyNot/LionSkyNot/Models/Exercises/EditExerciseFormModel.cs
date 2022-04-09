@@ -1,11 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
+using static LionSkyNot.Data.DataConstants.Exercise;
+
+
 namespace LionSkyNot.Models.Exercises
 {
     public class EditExerciseFormModel
     {
 
-        [MaxLength(200)]
+        [MaxLength(NameMaxLength)]
+        [MinLength(NameMinLength)]
         [Required]
         public string Name { get; set; }
 

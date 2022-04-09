@@ -1,5 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+
 using System.ComponentModel.DataAnnotations.Schema;
+
+using static LionSkyNot.Data.DataConstants.Exercise;
+
 
 namespace LionSkyNot.Data.Models.Exercise
 {
@@ -9,7 +13,7 @@ namespace LionSkyNot.Data.Models.Exercise
         [Key]
         public int Id { get; set; }
 
-        [MaxLength(200)]
+        [MaxLength(NameMaxLength)]
         [Required]
         public string Name { get; set; }
 

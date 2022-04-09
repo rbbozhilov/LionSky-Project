@@ -1,6 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+
 using System.ComponentModel.DataAnnotations.Schema;
-using static LionSkyNot.Data.DataConstants;
+
+using static LionSkyNot.Data.DataConstants.Trainer;
+
 
 namespace LionSkyNot.Data.Models.Classes
 {
@@ -10,14 +13,14 @@ namespace LionSkyNot.Data.Models.Classes
         [Key]
         public int Id { get; set; }
 
-        [MaxLength(50)]
+        [MaxLength(NameMaxLength)]
         [Required]
         public string FullName { get; set; }
 
         [Required]
         public string ImageUrl { get; set; }
 
-        [MaxLength(255)]
+        [MaxLength(DescriptionMaxLength)]
         [Required]
         public string Description { get; set; }
 
