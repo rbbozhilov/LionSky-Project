@@ -6,6 +6,7 @@ using LionSkyNot.Data.Models.Shop;
 using LionSkyNot.Data.Models.User;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Text;
 using Type = LionSkyNot.Data.Models.Shop.Type;
 
 namespace LionSkyNot.Infrastructure
@@ -28,6 +29,7 @@ namespace LionSkyNot.Infrastructure
             SeedProductType(data);
             SeedAdminRole(serviceProvider);
             SeedModeratorRole(serviceProvider);
+            SeedUsers(serviceProvider);
 
             return app;
         }
@@ -147,8 +149,6 @@ namespace LionSkyNot.Infrastructure
                 })
                 .GetAwaiter()
                 .GetResult();
-
-
         }
 
 
@@ -188,6 +188,43 @@ namespace LionSkyNot.Infrastructure
 
         }
 
+
+        private static void SeedUsers(IServiceProvider services)
+        {
+
+            var userManager = services.GetRequiredService<UserManager<User>>();
+            StringBuilder builder = new StringBuilder();
+
+            Task
+               .Run(async () =>
+               {
+
+                   var userPassword = "user12";
+
+                   for(int i = 0; i < 20; i++)
+                   {
+
+                       builder.Append("user");
+                       builder.Append(i.ToString());
+                       builder.Append("@lionsky.net");
+
+                       var user = new User
+                       {
+                           Email = builder.ToString(),
+                           UserName = builder.ToString()
+                       };
+
+                       await userManager.CreateAsync(user, userPassword);
+
+                       builder.Clear();
+                   }
+
+    
+               })
+               .GetAwaiter()
+               .GetResult();
+            
+        }
 
     }
 }

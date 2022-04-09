@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LionSkyNot.Migrations
 {
     [DbContext(typeof(LionSkyDbContext))]
-    [Migration("20220402154440_InitialCreate")]
+    [Migration("20220409111836_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,7 +34,8 @@ namespace LionSkyNot.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
@@ -139,6 +140,9 @@ namespace LionSkyNot.Migrations
                     b.Property<bool>("IsCandidate")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -219,19 +223,10 @@ namespace LionSkyNot.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<float>("Calories")
-                        .HasColumnType("real");
-
-                    b.Property<float>("Carbohydrates")
-                        .HasColumnType("real");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(2000)
                         .HasColumnType("nvarchar(2000)");
-
-                    b.Property<float>("Fat")
-                        .HasColumnType("real");
 
                     b.Property<string>("ImageUrl")
                         .IsRequired()
@@ -244,9 +239,6 @@ namespace LionSkyNot.Migrations
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
-
-                    b.Property<float>("Protein")
-                        .HasColumnType("real");
 
                     b.HasKey("Id");
 

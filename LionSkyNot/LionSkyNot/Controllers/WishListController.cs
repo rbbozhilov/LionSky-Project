@@ -38,6 +38,11 @@ namespace LionSkyNot.Controllers
 
             var tuple = this.wishListService.GetProductsOfUser(user);
 
+            if(tuple.Item1 == false)
+            {
+                return View("NotAddedProducts");
+            }
+
             var currentProducts = tuple.Item2;
 
             return View(currentProducts);

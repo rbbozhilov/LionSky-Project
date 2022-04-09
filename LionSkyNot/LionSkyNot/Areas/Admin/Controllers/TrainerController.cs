@@ -23,7 +23,7 @@ namespace LionSkyNot.Areas.Admin.Controllers
         private ITrainerService trainerService;
         private IUserService userService;
 
-        public TrainerController(ITrainerService trainerService , IUserService userService)
+        public TrainerController(ITrainerService trainerService, IUserService userService)
         {
             this.trainerService = trainerService;
             this.userService = userService;
@@ -86,6 +86,11 @@ namespace LionSkyNot.Areas.Admin.Controllers
             if (currentUser == null)
             {
                 ModelState.AddModelError("notFindUser", "The user is not exists");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View(trainerModel);
             }
 
             if (this.trainerService.IsTrainer(currentUser.Id))

@@ -1,5 +1,5 @@
-﻿using LionSkyNot.Models.Class;
-using LionSkyNot.Models.Products;
+﻿using LionSkyNot.Models.Products;
+
 
 namespace LionSkyNot.Models.WishLists
 {

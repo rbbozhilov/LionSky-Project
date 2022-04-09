@@ -190,6 +190,7 @@ namespace LionSkyNot.Services.Trainers
                         FullName = t.FullName,
                         Description = t.Description,
                         ImageUrl = t.ImageUrl,
+                        Category = t.Categorie.Name
                     })
                     .ToList();
 
