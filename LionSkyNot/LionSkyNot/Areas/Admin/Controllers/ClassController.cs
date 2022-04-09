@@ -1,13 +1,20 @@
 ﻿using LionSkyNot.Controllers;
+
 using LionSkyNot.Models.Class;
+
 using LionSkyNot.Services.Classes;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+
+using static LionSkyNot.Areas.Admin.AdminConstants;
+
+
 
 namespace LionSkyNot.Areas.Admin.Controllers
 {
 
-    [Area(AdminConstants.AreaName)]
+    [Area(AreaName)]
     public class ClassController : BaseController
     {
 
@@ -21,7 +28,7 @@ namespace LionSkyNot.Areas.Admin.Controllers
 
 
 
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = AdminRole)]
         public IActionResult ShowClasses(IEnumerable<ClassFormModelForAdmin> classModel)
         {
             classModel = this.classService.GetAllClassesForAdmin();
@@ -29,7 +36,7 @@ namespace LionSkyNot.Areas.Admin.Controllers
             return View(classModel);
         }
 
-        [Authorize(Roles = "Moderator,Administrator")]
+        [Authorize(Roles = ModeratorAndAdminRole)]
         public IActionResult AddClass()
         {
             return View(new ClassFormModel()
@@ -39,7 +46,7 @@ namespace LionSkyNot.Areas.Admin.Controllers
 
         }
 
-        [Authorize(Roles = "Moderator,Administrator")]
+        [Authorize(Roles = ModeratorAndAdminRole)]
         [HttpPost]
         public IActionResult AddClass(ClassFormModel classModel)
         {
@@ -76,14 +83,14 @@ namespace LionSkyNot.Areas.Admin.Controllers
         }
 
 
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = AdminRole)]
         public IActionResult Successfull()
         {
             return View();
         }
 
 
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = AdminRole)]
         public IActionResult EditClass(string id)
         {
 
@@ -111,7 +118,7 @@ namespace LionSkyNot.Areas.Admin.Controllers
         }
 
 
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = AdminRole)]
         [HttpPost]
         public IActionResult EditClass(ClassFormModel classModel, string id)
         {
@@ -142,7 +149,7 @@ namespace LionSkyNot.Areas.Admin.Controllers
         }
 
 
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = AdminRole)]
         public IActionResult DeleteClass(string id)
         {
 
@@ -155,8 +162,6 @@ namespace LionSkyNot.Areas.Admin.Controllers
 
             return View("Successfull");
         }
-
-
 
     }
 }

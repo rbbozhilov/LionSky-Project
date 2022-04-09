@@ -1,13 +1,19 @@
 ﻿using LionSkyNot.Controllers;
+
 using LionSkyNot.Models.Exercises;
+
 using LionSkyNot.Services.Exercises;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+
+using static LionSkyNot.Areas.Admin.AdminConstants;
+
 
 namespace LionSkyNot.Areas.Admin.Controllers
 {
 
-    [Area(AdminConstants.AreaName)]
+    [Area(AreaName)]
     public class ExerciseController : BaseController
     {
 
@@ -21,7 +27,7 @@ namespace LionSkyNot.Areas.Admin.Controllers
 
 
 
-        [Authorize(Roles = "Moderator,Administrator")]
+        [Authorize(Roles = ModeratorAndAdminRole)]
         public IActionResult AddExercise()
         {
             return View(new AddExerciseFormModel()
@@ -31,7 +37,7 @@ namespace LionSkyNot.Areas.Admin.Controllers
         }
 
 
-        [Authorize(Roles = "Moderator,Administrator")]
+        [Authorize(Roles = ModeratorAndAdminRole)]
         [HttpPost]
         public IActionResult AddExercise(AddExerciseFormModel exerciseModel)
         {
@@ -54,7 +60,7 @@ namespace LionSkyNot.Areas.Admin.Controllers
         }
 
 
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = AdminRole)]
         public IActionResult ShowExercise(IEnumerable<ExerciseFormModelForAdmin> exerciseModel)
         {
 
@@ -64,13 +70,13 @@ namespace LionSkyNot.Areas.Admin.Controllers
         }
 
 
-        [Authorize(Roles = "Moderator,Administrator")]
+        [Authorize(Roles = ModeratorAndAdminRole)]
         public IActionResult SuccessChange()
         {
             return View();
         }
 
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = AdminRole)]
         public IActionResult EditExercise(int id)
         {
 
@@ -90,7 +96,7 @@ namespace LionSkyNot.Areas.Admin.Controllers
         }
 
 
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = AdminRole)]
         [HttpPost]
         public IActionResult EditExercise(EditExerciseFormModel exerciseModel, int id)
         {
@@ -117,7 +123,7 @@ namespace LionSkyNot.Areas.Admin.Controllers
         }
 
 
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = AdminRole)]
         public IActionResult DeleteExercise(int id)
         {
 

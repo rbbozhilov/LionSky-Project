@@ -1,9 +1,13 @@
 ﻿using LionSkyNot.Controllers;
+
 using Microsoft.AspNetCore.Mvc;
+
+using static LionSkyNot.Areas.Admin.AdminConstants;
+
 
 namespace LionSkyNot.Areas.Admin.Controllers
 {
-    [Area(AdminConstants.AreaName)]
+    [Area(AreaName)]
     public class Admin : BaseController
     {
 

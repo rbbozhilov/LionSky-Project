@@ -5,13 +5,14 @@ using LionSkyNot.Models.Products;
 using LionSkyNot.Services.Products;
 
 using Microsoft.AspNetCore.Authorization;
-
 using Microsoft.AspNetCore.Mvc;
+
+using static LionSkyNot.Areas.Admin.AdminConstants;
 
 
 namespace LionSkyNot.Areas.Admin.Controllers
 {
-    [Area(AdminConstants.AreaName)]
+    [Area(AreaName)]
     public class ShopController : BaseController
     {
 
@@ -24,7 +25,7 @@ namespace LionSkyNot.Areas.Admin.Controllers
 
 
 
-        [Authorize(Roles = "Moderator,Administrator")]
+        [Authorize(Roles = ModeratorAndAdminRole)]
         public IActionResult AddProduct()
         {
             return View(new AddProductFormModel()
@@ -36,7 +37,7 @@ namespace LionSkyNot.Areas.Admin.Controllers
         }
 
 
-        [Authorize(Roles = "Moderator,Administrator")]
+        [Authorize(Roles = ModeratorAndAdminRole)]
         [HttpPost]
         public IActionResult AddProduct(AddProductFormModel productModel)
         {
@@ -70,7 +71,7 @@ namespace LionSkyNot.Areas.Admin.Controllers
             return RedirectToAction("Successfull");
         }
 
-        [Authorize(Roles = "Moderator,Administrator")]
+        [Authorize(Roles = ModeratorAndAdminRole)]
         public IActionResult AddProductsInStock()
         {
             bool isDone = this.productService.UpdateInStockCountOfProducts();
@@ -85,21 +86,21 @@ namespace LionSkyNot.Areas.Admin.Controllers
         }
 
 
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = AdminRole)]
         public IActionResult Successfull()
         {
             return View();
         }
 
 
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = AdminRole)]
         public IActionResult NotSuccess()
         {
             return View();
         }
 
 
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = AdminRole)]
         public IActionResult ShowProducts(IEnumerable<ProductServiceModel> serviceModel)
         {
 
@@ -109,7 +110,7 @@ namespace LionSkyNot.Areas.Admin.Controllers
         }
 
 
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = AdminRole)]
         public IActionResult EditProduct(int id)
         {
 
@@ -129,7 +130,7 @@ namespace LionSkyNot.Areas.Admin.Controllers
         }
 
 
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = AdminRole)]
         [HttpPost]
         public IActionResult EditProduct(EditProductFormModel productModel, int id)
         {
@@ -158,7 +159,7 @@ namespace LionSkyNot.Areas.Admin.Controllers
         }
 
 
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = AdminRole)]
         public IActionResult DeleteProduct(int id)
         {
 

@@ -1,16 +1,22 @@
 ﻿using LionSkyNot.Controllers;
+
 using LionSkyNot.Models.Trainers;
+
 using LionSkyNot.Services.Trainers;
 using LionSkyNot.Services.Users;
 using LionSkyNot.Views.ViewModels.Trainers;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+
+using static LionSkyNot.Areas.Admin.AdminConstants;
+
 
 namespace LionSkyNot.Areas.Admin.Controllers
 {
 
-    [Area(AdminConstants.AreaName)]
-    [Authorize(Roles = "Administrator")]
+    [Area(AreaName)]
+    [Authorize(Roles = AdminRole)]
     public class TrainerController : BaseController
     {
 

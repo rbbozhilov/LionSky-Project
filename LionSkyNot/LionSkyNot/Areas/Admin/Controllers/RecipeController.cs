@@ -1,15 +1,21 @@
 ﻿using LionSkyNot.Controllers;
+
 using LionSkyNot.Models.Recipe;
 using LionSkyNot.Models.Recipes;
+
 using LionSkyNot.Services.Recipes;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+
+using static LionSkyNot.Areas.Admin.AdminConstants;
+
 
 namespace LionSkyNot.Areas.Admin.Controllers
 {
 
 
-    [Area(AdminConstants.AreaName)]
+    [Area(AreaName)]
     public class RecipeController : BaseController
     {
 
@@ -21,13 +27,13 @@ namespace LionSkyNot.Areas.Admin.Controllers
         }
 
 
-        [Authorize(Roles = "Moderator,Administrator")]
+        [Authorize(Roles = ModeratorAndAdminRole)]
         public IActionResult Successfull()
         {
             return View();
         }
 
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = AdminRole)]
         public IActionResult ShowRecipes(IEnumerable<RecipeFormModelForAdmin> recipeModel)
         {
 
@@ -37,13 +43,13 @@ namespace LionSkyNot.Areas.Admin.Controllers
 
         }
 
-        [Authorize(Roles = "Moderator,Administrator")]
+        [Authorize(Roles = ModeratorAndAdminRole)]
         public IActionResult AddRecipe()
         {
             return View();
         }
 
-        [Authorize(Roles = "Moderator,Administrator")]
+        [Authorize(Roles = ModeratorAndAdminRole)]
         [HttpPost]
         public IActionResult AddRecipe(RecipeFormModel recipeModel)
         {
@@ -63,7 +69,7 @@ namespace LionSkyNot.Areas.Admin.Controllers
         }
 
 
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = AdminRole)]
         public IActionResult EditRecipe(int id)
         {
             var currentRecipe = this.recipeService.GetRecipeById(id);
@@ -82,7 +88,7 @@ namespace LionSkyNot.Areas.Admin.Controllers
             });
         }
 
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = AdminRole)]
         [HttpPost]
         public IActionResult EditRecipe(RecipeFormModel recipeModel, int id)
         {
@@ -108,7 +114,7 @@ namespace LionSkyNot.Areas.Admin.Controllers
 
         }
 
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = AdminRole)]
         public IActionResult DeleteRecipe(int id)
         {
 
