@@ -45,6 +45,12 @@ namespace LionSkyNot.Controllers
 
             var currentProducts = tuple.Item2;
 
+            if(currentProducts.Products.Count() == 0)
+            {
+                return View("NotAddedProducts");
+            }
+
+
             return View(currentProducts);
         }
 
