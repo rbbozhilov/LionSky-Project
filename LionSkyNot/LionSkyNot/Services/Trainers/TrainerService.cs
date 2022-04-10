@@ -224,7 +224,7 @@ namespace LionSkyNot.Services.Trainers
 
         public IEnumerable<TrainerCandidateViewModel> GetAllTrainerCandidates()
         => this.data.Trainers
-                    .Where(t => t.IsCandidate == true)
+                    .Where(t => t.IsCandidate == true && t.IsDeleted == false)
                     .Select(t => new TrainerCandidateViewModel()
                     {
                         Id = t.Id,
