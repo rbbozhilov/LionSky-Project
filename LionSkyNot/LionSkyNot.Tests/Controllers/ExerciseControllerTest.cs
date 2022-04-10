@@ -54,7 +54,7 @@ namespace LionSkyNot.Tests.Controllers
                 Id = 1,
                 Name = "name",
                 ImageUrl = "image",
-                VideoUrl = "video",
+                Description = "Description",
                 TypeExercise = new TypeExercise() { Id = 1, TypeName = "Back" }
             };
 
@@ -91,7 +91,7 @@ namespace LionSkyNot.Tests.Controllers
                 Id = 1,
                 Name = "name",
                 ImageUrl = "image",
-                VideoUrl = "video",
+                Description = "Description",
                 TypeExercise = new TypeExercise() { Id = 1, TypeName = "Legs" }
             };
 
@@ -128,7 +128,7 @@ namespace LionSkyNot.Tests.Controllers
                 Id = 1,
                 Name = "name",
                 ImageUrl = "image",
-                VideoUrl = "video",
+                Description = "Description",
                 TypeExercise = new TypeExercise() { Id = 1, TypeName = "Biceps" }
             };
 
@@ -165,7 +165,7 @@ namespace LionSkyNot.Tests.Controllers
                 Id = 1,
                 Name = "name",
                 ImageUrl = "image",
-                VideoUrl = "video",
+                Description = "Description",
                 TypeExercise = new TypeExercise() { Id = 1, TypeName = "Chest" }
             };
 

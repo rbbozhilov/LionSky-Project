@@ -39,7 +39,7 @@ namespace LionSkyNot.Tests.Services
                 Id = id,
                 Name = name,
                 ImageUrl = image,
-                VideoUrl = video,
+                Description = video,
                 TypeExercise = new TypeExercise() { Id = 1, TypeName = "Biceps" }
             };
 
@@ -48,7 +48,7 @@ namespace LionSkyNot.Tests.Services
                 Id = 2,
                 Name = "gggg",
                 ImageUrl = "igerq",
-                VideoUrl = "vidd",
+                Description = "vidd",
                 TypeExerciseId = 2
             };
         }
@@ -121,8 +121,8 @@ namespace LionSkyNot.Tests.Services
 
             Assert.True(result);
             Assert.NotEqual(name, exercise.Name);
-            Assert.NotEqual(image, exercise.ImageUrl);
-            Assert.NotEqual(video, exercise.VideoUrl);
+            Assert.NotEqual(image, exercise.Description);
+            Assert.NotEqual(video, exercise.Description);
 
         }
 

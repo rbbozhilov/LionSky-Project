@@ -89,7 +89,7 @@ namespace LionSkyNot.Areas.Admin.Controllers
 
             return View(new EditExerciseFormModel()
             {
-                VideoUrl = exercise.VideoUrl,
+                Description = exercise.Description,
                 ImageUrl = exercise.ImageUrl,
                 Name = exercise.Name
             });
@@ -111,7 +111,7 @@ namespace LionSkyNot.Areas.Admin.Controllers
                                                        id,
                                                        exerciseModel.Name,
                                                        exerciseModel.ImageUrl,
-                                                       exerciseModel.VideoUrl);
+                                                       exerciseModel.Description);
 
             if (!isEditted)
             {

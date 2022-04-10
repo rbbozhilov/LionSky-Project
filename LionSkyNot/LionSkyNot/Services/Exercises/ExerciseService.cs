@@ -25,14 +25,14 @@ namespace LionSkyNot.Services.Exercises
         public void Create(
                            string name,
                            string imgUrl,
-                           string videoUrl,
+                           string description,
                            int typeExercisesId)
         {
             var exercise = new Exercise()
             {
                 Name = name,
                 ImageUrl = imgUrl,
-                VideoUrl = videoUrl,
+                Description = description,
                 TypeExerciseId = typeExercisesId
 
             };
@@ -48,7 +48,7 @@ namespace LionSkyNot.Services.Exercises
                          int id,
                          string name,
                          string imgUrl,
-                         string videoUrl)
+                         string description)
         {
             var exercise = this.data.Exercises
                                     .Where(e => e.Id == id && e.IsDeleted == false)
@@ -62,7 +62,7 @@ namespace LionSkyNot.Services.Exercises
 
             exercise.Name = name;
             exercise.ImageUrl = imgUrl;
-            exercise.VideoUrl = videoUrl;
+            exercise.Description = description;
 
             this.data.SaveChanges();
 
@@ -100,7 +100,7 @@ namespace LionSkyNot.Services.Exercises
                     {
                         ImageUrl = e.ImageUrl,
                         Name = e.Name,
-                        VideoUrl = e.VideoUrl
+                        Description = e.Description
                     })
                     .FirstOrDefault();
 
@@ -123,7 +123,7 @@ namespace LionSkyNot.Services.Exercises
                     {
                         Name = x.Name,
                         ImageUrl = x.ImageUrl,
-                        VideoUrl = x.VideoUrl
+                        Description = x.Description
                     })
                     .ToList();
 

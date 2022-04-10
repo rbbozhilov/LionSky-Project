@@ -17,8 +17,9 @@ namespace LionSkyNot.Data.Models.Exercise
         [Required]
         public string Name { get; set; }
 
+        [MaxLength(DescriptionMaxLength)]
         [Required]
-        public string VideoUrl { get; set; }
+        public string Description { get; set; }
 
         [Required]
         public string ImageUrl { get; set; }
@@ -28,9 +29,7 @@ namespace LionSkyNot.Data.Models.Exercise
 
         public TypeExercise TypeExercise { get; set; }
 
-
         public bool IsDeleted { get; set; } = false;
-
 
 
     }

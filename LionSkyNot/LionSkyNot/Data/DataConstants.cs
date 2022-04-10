@@ -50,6 +50,8 @@
         {
             public const int NameMaxLength = 200;
             public const int NameMinLength = 2;
+            public const int DescriptionMaxLength = 2000;
+            public const int DescriptionMinLength = 10;
 
             public const string DisplayTypeName = "Type";
         }

@@ -87,7 +87,7 @@ namespace LionSkyNot.Tests.Services
                 Id = 1,
                 Name = "name2",
                 ImageUrl = "someimg",
-                VideoUrl = "videourl"
+                Description = "videourl"
             };
 
 
