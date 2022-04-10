@@ -27,6 +27,21 @@ namespace LionSkyNot.Controllers
         => View(this.trainerService.TopTrainers());
 
 
+        public IActionResult StatusCode (int code)
+        {
+
+            if(code == 404)
+            {
+                return View("NotFound");
+            }
+
+            else
+            {
+                return View("SomethingWentWrong");
+            }
+        }
+
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

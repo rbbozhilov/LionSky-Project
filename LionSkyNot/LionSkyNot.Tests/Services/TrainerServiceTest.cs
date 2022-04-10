@@ -620,53 +620,6 @@ namespace LionSkyNot.Tests.Services
 
 
         [Fact]
-        public void SearchTrainerByName_ShouldReturnCorrectOne()
-        {
-
-            //Arrange
-
-            using var data = DatabaseMock.Instance;
-            var trainerService = new TrainerService(data);
-
-
-            var trainer1 = new Trainer()
-            {
-                Id = 1,
-                FullName = "Yoga",
-                UserId = "testuser",
-                Description = "description",
-                ImageUrl = "imageurl",
-                YearOfExperience = 5,
-                IsCandidate = false,
-            };
-
-            var trainer2 = new Trainer()
-            {
-                Id = 2,
-                FullName = "Box",
-                UserId = "tes2tuser",
-                Description = "descrip3tion",
-                ImageUrl = "image3url",
-                YearOfExperience = 15,
-                IsCandidate = true,
-            };
-
-
-            data.Trainers.AddRange(trainer1, trainer2);
-
-            //Act
-
-            data.SaveChanges();
-            var trainers = trainerService.SearchTrainerByName("Yoga");
-
-            //Assert
-
-            Assert.Equal("Yoga", trainers.First().FullName);
-
-        }
-
-
-        [Fact]
         public void GetTrainerById_ShouldBeCorrect()
         {
 
