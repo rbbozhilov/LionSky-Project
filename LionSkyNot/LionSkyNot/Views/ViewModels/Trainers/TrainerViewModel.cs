@@ -7,6 +7,8 @@
 
         public string Description { get; set; }
 
+        public string CategorieName { get; set; }
+
         public string ImageUrl { get; set; }
 
         public int YearOfExperience { get; set; }

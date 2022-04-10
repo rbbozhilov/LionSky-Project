@@ -248,7 +248,8 @@ namespace LionSkyNot.Services.Trainers
                         YearOfExperience = t.YearOfExperience,
                         BirthDate = t.BirthDate,
                         Weight = t.Weight,
-                        Height = t.Height
+                        Height = t.Height,
+                        CategorieName = t.Categorie.Name
                     })
                     .OrderByDescending(t => t.YearOfExperience)
                     .Take(1)
