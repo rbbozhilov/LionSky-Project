@@ -8,6 +8,8 @@ using LionSkyNot.Views.ViewModels.Trainers;
 
 using Microsoft.AspNetCore.Mvc;
 
+using Microsoft.Extensions.Caching.Memory;
+
 
 namespace LionSkyNot.Controllers
 {
@@ -15,22 +17,42 @@ namespace LionSkyNot.Controllers
     {
 
         private ITrainerService trainerService;
+        private IMemoryCache cache;
 
-        public HomeController(ITrainerService trainerService)
+        public HomeController(ITrainerService trainerService,IMemoryCache cache)
         {
             this.trainerService = trainerService;
+            this.cache = cache;
         }
 
 
 
         public IActionResult Index(IEnumerable<TrainerViewModel> trainerModel)
-        => View(this.trainerService.TopTrainers());
-
-
-        public IActionResult StatusCode (int code)
         {
 
-            if(code == 404)
+            const string topTrainersKeyCache = "topTrainersKeyCache";
+
+            var topTrainers = this.cache.Get<IEnumerable<TrainerViewModel>>(topTrainersKeyCache);
+
+            if (topTrainers == null)
+            {
+                topTrainers = this.trainerService.TopTrainers();
+
+                var cacheOptions = new MemoryCacheEntryOptions()
+                    .SetAbsoluteExpiration(TimeSpan.FromMinutes(15));
+
+
+                this.cache.Set(topTrainersKeyCache, topTrainers);
+            }
+
+            return View(topTrainers);
+        }
+
+
+        public IActionResult StatusCode(int code)
+        {
+
+            if (code == 404)
             {
                 return View("NotFound");
             }

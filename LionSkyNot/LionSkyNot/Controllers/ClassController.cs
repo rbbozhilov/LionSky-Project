@@ -5,7 +5,10 @@ using LionSkyNot.Services.Classes;
 using LionSkyNot.Views.ViewModels.Classes;
 
 using Microsoft.AspNetCore.Authorization;
+
 using Microsoft.AspNetCore.Mvc;
+
+using Microsoft.Extensions.Caching.Memory;
 
 
 namespace LionSkyNot.Controllers
@@ -14,49 +17,205 @@ namespace LionSkyNot.Controllers
     {
 
         private IClassService classService;
+        private IMemoryCache cache;
 
-        public ClassController(IClassService classService)
-        => this.classService = classService;
+
+        public ClassController(IClassService classService, IMemoryCache cache)
+        {
+            this.classService = classService;
+            this.cache = cache;
+        }
 
 
 
         public IActionResult Index(AllClassViewModel allClassModel)
-        => View(this.classService.GetCountOfAllClasses());
+        {
+
+            const string allCountOfClassesKeyCache = "AllCountOfClassesKeyCache";
+
+            allClassModel = this.cache.Get<AllClassViewModel>(allCountOfClassesKeyCache);
+
+            if (allClassModel == null)
+            {
+                allClassModel = this.classService.GetCountOfAllClasses();
+
+                var cacheOptions = new MemoryCacheEntryOptions()
+                    .SetAbsoluteExpiration(TimeSpan.FromMinutes(15));
+
+
+                this.cache.Set(allCountOfClassesKeyCache, allClassModel);
+            }
+
+
+            return View(allClassModel);
+        }
 
 
         [Authorize]
         public IActionResult ViewAllFitnessClass()
-        => View(this.classService.GetAllClassesByCategorieName("Fitness"));
+        {
+
+            const string allFitnessClassesKeyCache = "AllFitnessClassesKeyCache";
+
+            var allFitnessClasses = this.cache.Get<IEnumerable<ClassViewModel>>(allFitnessClassesKeyCache);
+
+            if (allFitnessClasses == null)
+            {
+                allFitnessClasses = this.classService.GetAllClassesByCategorieName("Fitness");
+
+                var cacheOptions = new MemoryCacheEntryOptions()
+                    .SetAbsoluteExpiration(TimeSpan.FromMinutes(15));
+
+
+                this.cache.Set(allFitnessClassesKeyCache, allFitnessClasses);
+            }
+
+
+            return View(allFitnessClasses);
+        }
 
 
         [Authorize]
         public IActionResult ViewAllYogaClass()
-        => View(this.classService.GetAllClassesByCategorieName("Yoga"));
+        {
+
+            const string allYogaClassesKeyCache = "AllYogaClassesKeyCache";
+
+            var allYogaClasses = this.cache.Get<IEnumerable<ClassViewModel>>(allYogaClassesKeyCache);
+
+            if (allYogaClasses == null)
+            {
+                allYogaClasses = this.classService.GetAllClassesByCategorieName("Yoga");
+
+                var cacheOptions = new MemoryCacheEntryOptions()
+                    .SetAbsoluteExpiration(TimeSpan.FromMinutes(15));
+
+
+                this.cache.Set(allYogaClassesKeyCache, allYogaClasses);
+            }
+
+
+            return View(allYogaClasses);
+        }
 
 
         [Authorize]
         public IActionResult ViewAllMmaClass()
-        => View(this.classService.GetAllClassesByCategorieName("Mma"));
+        {
+
+            const string allMmaClassesKeyCache = "AllMmaClassesKeyCache";
+
+            var allMmaClasses = this.cache.Get<IEnumerable<ClassViewModel>>(allMmaClassesKeyCache);
+
+            if (allMmaClasses == null)
+            {
+                allMmaClasses = this.classService.GetAllClassesByCategorieName("Mma");
+
+                var cacheOptions = new MemoryCacheEntryOptions()
+                    .SetAbsoluteExpiration(TimeSpan.FromMinutes(15));
+
+
+                this.cache.Set(allMmaClassesKeyCache, allMmaClasses);
+            }
+
+
+            return View(allMmaClasses);
+        }
 
 
         [Authorize]
         public IActionResult ViewAllBoxClass()
-        => View(this.classService.GetAllClassesByCategorieName("Box"));
+        {
+
+            const string allBoxClassesKeyCache = "AllBoxClassesKeyCache";
+
+            var allBoxClasses = this.cache.Get<IEnumerable<ClassViewModel>>(allBoxClassesKeyCache);
+
+            if (allBoxClasses == null)
+            {
+                allBoxClasses = this.classService.GetAllClassesByCategorieName("Box");
+
+                var cacheOptions = new MemoryCacheEntryOptions()
+                    .SetAbsoluteExpiration(TimeSpan.FromMinutes(15));
+
+
+                this.cache.Set(allBoxClassesKeyCache, allBoxClasses);
+            }
+
+
+            return View(allBoxClasses);
+        }
 
 
         [Authorize]
         public IActionResult ViewAllWrestlingClass()
-        => View(this.classService.GetAllClassesByCategorieName("Wrestling"));
+        {
+
+            const string allWrestlingClassesKeyCache = "AllWrestlingClassesKeyCache";
+
+            var allWrestlingClasses = this.cache.Get<IEnumerable<ClassViewModel>>(allWrestlingClassesKeyCache);
+
+            if (allWrestlingClasses == null)
+            {
+                allWrestlingClasses = this.classService.GetAllClassesByCategorieName("Wrestling");
+
+                var cacheOptions = new MemoryCacheEntryOptions()
+                    .SetAbsoluteExpiration(TimeSpan.FromMinutes(15));
+
+
+                this.cache.Set(allWrestlingClassesKeyCache, allWrestlingClasses);
+            }
+
+
+            return View(allWrestlingClasses);
+        }
 
 
         [Authorize]
         public IActionResult ViewAllAthleticClass()
-        => View(this.classService.GetAllClassesByCategorieName("Athletic"));
+        {
+
+            const string allAthleticClassesKeyCache = "AllAthleticClassesKeyCache";
+
+            var allAthleticClasses = this.cache.Get<IEnumerable<ClassViewModel>>(allAthleticClassesKeyCache);
+
+            if (allAthleticClasses == null)
+            {
+                allAthleticClasses = this.classService.GetAllClassesByCategorieName("Athletic");
+
+                var cacheOptions = new MemoryCacheEntryOptions()
+                    .SetAbsoluteExpiration(TimeSpan.FromMinutes(15));
+
+
+                this.cache.Set(allAthleticClassesKeyCache, allAthleticClasses);
+            }
+
+
+            return View(allAthleticClasses);
+        }
 
 
         [Authorize]
         public IActionResult ViewDetails(string id)
-        => View(this.classService.GetClassForDetails(id));
+        {
+
+            const string viewDetailsKeyCache = "viewDetailsKeyCache";
+
+            var viewDetails = this.cache.Get<ClassDetailsViewModel>(viewDetailsKeyCache);
+
+            if (viewDetails == null)
+            {
+                viewDetails = this.classService.GetClassForDetails(id);
+
+                var cacheOptions = new MemoryCacheEntryOptions()
+                    .SetAbsoluteExpiration(TimeSpan.FromMinutes(15));
+
+
+                this.cache.Set(viewDetailsKeyCache, viewDetails);
+            }
+
+            return View(viewDetails);
+        }
 
 
         [Authorize]

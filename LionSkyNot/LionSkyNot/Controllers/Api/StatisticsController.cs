@@ -3,7 +3,7 @@
 using LionSkyNot.Services.Statistics;
 
 using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.Extensions.Caching.Memory;
 
 namespace LionSkyNot.Controllers.Api
 {
@@ -13,10 +13,12 @@ namespace LionSkyNot.Controllers.Api
     {
 
         private IStatisticsService statisticsService;
+        private IMemoryCache cache;
 
-        public StatisticsController(IStatisticsService statisticsService)
+        public StatisticsController(IStatisticsService statisticsService, IMemoryCache cache)
         {
             this.statisticsService = statisticsService;
+            this.cache = cache;
         }
 
 
@@ -24,7 +26,27 @@ namespace LionSkyNot.Controllers.Api
         [Route("api/statistics")]
         [HttpGet]
         public ActionResult<StatisticsResponseModel> GetStatistics()
-        => this.statisticsService.GetStatistics();
+        {
+
+            const string allStatisticsKeyCache = "AllStatisticsKeyCache";
+
+            var allStatistics = this.cache.Get<StatisticsResponseModel>(allStatisticsKeyCache);
+
+            if (allStatistics == null)
+            {
+                allStatistics = this.statisticsService.GetStatistics();
+
+                var cacheOptions = new MemoryCacheEntryOptions()
+                    .SetAbsoluteExpiration(TimeSpan.FromMinutes(15));
+
+
+                this.cache.Set(allStatisticsKeyCache, allStatistics);
+            }
+
+
+            return allStatistics;
+
+        }
 
     }
 }
