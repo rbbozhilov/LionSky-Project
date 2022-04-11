@@ -149,6 +149,12 @@ To add class you need first to have some trainer add ( trainer is add only on re
 ![alt text](https://github.com/rbbozhilov/LionSky-Project/blob/main/LionSky-Images/WishListPage.jpg)
 
 
+## :framed_picture: Screenshot - Payment
+
+![alt text](https://github.com/rbbozhilov/LionSky-Project/blob/main/LionSky-Images/PaymentPage.jpg)
+![alt text](https://github.com/rbbozhilov/LionSky-Project/blob/main/LionSky-Images/PaymentPhone.jpg)
+
+
 ## :framed_picture: Screenshot - Trainers
 
 ![alt text](https://github.com/rbbozhilov/LionSky-Project/blob/main/LionSky-Images/TrainersPage.jpg)
