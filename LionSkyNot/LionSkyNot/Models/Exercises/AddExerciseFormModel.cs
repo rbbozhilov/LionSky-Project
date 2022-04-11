@@ -14,9 +14,10 @@ namespace LionSkyNot.Models.Exercises
         [Required]
         public string Name { get; set; }
 
-        [Url]
+        [MaxLength(DescriptionMaxLength)]
+        [MinLength(DescriptionMinLength)]
         [Required]
-        public string VideoUrl { get; set; }
+        public string Description { get; set; }
 
         [Url]
         [Required]

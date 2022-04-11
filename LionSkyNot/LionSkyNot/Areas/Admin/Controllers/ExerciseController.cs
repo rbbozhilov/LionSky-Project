@@ -54,7 +54,7 @@ namespace LionSkyNot.Areas.Admin.Controllers
                 return View(exerciseModel);
             }
 
-            this.exerciseService.Create(exerciseModel.Name, exerciseModel.ImageUrl, exerciseModel.VideoUrl, exerciseModel.TypeId);
+            this.exerciseService.Create(exerciseModel.Name, exerciseModel.ImageUrl, exerciseModel.Description, exerciseModel.TypeId);
 
 
             return RedirectToAction("SuccessChange");
