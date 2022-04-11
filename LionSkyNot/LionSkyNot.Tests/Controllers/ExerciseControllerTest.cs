@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 
 using LionSkyNot.Controllers;
+
 using LionSkyNot.Data.Models.Exercise;
+
 using LionSkyNot.Services.Exercises;
 
 using LionSkyNot.Tests.Mock;

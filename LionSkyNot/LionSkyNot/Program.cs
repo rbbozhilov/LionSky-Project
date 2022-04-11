@@ -1,6 +1,8 @@
 using LionSkyNot.Data;
 using LionSkyNot.Data.Models.User;
+
 using LionSkyNot.Infrastructure;
+
 using LionSkyNot.Services.Classes;
 using LionSkyNot.Services.Exercises;
 using LionSkyNot.Services.Products;
@@ -8,9 +10,12 @@ using LionSkyNot.Services.Recipes;
 using LionSkyNot.Services.Statistics;
 using LionSkyNot.Services.Trainers;
 using LionSkyNot.Services.Users;
+
 using LionSkyNot.Services.WishLists;
+
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

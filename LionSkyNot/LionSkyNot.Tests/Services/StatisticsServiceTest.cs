@@ -2,6 +2,7 @@
 using LionSkyNot.Data.Models.Exercise;
 using LionSkyNot.Data.Models.Recipe;
 using LionSkyNot.Data.Models.Shop;
+
 using LionSkyNot.Services.Statistics;
 
 using LionSkyNot.Tests.Mock;

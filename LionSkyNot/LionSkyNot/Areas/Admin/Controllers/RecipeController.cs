@@ -27,11 +27,13 @@ namespace LionSkyNot.Areas.Admin.Controllers
         }
 
 
+
         [Authorize(Roles = ModeratorAndAdminRole)]
         public IActionResult Successfull()
         {
             return View();
         }
+
 
         [Authorize(Roles = AdminRole)]
         public IActionResult ShowRecipes(IEnumerable<RecipeFormModelForAdmin> recipeModel)
@@ -43,11 +45,11 @@ namespace LionSkyNot.Areas.Admin.Controllers
 
         }
 
+
         [Authorize(Roles = ModeratorAndAdminRole)]
         public IActionResult AddRecipe()
-        {
-            return View();
-        }
+        => View();
+
 
         [Authorize(Roles = ModeratorAndAdminRole)]
         [HttpPost]
@@ -88,6 +90,7 @@ namespace LionSkyNot.Areas.Admin.Controllers
             });
         }
 
+
         [Authorize(Roles = AdminRole)]
         [HttpPost]
         public IActionResult EditRecipe(RecipeFormModel recipeModel, int id)
@@ -114,6 +117,7 @@ namespace LionSkyNot.Areas.Admin.Controllers
 
         }
 
+
         [Authorize(Roles = AdminRole)]
         public IActionResult DeleteRecipe(int id)
         {
@@ -125,7 +129,5 @@ namespace LionSkyNot.Areas.Admin.Controllers
 
             return View("Successfull");
         }
-
-
     }
 }

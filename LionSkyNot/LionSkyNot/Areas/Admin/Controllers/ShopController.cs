@@ -71,6 +71,7 @@ namespace LionSkyNot.Areas.Admin.Controllers
             return RedirectToAction("Successfull");
         }
 
+
         [Authorize(Roles = ModeratorAndAdminRole)]
         public IActionResult AddProductsInStock()
         {

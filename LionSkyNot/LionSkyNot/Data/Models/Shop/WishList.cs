@@ -2,7 +2,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
 
-
 namespace LionSkyNot.Data.Models.Shop
 {
     public class WishList 

@@ -3,7 +3,6 @@
 using LionSkyNot.Views.ViewModels.Calculator;
 
 using Microsoft.AspNetCore.Authorization;
-
 using Microsoft.AspNetCore.Mvc;
 
 

@@ -3,15 +3,12 @@
 using LionSkyNot.Models;
 
 using LionSkyNot.Services.Classes;
-
 using LionSkyNot.Services.Trainers;
 
 using LionSkyNot.Views.ViewModels.Classes;
-
 using LionSkyNot.Views.ViewModels.Trainers;
 
 using Microsoft.AspNetCore.Authorization;
-
 using Microsoft.AspNetCore.Mvc;
 
 

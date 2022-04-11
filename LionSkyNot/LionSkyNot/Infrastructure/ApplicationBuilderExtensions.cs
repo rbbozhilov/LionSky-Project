@@ -1,12 +1,15 @@
-﻿
+﻿using System.Text;
+
 using LionSkyNot.Data;
 using LionSkyNot.Data.Models.Classes;
 using LionSkyNot.Data.Models.Exercise;
 using LionSkyNot.Data.Models.Shop;
 using LionSkyNot.Data.Models.User;
+
 using Microsoft.AspNetCore.Identity;
+
 using Microsoft.EntityFrameworkCore;
-using System.Text;
+
 using Type = LionSkyNot.Data.Models.Shop.Type;
 
 namespace LionSkyNot.Infrastructure

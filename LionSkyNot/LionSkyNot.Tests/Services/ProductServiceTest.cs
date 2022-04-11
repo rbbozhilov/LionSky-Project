@@ -1,10 +1,10 @@
-﻿using LionSkyNot.Data.Models.Shop;
+﻿using System.Linq;
+
+using LionSkyNot.Data.Models.Shop;
 
 using LionSkyNot.Services.Products;
 
 using LionSkyNot.Tests.Mock;
-
-using System.Linq;
 
 using Xunit;
 

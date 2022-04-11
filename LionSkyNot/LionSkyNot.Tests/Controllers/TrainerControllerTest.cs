@@ -1,13 +1,22 @@
-﻿using LionSkyNot.Controllers;
+﻿using System.Linq;
+
+using LionSkyNot.Controllers;
+
 using LionSkyNot.Data.Models.Classes;
+
 using LionSkyNot.Models;
+
 using LionSkyNot.Services.Classes;
 using LionSkyNot.Services.Trainers;
+
 using LionSkyNot.Tests.Mock;
+
 using LionSkyNot.Views.ViewModels.Trainers;
+
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
+
 using Xunit;
+
 
 namespace LionSkyNot.Tests.Controllers
 {

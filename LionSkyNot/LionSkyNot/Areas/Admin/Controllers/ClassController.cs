@@ -5,10 +5,10 @@ using LionSkyNot.Models.Class;
 using LionSkyNot.Services.Classes;
 
 using Microsoft.AspNetCore.Authorization;
+
 using Microsoft.AspNetCore.Mvc;
 
 using static LionSkyNot.Areas.Admin.AdminConstants;
-
 
 
 namespace LionSkyNot.Areas.Admin.Controllers
@@ -36,6 +36,7 @@ namespace LionSkyNot.Areas.Admin.Controllers
             return View(classModel);
         }
 
+
         [Authorize(Roles = ModeratorAndAdminRole)]
         public IActionResult AddClass()
         {
@@ -45,6 +46,7 @@ namespace LionSkyNot.Areas.Admin.Controllers
             });
 
         }
+
 
         [Authorize(Roles = ModeratorAndAdminRole)]
         [HttpPost]

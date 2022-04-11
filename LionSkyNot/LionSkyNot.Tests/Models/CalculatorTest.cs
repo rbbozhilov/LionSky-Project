@@ -1,5 +1,7 @@
 ﻿using LionSkyNot.Models.Calculator;
+
 using Xunit;
+
 
 namespace LionSkyNot.Tests.Models
 {

@@ -10,11 +10,19 @@ namespace LionSkyNot.Services.Exercises
     public interface IExerciseService
     {
 
-        void Create(string name, string imgUrl, string videoUrl, int typeExerciseId);
+        void Create(
+                    string name,
+                    string imgUrl,
+                    string videoUrl,
+                    int typeExerciseId);
 
         bool Delete(int id);
 
-        bool Edit(int id, string name, string imgUrl, string videoUrl);
+        bool Edit(
+                  int id,
+                  string name,
+                  string imgUrl,
+                  string videoUrl);
 
         bool AnyExercieByType(int id);
 

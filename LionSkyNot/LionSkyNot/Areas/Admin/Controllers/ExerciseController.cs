@@ -5,6 +5,7 @@ using LionSkyNot.Models.Exercises;
 using LionSkyNot.Services.Exercises;
 
 using Microsoft.AspNetCore.Authorization;
+
 using Microsoft.AspNetCore.Mvc;
 
 using static LionSkyNot.Areas.Admin.AdminConstants;
@@ -72,9 +73,7 @@ namespace LionSkyNot.Areas.Admin.Controllers
 
         [Authorize(Roles = ModeratorAndAdminRole)]
         public IActionResult SuccessChange()
-        {
-            return View();
-        }
+        => View();
 
         [Authorize(Roles = AdminRole)]
         public IActionResult EditExercise(int id)

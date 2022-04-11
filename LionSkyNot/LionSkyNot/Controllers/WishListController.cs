@@ -1,15 +1,9 @@
-﻿using LionSkyNot.Data;
-
-
-using LionSkyNot.Models.Products;
+﻿using LionSkyNot.Models.Products;
 
 using LionSkyNot.Services.Products;
-
 using LionSkyNot.Services.WishLists;
 
-
 using Microsoft.AspNetCore.Authorization;
-
 using Microsoft.AspNetCore.Mvc;
 
 

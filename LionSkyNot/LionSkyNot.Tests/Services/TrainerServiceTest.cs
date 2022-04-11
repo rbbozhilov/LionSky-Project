@@ -1,12 +1,12 @@
-﻿using LionSkyNot.Data;
+﻿using System;
+using System.Linq;
 
 using LionSkyNot.Data.Models.Classes;
 
 using LionSkyNot.Services.Trainers;
 
 using LionSkyNot.Tests.Mock;
-using System;
-using System.Linq;
+
 using Xunit;
 
 

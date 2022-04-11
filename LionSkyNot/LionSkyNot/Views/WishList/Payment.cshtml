@@ -1,5 +1,10 @@
 ﻿@model PaymentFormModel
 
+ @{
+    ViewData["Title"] = "Payment";
+}
+
+
 <head>
     <link rel="stylesheet" href="~/css/payment.css" />
 </head>
@@ -21,14 +26,11 @@
         <div class="col-12">
             <div class="card p-3">
                 <div class="card-body border p-0">
-                    <p> <a class="btn btn-primary w-100 h-100 d-flex align-items-center justify-content-between" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="true" aria-controls="collapseExample"> <span class="fw-bold">PayPal</span> <span class="fab fa-cc-paypal"> </span> </a> </p>
+                    <p> <a class="btn btn-primary w-100 h-100 d-flex align-items-center justify-content-between" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="true" aria-controls="collapseExample"> <span class="fw-bold">Information</span> <span class="fab fa-cc-paypal"> </span> </a> </p>
                     <div class="collapse p-3 pt-0" id="collapseExample">
                         <div class="row">
                             <div class="col-8">
-                                <p class="h4 mb-0">Summary</p>
-                                <p class="mb-0"><span class="fw-bold">Product:</span><span class="c-green">: Name of product</span></p>
-                                <p class="mb-0"><span class="fw-bold">Price:</span><span class="c-green">:$452.90</span></p>
-                                <p class="mb-0">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque nihil neque quisquam aut repellendus, dicta vero? Animi dicta cupiditate, facilis provident quibusdam ab quis, iste harum ipsum hic, nemo qui!</p>
+                                <p class="mb-0">Will not make real payment ! Your card information will not saved anywhere ! It is just made for education purposes</p>
                             </div>
                         </div>
                     </div>
@@ -38,10 +40,7 @@
                     <div class="collapse show p-3 pt-0" id="collapseExample">
                         <div class="row">
                             <div class="col-lg-5 mb-lg-0 mb-3">
-                                <p class="h4 mb-0">Summary</p>
-                                <p class="mb-0"><span class="fw-bold">Product:</span><span class="c-green">: Name of product</span> </p>
-                                <p class="mb-0"> <span class="fw-bold">Price:</span> <span class="c-green">:$452.90</span> </p>
-                                <p class="mb-0">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque nihil neque quisquam aut repellendus, dicta vero? Animi dicta cupiditate, facilis provident quibusdam ab quis, iste harum ipsum hic, nemo qui!</p>
+                                <p class="mb-0">Adding some fake Visa credit information , the form work only with Visa card information.</p>
                             </div>
                             <div class="col-lg-7">
                                 <form method="post" class="form">

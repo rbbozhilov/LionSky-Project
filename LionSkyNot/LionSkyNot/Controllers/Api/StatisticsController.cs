@@ -1,6 +1,9 @@
 ﻿using LionSkyNot.Models.Api.Statistics;
+
 using LionSkyNot.Services.Statistics;
+
 using Microsoft.AspNetCore.Mvc;
+
 
 namespace LionSkyNot.Controllers.Api
 {
@@ -15,6 +18,7 @@ namespace LionSkyNot.Controllers.Api
         {
             this.statisticsService = statisticsService;
         }
+
 
 
         [Route("api/statistics")]

@@ -1,7 +1,9 @@
-﻿using LionSkyNot.Services.Recipes;
+﻿using System.Linq;
+
+using LionSkyNot.Services.Recipes;
 
 using LionSkyNot.Tests.Mock;
-using System.Linq;
+
 using Xunit;
 
 

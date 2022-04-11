@@ -1,5 +1,7 @@
-﻿using LionSkyNot.Models.Trainers;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+
+using LionSkyNot.Models.Trainers;
+
 
 namespace LionSkyNot.Views.ViewModels.Trainers
 {

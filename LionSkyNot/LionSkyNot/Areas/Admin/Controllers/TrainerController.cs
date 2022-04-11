@@ -30,10 +30,12 @@ namespace LionSkyNot.Areas.Admin.Controllers
         }
 
 
+
         public IActionResult Successfull()
         {
             return View();
         }
+
 
         public IActionResult ShowCandidateTrainers(IEnumerable<TrainerCandidateViewModel> trainerCandidateModel)
         {
@@ -41,6 +43,7 @@ namespace LionSkyNot.Areas.Admin.Controllers
 
             return View(candidateTrainers);
         }
+
 
         public IActionResult ShowTrainers(IEnumerable<TrainerFormModelForAdmin> trainerModel)
         {
@@ -50,6 +53,7 @@ namespace LionSkyNot.Areas.Admin.Controllers
             return View(trainerModel);
 
         }
+
 
         public IActionResult AddTrainerCandidate(int id)
         {
@@ -138,7 +142,6 @@ namespace LionSkyNot.Areas.Admin.Controllers
             return View("Successfull");
 
         }
-
 
     }
 }

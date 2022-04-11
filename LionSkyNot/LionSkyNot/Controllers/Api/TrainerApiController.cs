@@ -1,6 +1,9 @@
 ﻿using LionSkyNot.Services.Trainers;
+
 using LionSkyNot.Views.ViewModels.Trainers;
+
 using Microsoft.AspNetCore.Mvc;
+
 
 namespace LionSkyNot.Controllers.Api
 {
@@ -14,6 +17,7 @@ namespace LionSkyNot.Controllers.Api
         {
             this.trainerService = trainerService;
         }
+
 
         
         [Route("api/trainers")]

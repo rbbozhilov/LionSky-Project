@@ -24,7 +24,6 @@ namespace LionSkyNot.Controllers
                 return View(model);
             }
 
-
             return View("SendSuccess");
         }
 

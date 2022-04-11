@@ -5,6 +5,7 @@ using LionSkyNot.Data.Models.Shop;
 
 using Microsoft.AspNetCore.Identity;
 
+
 namespace LionSkyNot.Data.Models.User
 {
     public class User : IdentityUser
@@ -14,7 +15,6 @@ namespace LionSkyNot.Data.Models.User
         {
             this.Classes = new HashSet<ClassUser>();
         }
-
 
 
         public ICollection<ClassUser> Classes { get; set; }

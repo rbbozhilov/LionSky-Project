@@ -1,8 +1,12 @@
 ﻿using LionSkyNot.Data;
 using LionSkyNot.Data.Models.Classes;
+
 using LionSkyNot.Models.Class;
+
 using LionSkyNot.Views.ViewModels.Classes;
+
 using Microsoft.EntityFrameworkCore;
+
 
 namespace LionSkyNot.Services.Classes
 {
@@ -99,6 +103,7 @@ namespace LionSkyNot.Services.Classes
 
         }
 
+
         public bool IsUserHaveClasses(string userId)
         => this.data.ClassUsers
                     .Any(c => c.UserId == userId && c.Class.IsDeleted == false);
@@ -158,6 +163,7 @@ namespace LionSkyNot.Services.Classes
             return true;
         }
 
+
         public bool RemovingClassFromUser(string userId, string classId)
         {
 
@@ -177,6 +183,7 @@ namespace LionSkyNot.Services.Classes
             return true;
         }
 
+
         public IEnumerable<ClassViewModel> GetUserClasses(string userId)
         => this.data.ClassUsers
                     .Include(c => c.Class)
@@ -192,7 +199,6 @@ namespace LionSkyNot.Services.Classes
                         isDeletedTrainer = c.Class.Trainer.IsDeleted
                     })
                     .ToList();
-
 
 
         public IEnumerable<TrainerClassViewModel> GetAllTrainers()

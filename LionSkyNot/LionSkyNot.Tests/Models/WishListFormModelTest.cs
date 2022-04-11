@@ -1,10 +1,13 @@
-﻿
+﻿using System.Collections.Generic;
 
 using LionSkyNot.Models.Products;
+
 using LionSkyNot.Models.WishLists;
+
 using LionSkyNot.Tests.Mock;
-using System.Collections.Generic;
+
 using Xunit;
+
 
 namespace LionSkyNot.Tests.Models
 {

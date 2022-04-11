@@ -188,11 +188,9 @@ namespace LionSkyNot.Services.Products
                    .OrderByDescending(p => p.Price);
 
 
-
         public IQueryable<Product> SortedByPrice(IQueryable<Product> products)
         => products.Distinct()
                    .OrderBy(p => p.Price);
-
 
 
         public IQueryable<Product> SortedByName(IQueryable<Product> products)
@@ -200,12 +198,9 @@ namespace LionSkyNot.Services.Products
                    .OrderBy(p => p.Name);
 
 
-
         public IQueryable<Product> SortedByMostBuys(IQueryable<Product> products)
         => products.Distinct()
                    .OrderByDescending(p => p.CountOfBuys);
-
-
 
 
         public IEnumerable<ProductListViewModel> GetFinalProductsSelected(IQueryable<Product> products)

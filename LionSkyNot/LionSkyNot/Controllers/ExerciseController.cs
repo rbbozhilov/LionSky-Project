@@ -38,6 +38,5 @@ namespace LionSkyNot.Controllers
         public IActionResult ChestExercises(IEnumerable<ExerciseViewModel> exerciseViewModel)
         => View(this.exerciesService.GetAllExercisesByType("Chest"));
 
-
     }
 }

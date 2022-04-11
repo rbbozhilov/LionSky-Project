@@ -4,8 +4,8 @@ using LionSkyNot.Data.Models.Shop;
 using LionSkyNot.Data.Models.Recipe;
 using LionSkyNot.Data.Models.User;
 
-
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace LionSkyNot.Data

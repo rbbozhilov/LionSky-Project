@@ -1,6 +1,6 @@
-﻿using LionSkyNot.Views.ViewModels.Exercises;
+﻿using System.ComponentModel.DataAnnotations;
 
-using System.ComponentModel.DataAnnotations;
+using LionSkyNot.Views.ViewModels.Exercises;
 
 using static LionSkyNot.Data.DataConstants.Exercise;
 
