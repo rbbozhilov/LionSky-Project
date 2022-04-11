@@ -1,6 +1,6 @@
 # LionSky-Project
 
-This is fitness site . In the site you can find (Shop,Recipes,Exercises,Calculator for control weight,Trainers and more.
+This is fitness site . In the site you can find (Shop,Recipes,Exercises,Calculator for control weight,Trainers and more).
 
 ## :hammer_and_pick: Used Technologies
 
