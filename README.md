@@ -13,7 +13,7 @@ This is fitness site . In the site you can find (Shop,Recipes,Exercises,Calculat
 ## Using Web Api 
   - Route(/api/statistics) - you can get statistics for the site , how much ( exercise,products,trainers,classes,recipes) has in the site.
   - Route(/api/trainers) - you can get information for all trainers
-  - Route(/api/trainers/1) - you get information for the current trainer with id 1
+  - Route(/api/trainers/1) - you get information for the current trainer with id 1.
 
 
 ## :hammer_and_pick: Tests
