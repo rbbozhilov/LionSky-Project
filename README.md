@@ -105,29 +105,85 @@ To add class you need first to have some trainer add ( trainer is add only on re
 
 ![alt text](https://github.com/rbbozhilov/LionSky-Project/blob/main/LionSky-Images/HomePagePhone2.jpg)
 
-![alt text](https://github.com/rbbozhilov/LionSky-Project/blob/main/LionSky-Images/HomePagePhone3.jpg)
+![alt text](https://github.com/rbbozhilov/LionSky-Project/blob/main/LionSky-Images/FooterPhone.jpg)
 
 ![alt text](https://github.com/rbbozhilov/LionSky-Project/blob/main/LionSky-Images/MenuPhone.jpg)
 
 ## :framed_picture: Screenshot - Classes
 
+![alt text](https://github.com/rbbozhilov/LionSky-Project/blob/main/LionSky-Images/classPage1.jpg)
+![alt text](https://github.com/rbbozhilov/LionSky-Project/blob/main/LionSky-Images/MyClassesPage.jpg)
+![alt text](https://github.com/rbbozhilov/LionSky-Project/blob/main/LionSky-Images/ClassesViewPage.jpg)
+![alt text](https://github.com/rbbozhilov/LionSky-Project/blob/main/LionSky-Images/ClassesPhone.jpg)
+![alt text](https://github.com/rbbozhilov/LionSky-Project/blob/main/LionSky-Images/ClassPage2.jpg)
+![alt text](https://github.com/rbbozhilov/LionSky-Project/blob/main/LionSky-Images/ClassDetails.jpg)
+
 
 ## :framed_picture: Screenshot - Exercise
-![alt text](https://github.com/rbbozhilov/LionSky-Project/blob/main/LionSky-Images/ExercisePage.jpg)
-![alt text](https://github.com/rbbozhilov/LionSky-Project/blob/main/LionSky-Images/ExercisePage.jpg)
 
+![alt text](https://github.com/rbbozhilov/LionSky-Project/blob/main/LionSky-Images/ExercisePage.jpg)
+![alt text](https://github.com/rbbozhilov/LionSky-Project/blob/main/LionSky-Images/ViewExercisePage.jpg)
+![alt text](https://github.com/rbbozhilov/LionSky-Project/blob/main/LionSky-Images/ExercisePhone.jpg)
 
 
 ## :framed_picture: Screenshot - Shop
 
+![alt text](https://github.com/rbbozhilov/LionSky-Project/blob/main/LionSky-Images/ShopPage.jpg)
+![alt text](https://github.com/rbbozhilov/LionSky-Project/blob/main/LionSky-Images/ShopPhone.jpg)
+
+![alt text](https://github.com/rbbozhilov/LionSky-Project/blob/main/LionSky-Images/ProductsPhone.jpg)
+![alt text](https://github.com/rbbozhilov/LionSky-Project/blob/main/LionSky-Images/ViewProductsPage.jpg)
+
+
+## :framed_picture: Screenshot - Wish List
+
+![alt text](https://github.com/rbbozhilov/LionSky-Project/blob/main/LionSky-Images/WishListPhone.jpg)
+![alt text](https://github.com/rbbozhilov/LionSky-Project/blob/main/LionSky-Images/WishListPage.jpg)
+
 
 ## :framed_picture: Screenshot - Trainers
+
+![alt text](https://github.com/rbbozhilov/LionSky-Project/blob/main/LionSky-Images/TrainersPage.jpg)
+![alt text](https://github.com/rbbozhilov/LionSky-Project/blob/main/LionSky-Images/TrainersPhone.jpg)
+![alt text](https://github.com/rbbozhilov/LionSky-Project/blob/main/LionSky-Images/ViewTrainersPage.jpg)
+
+
+## :framed_picture: Screenshot - Recipes
+
+![alt text](https://github.com/rbbozhilov/LionSky-Project/blob/main/LionSky-Images/RecipePage.jpg)
+
+
+## :framed_picture: Screenshot - Contact
+
+![alt text](https://github.com/rbbozhilov/LionSky-Project/blob/main/LionSky-Images/ContactPage.jpg)
+
+
+## :framed_picture: Screenshot - Calculator
+
+![alt text](https://github.com/rbbozhilov/LionSky-Project/blob/main/LionSky-Images/CalculatorPage.jpg)
 
 
 ## :framed_picture: Screenshot - Admin Panel
 
+![alt text](https://github.com/rbbozhilov/LionSky-Project/blob/main/LionSky-Images/AddExercisePage.jpg)
+![alt text](https://github.com/rbbozhilov/LionSky-Project/blob/main/LionSky-Images/AddProductAdminPanelPage.jpg)
+![alt text](https://github.com/rbbozhilov/LionSky-Project/blob/main/LionSky-Images/AddProductPhone.jpg)
+![alt text](https://github.com/rbbozhilov/LionSky-Project/blob/main/LionSky-Images/AddRecipe.jpg)
+![alt text](https://github.com/rbbozhilov/LionSky-Project/blob/main/LionSky-Images/AddTrainerPage.jpg)
+![alt text](https://github.com/rbbozhilov/LionSky-Project/blob/main/LionSky-Images/AdminPanelPage.jpg)
+![alt text](https://github.com/rbbozhilov/LionSky-Project/blob/main/LionSky-Images/DeleteEditProductPage.jpg)
+![alt text](https://github.com/rbbozhilov/LionSky-Project/blob/main/LionSky-Images/EditRemoveExercisePage.jpg)
+![alt text](https://github.com/rbbozhilov/LionSky-Project/blob/main/LionSky-Images/EditRemoveRecipePage.jpg)
 
-## :framed_picture: Screenshot - Recipes
+## :framed_picture: Screenshot - Not Found 
+
+![alt text](https://github.com/rbbozhilov/LionSky-Project/blob/main/LionSky-Images/NotFound.jpg)
+
+## :framed_picture: Screenshot - Bad Requests
+
+![alt text](https://github.com/rbbozhilov/LionSky-Project/blob/main/LionSky-Images/ElseErrorLikeBadRequestPage.jpg)
+
+
 
 
 ## License
