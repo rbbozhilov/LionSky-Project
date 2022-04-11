@@ -10,6 +10,12 @@ This is fitness site . In the site you can find (Shop,Recipes,Exercises,Calculat
 - jQuery
 
 
+## :framed_picture: Screenshot - Using Web Api 
+  - Route(/api/statistics) - you can get statistics for the site , how much ( exercise,products,trainers,classes,recipes) has in the site.
+  - Route(/api/trainers) - you can get information for all trainers
+  - Route(/api/trainers/1) - you get information for the current trainer with id 1
+
+
 ## :hammer_and_pick: Tests
 
 - Unit testing
@@ -90,6 +96,7 @@ Moderator Role :
 If you want to add some exercise,products,recipes,classes or trainers , you need to log in with Admin account ( because Moderator  don't have Full permission to all functionality of Admin Panel) and from Admin Panel add what you wish . 
 
 To add class you need first to have some trainer add ( trainer is add only on real user that he will became trainer) , and after when you have trainer you can add some class with that trainer. Classes without trainer can't be added!
+
 
 ## :framed_picture: Screenshot - Database Diagram
 
