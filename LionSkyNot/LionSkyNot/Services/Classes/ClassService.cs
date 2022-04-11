@@ -178,6 +178,12 @@ namespace LionSkyNot.Services.Classes
 
             this.data.ClassUsers.Remove(currentClass);
 
+            var @class = this.data.Classes
+                                .Where(c => c.Id == classId)
+                                .FirstOrDefault();
+
+            @class.PractitionerCount--;
+
             this.data.SaveChanges();
 
             return true;
