@@ -219,12 +219,12 @@ namespace LionSkyNot.Services.Classes
 
         public IEnumerable<ClassTrainerViewModel> GetAllTrainerClasses(int trainerId)
          => this.data.Classes
-                     .Where(c => c.TrainerId == trainerId)
+                     .Where(c => c.TrainerId == trainerId && c.IsDeleted == false)
                      .Select(t => new ClassTrainerViewModel()
                      {
                          PractitionerCount = t.PractitionerCount,
-                         StartDateTime = t.StartDateTime.ToString(),
-                         EndDateTime = t.EndDateTime.ToString(),
+                         StartDateTime = t.StartDateTime,
+                         EndDateTime = t.EndDateTime,
                          Trainer = t.Trainer.FullName,
                          Categorie = t.Trainer.Categorie.Name,
                          ClassName = t.ClassName,
