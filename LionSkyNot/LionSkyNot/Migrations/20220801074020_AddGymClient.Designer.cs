@@ -4,6 +4,7 @@ using LionSkyNot.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LionSkyNot.Migrations
 {
     [DbContext(typeof(LionSkyDbContext))]
-    partial class LionSkyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220801074020_AddGymClient")]
+    partial class AddGymClient
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

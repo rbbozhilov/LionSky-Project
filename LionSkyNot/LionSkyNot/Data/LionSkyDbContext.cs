@@ -3,6 +3,7 @@ using LionSkyNot.Data.Models.Exercise;
 using LionSkyNot.Data.Models.Shop;
 using LionSkyNot.Data.Models.Recipe;
 using LionSkyNot.Data.Models.User;
+using LionSkyNot.Data.Models.Gym;
 
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
@@ -18,6 +19,8 @@ namespace LionSkyNot.Data
         }
 
         public virtual DbSet<Categorie> Categories { get; set; }
+
+        public virtual DbSet<Client> Clients { get; set; }
 
         public virtual DbSet<Class> Classes { get; set; }
 
