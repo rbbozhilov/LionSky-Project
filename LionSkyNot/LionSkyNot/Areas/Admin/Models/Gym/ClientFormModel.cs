@@ -1,21 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations;
-
 using static LionSkyNot.Data.DataConstants.Gym;
 
-namespace LionSkyNot.Data.Models.Gym
+namespace LionSkyNot.Areas.Admin.Models.Gym
 {
-    public class Client
+    public class ClientFormModel
     {
-
-        [Key]
-        public int Id { get; set; }
 
         [Required]
         [MaxLength(FullNameMaxLength)]
+        [MinLength(FullNameMinLength)]
         public string FullName { get; set; }
-
-        [Required]
-        public int Number { get; set; }
 
         [Required]
         public DateTime StartDate { get; set; }

@@ -5,6 +5,7 @@ using LionSkyNot.Infrastructure;
 
 using LionSkyNot.Services.Classes;
 using LionSkyNot.Services.Exercises;
+using LionSkyNot.Services.Gym;
 using LionSkyNot.Services.Products;
 using LionSkyNot.Services.Recipes;
 using LionSkyNot.Services.Statistics;
@@ -51,6 +52,7 @@ builder.Services.AddTransient<ITrainerService, TrainerService>();
 builder.Services.AddTransient<IStatisticsService, StatisticsService>();
 builder.Services.AddTransient<IClassService, ClassService>();
 builder.Services.AddTransient<IWishListService, WishListService>();
+builder.Services.AddTransient<IClientService, ClientService>();
 builder.Services.AddTransient<IUserService, UserService>();
 
 var app = builder.Build();

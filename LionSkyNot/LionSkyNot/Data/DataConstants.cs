@@ -6,7 +6,7 @@
         public class Gym
         {
             public const int FullNameMaxLength = 255;
-            public const int NameMinLength = 2;
+            public const int FullNameMinLength = 2;
         }
 
         public class Categorie
