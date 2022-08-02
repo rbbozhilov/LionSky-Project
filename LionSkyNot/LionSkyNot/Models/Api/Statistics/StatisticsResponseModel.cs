@@ -13,5 +13,7 @@
 
         public int TrainerCount { get; set; }
 
+        public int GymClientsCount { get; set; }
+
     }
 }

@@ -34,7 +34,9 @@ namespace LionSkyNot.Services.Statistics
                                     .Count(),
             RecipeCount = this.data.Recipes
                                    .Where(r => r.IsDeleted == false)
-                                   .Count()
+                                   .Count(),
+            GymClientsCount = this.data.Clients
+                                        .Count()
         };
     }
 }

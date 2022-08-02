@@ -125,6 +125,7 @@
                     <p id="productCount"></p>
                     <p id="trainerCount"></p>
                     <p id="exerciseCount"></p>
+                    <p id="gymClientsCount"></p>
                 </div>
 
                 <button type="button" class="btn btn-primary" id="statistics-button">
@@ -146,6 +147,7 @@
          $('#trainerCount').text("Trainers: " + data.trainerCount );
          $('#exerciseCount').text("Exercises: " + data.exerciseCount );
          $('#productCount').text("Products: " + data.productCount );
+         $('#gymClientsCount').text("Gym clients: " + data.gymClientsCount );
 
          $('#statistics').removeClass('d-none');
          $('#statistics-p').addClass('d-none');
