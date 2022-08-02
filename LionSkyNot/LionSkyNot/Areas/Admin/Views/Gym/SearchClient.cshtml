@@ -1,9 +1,12 @@
 ﻿@model ClientViewModel
 
+<link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
+
+
 <form method="get">
     <div class="form-group">
-        <label asp-for="SearchTerm">Search by trainer name</label>
+        <label asp-for="SearchTerm">Search client by eather name or number</label>
         <input asp-for="SearchTerm" type="text" class="form-control">
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">Search</button>
 </form>
