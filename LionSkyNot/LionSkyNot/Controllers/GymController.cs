@@ -2,7 +2,7 @@
 
 namespace LionSkyNot.Controllers
 {
-    public class Gym : BaseController
+    public class GymController : BaseController
     {
 
         public IActionResult Index()

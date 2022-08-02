@@ -1,6 +1,7 @@
 ﻿using LionSkyNot.Areas.Admin.Models.Gym;
 using LionSkyNot.Controllers;
 using LionSkyNot.Services.Gym;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 using static LionSkyNot.Areas.Admin.AdminConstants;
@@ -9,6 +10,7 @@ namespace LionSkyNot.Areas.Admin.Controllers
 {
 
     [Area(AreaName)]
+    [Authorize(Roles = ModeratorAndAdminRole)]
     public class GymController : BaseController
     {
 
