@@ -1,6 +1,35 @@
-﻿namespace LionSkyNot.Areas.Admin.Views.Gym
-{
-    public class ShowClient
-    {
-    }
-}
+﻿@model ClientViewModel
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Full Name</th>
+            <th scope="col">Number</th>
+            <th scope="col">Start Date</th>
+            <th scope="col">Expire Date</th>
+            <th scope="col">Status</th>
+            <th scope="col">Edit</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Model.FullName</td>
+            <td>@Model.Number</td>
+            <td>@Model.StartDate.ToString("dd/MM/yyyy")</td>
+            <td>@Model.ExpireDate.ToString("dd/MM/yyyy")</td>
+            <td>
+                @if (@DateTime.Now <= @Model.ExpireDate)
+                {
+                    <span class="badge badge-pill badge-success">Active</span>
+                }
+                else
+                {
+                    <span class="badge badge-pill badge-danger">Expire</span>
+                }
+            </td>
+            <td>
+                <a asp-controller="Gym" asp-action="EditClient" asp-route-id="@Model.Number" class="btn btn-warning btn-sm">Edit</a>
+            </td>
+        </tr>
+    </tbody>
+</table>

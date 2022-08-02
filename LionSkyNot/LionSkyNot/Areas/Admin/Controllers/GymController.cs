@@ -47,6 +47,57 @@ namespace LionSkyNot.Areas.Admin.Controllers
             return RedirectToAction("Successfull");
         }
 
+
+        public IActionResult EditClient(int id)
+        {
+
+            var client = this.clientService.SearchByNumberAndName(id.ToString());
+
+            if (client == null)
+            {
+                return BadRequest();
+            }
+
+            return View(new ClientFormModel()
+            {
+                FullName = client.FullName,
+                StartDate = client.StartDate,
+                ExpireDate = client.ExpireDate,
+            });
+        }
+
+
+        [HttpPost]
+        public IActionResult EditClient(ClientFormModel clientModel, int id)
+        {
+
+            if (clientModel.StartDate > clientModel.ExpireDate)
+            {
+                this.ModelState.AddModelError("errorDate", "Cannot start date be after expire date");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View(clientModel);
+            }
+
+
+            bool isEditted = this.clientService.Edit(
+                                                       id,
+                                                       clientModel.FullName,
+                                                       clientModel.StartDate,
+                                                       clientModel.ExpireDate);
+
+            if (!isEditted)
+            {
+                return BadRequest();
+            }
+
+
+            return RedirectToAction("Successfull");
+        }
+
+
         public IActionResult SearchClient(string searchTerm)
         {
 
@@ -54,7 +105,7 @@ namespace LionSkyNot.Areas.Admin.Controllers
             {
                 var searchClient = this.clientService.SearchByNumberAndName(searchTerm);
 
-                return View("TrainerSearch", searchClient);
+                return View("ShowClient", searchClient);
 
             }
 

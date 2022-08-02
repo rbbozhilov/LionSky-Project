@@ -1,0 +1,41 @@
+﻿@model ClientFormModel
+
+
+<link rel="stylesheet" href="~/css/form.css" asp-append-version="true" />
+
+<div>
+    <img class="center" src="https://www.ncl.ac.uk/mediav8/sport-/exercise-class-header.jpg">
+</div>
+<br />
+<br />
+
+<div class="row">
+    <div class="offset-md-3 col-md-6 col-sm-12 ">
+
+        <form method="post">
+            <div class="text-danger">@Html.ValidationMessage("errorDate")</div>
+
+            <div class="form-group">
+                <label asp-for="FullName">Full Name</label>
+                <input asp-for="FullName" type="text" class="form-control">
+                <span asp-validation-for="FullName" class="small text-danger"> </span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="StartDate">Start date</label>
+                <input asp-for="StartDate" type="date" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ExpireDate">Expire date</label>
+                <input asp-for="ExpireDate" type="date" class="form-control">
+            </div>
+            <br />
+            <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+<partial name="_ValidationScriptsPartial" />
+}
