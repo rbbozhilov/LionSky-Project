@@ -1,5 +1,6 @@
 ﻿using LionSkyNot.Data;
 using LionSkyNot.Data.Models.Gym;
+using LionSkyNot.Views.ViewModels.Gym;
 
 namespace LionSkyNot.Services.Gym
 {
@@ -44,10 +45,23 @@ namespace LionSkyNot.Services.Gym
         public bool CheckNumber(int number)
         => this.data.Clients.Any(c => c.Number == number);
 
+        public ClientViewModel SearchByNumberAndName(string searchTerm)
+        => this.data.Clients
+                        .Where(c => c.Number.ToString() == searchTerm || c.FullName.ToLower().Contains(searchTerm.ToLower()))
+                        .Select(c => new ClientViewModel()
+                        {
+                            Number = c.Number,
+                            FullName = c.FullName,
+                            StartDate = c.StartDate,
+                            ExpireDate = c.ExpireDate
+                        })
+                        .FirstOrDefault();
+
 
 
         private int GenerateNumber()
         => new Random().Next(0, 10000);
+
 
     }
 }

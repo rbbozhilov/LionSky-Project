@@ -1,6 +1,9 @@
-﻿namespace LionSkyNot.Areas.Admin.Views.Gym
-{
-    public class SearchClient
-    {
-    }
-}
+﻿@model ClientViewModel
+
+<form method="get">
+    <div class="form-group">
+        <label asp-for="SearchTerm">Search by trainer name</label>
+        <input asp-for="SearchTerm" type="text" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

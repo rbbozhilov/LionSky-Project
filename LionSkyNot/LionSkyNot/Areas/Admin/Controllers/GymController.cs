@@ -47,6 +47,20 @@ namespace LionSkyNot.Areas.Admin.Controllers
             return RedirectToAction("Successfull");
         }
 
+        public IActionResult SearchClient(string searchTerm)
+        {
+
+            if (!string.IsNullOrWhiteSpace(searchTerm) && !string.IsNullOrEmpty(searchTerm))
+            {
+                var searchClient = this.clientService.SearchByNumberAndName(searchTerm);
+
+                return View("TrainerSearch", searchClient);
+
+            }
+
+            return View();
+
+        }
 
         public IActionResult Successfull()
         => this.View();

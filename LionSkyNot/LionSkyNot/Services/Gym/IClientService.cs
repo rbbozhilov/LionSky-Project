@@ -1,4 +1,6 @@
-﻿namespace LionSkyNot.Services.Gym
+﻿using LionSkyNot.Views.ViewModels.Gym;
+
+namespace LionSkyNot.Services.Gym
 {
     public interface IClientService
     {
@@ -10,6 +12,7 @@
 
         bool CheckNumber(int number);
 
+        ClientViewModel SearchByNumberAndName(string searchTerm);
        
     }
 }
