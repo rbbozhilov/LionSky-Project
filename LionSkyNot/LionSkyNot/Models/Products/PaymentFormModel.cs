@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using LionSkyNot.Infrastructure.AttributeValidations;
+using System.ComponentModel.DataAnnotations;
 
 using static LionSkyNot.Data.DataConstants.Payment;
 
@@ -8,7 +9,8 @@ namespace LionSkyNot.Models.Products
     public class PaymentFormModel
     {
 
-        [RegularExpression(CardNumberRegularExpression, ErrorMessage = CardNumberErrorMessage)]
+        //[RegularExpression(CardNumberRegularExpression, ErrorMessage = CardNumberErrorMessage)]
+        [CardNumber] // With luhn algorithm better validation than with regex
         [Required]
         public string CardNumber { get; set; }
 
