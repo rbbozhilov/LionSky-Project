@@ -8,7 +8,6 @@ namespace LionSkyNot.Infrastructure.AttributeValidations
         //Luhn algorithm
         public override bool IsValid(object? value)
         {
-
             bool isValid = false;
 
             if (value is string cardNumber)
@@ -32,7 +31,6 @@ namespace LionSkyNot.Infrastructure.AttributeValidations
                 for (int i = cardNumber.Length; i > 0; i--)
                 {
                     counter++;
-
 
                     if (counter % 2 == 0)
                     {
