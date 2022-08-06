@@ -6,7 +6,7 @@ namespace LionSkyNot.Infrastructure.AttributeValidations
 {
     public class CardNumberAttribute : ValidationAttribute
     {
-        //Luhn algorithm
+
         public override bool IsValid(object? value)
         {
             bool isValid = false;
