@@ -23,7 +23,6 @@ namespace LionSkyNot.Tests.Services
         private string video;
         private string video2;
 
-
         private Exercise exercise;
         private Exercise exercise1;
 
