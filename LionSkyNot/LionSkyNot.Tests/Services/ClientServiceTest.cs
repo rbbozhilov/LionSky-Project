@@ -6,7 +6,7 @@ using Xunit;
 
 namespace LionSkyNot.Tests.Services
 {
-    public class GymServiceTest
+    public class ClientServiceTest
     {
 
         [Fact]
@@ -109,6 +109,53 @@ namespace LionSkyNot.Tests.Services
             Assert.False(isEditted);
 
         }
+
+
+        [Fact]
+        public void CheckClientNumber_ShouldReturnTrue()
+        {
+
+            //Arrange
+            using var data = DatabaseMock.Instance;
+            var clientService = new ClientService(data);
+            string createdName = "Test tester";
+            DateTime startDate = DateTime.Now;
+            DateTime expiredDate = DateTime.Now;
+
+            clientService.Create(
+                                 createdName,
+                                 startDate,
+                                 expiredDate);
+
+            var clientNumber = data.Clients
+                                    .Where(c => c.FullName == createdName)
+                                    .Select(c => c.Number)
+                                    .FirstOrDefault();
+
+            //Act
+            var exists = clientService.CheckNumber(clientNumber);
+
+            //Assert
+            Assert.True(exists);
+
+        }
+
+        [Fact]
+        public void CheckClientNumber_ShouldReturnFlase()
+        {
+
+            //Arrange
+            using var data = DatabaseMock.Instance;
+            var clientService = new ClientService(data);
+
+            //Act
+            var exists = clientService.CheckNumber(13123);
+
+            //Assert
+            Assert.False(exists);
+
+        }
+
 
     }
 }
