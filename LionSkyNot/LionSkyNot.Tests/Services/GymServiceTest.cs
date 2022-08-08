@@ -57,12 +57,58 @@ namespace LionSkyNot.Tests.Services
 
             var clientsNumbers = data.Clients.Select(c => c.Number).ToList();
 
-
             //Assert
             Assert.NotEqual(clientsNumbers[0], clientsNumbers[1]);
 
         }
 
+        [Fact]
+        public void EditClient_ShouldReturnTrue_And_EditCorrect()
+        {
+
+            //Arrange
+            using var data = DatabaseMock.Instance;
+            var clientService = new ClientService(data);
+            string createdName = "Test tester";
+            string editName = "Tester test";
+            DateTime startDate = DateTime.Now;
+            DateTime expiredDate = DateTime.Now;
+
+            //Act
+            clientService.Create(
+                                 createdName,
+                                 startDate,
+                                 expiredDate);
+
+            var currentClient = data.Clients.Where(c => c.FullName == createdName).FirstOrDefault();
+
+            var isEditted = clientService.Edit(currentClient.Number, editName, startDate, expiredDate);
+
+            //Assert
+            Assert.True(isEditted);
+            Assert.Equal(editName, currentClient.FullName);
+
+        }
+
+        [Fact]
+        public void EditClient_ShouldReturnFalse()
+        {
+
+            //Arrange
+            using var data = DatabaseMock.Instance;
+            var clientService = new ClientService(data);
+            string createdName = "Test tester";
+            DateTime startDate = DateTime.Now;
+            DateTime expiredDate = DateTime.Now;
+
+            //Act
+
+            var isEditted = clientService.Edit(3123123, createdName, startDate, expiredDate);
+
+            //Assert
+            Assert.False(isEditted);
+
+        }
 
     }
 }
