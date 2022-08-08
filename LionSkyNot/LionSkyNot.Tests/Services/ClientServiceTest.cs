@@ -157,5 +157,37 @@ namespace LionSkyNot.Tests.Services
         }
 
 
+        [Fact]
+        public void GetClientByNumber_ShouldReturn_CorrectClient()
+        {
+
+            //Arrange
+            using var data = DatabaseMock.Instance;
+            var clientService = new ClientService(data);
+            string createdName = "Test tester";
+            DateTime startDate = DateTime.Now;
+            DateTime expiredDate = DateTime.Now;
+
+            clientService.Create(
+                                 createdName,
+                                 startDate,
+                                 expiredDate);
+
+            var clientNumber = data.Clients
+                                    .Where(c => c.FullName == createdName)
+                                    .Select(c => c.Number)
+                                    .FirstOrDefault();
+
+            //Act
+            var client = clientService.GetClientByNumber(clientNumber);
+
+            //Assert
+            Assert.Equal(createdName, client.FullName);
+            Assert.Equal(startDate, client.StartDate);
+            Assert.Equal(expiredDate, client.ExpireDate);
+
+        }
+
+
     }
 }
