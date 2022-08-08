@@ -1,6 +1,5 @@
 ﻿using LionSkyNot.Models.Algorithms;
 using System.ComponentModel.DataAnnotations;
-using System.Text.RegularExpressions;
 
 namespace LionSkyNot.Infrastructure.AttributeValidations
 {
@@ -14,7 +13,6 @@ namespace LionSkyNot.Infrastructure.AttributeValidations
             if (value is string cardNumber)
             {
                 isValid = new LuhnAlgorithm().Implementation(cardNumber);
-
             }
 
             return isValid;
