@@ -16,7 +16,6 @@ namespace LionSkyNot.Controllers
         public IActionResult Index()
         => View();
 
-
         [HttpPost]
         public IActionResult Index(CalculateFormModel calculateModel, CalculatorViewModel model)
         {
@@ -34,6 +33,5 @@ namespace LionSkyNot.Controllers
 
             return View("Result", model);
         }
-
     }
 }

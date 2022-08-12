@@ -19,13 +19,11 @@ namespace LionSkyNot.Controllers
         private IClassService classService;
         private IMemoryCache cache;
 
-
         public ClassController(IClassService classService, IMemoryCache cache)
         {
             this.classService = classService;
             this.cache = cache;
         }
-
 
 
         public IActionResult Index(AllClassViewModel allClassModel)
@@ -141,8 +139,6 @@ namespace LionSkyNot.Controllers
 
                 this.cache.Set(allBoxClassesKeyCache, allBoxClasses);
             }
-
-
             return View(allBoxClasses);
         }
 
@@ -165,8 +161,6 @@ namespace LionSkyNot.Controllers
 
                 this.cache.Set(allWrestlingClassesKeyCache, allWrestlingClasses);
             }
-
-
             return View(allWrestlingClasses);
         }
 
@@ -189,8 +183,6 @@ namespace LionSkyNot.Controllers
 
                 this.cache.Set(allAthleticClassesKeyCache, allAthleticClasses);
             }
-
-
             return View(allAthleticClasses);
         }
 
@@ -213,7 +205,6 @@ namespace LionSkyNot.Controllers
 
                 this.cache.Set(viewDetailsKeyCache, viewDetails);
             }
-
             return View(viewDetails);
         }
 
@@ -233,7 +224,6 @@ namespace LionSkyNot.Controllers
             {
                 return View("UserAlreadyInClass");
             }
-
             return View("SuccessJoin");
         }
 
@@ -255,7 +245,6 @@ namespace LionSkyNot.Controllers
             {
                 return BadRequest();
             }
-
             return View("SuccessRemoveClassUser");
         }
     }
