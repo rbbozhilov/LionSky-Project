@@ -2,6 +2,7 @@
 using LionSkyNot.Tests.Mock;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace LionSkyNot.Tests.Services
@@ -10,7 +11,7 @@ namespace LionSkyNot.Tests.Services
     {
 
         [Fact]
-        public void AddNewClient_ShouldBeCorrect()
+        public async Task AddNewClient_ShouldBeCorrect()
         {
 
             //Arrange
@@ -21,10 +22,10 @@ namespace LionSkyNot.Tests.Services
             DateTime expiredDate = DateTime.Now;
 
             //Act
-            clientService.Create(
-                                 clientName,
-                                 startDate,
-                                 expiredDate);
+            await clientService.CreateAsync(
+                                   clientName,
+                                   startDate,
+                                   expiredDate);
 
             var currentClient = data.Clients.Where(c => c.FullName == clientName).FirstOrDefault();
 
@@ -36,7 +37,7 @@ namespace LionSkyNot.Tests.Services
         }
 
         [Fact]
-        public void AllCreatedClients_ShouldHave_DifferentNumber()
+        public async Task AllCreatedClients_ShouldHave_DifferentNumber()
         {
 
             //Arrange
@@ -49,10 +50,10 @@ namespace LionSkyNot.Tests.Services
             //Act
             for (int i = 0; i < 2; i++)
             {
-                clientService.Create(
-                                     clientName + i,
-                                     startDate,
-                                     expiredDate);
+                await clientService.CreateAsync(
+                                       clientName + i,
+                                       startDate,
+                                       expiredDate);
             }
 
             var clientsNumbers = data.Clients.Select(c => c.Number).ToList();
@@ -63,7 +64,7 @@ namespace LionSkyNot.Tests.Services
         }
 
         [Fact]
-        public void EditClient_ShouldReturnTrue_And_EditCorrect()
+        public async Task EditClient_ShouldReturnTrue_And_EditCorrect()
         {
 
             //Arrange
@@ -75,14 +76,14 @@ namespace LionSkyNot.Tests.Services
             DateTime expiredDate = DateTime.Now;
 
             //Act
-            clientService.Create(
-                                 createdName,
-                                 startDate,
-                                 expiredDate);
+            await clientService.CreateAsync(
+                                  createdName,
+                                  startDate,
+                                  expiredDate);
 
             var currentClient = data.Clients.Where(c => c.FullName == createdName).FirstOrDefault();
 
-            var isEditted = clientService.Edit(currentClient.Number, editName, startDate, expiredDate);
+            var isEditted = await clientService.EditAsync(currentClient.Number, editName, startDate, expiredDate);
 
             //Assert
             Assert.True(isEditted);
@@ -91,7 +92,7 @@ namespace LionSkyNot.Tests.Services
         }
 
         [Fact]
-        public void EditClient_ShouldReturnFalse()
+        public async Task EditClient_ShouldReturnFalse()
         {
 
             //Arrange
@@ -103,7 +104,7 @@ namespace LionSkyNot.Tests.Services
 
             //Act
 
-            var isEditted = clientService.Edit(3123123, createdName, startDate, expiredDate);
+            var isEditted = await clientService.EditAsync(3123123, createdName, startDate, expiredDate);
 
             //Assert
             Assert.False(isEditted);
@@ -112,7 +113,7 @@ namespace LionSkyNot.Tests.Services
 
 
         [Fact]
-        public void CheckClientNumber_ShouldReturnTrue()
+        public async Task CheckClientNumber_ShouldReturnTrue()
         {
 
             //Arrange
@@ -122,10 +123,10 @@ namespace LionSkyNot.Tests.Services
             DateTime startDate = DateTime.Now;
             DateTime expiredDate = DateTime.Now;
 
-            clientService.Create(
-                                 createdName,
-                                 startDate,
-                                 expiredDate);
+            await clientService.CreateAsync(
+                                  createdName,
+                                  startDate,
+                                  expiredDate);
 
             var clientNumber = data.Clients
                                     .Where(c => c.FullName == createdName)
@@ -158,7 +159,7 @@ namespace LionSkyNot.Tests.Services
 
 
         [Fact]
-        public void GetClientByNumber_ShouldReturn_CorrectClient()
+        public async Task GetClientByNumber_ShouldReturn_CorrectClient()
         {
 
             //Arrange
@@ -168,7 +169,7 @@ namespace LionSkyNot.Tests.Services
             DateTime startDate = DateTime.Now;
             DateTime expiredDate = DateTime.Now;
 
-            clientService.Create(
+            await clientService.CreateAsync(
                                  createdName,
                                  startDate,
                                  expiredDate);

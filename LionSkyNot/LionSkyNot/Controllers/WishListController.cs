@@ -32,14 +32,14 @@ namespace LionSkyNot.Controllers
 
             var tuple = this.wishListService.GetProductsOfUser(user);
 
-            if(tuple.Item1 == false)
+            if (tuple.Item1 == false)
             {
                 return View("NotAddedProducts");
             }
 
             var currentProducts = tuple.Item2;
 
-            if(currentProducts.Products.Count() == 0)
+            if (currentProducts.Products.Count() == 0)
             {
                 return View("NotAddedProducts");
             }
@@ -49,13 +49,14 @@ namespace LionSkyNot.Controllers
         }
 
 
-        public IActionResult AddToWishList(int id)
+        public async Task<IActionResult> AddToWishList(int id)
         {
             var user = Infrastructure.ClaimsPrincipalExtensions.GetId(this.User);
 
             var currentProduct = this.productService.TakeProduct(id);
+            var isAdded = await this.wishListService.AddAsync(currentProduct, user);
 
-            if (!this.wishListService.Add(currentProduct, user))
+            if (!isAdded)
             {
                 return BadRequest();
             }
@@ -64,11 +65,13 @@ namespace LionSkyNot.Controllers
         }
 
 
-        public IActionResult RemoveProduct(int id)
+        public async Task<IActionResult> RemoveProduct(int id)
         {
             var user = Infrastructure.ClaimsPrincipalExtensions.GetId(this.User);
 
-            if (!this.wishListService.RemoveProduct(id, user))
+            var isRemoved = await this.wishListService.RemoveProductAsync(id, user);
+
+            if (!isRemoved)
             {
                 return BadRequest();
             };

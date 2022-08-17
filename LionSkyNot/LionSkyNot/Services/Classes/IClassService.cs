@@ -10,7 +10,7 @@ namespace LionSkyNot.Services.Classes
     public interface IClassService
     {
 
-        void Create(
+        Task CreateAsync(
                     string fullname,
                     string imageUrl,
                     int MaxPractitionerCount,
@@ -19,7 +19,7 @@ namespace LionSkyNot.Services.Classes
                     DateTime endDateTime);
 
 
-        bool Edit(
+        Task<bool> EditAsync(
                   string id,
                   string className,
                   string imageUrl,
@@ -30,13 +30,13 @@ namespace LionSkyNot.Services.Classes
                   );
 
 
-        bool Delete(string id);
+        Task<bool> DeleteAsync(string id);
 
         bool IsHaveTrainerById(int id);
 
-        bool RemovingClassFromUser(string userId, string classId);
+        Task<bool> RemovingClassFromUserAsync(string userId, string classId);
 
-        bool AddUserToClass(string userId, string classId);
+        Task<bool> AddUserToClassAsync(string userId, string classId);
 
         bool CheckFreePlace(string classId);
 

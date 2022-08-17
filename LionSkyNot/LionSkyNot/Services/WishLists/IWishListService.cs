@@ -10,9 +10,9 @@ namespace LionSkyNot.Services.WishLists
     public interface IWishListService
     {
 
-        bool Add(Product product, string userId);
+        Task<bool> AddAsync(Product product, string userId);
 
-        bool RemoveProduct(int productId, string userId);
+        Task<bool> RemoveProductAsync(int productId, string userId);
 
         Tuple<bool, WishListFormModel> GetProductsOfUser(string userId);
 

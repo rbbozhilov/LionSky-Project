@@ -50,7 +50,7 @@ namespace LionSkyNot.Areas.Admin.Controllers
 
         [Authorize(Roles = ModeratorAndAdminRole)]
         [HttpPost]
-        public IActionResult AddClass(ClassFormModel classModel)
+        public async Task<IActionResult> AddClass(ClassFormModel classModel)
         {
 
             if (classModel.StartDateTime > classModel.EndDateTime)
@@ -73,13 +73,13 @@ namespace LionSkyNot.Areas.Admin.Controllers
                 return View(classModel);
             }
 
-            this.classService.Create(
-                                     classModel.ClassName,
-                                     classModel.ImageUrl,
-                                     classModel.MaxPractitionerCount,
-                                     classModel.TrainerId,
-                                     classModel.StartDateTime,
-                                     classModel.EndDateTime);
+            await this.classService.CreateAsync(
+                                       classModel.ClassName,
+                                       classModel.ImageUrl,
+                                       classModel.MaxPractitionerCount,
+                                       classModel.TrainerId,
+                                       classModel.StartDateTime,
+                                       classModel.EndDateTime);
 
             return RedirectToAction("Successfull");
         }
@@ -122,7 +122,7 @@ namespace LionSkyNot.Areas.Admin.Controllers
 
         [Authorize(Roles = AdminRole)]
         [HttpPost]
-        public IActionResult EditClass(ClassFormModel classModel, string id)
+        public async Task<IActionResult> EditClass(ClassFormModel classModel, string id)
         {
 
             if (!ModelState.IsValid)
@@ -130,7 +130,7 @@ namespace LionSkyNot.Areas.Admin.Controllers
                 return View(classModel);
             }
 
-            bool isEditted = this.classService.Edit(
+            var isEditted = await this.classService.EditAsync(
                                                     id,
                                                     classModel.ClassName,
                                                     classModel.ImageUrl,
@@ -152,10 +152,10 @@ namespace LionSkyNot.Areas.Admin.Controllers
 
 
         [Authorize(Roles = AdminRole)]
-        public IActionResult DeleteClass(string id)
+        public async Task<IActionResult> DeleteClass(string id)
         {
 
-            bool isDeleted = this.classService.Delete(id);
+            bool isDeleted = await this.classService.DeleteAsync(id);
 
             if (!isDeleted)
             {

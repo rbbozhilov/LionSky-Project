@@ -30,7 +30,7 @@ namespace LionSkyNot.Services.WishLists
 
 
 
-        public bool Add(Product product, string userId)
+        public async Task<bool> AddAsync(Product product, string userId)
         {
 
             var wishListProducts = new WishListsProducts();
@@ -39,7 +39,7 @@ namespace LionSkyNot.Services.WishLists
                                            .Where(w => w.UserId == userId)
                                            .FirstOrDefault();
 
-            if(product == null)
+            if (product == null)
             {
                 return false;
             }
@@ -52,12 +52,12 @@ namespace LionSkyNot.Services.WishLists
                     UserId = userId
                 };
 
-                this.data.WishLists.Add(currentWishList);
+                await this.data.WishLists.AddAsync(currentWishList);
 
 
                 wishListProducts.Product = product;
                 wishListProducts.WishList = currentWishList;
-               
+
             }
 
             else
@@ -67,17 +67,17 @@ namespace LionSkyNot.Services.WishLists
                 wishListProducts.WishList = currentWishList;
 
             }
- 
-            this.data.WishListsProducts.Add(wishListProducts);
+
+            await this.data.WishListsProducts.AddAsync(wishListProducts);
 
 
-            this.data.SaveChanges();
+            await this.data.SaveChangesAsync();
 
             return true;
         }
 
 
-        public bool RemoveProduct(int productId, string userId)
+        public async Task<bool> RemoveProductAsync(int productId, string userId)
         {
 
             var currentWishList = this.data.WishLists
@@ -102,7 +102,7 @@ namespace LionSkyNot.Services.WishLists
 
             this.data.WishListsProducts.Remove(currentProduct);
 
-            this.data.SaveChanges();
+            await this.data.SaveChangesAsync();
 
             return true;
         }
@@ -115,7 +115,7 @@ namespace LionSkyNot.Services.WishLists
                                            .FirstOrDefault();
 
 
-            if(currentWishList == null)
+            if (currentWishList == null)
             {
                 return new Tuple<bool, WishListFormModel>(false, null);
             }
@@ -147,7 +147,7 @@ namespace LionSkyNot.Services.WishLists
             };
 
             return new Tuple<bool, WishListFormModel>(true, returnProducts);
-            
+
         }
 
 

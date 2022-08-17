@@ -10,15 +10,15 @@ namespace LionSkyNot.Services.Exercises
     public interface IExerciseService
     {
 
-        void Create(
+        Task CreateAsync(
                     string name,
                     string imgUrl,
                     string videoUrl,
                     int typeExerciseId);
 
-        bool Delete(int id);
+        Task<bool> DeleteAsync(int id);
 
-        bool Edit(
+        Task<bool> EditAsync(
                   int id,
                   string name,
                   string imgUrl,

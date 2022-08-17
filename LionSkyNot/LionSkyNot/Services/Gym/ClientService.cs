@@ -16,7 +16,7 @@ namespace LionSkyNot.Services.Gym
         }
 
 
-        public void Create(
+        public async Task CreateAsync(
                            string fullName,
                            DateTime startDate,
                            DateTime expireDate)
@@ -37,13 +37,13 @@ namespace LionSkyNot.Services.Gym
                 client.Number = GenerateNumber();
             }
 
-            this.data.Clients.Add(client);
+            await this.data.Clients.AddAsync(client);
 
-            this.data.SaveChanges();
+            await this.data.SaveChangesAsync();
 
         }
 
-        public bool Edit(
+        public async Task<bool> EditAsync(
                         int number,
                         string fullName,
                         DateTime startDate,
@@ -51,7 +51,7 @@ namespace LionSkyNot.Services.Gym
         {
             var client = this.data.Clients.Where(c => c.Number == number).FirstOrDefault();
 
-            if(client == null)
+            if (client == null)
             {
                 return false;
             }
@@ -60,7 +60,7 @@ namespace LionSkyNot.Services.Gym
             client.StartDate = startDate;
             client.ExpireDate = expireDate;
 
-            this.data.SaveChanges();
+            await this.data.SaveChangesAsync();
 
             return true;
         }

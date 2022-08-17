@@ -39,7 +39,7 @@ namespace LionSkyNot.Areas.Admin.Controllers
 
         [Authorize(Roles = ModeratorAndAdminRole)]
         [HttpPost]
-        public IActionResult AddProduct(AddProductFormModel productModel)
+        public async Task<IActionResult> AddProduct(AddProductFormModel productModel)
         {
 
             if (!productService.IsHaveType(productModel.TypeId))
@@ -60,22 +60,23 @@ namespace LionSkyNot.Areas.Admin.Controllers
                 return View(productModel);
             }
 
-            this.productService.CreateProduct(productModel.Name,
-                productModel.Price,
-                productModel.InStock,
-                productModel.Description,
-                productModel.ImageUrl,
-                productModel.TypeId,
-                productModel.BrandId);
+            await this.productService.CreateProductAsync(
+                 productModel.Name,
+                 productModel.Price,
+                 productModel.InStock,
+                 productModel.Description,
+                 productModel.ImageUrl,
+                 productModel.TypeId,
+                 productModel.BrandId);
 
             return RedirectToAction("Successfull");
         }
 
 
         [Authorize(Roles = ModeratorAndAdminRole)]
-        public IActionResult AddProductsInStock()
+        public async Task<IActionResult> AddProductsInStock()
         {
-            bool isDone = this.productService.UpdateInStockCountOfProducts();
+            var isDone = await this.productService.UpdateInStockCountOfProductsAsync();
 
             if (!isDone)
             {
@@ -133,17 +134,16 @@ namespace LionSkyNot.Areas.Admin.Controllers
 
         [Authorize(Roles = AdminRole)]
         [HttpPost]
-        public IActionResult EditProduct(EditProductFormModel productModel, int id)
+        public async Task<IActionResult> EditProduct(EditProductFormModel productModel, int id)
         {
-
 
             if (!ModelState.IsValid)
             {
                 return View(productModel);
             }
 
-
-            bool isEditted = this.productService.EditProduct(id,
+            var isEditted = await this.productService.EditProductAsync(
+                                                              id,
                                                               productModel.ImageUrl,
                                                               productModel.Name,
                                                               productModel.Price,
@@ -154,17 +154,16 @@ namespace LionSkyNot.Areas.Admin.Controllers
                 return BadRequest();
             }
 
-
             return RedirectToAction("Successfull");
-
         }
 
 
         [Authorize(Roles = AdminRole)]
-        public IActionResult DeleteProduct(int id)
+        public async Task<IActionResult> DeleteProduct(int id)
         {
+            var isDeleted = await this.productService.DeleteProductAsync(id);
 
-            if (!this.productService.DeleteProduct(id))
+            if (!isDeleted)
             {
                 return BadRequest();
             }

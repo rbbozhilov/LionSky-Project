@@ -27,7 +27,7 @@ namespace LionSkyNot.Areas.Admin.Controllers
 
 
         [HttpPost]
-        public IActionResult AddClient(ClientFormModel clientModel)
+        public async Task<IActionResult> AddClient(ClientFormModel clientModel)
         {
 
             if (clientModel.StartDate > clientModel.ExpireDate)
@@ -41,10 +41,10 @@ namespace LionSkyNot.Areas.Admin.Controllers
                 return View(clientModel);
             }
 
-            this.clientService.Create(
-                                      clientModel.FullName,
-                                      clientModel.StartDate,
-                                      clientModel.ExpireDate);
+            await this.clientService.CreateAsync(
+                                       clientModel.FullName,
+                                       clientModel.StartDate,
+                                       clientModel.ExpireDate);
 
             return RedirectToAction("Successfull");
         }
@@ -70,7 +70,7 @@ namespace LionSkyNot.Areas.Admin.Controllers
 
 
         [HttpPost]
-        public IActionResult EditClient(ClientFormModel clientModel, int id)
+        public async Task<IActionResult> EditClient(ClientFormModel clientModel, int id)
         {
 
             if (clientModel.StartDate > clientModel.ExpireDate)
@@ -84,7 +84,7 @@ namespace LionSkyNot.Areas.Admin.Controllers
             }
 
 
-            bool isEditted = this.clientService.Edit(
+            bool isEditted = await this.clientService.EditAsync(
                                                        id,
                                                        clientModel.FullName,
                                                        clientModel.StartDate,
@@ -94,7 +94,6 @@ namespace LionSkyNot.Areas.Admin.Controllers
             {
                 return BadRequest();
             }
-
 
             return RedirectToAction("Successfull");
         }

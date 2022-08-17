@@ -10,7 +10,7 @@ namespace LionSkyNot.Services.Trainers
     public interface ITrainerService
     {
 
-        void Create(
+        Task CreateAsync(
                     string fullName,
                     int yearsOfExperience,
                     string imageUrl,
@@ -22,7 +22,7 @@ namespace LionSkyNot.Services.Trainers
                     string userId,
                     bool isCandidate);
 
-        void AddCandidate(Trainer trainer);
+        Task AddCandidateAsync(Trainer trainer);
 
         int GetTrainerId(string userId);
 
@@ -32,7 +32,7 @@ namespace LionSkyNot.Services.Trainers
 
         bool IsCandidate(string userId);
 
-        bool Delete(int id);
+        Task<bool> DeleteAsync(int id);
 
         TrainerViewModel GetTrainerById(int id);
 

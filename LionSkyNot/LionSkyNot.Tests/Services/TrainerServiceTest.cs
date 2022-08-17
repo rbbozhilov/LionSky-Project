@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-
+using System.Threading.Tasks;
 using LionSkyNot.Data.Models.Classes;
 
 using LionSkyNot.Services.Trainers;
@@ -18,7 +18,7 @@ namespace LionSkyNot.Tests.Services
 
 
         [Fact]
-        public void ShouldNotDeleteTrainerAndReturnFalse()
+        public async Task ShouldNotDeleteTrainerAndReturnFalse()
         {
 
             //Arrange
@@ -38,7 +38,7 @@ namespace LionSkyNot.Tests.Services
             });
             data.SaveChanges();
 
-            bool result = trainerService.Delete(2);
+            bool result = await trainerService.DeleteAsync(2);
 
             //Assert
 
@@ -48,9 +48,9 @@ namespace LionSkyNot.Tests.Services
 
         }
 
-     
+
         [Fact]
-        public void ShouldCreateTrainerCorrect()
+        public async Task ShouldCreateTrainerCorrect()
         {
 
             //Arrange
@@ -70,7 +70,7 @@ namespace LionSkyNot.Tests.Services
 
             //Act
 
-            trainerService.Create(
+            await trainerService.CreateAsync(
                                   fullName,
                                   yearOfExperience,
                                   imageUrl,
@@ -93,7 +93,7 @@ namespace LionSkyNot.Tests.Services
 
 
         [Fact]
-        public void AddCandidateShouldWorkCorrect()
+        public async Task AddCandidateShouldWorkCorrect()
         {
 
             //Arrange
@@ -116,7 +116,7 @@ namespace LionSkyNot.Tests.Services
 
             data.Trainers.Add(currentCandidate);
 
-            trainerService.AddCandidate(currentCandidate);
+            await trainerService.AddCandidateAsync(currentCandidate);
 
             //Assert
 
@@ -506,7 +506,7 @@ namespace LionSkyNot.Tests.Services
             };
 
 
-            data.Trainers.AddRange(trainer1,trainer2);
+            data.Trainers.AddRange(trainer1, trainer2);
 
             //Act
 

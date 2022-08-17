@@ -58,7 +58,7 @@ namespace LionSkyNot.Controllers
 
         [HttpPost]
         [Authorize]
-        public IActionResult BecomeTrainer(AddTrainerFormModel trainerModel)
+        public async Task<IActionResult> BecomeTrainer(AddTrainerFormModel trainerModel)
         {
             trainerModel.Categorie = this.trainerService.GetAllCategories();
             var currentUserId = ClaimsPrincipalExtensions.GetId(this.User);
@@ -81,17 +81,17 @@ namespace LionSkyNot.Controllers
                 return View(trainerModel);
             }
 
-            this.trainerService.Create(
-                                       trainerModel.FullName,
-                                       trainerModel.YearOfExperience,
-                                       trainerModel.ImageUrl,
-                                       trainerModel.Height,
-                                       trainerModel.Weight,
-                                       trainerModel.BirthDate,
-                                       trainerModel.CategorieId,
-                                       trainerModel.Description,
-                                       currentUserId,
-                                       true);
+            await this.trainerService.CreateAsync(
+                                        trainerModel.FullName,
+                                        trainerModel.YearOfExperience,
+                                        trainerModel.ImageUrl,
+                                        trainerModel.Height,
+                                        trainerModel.Weight,
+                                        trainerModel.BirthDate,
+                                        trainerModel.CategorieId,
+                                        trainerModel.Description,
+                                        currentUserId,
+                                        true);
 
 
             return RedirectToAction("CandidatureSuccess");

@@ -210,7 +210,7 @@ namespace LionSkyNot.Controllers
 
 
         [Authorize]
-        public IActionResult Join(string id)
+        public async Task<IActionResult> Join(string id)
         {
 
             var currentUserId = ClaimsPrincipalExtensions.GetId(this.User);
@@ -220,7 +220,9 @@ namespace LionSkyNot.Controllers
                 return View("ToMuchPeopleInClass");
             }
 
-            if (!this.classService.AddUserToClass(currentUserId, id))
+            var result = await this.classService.AddUserToClassAsync(currentUserId, id);
+
+            if (!result)
             {
                 return View("UserAlreadyInClass");
             }
@@ -236,12 +238,13 @@ namespace LionSkyNot.Controllers
         }
 
 
-        public IActionResult RemoveFromClassUser(string id)
+        public async Task<IActionResult> RemoveFromClassUser(string id)
         {
-
             var currentUserId = ClaimsPrincipalExtensions.GetId(this.User);
 
-            if (!this.classService.RemovingClassFromUser(currentUserId, id))
+            var result = await this.classService.RemovingClassFromUserAsync(currentUserId, id);
+
+            if (!result)
             {
                 return BadRequest();
             }

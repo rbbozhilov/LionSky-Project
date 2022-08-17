@@ -24,7 +24,7 @@ namespace LionSkyNot.Services.Trainers
 
 
 
-        public void Create(
+        public async Task CreateAsync(
                            string fullName,
                            int yearsOfExperience,
                            string imageUrl,
@@ -50,19 +50,19 @@ namespace LionSkyNot.Services.Trainers
                 IsCandidate = isCandidate
             };
 
-            this.data.Trainers.Add(trainer);
+            await this.data.Trainers.AddAsync(trainer);
 
-            this.data.SaveChanges();
+            await this.data.SaveChangesAsync();
 
         }
 
 
-        public void AddCandidate(Trainer currentCandidate)
+        public async Task AddCandidateAsync(Trainer currentCandidate)
         {
 
             currentCandidate.IsCandidate = false;
 
-            this.data.SaveChanges();
+            await this.data.SaveChangesAsync();
         }
 
 
@@ -71,7 +71,7 @@ namespace LionSkyNot.Services.Trainers
                .Any(t => t.UserId == userId && t.IsDeleted == true);
 
 
-        public bool Delete(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
             var currentTrainer = this.data.Trainers.Where(t => t.Id == id)
                                                    .FirstOrDefault();
@@ -83,7 +83,7 @@ namespace LionSkyNot.Services.Trainers
 
             currentTrainer.IsDeleted = true;
 
-            this.data.SaveChanges();
+            await this.data.SaveChangesAsync();
 
             return true;
 

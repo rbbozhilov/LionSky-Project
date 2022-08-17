@@ -10,7 +10,7 @@ namespace LionSkyNot.Services.Products
     public interface IProductService
     {
 
-        void CreateProduct(
+        Task CreateProductAsync(
                            string name,
                            decimal price,
                            int inStock,
@@ -19,16 +19,16 @@ namespace LionSkyNot.Services.Products
                            int typeProductId,
                            int brandProductId);
 
-        bool UpdateInStockCountOfProducts();
+        Task<bool> UpdateInStockCountOfProductsAsync();
 
-        bool EditProduct(
+        Task<bool> EditProductAsync(
                          int id,
                          string imageUrl,
                          string name,
                          decimal price,
                          float percentage);
 
-        bool DeleteProduct(int id);
+        Task<bool> DeleteProductAsync(int id);
 
         bool IsHaveBrand(int brandId);
 

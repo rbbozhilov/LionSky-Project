@@ -21,7 +21,7 @@ namespace LionSkyNot.Services.Products
 
 
 
-        public void CreateProduct(
+        public async Task CreateProductAsync(
                                   string name,
                                   decimal price,
                                   int inStock,
@@ -41,9 +41,9 @@ namespace LionSkyNot.Services.Products
                 CountInStock = inStock
             };
 
-            data.Products.Add(newProduct);
+            await data.Products.AddAsync(newProduct);
 
-            data.SaveChanges();
+            await data.SaveChangesAsync();
         }
 
 
@@ -59,7 +59,7 @@ namespace LionSkyNot.Services.Products
                     .FirstOrDefault();
 
 
-        public bool EditProduct(
+        public async Task<bool> EditProductAsync(
                                 int id,
                                 string imageUrl,
                                 string name,
@@ -93,7 +93,7 @@ namespace LionSkyNot.Services.Products
 
             currentProduct.PriceOnPromotion = currentProduct.Price - (currentProduct.Price * (decimal)(percentage / 100));
 
-            this.data.SaveChanges();
+            await this.data.SaveChangesAsync();
 
             return true;
         }
@@ -107,7 +107,7 @@ namespace LionSkyNot.Services.Products
         => this.data.Types.Any(t => t.Id == typeId);
 
 
-        public bool DeleteProduct(int id)
+        public async Task<bool> DeleteProductAsync(int id)
         {
             var currentProduct = this.data.Products
                                           .Where(p => p.Id == id && p.IsDeleted == false)
@@ -120,7 +120,7 @@ namespace LionSkyNot.Services.Products
 
             currentProduct.IsDeleted = true;
 
-            this.data.SaveChanges();
+            await this.data.SaveChangesAsync();
 
             return true;
         }
@@ -262,7 +262,7 @@ namespace LionSkyNot.Services.Products
                 .ToList();
 
 
-        public bool UpdateInStockCountOfProducts()
+        public async Task<bool> UpdateInStockCountOfProductsAsync()
         {
             var products = this.data.Products
                                     .Where(p => p.CountInStock == 0 && p.IsDeleted == false)
@@ -278,7 +278,7 @@ namespace LionSkyNot.Services.Products
                 products[i].CountInStock = 10;
             }
 
-            this.data.SaveChanges();
+            await this.data.SaveChangesAsync();
 
             return true;
         }
@@ -289,7 +289,6 @@ namespace LionSkyNot.Services.Products
             var product = this.data.Products
                                    .Where(p => p.Id == id && p.IsDeleted == false)
                                    .FirstOrDefault();
-
 
             return product;
         }

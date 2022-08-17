@@ -22,7 +22,7 @@ namespace LionSkyNot.Services.Classes
 
 
 
-        public void Create(
+        public async Task CreateAsync(
                           string className,
                           string imageUrl,
                           int maxPractitionerCount,
@@ -41,13 +41,13 @@ namespace LionSkyNot.Services.Classes
             };
 
 
-            this.data.Classes.Add(@class);
+            await this.data.Classes.AddAsync(@class);
 
-            this.data.SaveChanges();
+            await this.data.SaveChangesAsync();
         }
 
 
-        public bool AddUserToClass(string userId, string classId)
+        public async Task<bool> AddUserToClassAsync(string userId, string classId)
         {
 
 
@@ -75,9 +75,9 @@ namespace LionSkyNot.Services.Classes
             @class.PractitionerCount++;
 
 
-            this.data.ClassUsers.Add(newClassUser);
+            await this.data.ClassUsers.AddAsync(newClassUser);
 
-            this.data.SaveChanges();
+            await this.data.SaveChangesAsync();
 
             return true;
 
@@ -109,7 +109,7 @@ namespace LionSkyNot.Services.Classes
                     .Any(c => c.UserId == userId && c.Class.IsDeleted == false);
 
 
-        public bool Edit(
+        public async Task<bool> EditAsync(
                          string id,
                          string className,
                          string imageUrl,
@@ -138,14 +138,14 @@ namespace LionSkyNot.Services.Classes
             currentClass.TrainerId = trainerId;
 
 
-            this.data.SaveChanges();
+            await this.data.SaveChangesAsync();
 
             return true;
 
         }
 
 
-        public bool Delete(string id)
+        public async Task<bool> DeleteAsync(string id)
         {
             var currentClass = this.data.Classes
                                         .Where(c => c.Id == id && c.IsDeleted == false)
@@ -158,13 +158,13 @@ namespace LionSkyNot.Services.Classes
 
             currentClass.IsDeleted = true;
 
-            this.data.SaveChanges();
+            await this.data.SaveChangesAsync();
 
             return true;
         }
 
 
-        public bool RemovingClassFromUser(string userId, string classId)
+        public async Task<bool> RemovingClassFromUserAsync(string userId, string classId)
         {
 
             var currentClass = this.data.ClassUsers
@@ -184,7 +184,7 @@ namespace LionSkyNot.Services.Classes
 
             @class.PractitionerCount--;
 
-            this.data.SaveChanges();
+            await this.data.SaveChangesAsync();
 
             return true;
         }

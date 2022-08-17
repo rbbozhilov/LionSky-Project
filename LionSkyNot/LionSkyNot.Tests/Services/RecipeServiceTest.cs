@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-
+using System.Threading.Tasks;
 using LionSkyNot.Services.Recipes;
 
 using LionSkyNot.Tests.Mock;
@@ -13,7 +13,7 @@ namespace LionSkyNot.Tests.Services
     {
 
         [Fact]
-        public void CreateRecipe_ShouldBeCorrect()
+        public async Task CreateRecipe_ShouldBeCorrect()
         {
             //Arrange
 
@@ -25,7 +25,7 @@ namespace LionSkyNot.Tests.Services
 
 
             //Act
-            recipeService.Create(name, description, imgUrl);
+            await recipeService.CreateAsync(name, description, imgUrl);
 
 
             //Assert
@@ -36,7 +36,7 @@ namespace LionSkyNot.Tests.Services
 
 
         [Fact]
-        public void EditRecipe_ShouldReturnFalse()
+        public async Task EditRecipe_ShouldReturnFalse()
         {
             //Arrange
 
@@ -44,13 +44,13 @@ namespace LionSkyNot.Tests.Services
             var recipeService = new RecipeService(data);
 
             //Assert
-            Assert.False(recipeService.EditRecipe(1, "name", "imageurl", "description"));
+            Assert.False(await recipeService.EditRecipeAsync(1, "name", "imageurl", "description"));
 
         }
 
 
         [Fact]
-        public void EditRecipe_ShouldBeCorrect()
+        public async Task EditRecipe_ShouldBeCorrect()
         {
             //Arrange
 
@@ -65,9 +65,9 @@ namespace LionSkyNot.Tests.Services
 
 
             //Act
-            recipeService.Create(name, description, imgUrl);
+            await recipeService.CreateAsync(name, description, imgUrl);
             var recipe = data.Recipes.FirstOrDefault(r => r.Name == name);
-            var result = recipeService.EditRecipe(1, name1, imgUrl1, description1);
+            var result = await recipeService.EditRecipeAsync(1, name1, imgUrl1, description1);
 
             //Assert
             Assert.Equal(name1, recipe.Name);
@@ -80,7 +80,7 @@ namespace LionSkyNot.Tests.Services
 
 
         [Fact]
-        public void GetAllRecipes_ShouldBeCorrect()
+        public async Task GetAllRecipes_ShouldBeCorrect()
         {
             //Arrange
 
@@ -95,8 +95,8 @@ namespace LionSkyNot.Tests.Services
 
 
             //Act
-            recipeService.Create(name, description, imgUrl);
-            recipeService.Create(name1, description1, imgUrl1);
+            await recipeService.CreateAsync(name, description, imgUrl);
+            await recipeService.CreateAsync(name1, description1, imgUrl1);
             var allRecipes = recipeService.GetAll();
 
             //Assert
@@ -122,7 +122,7 @@ namespace LionSkyNot.Tests.Services
 
 
         [Fact]
-        public void GetRecipeById_ShouldBeCorrect()
+        public async Task GetRecipeById_ShouldBeCorrect()
         {
             //Arrange
 
@@ -133,7 +133,7 @@ namespace LionSkyNot.Tests.Services
             var imgUrl = "Some image";
 
             //Act
-            recipeService.Create(name, description, imgUrl);
+            await recipeService.CreateAsync(name, description, imgUrl);
             var recipe = recipeService.GetRecipeById(1);
 
             //Assert
@@ -144,7 +144,7 @@ namespace LionSkyNot.Tests.Services
 
 
         [Fact]
-        public void GetAllRecipes_ForAdmin_ShouldBeCorrect()
+        public async Task GetAllRecipes_ForAdmin_ShouldBeCorrect()
         {
             //Arrange
 
@@ -159,8 +159,8 @@ namespace LionSkyNot.Tests.Services
 
 
             //Act
-            recipeService.Create(name, description, imgUrl);
-            recipeService.Create(name1, description1, imgUrl1);
+            await recipeService.CreateAsync(name, description, imgUrl);
+            await recipeService.CreateAsync(name1, description1, imgUrl1);
             var allRecipes = recipeService.GetAllRecipesForAdmin();
 
             //Assert
@@ -172,7 +172,7 @@ namespace LionSkyNot.Tests.Services
 
 
         [Fact]
-        public void DeleteRecipe_ShouldReturnFalse()
+        public async Task DeleteRecipe_ShouldReturnFalse()
         {
             //Arrange
 
@@ -180,13 +180,13 @@ namespace LionSkyNot.Tests.Services
             var recipeService = new RecipeService(data);
 
             //Assert
-            Assert.False(recipeService.Delete(1));
+            Assert.False(await recipeService.DeleteAsync(1));
 
         }
 
 
         [Fact]
-        public void DeleteRecipe_ShouldBeCorrectAndReturnTrue()
+        public async Task DeleteRecipe_ShouldBeCorrectAndReturnTrue()
         {
             //Arrange
 
@@ -198,8 +198,8 @@ namespace LionSkyNot.Tests.Services
 
 
             //Act
-            recipeService.Create(name, description, imgUrl);
-            var result = recipeService.Delete(1);
+            await recipeService.CreateAsync(name, description, imgUrl);
+            var result = await recipeService.DeleteAsync(1);
 
             //Assert
             Assert.True(result);

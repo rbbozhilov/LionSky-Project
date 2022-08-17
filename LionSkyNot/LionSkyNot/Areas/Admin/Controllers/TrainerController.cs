@@ -55,7 +55,7 @@ namespace LionSkyNot.Areas.Admin.Controllers
         }
 
 
-        public IActionResult AddTrainerCandidate(int id)
+        public async Task<IActionResult> AddTrainerCandidate(int id)
         {
 
             var currentCandidate = this.trainerService.GetCandidateTrainerById(id);
@@ -65,7 +65,7 @@ namespace LionSkyNot.Areas.Admin.Controllers
                 return BadRequest();
             }
 
-            this.trainerService.AddCandidate(currentCandidate);
+            await this.trainerService.AddCandidateAsync(currentCandidate);
 
 
             return View("Successfull");
@@ -82,7 +82,7 @@ namespace LionSkyNot.Areas.Admin.Controllers
 
 
         [HttpPost]
-        public IActionResult AddTrainer(AddTrainerFromAdminFormModel trainerModel)
+        public async Task<IActionResult> AddTrainer(AddTrainerFromAdminFormModel trainerModel)
         {
             var currentUser = this.userService.GetUser(trainerModel.Username);
             trainerModel.Categorie = this.trainerService.GetAllCategories();
@@ -111,26 +111,27 @@ namespace LionSkyNot.Areas.Admin.Controllers
             var existsUserId = currentUser.Id;
 
 
-            this.trainerService.Create(trainerModel.FullName,
-                                       trainerModel.YearOfExperience,
-                                       trainerModel.ImageUrl,
-                                       trainerModel.Height,
-                                       trainerModel.Weight,
-                                       trainerModel.BirthDate,
-                                       trainerModel.CategorieId,
-                                       trainerModel.Description,
-                                       existsUserId,
-                                       false);
+            await this.trainerService.CreateAsync(
+                                        trainerModel.FullName,
+                                        trainerModel.YearOfExperience,
+                                        trainerModel.ImageUrl,
+                                        trainerModel.Height,
+                                        trainerModel.Weight,
+                                        trainerModel.BirthDate,
+                                        trainerModel.CategorieId,
+                                        trainerModel.Description,
+                                        existsUserId,
+                                        false);
 
             return RedirectToAction("Successfull");
 
         }
 
 
-        public IActionResult DeleteTrainer(int id)
+        public async Task<IActionResult> DeleteTrainer(int id)
         {
 
-            bool isDeleted = this.trainerService.Delete(id);
+            var isDeleted = await this.trainerService.DeleteAsync(id);
 
             if (!isDeleted)
             {

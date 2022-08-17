@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-
+using System.Threading.Tasks;
 using LionSkyNot.Data.Models.Shop;
 
 using LionSkyNot.Services.Products;
@@ -15,7 +15,7 @@ namespace LionSkyNot.Tests.Services
     {
 
         [Fact]
-        public void CreateProduct_ShouldBeSuccess()
+        public async Task CreateProduct_ShouldBeSuccess()
         {
 
             //Arrange
@@ -32,14 +32,14 @@ namespace LionSkyNot.Tests.Services
 
             //Act
 
-            productService.CreateProduct(
-                                         name,
-                                         price,
-                                         inStock,
-                                         description,
-                                         img,
-                                         typeProductId,
-                                         brandProductId);
+            await productService.CreateProductAsync(
+                                          name,
+                                          price,
+                                          inStock,
+                                          description,
+                                          img,
+                                          typeProductId,
+                                          brandProductId);
 
             var currentProduct = data.Products
                                      .Where(p => p.Name == name)
@@ -58,7 +58,7 @@ namespace LionSkyNot.Tests.Services
 
 
         [Fact]
-        public void GetProductById_ShouldReturnCorrectProduct()
+        public async Task GetProductById_ShouldReturnCorrectProduct()
         {
 
             //Arrange
@@ -75,14 +75,14 @@ namespace LionSkyNot.Tests.Services
 
             //Act
 
-            productService.CreateProduct(
-                                         name,
-                                         price,
-                                         inStock,
-                                         description,
-                                         img,
-                                         typeProductId,
-                                         brandProductId);
+            await productService.CreateProductAsync(
+                                           name,
+                                           price,
+                                           inStock,
+                                           description,
+                                           img,
+                                           typeProductId,
+                                           brandProductId);
 
             var currentProductId = data.Products
                                      .Where(p => p.Name == name)
@@ -100,7 +100,7 @@ namespace LionSkyNot.Tests.Services
 
 
         [Fact]
-        public void EditProduct_ShouldReturnFalse()
+        public async void EditProduct_ShouldReturnFalse()
         {
 
             //Arrange
@@ -119,7 +119,7 @@ namespace LionSkyNot.Tests.Services
 
             //Act
 
-            var result = productService.EditProduct(
+            var result = await productService.EditProductAsync(
                                                     productId,
                                                     img,
                                                     name,
@@ -134,7 +134,7 @@ namespace LionSkyNot.Tests.Services
 
 
         [Fact]
-        public void EditProduct_ShouldReturnTrueAndEditTheProduct()
+        public async Task EditProduct_ShouldReturnTrueAndEditTheProduct()
         {
 
             //Arrange
@@ -152,21 +152,21 @@ namespace LionSkyNot.Tests.Services
 
             //Act
 
-            productService.CreateProduct(
-                                         name,
-                                         price,
-                                         inStock,
-                                         description,
-                                         img,
-                                         typeProductId,
-                                         brandProductId);
+            await productService.CreateProductAsync(
+                                          name,
+                                          price,
+                                          inStock,
+                                          description,
+                                          img,
+                                          typeProductId,
+                                          brandProductId);
 
             var currentProduct = data.Products
                                      .Where(p => p.Name == name)
                                      .FirstOrDefault();
 
 
-            var result = productService.EditProduct(
+            var result = await productService.EditProductAsync(
                                                     currentProduct.Id,
                                                     img,
                                                     name,
@@ -185,7 +185,7 @@ namespace LionSkyNot.Tests.Services
 
 
         [Fact]
-        public void EditProduct_ShouldReturnTrueButNotOnPromotion()
+        public async Task EditProduct_ShouldReturnTrueButNotOnPromotion()
         {
 
             //Arrange
@@ -203,21 +203,21 @@ namespace LionSkyNot.Tests.Services
 
             //Act
 
-            productService.CreateProduct(
-                                         name,
-                                         price,
-                                         inStock,
-                                         description,
-                                         img,
-                                         typeProductId,
-                                         brandProductId);
+            await productService.CreateProductAsync(
+                                          name,
+                                          price,
+                                          inStock,
+                                          description,
+                                          img,
+                                          typeProductId,
+                                          brandProductId);
 
             var currentProduct = data.Products
                                       .Where(p => p.Name == name)
                                       .FirstOrDefault();
 
 
-            var result = productService.EditProduct(
+            var result = await productService.EditProductAsync(
                                                     currentProduct.Id,
                                                     img,
                                                     name,
@@ -233,7 +233,7 @@ namespace LionSkyNot.Tests.Services
 
 
         [Fact]
-        public void DeleteProduct_ShouldReturnFalse()
+        public async Task DeleteProduct_ShouldReturnFalse()
         {
 
             //Arrange
@@ -243,13 +243,13 @@ namespace LionSkyNot.Tests.Services
 
             //Assert
 
-            Assert.False(productService.DeleteProduct(1));
+            Assert.False(await productService.DeleteProductAsync(1));
 
         }
 
 
         [Fact]
-        public void DeleteProduct_ShouldReturnTrueAndDelete()
+        public async Task DeleteProduct_ShouldReturnTrueAndDelete()
         {
 
             //Arrange
@@ -267,21 +267,21 @@ namespace LionSkyNot.Tests.Services
 
             //Act
 
-            productService.CreateProduct(
-                                         name,
-                                         price,
-                                         inStock,
-                                         description,
-                                         img,
-                                         typeProductId,
-                                         brandProductId);
+            await productService.CreateProductAsync(
+                                          name,
+                                          price,
+                                          inStock,
+                                          description,
+                                          img,
+                                          typeProductId,
+                                          brandProductId);
 
             var currentProduct = data.Products
                                       .Where(p => p.Name == name)
                                       .FirstOrDefault();
 
 
-            var result = productService.DeleteProduct(currentProduct.Id);
+            var result = await productService.DeleteProductAsync(currentProduct.Id);
 
             //Assert
 
@@ -973,7 +973,7 @@ namespace LionSkyNot.Tests.Services
 
 
         [Fact]
-        public void UpdateInStockCountOfProductsWithZeroInStock_ShouldReturnFalse()
+        public async Task UpdateInStockCountOfProductsWithZeroInStock_ShouldReturnFalse()
         {
 
             //Arrange
@@ -983,13 +983,13 @@ namespace LionSkyNot.Tests.Services
 
             //Assert
 
-            Assert.False(productService.UpdateInStockCountOfProducts());
+            Assert.False(await productService.UpdateInStockCountOfProductsAsync());
 
         }
 
 
         [Fact]
-        public void UpdateInStockCountOfProductsWithZeroInStock_ShouldReturnTrue()
+        public async Task UpdateInStockCountOfProductsWithZeroInStock_ShouldReturnTrue()
         {
 
             //Arrange
@@ -1053,7 +1053,7 @@ namespace LionSkyNot.Tests.Services
             data.Products.AddRange(product, product2);
             data.SaveChanges();
 
-            var result = productService.UpdateInStockCountOfProducts();
+            var result = await productService.UpdateInStockCountOfProductsAsync();
 
             //Assert
 
@@ -1179,7 +1179,7 @@ namespace LionSkyNot.Tests.Services
             //Assert
 
             Assert.NotNull(detailProduct);
-            Assert.Equal(productName,detailProduct.Name);
+            Assert.Equal(productName, detailProduct.Name);
 
         }
     }

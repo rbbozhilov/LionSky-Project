@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-
+using System.Threading.Tasks;
 using LionSkyNot.Data.Models.Shop;
 
 using LionSkyNot.Services.Products;
@@ -18,7 +18,7 @@ namespace LionSkyNot.Tests.Services
 
 
         [Fact]
-        public void AddWishListWithProduct_ShouldReturnFalse_ProductIsNull()
+        public async Task AddWishListWithProduct_ShouldReturnFalse_ProductIsNull()
         {
 
             //Arrange
@@ -28,13 +28,13 @@ namespace LionSkyNot.Tests.Services
 
             //Assert
 
-            Assert.False(wishListService.Add(null, null));
+            Assert.False(await wishListService.AddAsync(null, null));
 
         }
 
 
         [Fact]
-        public void AddWishListWithProduct_ShouldReturnTrue_CreateNewWishList()
+        public async Task AddWishListWithProduct_ShouldReturnTrue_CreateNewWishList()
         {
 
             //Arrange
@@ -53,7 +53,7 @@ namespace LionSkyNot.Tests.Services
 
             //Act
 
-            var result = wishListService.Add(product, "userid");
+            var result = await wishListService.AddAsync(product, "userid");
 
             //Assert
 
@@ -64,7 +64,7 @@ namespace LionSkyNot.Tests.Services
 
 
         [Fact]
-        public void AddWishListWithProduct_ShouldReturnTrue_AddProductToCurrentWishList()
+        public async Task AddWishListWithProduct_ShouldReturnTrue_AddProductToCurrentWishList()
         {
 
             //Arrange
@@ -92,8 +92,8 @@ namespace LionSkyNot.Tests.Services
 
             //Act
 
-            wishListService.Add(product, "userid");
-            wishListService.Add(product2, "userid");
+            await wishListService.AddAsync(product, "userid");
+            await wishListService.AddAsync(product2, "userid");
 
             var wishList = data.WishListsProducts
                                .Where(w => w.ProductId == 1)
@@ -130,7 +130,7 @@ namespace LionSkyNot.Tests.Services
 
 
         [Fact]
-        public void GetProductsOfUser_ShouldReturnTrueAndProductsOfCurrentUser()
+        public async Task GetProductsOfUser_ShouldReturnTrueAndProductsOfCurrentUser()
         {
 
             //Arrange
@@ -158,8 +158,8 @@ namespace LionSkyNot.Tests.Services
 
             //Act
 
-            wishListService.Add(product, "userid");
-            wishListService.Add(product2, "userid");
+            await wishListService.AddAsync(product, "userid");
+            await wishListService.AddAsync(product2, "userid");
 
             var result = wishListService.GetProductsOfUser("userid");
 
@@ -177,7 +177,7 @@ namespace LionSkyNot.Tests.Services
 
 
         [Fact]
-        public void RemoveProduct_ShouldReturnFalse_WishListNull()
+        public async Task RemoveProduct_ShouldReturnFalse_WishListNull()
         {
 
             //Arrange
@@ -188,13 +188,13 @@ namespace LionSkyNot.Tests.Services
 
             //Assert
 
-            Assert.False(wishListService.RemoveProduct(1, "someuser"));
+            Assert.False(await wishListService.RemoveProductAsync(1, "someuser"));
 
         }
 
 
         [Fact]
-        public void RemoveProduct_ShouldReturnFalse_ProductNull()
+        public async Task RemoveProduct_ShouldReturnFalse_ProductNull()
         {
 
             //Arrange
@@ -213,17 +213,17 @@ namespace LionSkyNot.Tests.Services
 
             //Act
 
-            wishListService.Add(product, "userid");
+            await wishListService.AddAsync(product, "userid");
 
             //Assert
 
-            Assert.False(wishListService.RemoveProduct(55, "userid"));
+            Assert.False(await wishListService.RemoveProductAsync(55, "userid"));
 
         }
 
 
         [Fact]
-        public void RemoveProduct_ShouldReturnTrue_AndRemoveProduct()
+        public async Task RemoveProduct_ShouldReturnTrue_AndRemoveProduct()
         {
 
             //Arrange
@@ -242,9 +242,9 @@ namespace LionSkyNot.Tests.Services
 
             //Act
 
-            wishListService.Add(product, "userid");
+            await wishListService.AddAsync(product, "userid");
 
-            var result = wishListService.RemoveProduct(1, "userid");
+            var result = await wishListService.RemoveProductAsync(1, "userid");
 
             //Assert
 
@@ -254,7 +254,7 @@ namespace LionSkyNot.Tests.Services
 
 
         [Fact]
-        public void BuyProducts_ShouldReturnFalse_WishListProductsZero()
+        public async Task BuyProducts_ShouldReturnFalse_WishListProductsZero()
         {
 
             //Arrange
@@ -273,9 +273,9 @@ namespace LionSkyNot.Tests.Services
 
             //Act
 
-            wishListService.Add(product, "userid");
+            await wishListService.AddAsync(product, "userid");
 
-            wishListService.RemoveProduct(1, "userid");
+            await wishListService.RemoveProductAsync(1, "userid");
 
             var result = wishListService.BuyProducts("userid");
 
@@ -288,7 +288,7 @@ namespace LionSkyNot.Tests.Services
 
 
         [Fact]
-        public void BuyProducts_ShouldReturnFalse_CountOfProductInStockIsZero()
+        public async Task BuyProducts_ShouldReturnFalse_CountOfProductInStockIsZero()
         {
 
             //Arrange
@@ -307,7 +307,7 @@ namespace LionSkyNot.Tests.Services
 
             //Act
 
-            wishListService.Add(product, "userid");
+           await wishListService.AddAsync(product, "userid");
 
 
             var result = wishListService.BuyProducts("userid");
@@ -321,7 +321,7 @@ namespace LionSkyNot.Tests.Services
 
 
         [Fact]
-        public void BuyProducts_ShouldReturnTrue_AndProductsBuy()
+        public async Task BuyProducts_ShouldReturnTrue_AndProductsBuy()
         {
 
             //Arrange
@@ -341,7 +341,7 @@ namespace LionSkyNot.Tests.Services
 
             //Act
 
-            wishListService.Add(product, "userid");
+            await wishListService.AddAsync(product, "userid");
 
             var result = wishListService.BuyProducts("userid");
             var isSuccess = result.Item1;
@@ -350,7 +350,7 @@ namespace LionSkyNot.Tests.Services
             //Assert
 
             Assert.True(isSuccess);
-            Assert.Equal("name",products.First().Name);
+            Assert.Equal("name", products.First().Name);
 
         }
 

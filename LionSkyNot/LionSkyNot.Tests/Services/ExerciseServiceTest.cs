@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-
+using System.Threading.Tasks;
 using LionSkyNot.Data.Models.Exercise;
 
 using LionSkyNot.Services.Exercises;
@@ -58,7 +58,7 @@ namespace LionSkyNot.Tests.Services
 
 
         [Fact]
-        public void CreateExercise_ShouldBeCorrect()
+        public async Task CreateExercise_ShouldBeCorrect()
         {
 
             //Arrange
@@ -71,11 +71,11 @@ namespace LionSkyNot.Tests.Services
 
             //Act
 
-            exerciseService.Create(
-                                   this.name,
-                                   this.image,
-                                   this.video,
-                                   typeExerciseId);
+            await exerciseService.CreateAsync(
+                                    this.name,
+                                    this.image,
+                                    this.video,
+                                    typeExerciseId);
 
             var actualExercise = data.Exercises.Where(t => t.Name == this.name);
 
@@ -87,7 +87,7 @@ namespace LionSkyNot.Tests.Services
 
 
         [Fact]
-        public void EditExercise_ShouldReturnFalse()
+        public async Task EditExercise_ShouldReturnFalse()
         {
 
             //Arrange
@@ -98,13 +98,13 @@ namespace LionSkyNot.Tests.Services
 
             //Assert
 
-            Assert.False(exerciseService.Edit(id, name, image, video));
+            Assert.False(await exerciseService.EditAsync(id, name, image, video));
 
         }
 
 
         [Fact]
-        public void EditExercise_ShouldReturnTrue()
+        public async Task EditExercise_ShouldReturnTrue()
         {
 
             //Arrange
@@ -118,7 +118,7 @@ namespace LionSkyNot.Tests.Services
             data.Exercises.Add(exercise);
             data.SaveChanges();
 
-            var result = exerciseService.Edit(id, name2, image2, video2);
+            var result = await exerciseService.EditAsync(id, name2, image2, video2);
 
             //Assert
 
@@ -131,7 +131,7 @@ namespace LionSkyNot.Tests.Services
 
 
         [Fact]
-        public void DeleteExercise_ShouldReturnFalse()
+        public async Task DeleteExercise_ShouldReturnFalse()
         {
 
             //Arrange
@@ -142,13 +142,13 @@ namespace LionSkyNot.Tests.Services
 
             //Assert
 
-            Assert.False(exerciseService.Delete(1));
+            Assert.False(await exerciseService.DeleteAsync(1));
 
         }
 
 
         [Fact]
-        public void DeleteExercise_ShouldBeSuccess()
+        public async Task DeleteExercise_ShouldBeSuccess()
         {
 
             //Arrange
@@ -163,7 +163,7 @@ namespace LionSkyNot.Tests.Services
 
             //Assert
 
-            Assert.True(exerciseService.Delete(id));
+            Assert.True(await exerciseService.DeleteAsync(id));
             Assert.True(exercise.IsDeleted);
 
         }

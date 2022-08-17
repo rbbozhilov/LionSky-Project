@@ -22,7 +22,7 @@ namespace LionSkyNot.Services.Exercises
 
 
 
-        public void Create(
+        public async Task CreateAsync(
                            string name,
                            string imgUrl,
                            string description,
@@ -37,14 +37,14 @@ namespace LionSkyNot.Services.Exercises
 
             };
 
-            this.data.Exercises.Add(exercise);
+            await this.data.Exercises.AddAsync(exercise);
 
-            this.data.SaveChanges();
+            await this.data.SaveChangesAsync();
 
         }
 
 
-        public bool Edit(
+        public async Task<bool> EditAsync(
                          int id,
                          string name,
                          string imgUrl,
@@ -64,14 +64,14 @@ namespace LionSkyNot.Services.Exercises
             exercise.ImageUrl = imgUrl;
             exercise.Description = description;
 
-            this.data.SaveChanges();
+            await this.data.SaveChangesAsync();
 
             return true;
 
         }
 
 
-        public bool Delete(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
             var currentExercise = this.data.Exercises
                                            .Where(e => e.Id == id && e.IsDeleted == false)
@@ -83,7 +83,7 @@ namespace LionSkyNot.Services.Exercises
 
             currentExercise.IsDeleted = true;
 
-            this.data.SaveChanges();
+            await this.data.SaveChangesAsync();
 
             return true;
         }

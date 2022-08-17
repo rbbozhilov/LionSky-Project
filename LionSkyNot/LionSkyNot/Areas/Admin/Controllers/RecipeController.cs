@@ -53,7 +53,7 @@ namespace LionSkyNot.Areas.Admin.Controllers
 
         [Authorize(Roles = ModeratorAndAdminRole)]
         [HttpPost]
-        public IActionResult AddRecipe(RecipeFormModel recipeModel)
+        public async Task<IActionResult> AddRecipe(RecipeFormModel recipeModel)
         {
 
             if (!ModelState.IsValid)
@@ -61,10 +61,10 @@ namespace LionSkyNot.Areas.Admin.Controllers
                 return View(recipeModel);
             }
 
-            this.recipeService.Create(
-                                      recipeModel.Name,
-                                      recipeModel.Description,
-                                      recipeModel.ImageUrl);
+            await this.recipeService.CreateAsync(
+                                       recipeModel.Name,
+                                       recipeModel.Description,
+                                       recipeModel.ImageUrl);
 
 
             return RedirectToAction("Successfull");
@@ -93,7 +93,7 @@ namespace LionSkyNot.Areas.Admin.Controllers
 
         [Authorize(Roles = AdminRole)]
         [HttpPost]
-        public IActionResult EditRecipe(RecipeFormModel recipeModel, int id)
+        public async Task<IActionResult> EditRecipe(RecipeFormModel recipeModel, int id)
         {
 
             if (!ModelState.IsValid)
@@ -101,7 +101,7 @@ namespace LionSkyNot.Areas.Admin.Controllers
                 return View(recipeModel);
             }
 
-            bool isEditted = this.recipeService.EditRecipe(
+            var isEditted = await this.recipeService.EditRecipeAsync(
                                                             id,
                                                             recipeModel.Name,
                                                             recipeModel.ImageUrl,
@@ -112,17 +112,16 @@ namespace LionSkyNot.Areas.Admin.Controllers
                 return BadRequest();
             }
 
-
             return RedirectToAction("Successfull");
-
         }
 
 
         [Authorize(Roles = AdminRole)]
-        public IActionResult DeleteRecipe(int id)
+        public async Task<IActionResult> DeleteRecipe(int id)
         {
+            var isDeleted = await this.recipeService.DeleteAsync(id);
 
-            if (!this.recipeService.Delete(id))
+            if (!isDeleted)
             {
                 return BadRequest();
             }

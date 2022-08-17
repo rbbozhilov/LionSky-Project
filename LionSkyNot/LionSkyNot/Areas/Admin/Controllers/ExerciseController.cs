@@ -40,7 +40,7 @@ namespace LionSkyNot.Areas.Admin.Controllers
 
         [Authorize(Roles = ModeratorAndAdminRole)]
         [HttpPost]
-        public IActionResult AddExercise(AddExerciseFormModel exerciseModel)
+        public async Task<IActionResult> AddExercise(AddExerciseFormModel exerciseModel)
         {
 
             if (!this.exerciseService.AnyExercieByType(exerciseModel.TypeId))
@@ -54,7 +54,11 @@ namespace LionSkyNot.Areas.Admin.Controllers
                 return View(exerciseModel);
             }
 
-            this.exerciseService.Create(exerciseModel.Name, exerciseModel.ImageUrl, exerciseModel.Description, exerciseModel.TypeId);
+            await this.exerciseService.CreateAsync(
+                                                   exerciseModel.Name,
+                                                   exerciseModel.ImageUrl,
+                                                   exerciseModel.Description,
+                                                   exerciseModel.TypeId);
 
 
             return RedirectToAction("SuccessChange");
@@ -97,7 +101,7 @@ namespace LionSkyNot.Areas.Admin.Controllers
 
         [Authorize(Roles = AdminRole)]
         [HttpPost]
-        public IActionResult EditExercise(EditExerciseFormModel exerciseModel, int id)
+        public async Task<IActionResult> EditExercise(EditExerciseFormModel exerciseModel, int id)
         {
 
             if (!ModelState.IsValid)
@@ -105,8 +109,7 @@ namespace LionSkyNot.Areas.Admin.Controllers
                 return View(exerciseModel);
             }
 
-
-            bool isEditted = this.exerciseService.Edit(
+            var isEditted = await this.exerciseService.EditAsync(
                                                        id,
                                                        exerciseModel.Name,
                                                        exerciseModel.ImageUrl,
@@ -123,10 +126,11 @@ namespace LionSkyNot.Areas.Admin.Controllers
 
 
         [Authorize(Roles = AdminRole)]
-        public IActionResult DeleteExercise(int id)
+        public async Task<IActionResult> DeleteExercise(int id)
         {
+            var isDeleted = await this.exerciseService.DeleteAsync(id);
 
-            if (!this.exerciseService.Delete(id))
+            if (!isDeleted)
             {
                 return BadRequest();
             };

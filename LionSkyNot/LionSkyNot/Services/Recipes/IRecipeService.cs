@@ -10,14 +10,14 @@ namespace LionSkyNot.Services.Recipes
     public interface IRecipeService
     {
 
-        void Create(
+        Task CreateAsync(
                     string name,
                     string description,
                     string imgUrl);
 
-        bool Delete(int id);
+        Task<bool> DeleteAsync(int id);
 
-        bool EditRecipe(
+        Task<bool> EditRecipeAsync(
                         int id,
                         string name,
                         string imageUrl,

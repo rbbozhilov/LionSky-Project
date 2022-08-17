@@ -24,7 +24,7 @@ namespace LionSkyNot.Services.Recipes
 
 
 
-        public void Create(
+        public async Task CreateAsync(
                            string name,
                            string description,
                            string imgUrl)
@@ -37,14 +37,14 @@ namespace LionSkyNot.Services.Recipes
                 ImageUrl = imgUrl
             };
 
-            this.data.Recipes.Add(recipe);
+            await this.data.Recipes.AddAsync(recipe);
 
-            this.data.SaveChanges();
+            await this.data.SaveChangesAsync();
 
         }
 
 
-        public bool Delete(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
             var currentRecipe = this.data.Recipes
                                          .Where(r => r.Id == id && r.IsDeleted == false)
@@ -57,13 +57,13 @@ namespace LionSkyNot.Services.Recipes
 
             currentRecipe.IsDeleted = true;
 
-            this.data.SaveChanges();
+            await this.data.SaveChangesAsync();
 
             return true;
         }
 
 
-        public bool EditRecipe(
+        public async Task<bool> EditRecipeAsync(
                                int id,
                                string name,
                                string imageUrl,
@@ -83,7 +83,7 @@ namespace LionSkyNot.Services.Recipes
             currentRecipe.ImageUrl = imageUrl;
 
 
-            this.data.SaveChanges();
+            await this.data.SaveChangesAsync();
 
             return true;
         }

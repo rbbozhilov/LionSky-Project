@@ -6,12 +6,12 @@ namespace LionSkyNot.Services.Gym
     public interface IClientService
     {
 
-        void Create(
+        Task CreateAsync(
                    string fullName,
                    DateTime startDate,
                    DateTime expireDate);
 
-        bool Edit(
+        Task<bool> EditAsync(
                  int number,
                  string fullName,
                  DateTime StartDate,

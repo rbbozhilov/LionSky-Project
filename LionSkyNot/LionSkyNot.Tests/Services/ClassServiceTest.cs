@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-
+using System.Threading.Tasks;
 using LionSkyNot.Data.Models.Classes;
 
 using LionSkyNot.Services.Classes;
@@ -16,7 +16,7 @@ namespace LionSkyNot.Tests.Services
     {
 
         [Fact]
-        public void AddUserToClass_ShouldReturnTrue()
+        public async Task AddUserToClass_ShouldReturnTrue()
         {
 
             //Arrange
@@ -33,13 +33,13 @@ namespace LionSkyNot.Tests.Services
 
             //Act
 
-            classService.Create(
-                                className,
-                                imgUrl,
-                                maxPractitionerCount,
-                                trainerId,
-                                startDate,
-                                endDate);
+            await classService.CreateAsync(
+                                 className,
+                                 imgUrl,
+                                 maxPractitionerCount,
+                                 trainerId,
+                                 startDate,
+                                 endDate);
 
             var classId = data.Classes
                                  .Where(c => c.ClassName == className)
@@ -48,7 +48,7 @@ namespace LionSkyNot.Tests.Services
 
 
 
-            var result = classService.AddUserToClass(userId, classId);
+            var result = await classService.AddUserToClassAsync(userId, classId);
 
             var countOfPractitioners = data.Classes
                                       .Where(c => c.Id == classId)
@@ -63,7 +63,7 @@ namespace LionSkyNot.Tests.Services
 
 
         [Fact]
-        public void AddUserToClass_ShouldReturnFalse()
+        public async Task AddUserToClass_ShouldReturnFalse()
         {
 
             //Arrange
@@ -80,7 +80,7 @@ namespace LionSkyNot.Tests.Services
 
             //Act
 
-            classService.Create(
+            await classService.CreateAsync(
                                 className,
                                 imgUrl,
                                 maxPractitionerCount,
@@ -93,17 +93,17 @@ namespace LionSkyNot.Tests.Services
                                  .Select(c => c.Id)
                                  .FirstOrDefault();
 
-            classService.AddUserToClass(userId, classId);
+            await classService.AddUserToClassAsync(userId, classId);
 
             //Assert
 
-            Assert.False(classService.AddUserToClass(userId, classId));
+            Assert.False(await classService.AddUserToClassAsync(userId, classId));
 
         }
 
 
         [Fact]
-        public void CheckFreePlace_ShouldBeFalse()
+        public async Task CheckFreePlace_ShouldBeFalse()
         {
 
             //Arrange
@@ -120,13 +120,13 @@ namespace LionSkyNot.Tests.Services
 
             //Act
 
-            classService.Create(
-                                className,
-                                imgUrl,
-                                maxPractitionerCount,
-                                trainerId,
-                                startDate,
-                                endDate);
+            await classService.CreateAsync(
+                                 className,
+                                 imgUrl,
+                                 maxPractitionerCount,
+                                 trainerId,
+                                 startDate,
+                                 endDate);
 
             var classId = data.Classes
                                  .Where(c => c.ClassName == className)
@@ -142,7 +142,7 @@ namespace LionSkyNot.Tests.Services
 
 
         [Fact]
-        public void CheckFreePlace_ShouldBeTrue()
+        public async Task CheckFreePlace_ShouldBeTrue()
         {
 
             //Arrange
@@ -159,20 +159,20 @@ namespace LionSkyNot.Tests.Services
 
             //Act
 
-            classService.Create(
-                                className,
-                                imgUrl,
-                                maxPractitionerCount,
-                                trainerId,
-                                startDate,
-                                endDate);
+            await classService.CreateAsync(
+                                  className,
+                                  imgUrl,
+                                  maxPractitionerCount,
+                                  trainerId,
+                                  startDate,
+                                  endDate);
 
             var classId = data.Classes
                                  .Where(c => c.ClassName == className)
                                  .Select(c => c.Id)
                                  .FirstOrDefault();
 
-            classService.AddUserToClass(userId, classId);
+            await classService.AddUserToClassAsync(userId, classId);
 
             //Assert
 
@@ -200,7 +200,7 @@ namespace LionSkyNot.Tests.Services
 
 
         [Fact]
-        public void IsUserHaveClasses_ShouldReturnTrue()
+        public async Task IsUserHaveClasses_ShouldReturnTrue()
         {
 
             //Arrange
@@ -217,20 +217,20 @@ namespace LionSkyNot.Tests.Services
 
             //Act
 
-            classService.Create(
-                                className,
-                                imgUrl,
-                                maxPractitionerCount,
-                                trainerId,
-                                startDate,
-                                endDate);
+            await classService.CreateAsync(
+                                 className,
+                                 imgUrl,
+                                 maxPractitionerCount,
+                                 trainerId,
+                                 startDate,
+                                 endDate);
 
             var classId = data.Classes
                                  .Where(c => c.ClassName == className)
                                  .Select(c => c.Id)
                                  .FirstOrDefault();
 
-            classService.AddUserToClass(userId, classId);
+            await classService.AddUserToClassAsync(userId, classId);
 
             //Assert
 
@@ -240,7 +240,7 @@ namespace LionSkyNot.Tests.Services
 
 
         [Fact]
-        public void Create_ShouldBeCorrect()
+        public async Task Create_ShouldBeCorrect()
         {
 
             //Arrange
@@ -256,13 +256,13 @@ namespace LionSkyNot.Tests.Services
 
             //Act
 
-            classService.Create(
-                                className,
-                                imgUrl,
-                                maxPractitionerCount,
-                                trainerId,
-                                startDate,
-                                endDate);
+            await classService.CreateAsync(
+                                 className,
+                                 imgUrl,
+                                 maxPractitionerCount,
+                                 trainerId,
+                                 startDate,
+                                 endDate);
 
             //Assert
 
@@ -272,7 +272,7 @@ namespace LionSkyNot.Tests.Services
 
 
         [Fact]
-        public void Edit_ShouldReturnFalse()
+        public async Task Edit_ShouldReturnFalse()
         {
 
             //Arrange
@@ -289,7 +289,7 @@ namespace LionSkyNot.Tests.Services
 
             //Assert
 
-            Assert.False(classService.Edit(
+            Assert.False(await classService.EditAsync(
                                            classId,
                                            className,
                                            imgUrl,
@@ -302,7 +302,7 @@ namespace LionSkyNot.Tests.Services
 
 
         [Fact]
-        public void Edit_ShouldReturnTrueAndBeCorrect()
+        public async Task Edit_ShouldReturnTrueAndBeCorrect()
         {
 
             //Arrange
@@ -325,7 +325,7 @@ namespace LionSkyNot.Tests.Services
 
             //Act
 
-            classService.Create(
+            await classService.CreateAsync(
                                 className,
                                 imgUrl,
                                 maxPractitionerCount,
@@ -338,7 +338,7 @@ namespace LionSkyNot.Tests.Services
                                  .Select(c => c.Id)
                                  .FirstOrDefault();
 
-            var result = classService.Edit(
+            var result = await classService.EditAsync(
                                            classId,
                                            className1,
                                            imgUrl1,
@@ -365,7 +365,7 @@ namespace LionSkyNot.Tests.Services
 
 
         [Fact]
-        public void Delete_ShouldReturnFalse()
+        public async Task Delete_ShouldReturnFalse()
         {
 
             //Arrange
@@ -376,13 +376,13 @@ namespace LionSkyNot.Tests.Services
 
             //Assert
 
-            Assert.False(classService.Delete(classId));
+            Assert.False(await classService.DeleteAsync(classId));
 
         }
 
 
         [Fact]
-        public void Delete_ShouldBeCorrectAndReturnTrue()
+        public async Task Delete_ShouldBeCorrectAndReturnTrue()
         {
 
             //Arrange
@@ -398,7 +398,7 @@ namespace LionSkyNot.Tests.Services
 
             //Act
 
-            classService.Create(
+            await classService.CreateAsync(
                                 className,
                                 imgUrl,
                                 maxPractitionerCount,
@@ -417,13 +417,13 @@ namespace LionSkyNot.Tests.Services
 
             //Assert
 
-            Assert.True(classService.Delete(classId));
+            Assert.True(await classService.DeleteAsync(classId));
             Assert.True(currentClass.IsDeleted);
         }
 
 
         [Fact]
-        public void RemovingClassFromUser_ShouldReturnFalse()
+        public async Task RemovingClassFromUser_ShouldReturnFalse()
         {
 
             //Arrange
@@ -436,13 +436,13 @@ namespace LionSkyNot.Tests.Services
 
             //Assert
 
-            Assert.False(classService.RemovingClassFromUser(userId, classId));
+            Assert.False(await classService.RemovingClassFromUserAsync(userId, classId));
 
         }
 
 
         [Fact]
-        public void RemovingClassFromUser_ShouldReturnTrue()
+        public async Task RemovingClassFromUser_ShouldReturnTrue()
         {
 
             //Arrange
@@ -459,24 +459,24 @@ namespace LionSkyNot.Tests.Services
 
             //Act
 
-            classService.Create(
-                                className,
-                                imgUrl,
-                                maxPractitionerCount,
-                                trainerId,
-                                startDate,
-                                endDate);
+            await classService.CreateAsync(
+                                 className,
+                                 imgUrl,
+                                 maxPractitionerCount,
+                                 trainerId,
+                                 startDate,
+                                 endDate);
 
             var classId = data.Classes
                                  .Where(c => c.ClassName == className)
                                  .Select(c => c.Id)
                                  .FirstOrDefault();
 
-            classService.AddUserToClass(userId, classId);
+            await classService.AddUserToClassAsync(userId, classId);
 
             //Assert
 
-            Assert.True(classService.RemovingClassFromUser(userId, classId));
+            Assert.True(await classService.RemovingClassFromUserAsync(userId, classId));
 
         }
 
