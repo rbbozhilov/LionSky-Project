@@ -38,6 +38,12 @@ builder.Services.AddDefaultIdentity<User>(options =>
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<LionSkyDbContext>();
 
+builder.Services.Configure<CookiePolicyOptions>(options =>
+{
+    options.CheckConsentNeeded = context => true;
+    options.MinimumSameSitePolicy = SameSiteMode.None;
+});
+
 builder.Services.AddAuthentication()
     .AddFacebook(options =>
     {
@@ -51,7 +57,7 @@ builder.Services.AddAuthentication()
     });
 
 
-    
+
 
 
 builder.Services.AddMemoryCache();
@@ -89,6 +95,7 @@ else
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseCookiePolicy();
 
 app.UseStatusCodePagesWithRedirects("/Home/StatusCode?code={0}");
 

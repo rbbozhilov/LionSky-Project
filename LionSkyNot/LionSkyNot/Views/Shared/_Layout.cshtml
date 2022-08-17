@@ -18,12 +18,13 @@
 
     </header>
     <div class="container">
+        <partial name="_CookieConsentPartial" />
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-     @Html.Partial("_Footer")
+    @Html.Partial("_Footer")
 
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
