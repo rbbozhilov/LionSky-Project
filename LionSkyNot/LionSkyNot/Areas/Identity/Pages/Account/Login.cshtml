@@ -1,5 +1,6 @@
 ﻿@page
 @model LoginModel
+@inject IConfiguration Configuration
 
 @{
     ViewData["Title"] = "Log in";
@@ -35,7 +36,7 @@
                         </div>
                     </div>
                     <div>
-                        <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
+                        <button id="login-submit" type="submit" class="g-recaptcha w-100 btn btn-lg btn-primary" data-sitekey="@Configuration["SiteKey"]" data-callback='onSubmit' data-action='submit'>Log in</button>
                     </div>
 
                 </form>
@@ -94,6 +95,13 @@ else
     </div>
 }
 
+<script src="https://www.google.com/recaptcha/api.js"></script>
+
+<script>
+    function onSubmit(token) {
+      document.getElementById("account").submit();
+    }
+</script>
 
 @section Scripts {
 <partial name="_ValidationScriptsPartial" />

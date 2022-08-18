@@ -1,5 +1,7 @@
 ﻿@page
 @model RegisterModel
+@inject IConfiguration Configuration
+
 @{
     ViewData["Title"] = "Register";
 }
@@ -31,7 +33,7 @@
                     <label asp-for="Input.ConfirmPassword"></label>
                     <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                 </div>
-                <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+                <button id="registerSubmit" type="submit" class="g-recaptcha w-100 btn btn-lg btn-primary" data-sitekey="@Configuration["SiteKey"]" data-callback='onSubmit' data-action='submit'>Register</button>
             </form>
         </div>
     </div>
@@ -44,6 +46,14 @@ else
     </div>
 }
 
+<script src="https://www.google.com/recaptcha/api.js"></script>
+
+<script>
+    function onSubmit(token) {
+      document.getElementById("registerForm").submit();
+    }
+</script>
+
 @section Scripts {
 <partial name="_ValidationScriptsPartial" />
-    }
+}
