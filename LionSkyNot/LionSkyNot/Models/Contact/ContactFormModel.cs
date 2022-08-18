@@ -9,9 +9,8 @@ namespace LionSkyNot.Models.Contact
     {
 
         [Required]
-        [Display(Name = DisplayName)]
-        [MinLength(ContactNameMinLength, ErrorMessage = NameMinLengthErrorMessage)]
-        [MaxLength(ContactNameMaxLength, ErrorMessage = NameMaxLengthErrorMessage)]
+        [Display(Name = DisplayEmail)]
+        [EmailAddress(ErrorMessage = EmailNameErrorMessage)]
         public string Name { get; set; }
 
         [Required]

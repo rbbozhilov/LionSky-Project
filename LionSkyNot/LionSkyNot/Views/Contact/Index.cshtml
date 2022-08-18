@@ -1,4 +1,5 @@
 ﻿@model ContactFormModel
+@inject IConfiguration Configuration
 
  @{
     ViewData["Title"] = "Contact";
@@ -46,7 +47,7 @@
 
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Send</button>
+                <button type="submit" class="g-recaptcha btn btn-primary" data-sitekey="@Configuration["SiteKey"]" data-callback='onSubmit' data-action='submit'>Send</button>
             </form>
         </div>
         <div class="col-md-3 text-center">
@@ -63,3 +64,16 @@
         </div>
     </div>
 </section>
+
+
+<script src="https://www.google.com/recaptcha/api.js"></script>
+
+<script>
+    function onSubmit(token) {
+      document.getElementById("contact-form").submit();
+    }
+</script>
+
+@section Scripts {
+<partial name="_ValidationScriptsPartial" />
+}

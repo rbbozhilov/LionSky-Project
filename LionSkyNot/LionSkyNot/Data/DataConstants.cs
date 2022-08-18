@@ -30,11 +30,8 @@
 
             public const int StringLengthSubject = 100;
             public const int StringLengthMessage = 5000;
-            public const int ContactNameMaxLength = 20;
-            public const int ContactNameMinLength = 2;
 
-            public const string NameMaxLengthErrorMessage = "The name must be at least 2 letters";
-            public const string NameMinLengthErrorMessage = "Too long name";
+            public const string EmailNameErrorMessage = "The email is not valid";
             public const string SubjectStringLengthErrorMessage = "Too long subject";
             public const string MessageStringLengthErrorMessage = "Too long message";
         }
