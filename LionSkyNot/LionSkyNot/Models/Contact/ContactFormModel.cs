@@ -15,11 +15,6 @@ namespace LionSkyNot.Models.Contact
         public string Name { get; set; }
 
         [Required]
-        [Display(Name = DisplayEmail)]
-        [EmailAddress]
-        public string Email { get; set; }
-
-        [Required]
         [StringLength(StringLengthSubject, ErrorMessage = SubjectStringLengthErrorMessage)]
         public string Subject { get; set; }
 
