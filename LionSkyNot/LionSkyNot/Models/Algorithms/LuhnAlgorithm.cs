@@ -7,7 +7,7 @@ namespace LionSkyNot.Models.Algorithms
 
         public bool Implementation(string cardNumber)
         {
-            bool isvalid = false;
+            bool isValid = false;
             cardNumber = Regex.Replace(cardNumber, @"\s+", "");
 
             if (!double.TryParse(cardNumber, out double result))
@@ -53,10 +53,10 @@ namespace LionSkyNot.Models.Algorithms
 
             if (finalCreditCardNumbers.Sum() % 10 == 0)
             {
-                isvalid = true;
+                isValid = true;
             }
 
-            return isvalid;
+            return isValid;
         }
 
     }
