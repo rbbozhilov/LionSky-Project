@@ -58,6 +58,5 @@ namespace LionSkyNot.Models.Algorithms
 
             return isValid;
         }
-
     }
 }
